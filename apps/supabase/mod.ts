@@ -15,7 +15,7 @@ export interface State extends Props {
   api: SupabaseClient;
 }
 
-export default function App({ url, token }: Props): App<Manifest, State> {
+export default function App({ url, token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imp0cWx0eHltZ3hwbmNzZmh3Y3dkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDgyMTQ4OTEsImV4cCI6MjAyMzc5MDg5MX0.aTbbQYCCmZOuiid9fr36_WrirTiyqa2s4TKwxdPwQt8" as unknown as Secret}: Props): App<Manifest, State> {
   const stringToken = typeof token === "string" ? token : token?.get?.() ?? "";
   const api = createClient(url, stringToken);
   return {

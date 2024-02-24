@@ -51,8 +51,6 @@ import * as $$$$$$43 from "./sections/Social/WhatsApp.tsx";
 import * as $$$$$$44 from "./sections/Theme/Theme.tsx";
 import * as $$$$$$$$$$$0 from "./apps/decohub.ts";
 import * as $$$$$$$$$$$1 from "./apps/site.ts";
-import * as $$$$$$$$$$$2 from "./apps/supabase/manifest.gen.ts";
-import * as $$$$$$$$$$$3 from "./apps/supabase/mod.ts";
 
 const manifest = {
   "loaders": {
@@ -110,8 +108,6 @@ const manifest = {
   "apps": {
     "deco-sites/niivu-bank/apps/decohub.ts": $$$$$$$$$$$0,
     "deco-sites/niivu-bank/apps/site.ts": $$$$$$$$$$$1,
-    "deco-sites/niivu-bank/apps/supabase/manifest.gen.ts": $$$$$$$$$$$2,
-    "deco-sites/niivu-bank/apps/supabase/mod.ts": $$$$$$$$$$$3,
   },
   "name": "deco-sites/niivu-bank",
   "baseUrl": import.meta.url,

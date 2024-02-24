@@ -32,7 +32,7 @@ export type Props = {
 } & CommerceProps;
 
 export interface State extends Props {
-  client: SupabaseClient;
+  supaBaseClient: SupabaseClient;
 }
 
 export type Platform =
@@ -90,10 +90,10 @@ export default function Site(
     ? supaBase.token
     : supaBase.token?.get?.() ?? "";
 
-  const client = createClient(supaBase.url, stringAuthToken);
+  const supaBaseClient = createClient(supaBase.url, stringAuthToken);
 
   return {
-    state: { ...state, client, supaBase },
+    state: { ...state, supaBaseClient, supaBase },
     manifest,
     dependencies: [
       commerce({

@@ -9,6 +9,16 @@ import { Section } from "deco/blocks/section.ts";
 import type { App as A, AppContext as AC } from "deco/mod.ts";
 import { rgb24 } from "std/fmt/colors.ts";
 import manifest, { Manifest } from "../manifest.gen.ts";
+import { Secret } from "apps/website/loaders/secret.ts";
+import {
+  createClient,
+  SupabaseClient,
+} from "https://esm.sh/v135/@supabase/supabase-js@2.7.0";
+
+export interface SupaBase {
+  token: Secret;
+  url: string;
+}
 
 export type Props = {
   /**
@@ -18,7 +28,12 @@ export type Props = {
    */
   platform: Platform;
   theme?: Section;
+  supaBase: SupaBase;
 } & CommerceProps;
+
+export interface State extends Props {
+  client: SupabaseClient;
+}
 
 export type Platform =
   | "vtex"
@@ -58,8 +73,8 @@ const color = (platform: string) => {
 let firstRun = true;
 
 export default function Site(
-  { theme, ...state }: Props,
-): A<Manifest, Props, [ReturnType<typeof commerce>]> {
+  { theme, supaBase, ...state }: Props,
+): A<Manifest, State, [ReturnType<typeof commerce>]> {
   _platform = state.platform || state.commerce?.platform || "custom";
 
   // Prevent console.logging twice
@@ -71,9 +86,14 @@ export default function Site(
       } \n`,
     );
   }
+  const stringAuthToken = typeof supaBase.token === "string"
+    ? supaBase.token
+    : supaBase.token?.get?.() ?? "";
+
+  const client = createClient(supaBase.url, stringAuthToken);
 
   return {
-    state,
+    state: { ...state, client, supaBase },
     manifest,
     dependencies: [
       commerce({

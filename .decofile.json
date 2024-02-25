@@ -1,0 +1,336 @@
+{
+  "decohub": {
+    "apps": [],
+    "enableAdmin": false,
+    "__resolveType": "deco-sites/niivu-bank/apps/decohub.ts"
+  },
+  "files": {
+    "root": {
+      "name": "risk3",
+      "nodes": [
+        {
+          "name": "deco-sites/niivu-bank/apps/risk3",
+          "content": "test"
+        }
+      ]
+    },
+    "__resolveType": "decohub/apps/files.ts"
+  },
+  "admin-app": {
+    "resolvables": {
+      "__resolveType": "deco-sites/admin/loaders/state.ts"
+    },
+    "__resolveType": "decohub/apps/admin.ts"
+  },
+  "deco-sites/niivu-bank": {
+    "routes": [
+      {
+        "__resolveType": "website/loaders/pages.ts"
+      }
+    ],
+    "__resolveType": "decohub/apps/deco-sites/niivu-bank.ts"
+  },
+  "site": {
+    "seo": {
+      "type": "website",
+      "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/a5d890ba-e5b8-471e-8b77-7412c1d4fa56",
+      "title": "Storefront",
+      "jsonLDs": [],
+      "canonical": "https://fashion.deco.site",
+      "noIndexing": false,
+      "description": "Improve your page performance with deco.cx",
+      "titleTemplate": "%s | deco.cx",
+      "descriptionTemplate": "%s | Deco.cx"
+    },
+    "theme": {
+      "__resolveType": "Theme"
+    },
+    "global": [],
+    "routes": [
+      {
+        "__resolveType": "website/loaders/pages.ts"
+      },
+      {
+        "__resolveType": "website/loaders/redirects.ts"
+      }
+    ],
+    "caching": {
+      "directives": []
+    },
+    "commerce": {
+      "platform": "other"
+    },
+    "platform": "vtex",
+    "__resolveType": "deco-sites/niivu-bank/apps/site.ts"
+  },
+  "Theme": {
+    "font": {
+      "fonts": [
+        {
+          "family": "Poppins",
+          "variations": [
+            {
+              "weight": "400"
+            },
+            {
+              "weight": "600"
+            },
+            {
+              "weight": "700"
+            }
+          ]
+        }
+      ],
+      "__resolveType": "website/loaders/fonts/googleFonts.ts"
+    },
+    "fonts": [
+      {
+        "fontFamily": "Poppins"
+      }
+    ],
+    "mainColors": {
+      "neutral": "#f9f9f9",
+      "primary": "#384c53",
+      "warning": "#e08e00",
+      "base-100": "#e5fbe5",
+      "tertiary": "#ffeaaf",
+      "secondary": "#ffeaaf"
+    },
+    "buttonStyle": {
+      "--border-btn": "1px",
+      "--rounded-btn": "0.2rem",
+      "--animation-btn": "0.25s",
+      "--btn-text-case": "normal-case",
+      "--btn-focus-scale": "0.95"
+    },
+    "colorScheme": "light",
+    "otherStyles": {
+      "--tab-border": "1px",
+      "--tab-radius": "0.5rem",
+      "--rounded-box": "1rem",
+      "--rounded-badge": "1.9rem",
+      "--animation-input": "0.2s"
+    },
+    "__resolveType": "deco-sites/niivu-bank/sections/Theme/Theme.tsx"
+  },
+  "everyone": {
+    "routes": [],
+    "__resolveType": "$live/flags/everyone.ts"
+  },
+  "supabase": {
+    "url": "https://jtqltxymgxpncsfhwcwd.supabase.co/",
+    "token": {
+      "name": "secret",
+      "encrypted": "1aa8d424f5e89d3b873decf2bafe80b70d0155ac9054ae338fadd79ee937aa3cd227eb304e6278a677bdf899097d968e793c26cba4dcb1c4179db1559a75d5b7c4fb79172105d593bb598d612563ce007195520fe5a4ed1b040d5c13d52225d51998e1718ceb8b3c0ac51b1a85e3fe8b93e3899a0c71673b7fc1f9a282566cab85625a89aead9d135cf50cfd831e6dce6d0ceea17e1639f63e4e7a48d4db6e54b0f0e056b632279116a2b8fce690800725b620e71e6c689aaa0dd05d29ff9543e316045da26b15210f44d8792ecf7824e5ce5d15864a07d76fc7bc9432d6d51a",
+      "__resolveType": "website/loaders/secret.ts"
+    },
+    "__resolveType": "deco-sites/niivu-bank/apps/supabase/mod.ts"
+  },
+  "pages-home-start-5cae41e3d348": {
+    "name": "Home - Start",
+    "path": "/",
+    "sections": {
+      "variants": [
+        {
+          "rule": {
+            "__resolveType": "website/matchers/always.ts"
+          },
+          "value": [
+            {
+              "font": {
+                "fonts": [
+                  {
+                    "family": "Poppins",
+                    "variations": [
+                      {
+                        "weight": "400"
+                      },
+                      {
+                        "weight": "600"
+                      },
+                      {
+                        "weight": "700"
+                      }
+                    ]
+                  }
+                ],
+                "__resolveType": "website/loaders/fonts/googleFonts.ts"
+              },
+              "fonts": [
+                {
+                  "fontFamily": "Poppins"
+                }
+              ],
+              "mainColors": {
+                "neutral": "#f9f9f9",
+                "primary": "#ffffff",
+                "warning": "#e08e00",
+                "base-100": "#ffffff",
+                "tertiary": "#02F67C",
+                "secondary": "#113032"
+              },
+              "buttonStyle": {
+                "--border-btn": "1px",
+                "--rounded-btn": "0.2rem",
+                "--animation-btn": "0.25s",
+                "--btn-text-case": "normal-case",
+                "--btn-focus-scale": "0.95"
+              },
+              "colorScheme": "dark",
+              "otherStyles": {
+                "--tab-border": "1px",
+                "--tab-radius": "0.5rem",
+                "--rounded-box": "1rem",
+                "--rounded-badge": "1.9rem",
+                "--animation-input": "0.2s"
+              },
+              "__resolveType": "deco-sites/niivu-bank/sections/Theme/Theme.tsx"
+            },
+            {
+              "logo": {
+                "alt": "deco.cx",
+                "src": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/8/72a07909-2a8c-4d0b-ae4e-ac2b100742ee",
+                "width": 96,
+                "height": 40
+              },
+              "alerts": [],
+              "buttons": {
+                "hideCartButton": true,
+                "hideSearchButton": true,
+                "hideAccountButton": true,
+                "hideWishlistButton": true
+              },
+              "navItems": [
+                {
+                  "url": "/",
+                  "name": "Home",
+                  "@type": "SiteNavigationElement",
+                  "image": [],
+                  "children": []
+                },
+                {
+                  "url": "https://deco.cx/discord",
+                  "name": "Discord",
+                  "@type": "SiteNavigationElement",
+                  "image": [],
+                  "children": []
+                },
+                {
+                  "url": "https://github.com/deco-cx/deco",
+                  "name": "GitHub",
+                  "@type": "SiteNavigationElement",
+                  "image": [],
+                  "children": []
+                }
+              ],
+              "logoPosition": "left",
+              "__resolveType": "deco-sites/niivu-bank/sections/Header/Header.tsx"
+            },
+            {
+              "cta": [
+                {
+                  "href": "https://deco.cx",
+                  "text": "Get Started",
+                  "variant": "Normal"
+                },
+                {
+                  "href": "https://deco.cx/discord",
+                  "text": "Join our Discord",
+                  "variant": "Reverse"
+                }
+              ],
+              "title": "<h1>Medium length</h1><h1><span style=\"color: rgb(2, 246, 124);\" data-mce-style=\"color: rgb(2, 246, 124);\">hero headline</span></h1><h1>goes here</h1>",
+              "placement": "left",
+              "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+              "__resolveType": "deco-sites/niivu-bank/sections/Content/Hero.tsx"
+            },
+            {
+              "cards": [
+                {
+                  "icon": "Star",
+                  "text": "Design high-converting shopping experiences with a powerful, visual builder. Your business team with the autonomy to modify components without writing a single line of code.",
+                  "title": "<p>Easy to use page builder</p>"
+                },
+                {
+                  "icon": "Star",
+                  "text": "Design high-converting shopping experiences with a powerful, visual builder. Your business team with the autonomy to modify components without writing a single line of code.",
+                  "title": "<p>Easy to use page builder</p>"
+                },
+                {
+                  "icon": "Star",
+                  "text": "No complicated set-up needed. Just select a page or section, start testing! Experiment with headlines, sales copy, or product descriptions to quickly find out what works best.",
+                  "title": "<p>Create A/B tests in 5 secs</p>"
+                },
+                {
+                  "icon": "Star",
+                  "text": "Conversion-driven storefronts that are optimized for each audience, increasing engagement and conversion rates.",
+                  "title": "<p>Craft unique experiences</p>"
+                },
+                {
+                  "icon": "Star",
+                  "text": "Integrated real-time analytics to identify the greatest opportunities to boost conversions.",
+                  "title": "<p>Analyze your data</p>"
+                }
+              ],
+              "title": "Discover our Features",
+              "__resolveType": "deco-sites/niivu-bank/sections/Content/Features.tsx"
+            },
+            {
+              "cta": {},
+              "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/530/bb27c3a6-7aa4-43a6-9e14-ad5af53a441f",
+              "title": "Lorem ipsum dolor sit amet consectetur. Egestas nec erat lorem ante aliquam suspendisse.",
+              "placement": "right",
+              "description": "Don’t start from scratch. With our intuitive visual editor, embrace rapid design and deployment using pre-built, universally adaptable UI components.",
+              "__resolveType": "deco-sites/niivu-bank/sections/Content/ImageSection.tsx"
+            },
+            {
+              "cta": {},
+              "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/530/bb27c3a6-7aa4-43a6-9e14-ad5af53a441f",
+              "title": "Lorem ipsum dolor sit amet consectetur. Egestas nec erat lorem ante aliquam suspendisse.",
+              "placement": "left",
+              "description": "Don’t start from scratch. With our intuitive visual editor, embrace rapid design and deployment using pre-built, universally adaptable UI components.",
+              "__resolveType": "deco-sites/niivu-bank/sections/Content/ImageSection.tsx"
+            },
+            {
+              "cta": {},
+              "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/530/bb27c3a6-7aa4-43a6-9e14-ad5af53a441f",
+              "title": "Lorem ipsum dolor sit amet consectetur. Egestas nec erat lorem ante aliquam suspendisse.",
+              "placement": "right",
+              "description": "Don’t start from scratch. With our intuitive visual editor, embrace rapid design and deployment using pre-built, universally adaptable UI components.",
+              "__resolveType": "deco-sites/niivu-bank/sections/Content/ImageSection.tsx"
+            },
+            {
+              "cta": {},
+              "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/530/bb27c3a6-7aa4-43a6-9e14-ad5af53a441f",
+              "title": "Lorem ipsum dolor sit amet consectetur. Egestas nec erat lorem ante aliquam suspendisse.",
+              "placement": "left",
+              "description": "Don’t start from scratch. With our intuitive visual editor, embrace rapid design and deployment using pre-built, universally adaptable UI components.",
+              "__resolveType": "deco-sites/niivu-bank/sections/Content/ImageSection.tsx"
+            },
+            {
+              "cta": [
+                {
+                  "href": "#",
+                  "text": "Button",
+                  "variant": "Normal"
+                },
+                {
+                  "href": "#",
+                  "text": "Button",
+                  "variant": "Reverse"
+                }
+              ],
+              "text": "Lorem ipsum dolor sit amet consectetur.",
+              "__resolveType": "deco-sites/niivu-bank/sections/Content/CallToAction.tsx"
+            },
+            {
+              "__resolveType": "deco-sites/niivu-bank/sections/Footer/Footer.tsx"
+            }
+          ]
+        }
+      ],
+      "__resolveType": "website/flags/multivariate.ts"
+    },
+    "__resolveType": "website/pages/Page.tsx"
+  }
+}

@@ -2,26 +2,59 @@ import commerce, { Props as CommerceProps } from "apps/commerce/mod.ts";
 import { Section } from "deco/blocks/section.ts";
 import type { App as A, AppContext as AC } from "deco/mod.ts";
 import manifest, { Manifest } from "../manifest.gen.ts";
+import { Secret } from "apps/website/loaders/secret.ts";
 
 export interface SupaBase {
   token?: string;
   url?: string;
 }
+
+  /**
+   * @title Configurações do Risk3
+   */
+export interface Risk3 {
+  /**
+   * @title Email
+   * @description exemplo: "example@example.com"
+   */
+  username: Secret;
+
+  /**
+  * @title Senha
+  */
+  password: Secret;
+
+  /**
+   * @title URL
+   * @description exemplo: https://express-api.risk3.live
+   */
+  url: string
+
+  /**
+   * @title Produto
+   * @description Qual o produto que será utilizado?
+   * - express: Express
+   * - express_light: Express Light
+   */
+  product: "express" | "express_light";
+}
+
 export type Props = {
   theme?: Section;
   supaBase: SupaBase;
+  risk3: Risk3;
 } & CommerceProps;
 
 export type App = ReturnType<typeof Site>;
 export type AppContext = AC<App>;
 
 export default function Site(
-  { supaBase, theme, ...state }: Props,
+  { supaBase, risk3, theme, ...state }: Props,
 ): A<Manifest, Props, [ReturnType<typeof commerce>]> {
   // Prevent console.logging twice
 
   return {
-    state: { supaBase, theme, ...state },
+    state: { supaBase, risk3, theme, ...state },
     manifest,
     dependencies: [
       commerce({

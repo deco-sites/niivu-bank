@@ -33,7 +33,6 @@ export default async function loader(
   ctx: AppContext,
 ) {
   const { supaBase } = ctx;
-  console.log(supaBase);
   if (!supaBase) {
     return "You must provide supaBase fields in site.ts";
   }
@@ -43,7 +42,7 @@ export default async function loader(
   const { type } = props;
 
   if (type !== "CPF" && type !== "CNPJ") {
-    return "error, wrong type."
+    return "error, wrong type.";
   }
 
   const { phone, address, email } = props;
@@ -56,24 +55,24 @@ export default async function loader(
   }
   const [addressData] = data;
 
-    if (type === "CPF") {
-      const { full_name, rg, cpf } = props;
-      return client.from("physicalperson").insert([{
-        phone,
-        address_id: addressData.id,
-        email,
-        full_name,
-        rg,
-        cpf,
-      }]);
-    } else {
-      const { business_name, cnpj } = props;
-      return client.from("legalperson").insert([{
-        phone,
-        address_id: addressData.id,
-        email,
-        business_name,
-        cnpj,
-      }]);
-    }
+  if (type === "CPF") {
+    const { full_name, rg, cpf } = props;
+    return client.from("physicalperson").insert([{
+      phone,
+      address_id: addressData.id,
+      email,
+      full_name,
+      rg,
+      cpf,
+    }]);
+  } else {
+    const { business_name, cnpj } = props;
+    return client.from("legalperson").insert([{
+      phone,
+      address_id: addressData.id,
+      email,
+      business_name,
+      cnpj,
+    }]);
+  }
 }

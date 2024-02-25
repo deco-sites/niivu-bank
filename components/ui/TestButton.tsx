@@ -1,31 +1,32 @@
 import type { ComponentChildren } from "preact";
-import { useSupabase } from "$store/packs/hooks/useSupabase.ts";
+import { invoke } from "$store/runtime.ts";
 
 export interface Props {
-  onClick: () => void;
   children: ComponentChildren;
 }
 
-function TestButton({ onClick, children }: Props) {
-  const { register } = useSupabase();
+function TestButton({ children }: Props) {
   return (
     <button
       onClick={async () =>
         console.log(
-          await register({
-            "phone": "+1 (555) 123-4567",
-            address: {
-              "zip_code": "12345678",
-              "street": "123 Main Street",
-              "number": "101",
-              "complement": "Apartment 2B",
-              "city": "Cityville",
-              "state": "State",
+          await invoke({
+            key: "deco-sites/niivu-bank/loaders/actions/register.ts",
+            props: {
+              "phone": "+1 (555) 123-4567",
+              address: {
+                "zip_code": "12345678",
+                "street": "123 Main Street",
+                "number": "101",
+                "complement": "Apartment 2B",
+                "city": "Cityville",
+                "state": "State",
+              },
+              "email": "example@example.com",
+              "full_name": "ABC Company",
+              "cpf": "12345678912",
+              type: "CPF",
             },
-            "email": "example@example.com",
-            "full_name": "ABC Company",
-            "cpf": "12345678912",
-            type: "CPF",
           }),
         )}
     >

@@ -1,7 +1,7 @@
 import type { AppContext } from "$store/apps/site.ts";
 import { Secret } from "apps/website/loaders/secret.ts";
 import { createClient } from "https://esm.sh/v135/@supabase/supabase-js@2.7.0";
-import { ResponseLoginRisk3 } from "deco-sites/niivu-bank/packs/types.ts";
+import { ResponseRisk3 } from "deco-sites/niivu-bank/packs/types.ts";
 
 interface defaultFields {
   phone: string;
@@ -29,22 +29,61 @@ export interface CNPJ extends defaultFields {
   cnpj: string;
 }
 
-async function loginRisk3(usernameSecret: Secret, passwordSecret: Secret, url: string): Promise<ResponseLoginRisk3> {
-  const username = typeof usernameSecret === "string" ? usernameSecret : usernameSecret?.get()
-  const password = typeof passwordSecret === "string" ? passwordSecret : passwordSecret?.get()
-  
-  console.log(username, password, url);
-  const res = await fetch(`${url}/api/v0/login?username=${username}&password=${password}`, {
-    method: "POST",
-  })
+async function loginRisk3(
+  usernameSecret: Secret,
+  passwordSecret: Secret,
+  url: string,
+): Promise<ResponseRisk3> {
+  const username = typeof usernameSecret === "string"
+    ? usernameSecret
+    : usernameSecret?.get();
+  const password = typeof passwordSecret === "string"
+    ? passwordSecret
+    : passwordSecret?.get();
 
-  return res.json()
+  console.log(username, password, url);
+  const res = await fetch(
+    `${url}/api/v0/login?username=${username}&password=${password}`,
+    {
+      method: "POST",
+    },
+  );
+
+  return res.json();
 }
 
 function logoutRisk3(url: string) {
   return fetch(`${url}/api/v0/logout`, {
     method: "POST",
-  })
+  });
+}
+
+async function analiseCPF(url: string, authToken: string, cpf: string): Promise<ResponseRisk3> {
+  const response = await fetch(`${url}/api/v0/analises/cpf`, {
+    method: "POST",
+    headers: {
+      "Venidera-AuthToken": `Bearer ${authToken??"123"}`
+    },
+    body: JSON.stringify({
+      cpfs: [cpf],
+    }),
+  });
+
+  return response.json();
+}
+
+async function analiseCNPJ(authToken: string, url: string, cnpj: string, product: string): Promise<ResponseRisk3> {
+  const response = await fetch(`${url}/api/v0/analise?product=${product}`, {
+    method: "POST",
+    headers: {
+      "Venidera-AuthToken": `Bearer ${authToken??"123"}`
+    },
+    body: JSON.stringify({
+      cnpjs: [cnpj],
+    }),
+  });
+
+  return response.json();
 }
 
 export default async function loader(
@@ -65,8 +104,8 @@ export default async function loader(
     return "error, wrong type.";
   }
 
-  const response = await loginRisk3(risk3.username, risk3.password, risk3.url)
-  
+  const response = await loginRisk3(risk3.username, risk3.password, risk3.url);
+
   if (response.status === "error" && !response.data) {
     return response.message;
   }
@@ -91,19 +130,9 @@ export default async function loader(
       rg,
       cpf,
     }]);
-    
-    const analise = await fetch(`${risk3.url}/api/v0/analise/cpf`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Venidera-AuthToken": `Bearer ${response.data}`
-      },
-      body: JSON.stringify({
-        cpfs: [cpf],
-      }),
-    })
 
-    Promise.all([logoutRisk3(risk3.url)])
+    const analise = await analiseCPF(risk3.url, response.data!, cpf, );
+    Promise.all([logoutRisk3(risk3.url)]);
 
     return analise;
   } else {
@@ -116,18 +145,8 @@ export default async function loader(
       cnpj,
     }]);
 
-    const analise = await fetch(`${risk3.url}/api/v0/analise?product=${risk3.product}`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Venidera-AuthToken": `Bearer ${response.data}`,
-      },
-      body: JSON.stringify({
-        cnpjs: [cnpj],
-      }),
-    })
-
-    Promise.all([logoutRisk3(risk3.url)])
+    const analise = await analiseCNPJ(cnpj, risk3.url, risk3.product, response.data!)
+    Promise.all([logoutRisk3(risk3.url)]);
 
     return analise;
   }

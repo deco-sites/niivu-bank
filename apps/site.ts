@@ -9,9 +9,9 @@ export interface SupaBase {
   url?: string;
 }
 
-  /**
-   * @title Configurações do Risk3
-   */
+/**
+ * @title Configurações do Risk3
+ */
 export interface Risk3 {
   /**
    * @title Email
@@ -20,15 +20,15 @@ export interface Risk3 {
   username: Secret;
 
   /**
-  * @title Senha
-  */
+   * @title Senha
+   */
   password: Secret;
 
   /**
    * @title URL
    * @description exemplo: https://express-api.risk3.live
    */
-  url: string
+  url: string;
 
   /**
    * @title Produto

@@ -1,1 +1,1 @@
-export { default } from "$store/packs/actions/supabase/register.ts"
+export { default } from "$store/packs/actions/supabase/register.ts";

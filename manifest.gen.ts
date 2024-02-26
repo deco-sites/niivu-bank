@@ -3,7 +3,7 @@
 // This file is automatically updated during development when running `dev.ts`.
 
 import * as $$$0 from "./loaders/Layouts/ProductCard.tsx";
-import * as $$$1 from "./loaders/actions/register.ts";
+import * as $$$1 from "./loaders/actions/solicitation.ts";
 import * as $$$2 from "./loaders/List/Sections.tsx";
 import * as $$$$$$0 from "./sections/Newsletter/Newsletter.tsx";
 import * as $$$$$$1 from "./sections/Animation/Animation.tsx";
@@ -55,7 +55,7 @@ import * as $$$$$$$$$$$1 from "./apps/decohub.ts";
 
 const manifest = {
   "loaders": {
-    "deco-sites/niivu-bank/loaders/actions/register.ts": $$$1,
+    "deco-sites/niivu-bank/loaders/actions/solicitation.ts": $$$1,
     "deco-sites/niivu-bank/loaders/Layouts/ProductCard.tsx": $$$0,
     "deco-sites/niivu-bank/loaders/List/Sections.tsx": $$$2,
   },

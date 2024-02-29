@@ -6,6 +6,7 @@ import {
   loginRisk3,
   logoutRisk3,
 } from "deco-sites/niivu-bank/packs/utils.ts/risk3.ts";
+import { RESPONSE_RISK3_APPROVED, SOLICITATION_ENTITY_NAME, STATUS_ENUM_ABLE, STATUS_ENUM_ACCOUNT_OPENING, STATUS_ENUM_DISAPPROVED, STATUS_ENUM_IN_OPERATION, STATUS_ENUM_SIGNATURE, STATUS_ENUM_SUSPENDED } from "deco-sites/niivu-bank/packs/utils.ts/constants.ts";
 
 interface Fields {
   phone: string;
@@ -28,13 +29,11 @@ interface Entity extends Fields {
   status: StatusEnum;
 }
 
+export type StatusEnum = typeof STATUS_ENUM_ACCOUNT_OPENING | typeof STATUS_ENUM_SIGNATURE  | typeof STATUS_ENUM_ABLE | typeof STATUS_ENUM_IN_OPERATION | typeof STATUS_ENUM_SUSPENDED | typeof STATUS_ENUM_DISAPPROVED;
+
 interface Props extends Fields {
   type: "CPF" | "CNPJ";
 }
-
-type StatusEnum = "iniciado" | "em análise" | "reprovado" | "aprovado";
-
-const ENTITY_NAME = "customer";
 
 export default async function loader(
   props: Props,
@@ -66,11 +65,11 @@ export default async function loader(
 
     const customerWithStatus: Entity = {
       ...rest,
-      credit_status: analise.data === "Aprovado" ? true : false,
-      status: "iniciado",
+      credit_status: analise.data === RESPONSE_RISK3_APPROVED ? true : false,
+      status: STATUS_ENUM_ACCOUNT_OPENING,
     };
 
-    return await client.from(ENTITY_NAME).insert([{
+    return await client.from(SOLICITATION_ENTITY_NAME).insert([{
       ...customerWithStatus,
     }]).select();
   } else {
@@ -84,11 +83,11 @@ export default async function loader(
 
     const customerWithStatus: Entity = {
       ...rest,
-      credit_status: analise.data === "Aprovado" ? true : false,
-      status: "iniciado",
+      credit_status: analise.data === RESPONSE_RISK3_APPROVED ? true : false,
+      status: STATUS_ENUM_ACCOUNT_OPENING,
     };
 
-    return await client.from(ENTITY_NAME).insert([{
+    return await client.from(SOLICITATION_ENTITY_NAME).insert([{
       ...customerWithStatus,
     }]).select();
   }

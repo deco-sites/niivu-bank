@@ -3,6 +3,9 @@ import { Section } from "deco/blocks/section.ts";
 import type { App as A, AppContext as AC } from "deco/mod.ts";
 import manifest, { Manifest } from "../manifest.gen.ts";
 import { Secret } from "apps/website/loaders/secret.ts";
+import { fetchSafe } from "apps/utils/fetch.ts";
+import { ClientOf, createHttpClient } from "apps/utils/http.ts";
+import creditAnalysis from "../packs/utils/creditAnalysis.ts";
 
 export interface SupaBase {
   token?: string;
@@ -37,6 +40,12 @@ export interface Risk3 {
    * - express_light: Express Light
    */
   product: "express" | "express_light";
+
+  /**
+   * @title Cliente do Risk3
+   * @ignore
+   */
+  clientRisk3: ClientOf<creditAnalysis>
 }
 
 export type Props = {
@@ -51,10 +60,18 @@ export type AppContext = AC<App>;
 export default function Site(
   { supaBase, risk3, theme, ...state }: Props,
 ): A<Manifest, Props, [ReturnType<typeof commerce>]> {
-  // Prevent console.logging twice
+  const clientRisk3 = createHttpClient<creditAnalysis>({
+    base:risk3.url,
+    fetcher: fetchSafe,
+  });
+
+  const risk3ConfigsAndClient = {
+    ...risk3,
+    clientRisk3,
+  };
 
   return {
-    state: { supaBase, risk3, theme, ...state },
+    state: { supaBase, risk3: risk3ConfigsAndClient, theme, ...state },
     manifest,
     dependencies: [
       commerce({

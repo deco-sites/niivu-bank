@@ -127,7 +127,7 @@ export default interface creditAnalysis {
     };
   };
   "POST /api/v0/logout": {
-    response: void
+    response: void;
     headers: {
       "Venidera-AuthToken": string;
     };

@@ -9,7 +9,7 @@ import {
   STATUS_ENUM_IN_OPERATION,
   STATUS_ENUM_SIGNATURE,
   STATUS_ENUM_SUSPENDED,
-} from "../utils/constants.ts";
+} from "deco-sites/niivu-bank/packs/utils/constants.ts";
 
 interface Fields {
   phone: string;
@@ -63,18 +63,20 @@ export default async function loader(
     return "error, wrong type.";
   }
 
-    const user = typeof username === "string"
-    ? username 
-    : username?.get()
-  const pass = typeof password === "string"? password : password?.get()
+  const usernameStr = typeof username === "string" ? username : username?.get();
+  const passwordSrt = typeof password === "string" ? password : password?.get();
+
+  if (!usernameStr || !passwordSrt) {
+    return "error, credenciais de Usuário e senha não foram definidas.";
+  }
 
   const res = await clientRisk3["POST /api/v0/login"]({
-    username: user ?? "api@lavorocredito.com.br",
-    password: pass ?? "Lavoro?Usu4r10@API",
-  }, {})
+    username: usernameStr,
+    password: passwordSrt,
+  }, {});
   const response = await res.json();
 
-  const { data, status, message } = response
+  const { data, status, message } = response;
 
   if (status === "error" && !data) {
     return message;
@@ -82,19 +84,23 @@ export default async function loader(
 
   if (type === "CPF") {
     const res = await clientRisk3["POST /api/v0/analises/cpf"]({
-      "Venidera-AuthToken": `Bearer ${data.token}`
+      "Venidera-AuthToken": `Bearer ${data.token}`,
     }, {
       body: {
-        cpfs: [props.cpf!]
-      }
+        cpfs: [props.cpf!],
+      },
     });
     const analise = await res.json();
 
-    clientRisk3["POST /api/v0/logout"]({"Venidera-AuthToken": `Bearer ${data.token}`}, {});
+    clientRisk3["POST /api/v0/logout"]({
+      "Venidera-AuthToken": `Bearer ${data.token}`,
+    }, {});
 
     const customerWithStatus: Entity = {
       ...rest,
-      credit_status: analise.data[0].status === RESPONSE_RISK3_APPROVED ? true : false,
+      credit_status: analise.data[0].status === RESPONSE_RISK3_APPROVED
+        ? true
+        : false,
       status: STATUS_ENUM_ACCOUNT_OPENING,
     };
 
@@ -103,22 +109,26 @@ export default async function loader(
     }]).select();
   } else {
     const res = await clientRisk3["POST /api/v0/analises"]({
-      product: product
+      product: product,
     }, {
       headers: {
-        "Venidera-AuthToken": `Bearer ${data.token}`
+        "Venidera-AuthToken": `Bearer ${data.token}`,
       },
       body: {
-        cnpjs: [props.cnpj!]
+        cnpjs: [props.cnpj!],
       },
-      
     });
     const analise = await res.json();
-    clientRisk3["POST /api/v0/logout"]({"Venidera-AuthToken": `Bearer ${data.token}`}, {});
+    
+    clientRisk3["POST /api/v0/logout"]({
+      "Venidera-AuthToken": `Bearer ${data.token}`,
+    }, {});
 
     const customerWithStatus: Entity = {
       ...rest,
-      credit_status: analise.data[0].status === RESPONSE_RISK3_APPROVED ? true : false,
+      credit_status: analise.data[0].status === RESPONSE_RISK3_APPROVED
+        ? true
+        : false,
       status: STATUS_ENUM_ACCOUNT_OPENING,
     };
 

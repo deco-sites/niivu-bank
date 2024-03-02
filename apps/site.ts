@@ -45,7 +45,7 @@ export interface Risk3 {
    * @title Cliente do Risk3
    * @ignore
    */
-  clientRisk3: ClientOf<creditAnalysis>
+  clientRisk3: ClientOf<creditAnalysis>;
 }
 
 export type Props = {
@@ -61,7 +61,7 @@ export default function Site(
   { supaBase, risk3, theme, ...state }: Props,
 ): A<Manifest, Props, [ReturnType<typeof commerce>]> {
   const clientRisk3 = createHttpClient<creditAnalysis>({
-    base:risk3.url,
+    base: risk3.url,
     fetcher: fetchSafe,
   });
 

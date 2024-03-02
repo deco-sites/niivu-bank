@@ -1,70 +1,3 @@
-import { ResponseRisk3 } from "deco-sites/niivu-bank/packs/types.ts";
-import { Secret } from "apps/website/loaders/secret.ts";
-import { ClientOf } from "apps/utils/http.ts";
-
-export async function loginRisk3(
-  usernameSecret: Secret,
-  passwordSecret: Secret,
-  clientRisk3: ClientOf<creditAnalysis>,
-): Promise<AuthResponse> {
-  const username = typeof usernameSecret === "string"
-    ? usernameSecret
-    : usernameSecret?.get();
-  const password = typeof passwordSecret === "string"
-    ? passwordSecret
-    : passwordSecret?.get();
-
-  const res = await clientRisk3["POST /api/v0/login"]({
-    username: username ?? "api@lavorocredito.com.br",
-    password: password ?? "Lavoro?Usu4r10@API"
-  },{});
-
-  return res.json();
-}
-
-export function logoutRisk3(clientRisk3: ClientOf<creditAnalysis>, authToken: string) {
-   return clientRisk3["POST /api/v0/logout"]({}, {
-    "Venidera-AuthToken": `Bearer ${ authToken }`
-  });
-}
-
-export async function checkCPF(
-  url: string,
-  authToken: string,
-  cpf: string,
-): Promise<ResponseRisk3> {
-  const response = await fetch(`${url}/api/v0/analises/cpf`, {
-    method: "POST",
-    headers: {
-      "Venidera-AuthToken": `Bearer ${authToken ?? "123"}`,
-    },
-    body: JSON.stringify({
-      cpfs: [cpf],
-    }),
-  });
-
-  return response.json();
-}
-
-export async function checkCNPJ(
-  authToken: string,
-  url: string,
-  cnpj: string,
-  product: string,
-): Promise<ResponseRisk3> {
-  const response = await fetch(`${url}/api/v0/analise?product=${product}`, {
-    method: "POST",
-    headers: {
-      "Venidera-AuthToken": `Bearer ${authToken ?? "123"}`,
-    },
-    body: JSON.stringify({
-      cnpjs: [cnpj],
-    }),
-  });
-
-  return response.json();
-}
-
 interface AuthResponse {
   status: "success" | "error";
   message: string;
@@ -76,19 +9,27 @@ interface AuthResponse {
   };
 }
 
-interface CreditAnalysisResponse{
+interface CreditAnalysisResponse {
   status: "success" | string;
-  message: string;
+  message: message;
   status_code: number;
-  data: Records[]
+  data: Records[];
 }
 
-interface Records{
+type message =
+  | string
+  | "Value is not a valid email address"
+  | "Usuário não cadastrado."
+  | "Falha na autenticação. Token inválido."
+  | "Autenticação necessária."
+  | "Expecting value: line 2 column 12 (char 13)";
+
+interface Records {
   cpf?: string;
   cnpj?: string;
   status: string | "error";
   status_message: string;
-  id?: string,
+  id?: string;
 }
 
 interface AnalysisRequestResponse {
@@ -186,6 +127,7 @@ export default interface creditAnalysis {
     };
   };
   "POST /api/v0/logout": {
+    response: void
     headers: {
       "Venidera-AuthToken": string;
     };
@@ -194,7 +136,7 @@ export default interface creditAnalysis {
     response: CreditAnalysisResponse;
     headers: {
       "Venidera-AuthToken": string;
-    }
+    };
     body: {
       cpfs: string[];
     };
@@ -203,7 +145,7 @@ export default interface creditAnalysis {
     response: CreditAnalysisResponse;
     headers: {
       "Venidera-AuthToken": string;
-    }
+    };
     searchParams: {
       product: "express" | "express_light";
     };
@@ -215,6 +157,6 @@ export default interface creditAnalysis {
     response: AnalysisRequestResponse;
     headers: {
       "Venidera-AuthToken": string;
-    }
+    };
   };
 }

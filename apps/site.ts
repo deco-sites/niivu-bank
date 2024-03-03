@@ -7,7 +7,7 @@ import { fetchSafe } from "apps/utils/fetch.ts";
 import { ClientOf, createHttpClient } from "apps/utils/http.ts";
 import creditAnalysis from "../packs/utils/creditAnalysis.ts";
 
-export interface SupaBase {
+export interface Supabase {
   token?: string;
   url?: string;
 }
@@ -50,7 +50,7 @@ export interface Risk3 {
 
 export type Props = {
   theme?: Section;
-  supaBase: SupaBase;
+  supabase: Supabase;
   risk3: Risk3;
 } & CommerceProps;
 
@@ -58,7 +58,7 @@ export type App = ReturnType<typeof Site>;
 export type AppContext = AC<App>;
 
 export default function Site(
-  { supaBase, risk3, theme, ...state }: Props,
+  { supabase, risk3, theme, ...state }: Props,
 ): A<Manifest, Props, [ReturnType<typeof commerce>]> {
   const clientRisk3 = createHttpClient<creditAnalysis>({
     base: risk3.url,
@@ -71,7 +71,7 @@ export default function Site(
   };
 
   return {
-    state: { supaBase, risk3: risk3ConfigsAndClient, theme, ...state },
+    state: { supabase, risk3: risk3ConfigsAndClient, theme, ...state },
     manifest,
     dependencies: [
       commerce({

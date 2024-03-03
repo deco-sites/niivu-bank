@@ -1,5 +1,5 @@
 import type { AppContext } from "$store/apps/site.ts";
-import { createClient } from "https://esm.sh/v135/@supabase/supabase-js@2.7.0";
+import { SupabaseClient, createClient } from "https://esm.sh/v135/@supabase/supabase-js@2.7.0";
 import {
   RESPONSE_RISK3_APPROVED,
   SOLICITATION_ENTITY_NAME,
@@ -9,6 +9,9 @@ import {
   STATUS_ENUM_IN_OPERATION,
   STATUS_ENUM_SIGNATURE,
   STATUS_ENUM_SUSPENDED,
+  STATUS_ENUM_CREDIT_ANALYSIS,
+  STATUS_ENUM_RISK3_FAILED,
+  HEADER_AUTH_TOKEN,
 } from "deco-sites/niivu-bank/packs/utils/constants.ts";
 
 interface Fields {
@@ -20,120 +23,171 @@ interface Fields {
   city: string;
   state: string;
   email: string;
-  rg?: string;
+}
+
+interface CNPJ extends Fields {
+  type: "CNPJ";
+  cnpj: string;
+  business_name?: string;
+}
+
+interface CPF extends Fields {
+  type: "CPF";
   full_name?: string;
   cpf?: string;
-  business_name?: string;
-  cnpj?: string;
+  rg?: string;
 }
 
 interface Entity extends Fields {
   credit_status: boolean;
-  status: StatusEnum;
+  status: Status;
 }
 
-export type StatusEnum =
-  | typeof STATUS_ENUM_ACCOUNT_OPENING
-  | typeof STATUS_ENUM_SIGNATURE
-  | typeof STATUS_ENUM_ABLE
-  | typeof STATUS_ENUM_IN_OPERATION
-  | typeof STATUS_ENUM_SUSPENDED
-  | typeof STATUS_ENUM_DISAPPROVED;
-
-interface Props extends Fields {
-  type: "CPF" | "CNPJ";
+enum Status {
+  AnalysisDeCredito = STATUS_ENUM_CREDIT_ANALYSIS,
+  AccountOpening = STATUS_ENUM_ACCOUNT_OPENING,
+  Risk3Failed = STATUS_ENUM_RISK3_FAILED,
+  Signature = STATUS_ENUM_SIGNATURE,
+  Able = STATUS_ENUM_ABLE,
+  InOperation = STATUS_ENUM_IN_OPERATION,
+  Suspended = STATUS_ENUM_SUSPENDED,
+  Disapproved = STATUS_ENUM_DISAPPROVED,
 }
+
+interface DataObjectSoliciation {
+  id: number;
+  id_solicitation_risk3: number | null;
+  business_name: string | null;
+  full_name: string;
+  email: string;
+  cnpj: string | null;
+  cpf: string;
+  rg: string | null;
+  phone: string;
+  street: string;
+  number: string;
+  complement: string;
+  city: string;
+  state: string;
+  zip_code: string;
+  status: string;
+  credit_status: boolean;
+}
+  
+interface ApiResponse {
+  error: null | string;
+  data: DataObjectSoliciation[];
+  count: null | number;
+  status: number;
+  statusText: string;
+}
+  
+type LoaderResponse = 
+  | { error: string }
+  | { data: SupabaseClient<ApiResponse> };
+
 
 export default async function loader(
-  props: Props,
+  props: CNPJ | CPF,
   _req: Request,
   ctx: AppContext,
-) {
-  const { supaBase, risk3 } = ctx;
-  const { clientRisk3, password, username, product } = risk3;
-  if (!supaBase) {
-    return "You must provide supaBase fields in site.ts";
+): Promise<LoaderResponse> {
+  const { supabase, risk3 } = ctx;
+  const { clientRisk3, password, username, product } = risk3
+  
+  if (!supabase) {
+    return {
+      error: "supabase-credentials"
+    }
   }
 
-  const client = createClient(supaBase.url!, supaBase.token!);
+  const clientSupabase = createClient<ApiResponse>(supabase.url!, supabase.token!);
 
   const { type, ...rest } = props;
 
   if (type !== "CPF" && type !== "CNPJ") {
-    return "error, wrong type.";
+    return {
+     error: "error, wrong type."
+    }
   }
 
   const usernameStr = typeof username === "string" ? username : username?.get();
   const passwordSrt = typeof password === "string" ? password : password?.get();
 
   if (!usernameStr || !passwordSrt) {
-    return "error, credenciais de Usuário e senha não foram definidas.";
+    return {
+      error: "risk3-credentials"
+    };
   }
 
-  const res = await clientRisk3["POST /api/v0/login"]({
+  const response = await clientRisk3["POST /api/v0/login"]({
     username: usernameStr,
     password: passwordSrt,
-  }, {});
-  const response = await res.json();
+  }).then((res) => res.json());
 
   const { data, status, message } = response;
 
   if (status === "error" && !data) {
-    return message;
+    return {
+     error: message
+    }
   }
 
-  if (type === "CPF") {
-    const res = await clientRisk3["POST /api/v0/analises/cpf"]({
-      "Venidera-AuthToken": `Bearer ${data.token}`,
-    }, {
-      body: {
-        cpfs: [props.cpf!],
-      },
-    });
-    const analise = await res.json();
+  const AUTH_TOKEN = `Bearer ${data.token}`
+  const headers = new Headers();
+  headers.append(HEADER_AUTH_TOKEN, AUTH_TOKEN);
 
+  if (type === "CPF") {
+    const body = {
+      cpfs: [props.cpf!],
+    };
+    
+    const creditAnalysis = await clientRisk3["POST /api/v0/analises/cpf"]({},
+      {
+        body: body,
+        headers: headers,
+      }
+    ).then((res) => res.json())
+  
     clientRisk3["POST /api/v0/logout"]({
-      "Venidera-AuthToken": `Bearer ${data.token}`,
-    }, {});
+      headers: headers
+    });
 
     const customerWithStatus: Entity = {
       ...rest,
-      credit_status: analise.data[0].status === RESPONSE_RISK3_APPROVED
+      credit_status: creditAnalysis.data[0].status === RESPONSE_RISK3_APPROVED
         ? true
         : false,
-      status: STATUS_ENUM_ACCOUNT_OPENING,
+      status: Status.AnalysisDeCredito,
     };
 
-    return await client.from(SOLICITATION_ENTITY_NAME).insert([{
+    return await clientSupabase.from(SOLICITATION_ENTITY_NAME).insert([{
       ...customerWithStatus,
-    }]).select();
+    }]).select() as unknown as LoaderResponse;
   } else {
-    const res = await clientRisk3["POST /api/v0/analises"]({
+    const creditAnalysis = await clientRisk3["POST /api/v0/analises"]({
       product: product,
     }, {
-      headers: {
-        "Venidera-AuthToken": `Bearer ${data.token}`,
-      },
+      headers: headers,
       body: {
         cnpjs: [props.cnpj!],
       },
-    });
-    const analise = await res.json();
+    }).then((res) => res.json())
     
     clientRisk3["POST /api/v0/logout"]({
-      "Venidera-AuthToken": `Bearer ${data.token}`,
-    }, {});
+      headers: headers
+    });
 
     const customerWithStatus: Entity = {
       ...rest,
-      credit_status: analise.data[0].status === RESPONSE_RISK3_APPROVED
+      credit_status: creditAnalysis.data[0].status === RESPONSE_RISK3_APPROVED
         ? true
         : false,
-      status: STATUS_ENUM_ACCOUNT_OPENING,
+      status: Status.AnalysisDeCredito,
     };
 
-    return await client.from(SOLICITATION_ENTITY_NAME).insert([{
+    return await clientSupabase.from(SOLICITATION_ENTITY_NAME).insert([{
       ...customerWithStatus,
-    }]).select();
+    }]).select() as unknown as LoaderResponse;
   }
 }

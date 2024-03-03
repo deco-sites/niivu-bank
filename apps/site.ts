@@ -6,10 +6,14 @@ import { Secret } from "apps/website/loaders/secret.ts";
 import { fetchSafe } from "apps/utils/fetch.ts";
 import { ClientOf, createHttpClient } from "apps/utils/http.ts";
 import creditAnalysis from "../packs/utils/creditAnalysis.ts";
+import {
+  createClient,
+  SupabaseClient,
+} from "https://esm.sh/v135/@supabase/supabase-js@2.7.0";
 
 export interface Supabase {
-  token?: string;
-  url?: string;
+  token: string;
+  url: string;
 }
 
 /**
@@ -54,15 +58,19 @@ export type Props = {
   risk3: Risk3;
 } & CommerceProps;
 
+export interface State extends Props {
+  supabaseClient: SupabaseClient;
+}
+
 export type App = ReturnType<typeof Site>;
 export type AppContext = AC<App>;
 
 export default function Site(
   { supabase, risk3, theme, ...state }: Props,
-): A<Manifest, Props, [ReturnType<typeof commerce>]> {
+): A<Manifest, State, [ReturnType<typeof commerce>]> {
   const clientRisk3 = createHttpClient<creditAnalysis>({
     base: risk3.url,
-    fetcher: fetchSafe,
+    headers: new Headers({ "accept": "application/json" }),
   });
 
   const risk3ConfigsAndClient = {
@@ -70,8 +78,16 @@ export default function Site(
     clientRisk3,
   };
 
+  const supabaseClient = createClient(supabase.url, supabase.token);
+
   return {
-    state: { supabase, risk3: risk3ConfigsAndClient, theme, ...state },
+    state: {
+      supabase,
+      supabaseClient,
+      risk3: risk3ConfigsAndClient,
+      theme,
+      ...state,
+    },
     manifest,
     dependencies: [
       commerce({

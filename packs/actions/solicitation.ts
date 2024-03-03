@@ -1,17 +1,18 @@
 import type { AppContext } from "$store/apps/site.ts";
-import { SupabaseClient, createClient } from "https://esm.sh/v135/@supabase/supabase-js@2.7.0";
 import {
-  RESPONSE_RISK3_APPROVED,
+  SupabaseClient,
+} from "https://esm.sh/v135/@supabase/supabase-js@2.7.0";
+import {
+  HEADER_AUTH_TOKEN,
   SOLICITATION_ENTITY_NAME,
   STATUS_ENUM_ABLE,
   STATUS_ENUM_ACCOUNT_OPENING,
+  STATUS_ENUM_CREDIT_ANALYSIS,
   STATUS_ENUM_DISAPPROVED,
   STATUS_ENUM_IN_OPERATION,
+  STATUS_ENUM_RISK3_FAILED,
   STATUS_ENUM_SIGNATURE,
   STATUS_ENUM_SUSPENDED,
-  STATUS_ENUM_CREDIT_ANALYSIS,
-  STATUS_ENUM_RISK3_FAILED,
-  HEADER_AUTH_TOKEN,
 } from "deco-sites/niivu-bank/packs/utils/constants.ts";
 
 interface Fields {
@@ -40,6 +41,7 @@ interface CPF extends Fields {
 
 interface Entity extends Fields {
   credit_status: boolean;
+  id_solicitation_risk3: string;
   status: Status;
 }
 
@@ -73,7 +75,7 @@ interface DataObjectSoliciation {
   status: string;
   credit_status: boolean;
 }
-  
+
 interface ApiResponse {
   error: null | string;
   data: DataObjectSoliciation[];
@@ -81,34 +83,25 @@ interface ApiResponse {
   status: number;
   statusText: string;
 }
-  
-type LoaderResponse = 
+
+type LoaderResponse =
   | { error: string }
   | { data: SupabaseClient<ApiResponse> };
-
 
 export default async function loader(
   props: CNPJ | CPF,
   _req: Request,
   ctx: AppContext,
 ): Promise<LoaderResponse> {
-  const { supabase, risk3 } = ctx;
-  const { clientRisk3, password, username, product } = risk3
-  
-  if (!supabase) {
-    return {
-      error: "supabase-credentials"
-    }
-  }
-
-  const clientSupabase = createClient<ApiResponse>(supabase.url!, supabase.token!);
+  const { risk3, supabaseClient } = ctx;
+  const { clientRisk3, password, username, product } = risk3;
 
   const { type, ...rest } = props;
 
   if (type !== "CPF" && type !== "CNPJ") {
     return {
-     error: "error, wrong type."
-    }
+      error: "error, wrong type.",
+    };
   }
 
   const usernameStr = typeof username === "string" ? username : username?.get();
@@ -116,7 +109,7 @@ export default async function loader(
 
   if (!usernameStr || !passwordSrt) {
     return {
-      error: "risk3-credentials"
+      error: "risk3-credentials",
     };
   }
 
@@ -129,64 +122,64 @@ export default async function loader(
 
   if (status === "error" && !data) {
     return {
-     error: message
-    }
+      error: message,
+    };
   }
 
-  const AUTH_TOKEN = `Bearer ${data.token}`
-  const headers = new Headers();
-  headers.append(HEADER_AUTH_TOKEN, AUTH_TOKEN);
+  const headers = new Headers({ [HEADER_AUTH_TOKEN]: data.token });
 
   if (type === "CPF") {
     const body = {
       cpfs: [props.cpf!],
     };
-    
-    const creditAnalysis = await clientRisk3["POST /api/v0/analises/cpf"]({},
-      {
-        body: body,
-        headers: headers,
-      }
-    ).then((res) => res.json())
-  
-    clientRisk3["POST /api/v0/logout"]({
-      headers: headers
+
+    const { data: { records } } = await clientRisk3
+      ["POST /api/v0/analises/cpf"](
+        {},
+        {
+          body,
+          headers,
+        },
+      ).then((res) => res.json());
+
+    // This API returns 400 even when it is correct
+    clientRisk3["POST /api/v0/logout"]({}, {
+      headers,
     });
 
     const customerWithStatus: Entity = {
       ...rest,
-      credit_status: creditAnalysis.data[0].status === RESPONSE_RISK3_APPROVED
-        ? true
-        : false,
+      id_solicitation_risk3: records[0].id!,
+      credit_status: false,
       status: Status.AnalysisDeCredito,
     };
 
-    return await clientSupabase.from(SOLICITATION_ENTITY_NAME).insert([{
+    return await supabaseClient.from(SOLICITATION_ENTITY_NAME).insert([{
       ...customerWithStatus,
     }]).select() as unknown as LoaderResponse;
   } else {
-    const creditAnalysis = await clientRisk3["POST /api/v0/analises"]({
+    const { data: { records } } = await clientRisk3["POST /api/v0/analises"]({
       product: product,
     }, {
       headers: headers,
       body: {
         cnpjs: [props.cnpj!],
       },
-    }).then((res) => res.json())
-    
-    clientRisk3["POST /api/v0/logout"]({
-      headers: headers
+    }).then((res) => res.json());
+
+    // This API returns 400 even when it is correct
+    clientRisk3["POST /api/v0/logout"]({}, {
+      headers: headers,
     });
 
     const customerWithStatus: Entity = {
       ...rest,
-      credit_status: creditAnalysis.data[0].status === RESPONSE_RISK3_APPROVED
-        ? true
-        : false,
+      id_solicitation_risk3: records[0].id!,
+      credit_status: false,
       status: Status.AnalysisDeCredito,
     };
 
-    return await clientSupabase.from(SOLICITATION_ENTITY_NAME).insert([{
+    return await supabaseClient.from(SOLICITATION_ENTITY_NAME).insert([{
       ...customerWithStatus,
     }]).select() as unknown as LoaderResponse;
   }

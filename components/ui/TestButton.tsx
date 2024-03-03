@@ -22,7 +22,7 @@ function TestButton({ children }: Props) {
               "state": "State",
               "email": "example@example.com",
               "full_name": "ABC Company",
-              "cpf": "12345678912",
+              "cpf": "704.047.121-34",
               type: "CPF",
             },
           }),

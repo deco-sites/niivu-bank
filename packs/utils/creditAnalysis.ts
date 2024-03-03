@@ -13,7 +13,15 @@ interface CreditAnalysisResponse {
   status: "success" | string;
   message: message;
   status_code: number;
-  data: Records[];
+  data: {
+    statistics: {
+      cpfs_requested: number;
+      cpfs_duplicated: number;
+      cpfs_inserted: number;
+      cpfs_not_inserted: number;
+    };
+    records: Record[];
+  };
 }
 
 type message =
@@ -24,7 +32,7 @@ type message =
   | "Autenticação necessária."
   | "Expecting value: line 2 column 12 (char 13)";
 
-interface Records {
+interface Record {
   cpf?: string;
   cnpj?: string;
   status: string | "error";
@@ -63,7 +71,6 @@ interface AnalysisRequestResponse {
         score: string;
         alerta: string;
       };
-      fatores_restricao: any[];
       calculos: {
         score_final: number;
         fator_de_alerta: number;

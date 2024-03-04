@@ -1,5 +1,6 @@
 import type { AppContext } from "$store/apps/site.ts";
 import { setCookies } from "$store/utils/cookies.ts";
+import { BAD_REQUEST, CREATED, INTERNAL_ERROR } from "$store/utils/enum.ts";
 
 export interface SingUp {
   email: string;
@@ -18,14 +19,14 @@ export default async function loader(
 
   if (!passwordRegex.test(password)) {
     return {
-      status: 400,
+      status: BAD_REQUEST,
       message:
         "Sua senha tem que ter 8 caracteres, pelo menos um caracter especial, uma letra maiúscula e um número",
     };
   }
 
   if (!/@/.test(email)) {
-    return { status: 400, message: "Email invalido" };
+    return { status: BAD_REQUEST, message: "Email invalido" };
   }
 
   const url = new URL(req.url);
@@ -39,7 +40,7 @@ export default async function loader(
   });
 
   if (error) {
-    return { status: 400, message: "Email já cadastrado" };
+    return { status: BAD_REQUEST, message: "Email já cadastrado" };
   }
 
   const { data, error: singInError } = await supabaseClient.auth
@@ -49,10 +50,10 @@ export default async function loader(
     });
 
   if (singInError) {
-    return { status: 500, message: singInError };
+    return { status: INTERNAL_ERROR, message: singInError };
   }
 
   setCookies(data.session.access_token, ctx.response.headers);
 
-  return { status: 201, message: "Email Cadastrado" };
+  return { status: CREATED, message: "Email Cadastrado" };
 }

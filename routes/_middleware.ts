@@ -1,6 +1,7 @@
 import { FreshContext } from "$fresh/server.ts";
 import { getCookie } from "$store/utils/cookies.ts";
 import { checkJWTValidity } from "$store/utils/jwt.ts";
+import { TEMPORARY_REDIRECT } from "$store/utils/enum.ts";
 
 export function handler(
   req: Request,
@@ -13,13 +14,19 @@ export function handler(
     const cookie = getCookie(req);
 
     if (cookie === undefined) {
-      return new Response("", { status: 307, headers: { location: "/" } });
+      return new Response("", {
+        status: TEMPORARY_REDIRECT,
+        headers: { location: "/" },
+      });
     }
 
     if (
       !checkJWTValidity(cookie)
     ) {
-      return new Response("", { status: 307, headers: { location: "/" } });
+      return new Response("", {
+        status: TEMPORARY_REDIRECT,
+        headers: { location: "/" },
+      });
     }
   }
 

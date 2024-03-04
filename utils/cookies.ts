@@ -1,6 +1,6 @@
 import { getCookies, setCookie } from "std/http/mod.ts";
 
-export const COOKIE_NAME = "supabase_authToken";
+export const COOKIE_NAME = "niivo_auth";
 
 export const getCookie = (
   req: Request,

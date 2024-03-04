@@ -9,13 +9,13 @@ import {
   SUCCESS,
 } from "$store/utils/enum.ts";
 
-export interface SingIn {
+export interface Props {
   email: string;
   password: string;
 }
 
 export default async function loader(
-  props: SingIn,
+  props: Props,
   _req: Request,
   ctx: AppContext,
 ) {

@@ -1,6 +1,13 @@
 import type { AppContext } from "$store/apps/site.ts";
 import { setCookies } from "$store/utils/cookies.ts";
-import { BAD_REQUEST, OK } from "$store/utils/enum.ts";
+import {
+  BAD_REQUEST,
+  EMAIL_ERROR,
+  OK,
+  PASSWORD_ERROR,
+  SINGIN_ERROR,
+  SUCCESS,
+} from "$store/utils/enum.ts";
 
 export interface SingIn {
   email: string;
@@ -20,13 +27,12 @@ export default async function loader(
   if (!passwordRegex.test(password)) {
     return {
       status: BAD_REQUEST,
-      message:
-        "Sua senha tem que ter 8 caracteres, pelo menos um caracter especial, uma letra maiúscula e um número",
+      message: PASSWORD_ERROR,
     };
   }
 
   if (!/@/.test(email)) {
-    return { status: BAD_REQUEST, message: "Email invalido" };
+    return { status: BAD_REQUEST, message: EMAIL_ERROR };
   }
 
   const { data, error } = await supabaseClient.auth.signInWithPassword({
@@ -35,10 +41,10 @@ export default async function loader(
   });
 
   if (error) {
-    return { status: BAD_REQUEST, message: "Verifique seu email ou senha" };
+    return { status: BAD_REQUEST, message: SINGIN_ERROR };
   }
 
   setCookies(data.session.access_token, ctx.response.headers);
 
-  return { status: OK, message: "Usuario logado" };
+  return { status: OK, message: SUCCESS };
 }

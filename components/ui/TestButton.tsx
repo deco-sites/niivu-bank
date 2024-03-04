@@ -11,19 +11,10 @@ function TestButton({ children }: Props) {
       onClick={async () =>
         console.log(
           await invoke({
-            key: "deco-sites/niivu-bank/loaders/actions/solicitation.ts",
+            key: "deco-sites/niivu-bank/loaders/actions/singin.ts",
             props: {
-              "phone": "+1 (555) 123-4567",
-              "zip_code": "12345678",
-              "street": "123 Main Street",
-              "number": "101",
-              "complement": "Apartment 2B",
-              "city": "Cityville",
-              "state": "State",
-              "email": "example@example.com",
-              "full_name": "ABC Company",
-              "cpf": "704.047.121-34",
-              type: "CPF",
+              email: "galam89095@fashlend.com",
+              password: "vx)Kp:Dv58[1",
             },
           }),
         )}

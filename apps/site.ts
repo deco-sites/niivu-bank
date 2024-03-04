@@ -3,18 +3,10 @@ import { Section } from "deco/blocks/section.ts";
 import type { App as A, AppContext as AC } from "deco/mod.ts";
 import manifest, { Manifest } from "../manifest.gen.ts";
 import { Secret } from "apps/website/loaders/secret.ts";
-import { fetchSafe } from "apps/utils/fetch.ts";
 import { ClientOf, createHttpClient } from "apps/utils/http.ts";
 import creditAnalysis from "../packs/utils/creditAnalysis.ts";
-import {
-  createClient,
-  SupabaseClient,
-} from "https://esm.sh/v135/@supabase/supabase-js@2.7.0";
+import type { Supabase } from "$store/loaders/supabase/supabaseConfig.ts"
 
-export interface Supabase {
-  token: string;
-  url: string;
-}
 
 /**
  * @title Configurações do Risk3
@@ -54,20 +46,17 @@ export interface Risk3 {
 
 export type Props = {
   theme?: Section;
-  supabase: Supabase;
+  supabaseClient: Supabase;
   risk3: Risk3;
 } & CommerceProps;
 
-export interface State extends Props {
-  supabaseClient: SupabaseClient;
-}
 
 export type App = ReturnType<typeof Site>;
 export type AppContext = AC<App>;
 
 export default function Site(
-  { supabase, risk3, theme, ...state }: Props,
-): A<Manifest, State, [ReturnType<typeof commerce>]> {
+  { supabaseClient, risk3, theme, ...state }: Props,
+): A<Manifest, Props, [ReturnType<typeof commerce>]> {
   const clientRisk3 = createHttpClient<creditAnalysis>({
     base: risk3.url,
     headers: new Headers({ "accept": "application/json" }),
@@ -78,11 +67,9 @@ export default function Site(
     clientRisk3,
   };
 
-  const supabaseClient = createClient(supabase.url, supabase.token);
 
   return {
     state: {
-      supabase,
       supabaseClient,
       risk3: risk3ConfigsAndClient,
       theme,

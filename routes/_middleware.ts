@@ -1,15 +1,25 @@
+import { DecoState } from "deco/types.ts";
 import { FreshContext } from "$fresh/server.ts";
 import { getCookie } from "$store/utils/cookies.ts";
-import { checkJWTValidity } from "$store/utils/jwt.ts";
 import { TEMPORARY_REDIRECT } from "$store/utils/enum.ts";
+import type { Supabase } from "$store/loaders/supabase/supabaseConfig.ts";
+import { Manifest } from "$store/manifest.gen.ts";
 
-export function handler(
+export async function handler(
   req: Request,
-  ctx: FreshContext,
+  ctx: FreshContext<
+    DecoState<
+      Record<string | number | symbol, never>,
+      Record<string | number | symbol, never>,
+      //@ts-ignore Um erro bizarro acontecendo quando remove o ts-ignore
+      Manifest
+    >
+  >,
 ) {
   const isMyAccount = new URLPattern({ pathname: "/minha-conta*" }).test(
     req.url,
   );
+  const res = await ctx.next();
   if (isMyAccount) {
     const cookie = getCookie(req);
 
@@ -20,9 +30,14 @@ export function handler(
       });
     }
 
-    if (
-      !checkJWTValidity(cookie)
-    ) {
+    const supabaseClient = await ctx.state.invoke(
+      // @ts-ignore Because we can't change the types.
+      "SupaBase Client",
+    ) as Supabase;
+
+    const { error } = await supabaseClient.auth.getUser(cookie);
+
+    if (error) {
       return new Response("", {
         status: TEMPORARY_REDIRECT,
         headers: { location: "/" },
@@ -30,5 +45,5 @@ export function handler(
     }
   }
 
-  return ctx.next();
+  return res;
 }

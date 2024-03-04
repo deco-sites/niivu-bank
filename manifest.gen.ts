@@ -7,6 +7,7 @@ import * as $$$1 from "./loaders/actions/singup.ts";
 import * as $$$2 from "./loaders/actions/solicitation.ts";
 import * as $$$3 from "./loaders/Layouts/ProductCard.tsx";
 import * as $$$4 from "./loaders/List/Sections.tsx";
+import * as $$$5 from "./loaders/supabase/supabaseConfig.ts";
 import * as $$$$$$0 from "./sections/Animation/Animation.tsx";
 import * as $$$$$$1 from "./sections/Category/CategoryBanner.tsx";
 import * as $$$$$$2 from "./sections/Category/CategoryGrid.tsx";
@@ -62,6 +63,7 @@ const manifest = {
     "deco-sites/niivu-bank/loaders/actions/solicitation.ts": $$$2,
     "deco-sites/niivu-bank/loaders/Layouts/ProductCard.tsx": $$$3,
     "deco-sites/niivu-bank/loaders/List/Sections.tsx": $$$4,
+    "deco-sites/niivu-bank/loaders/supabase/supabaseConfig.ts": $$$5,
   },
   "sections": {
     "deco-sites/niivu-bank/sections/Animation/Animation.tsx": $$$$$$0,

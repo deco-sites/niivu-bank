@@ -11,7 +11,7 @@ function TestButton({ children }: Props) {
       onClick={async () =>
         console.log(
           await invoke({
-            key: "deco-sites/niivu-bank/loaders/actions/singup.ts",
+            key: "deco-sites/niivu-bank/loaders/actions/singin.ts",
             props: {
               email: "galam89095@fashlend.com",
               password: "vx)Kp:Dv58[1",

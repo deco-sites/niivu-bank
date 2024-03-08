@@ -1,67 +1,87 @@
 import type { AppContext } from "$store/apps/site.ts";
-import { HEADER_AUTH_TOKEN } from "deco-sites/niivu-bank/packs/utils/constants.ts";
+import {
+  CLASSIFICATION_APPROVED,
+  HEADER_AUTH_TOKEN,
+  SOLICITATION_ENTITY_NAME,
+  SOLICITATION_FILD_ID_RISK,
+  STATUS_ENUM_ACCOUNT_OPENING,
+  STATUS_ENUM_RISK3_FAILED,
+} from "deco-sites/niivu-bank/packs/utils/constants.ts";
 
 export default async function loader(
-    props: {
-      id: string;
-    },
-    _req: Request,
-    ctx: AppContext,
-  ) {
-    const { id } = props;
-   
-    if(!id){
-      return {
-        error: "error, id_solicitation_risk3.",
-      };
-    }
-    
-    const { risk3, supabaseClient } = ctx;
-    const { clientRisk3, password, username, _product } = risk3;
+  props: {
+    id: string;
+  },
+  _req: Request,
+  ctx: AppContext,
+) {
+  const { id } = props;
 
-    const usernameStr = typeof username === "string" ? username : username?.get();
-    const passwordSrt = typeof password === "string" ? password : password?.get();
-  
-    if (!usernameStr || !passwordSrt) {
-      return {
-        error: "risk3-credentials",
-      };
-    }
-  
-    const response = await clientRisk3["POST /api/v0/login"]({
-      username: usernameStr,
-      password: passwordSrt,
-    }).then((res) => res.json());
-  
-    const { data, status, message } = response;
-  
-    if (status === "error" && !data) {
-      return {
-        error: message,
-      };
-    }
-  
-    const headers = new Headers({ [HEADER_AUTH_TOKEN]: data.token });
-
-    const analisys = await clientRisk3["GET /api/v0/analises/id/:solicitationId"]({ solicitationId: id }, { headers }).then((res) => res.json());
-
-    const solicitation = await supabaseClient.from("solicitations").select("*").eq("id_risk3", id).single();
-
-    if(!solicitation){
-      return {
-        error: "error, solicitation not found.",
-      };
-    }
-
-    const updateSolicitation = await supabaseClient.from("solicitations").update({status: 1, statusText: "Em análise"}).eq("id_risk3", id)
-
-    if(updateSolicitation.error){
-      return {
-        error: "error, update solicitation.",
-      };
-    }
-
+  if (!id) {
     return {
-      status: 200,
-    }
+      error: "error, id_solicitation_risk3.",
+    };
   }
+
+  const { risk3, supabaseClient } = ctx;
+  const { clientRisk3, password, username } = risk3;
+
+  const usernameStr = typeof username === "string" ? username : username?.get();
+  const passwordSrt = typeof password === "string" ? password : password?.get();
+
+  if (!usernameStr || !passwordSrt) {
+    return {
+      error: "risk3-credentials",
+    };
+  }
+
+  const response = await clientRisk3["POST /api/v0/login"]({
+    username: usernameStr,
+    password: passwordSrt,
+  }).then((res) => res.json());
+
+  const { data, status, message } = response;
+
+  if (status === "error" && !data) {
+    return {
+      error: message,
+    };
+  }
+
+  const headers = new Headers({ [HEADER_AUTH_TOKEN]: data.token });
+
+  const analisys = await clientRisk3["GET /api/v0/analises/id/:solicitationId"](
+    { solicitationId: id },
+    { headers },
+  ).then((res) => res.json());
+  
+  const { analise: { classificacao } } = analisys.data;
+  const isApproved = classificacao === CLASSIFICATION_APPROVED;
+  const statusCredit = isApproved ? STATUS_ENUM_ACCOUNT_OPENING : STATUS_ENUM_RISK3_FAILED;
+
+  const solicitation = await supabaseClient.from(SOLICITATION_ENTITY_NAME)
+    .select("*").eq(SOLICITATION_FILD_ID_RISK, id).single();
+
+  if (!solicitation || solicitation.data.length === 0) {
+    return {
+      error: "error, solicitation not found.",
+    };
+  }
+
+  const updateSolicitation = await supabaseClient.from(SOLICITATION_ENTITY_NAME)
+    .update({
+      status: statusCredit,
+      credit_status: isApproved,
+      analysis_classification: classificacao,
+    }).eq("id", solicitation.data.id);
+
+  if (updateSolicitation.error !== null) {
+    return {
+      error: "error, update solicitation.",
+    };
+  }
+
+  return {
+    status: 201,
+  };
+}

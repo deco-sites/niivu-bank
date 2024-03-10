@@ -54,10 +54,12 @@ export default async function loader(
     { solicitationId: id },
     { headers },
   ).then((res) => res.json());
-  
+
   const { analise: { classificacao } } = analisys.data;
   const isApproved = classificacao === CLASSIFICATION_APPROVED;
-  const statusCredit = isApproved ? STATUS_ENUM_ACCOUNT_OPENING : STATUS_ENUM_RISK3_FAILED;
+  const statusCredit = isApproved
+    ? STATUS_ENUM_ACCOUNT_OPENING
+    : STATUS_ENUM_RISK3_FAILED;
 
   const solicitation = await supabaseClient.from(SOLICITATION_ENTITY_NAME)
     .select("*").eq(SOLICITATION_FILD_ID_RISK, id).single();

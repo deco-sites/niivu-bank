@@ -48,6 +48,7 @@ export type Props = {
   theme?: Section;
   supabaseClient: Supabase;
   risk3: Risk3;
+  sendEmail: string;
 } & CommerceProps;
 
 
@@ -55,7 +56,7 @@ export type App = ReturnType<typeof Site>;
 export type AppContext = AC<App>;
 
 export default function Site(
-  { supabaseClient, risk3, theme, ...state }: Props,
+  { supabaseClient, risk3, theme, sendEmail, ...state }: Props,
 ): A<Manifest, Props, [ReturnType<typeof commerce>]> {
   const clientRisk3 = createHttpClient<creditAnalysis>({
     base: risk3.url,
@@ -72,6 +73,7 @@ export default function Site(
     state: {
       supabaseClient,
       risk3: risk3ConfigsAndClient,
+      sendEmail,
       theme,
       ...state,
     },

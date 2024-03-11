@@ -6,10 +6,9 @@ export default async function loader(
   ctx: AppContext,
 ) {
   try {
-    // Obtendo a chave da API do Brevo do contexto
+    console.info("init sendEmail");
     const brevoApiKey = ctx.sendEmail;
 
-    // Dados do email
     const emailData = {
       sender: { name: "John Doe", email: "celso@niivobank.com.br" },
       to: [{ email: "jonasdasilvajesus@outlook.com", name: "Jane Doe" }],
@@ -20,7 +19,6 @@ export default async function loader(
       params: { subject: "Novo Assunto", parameter: "Meu valor de parâmetro" },
     };
 
-    // Enviando a requisição para a API do Brevo
     const response = await fetch("https://api.brevo.com/v3/smtp/email", {
       method: "POST",
       headers: {
@@ -30,14 +28,14 @@ export default async function loader(
       body: JSON.stringify(emailData),
     });
 
-    // Verificando se a requisição foi bem-sucedida
     if (!response.ok) {
       throw new Error(`Erro ao enviar email: ${response.statusText}`);
     }
-    return "Email enviado com sucesso!" + ctx.sendEmail;
+
     console.log("Email enviado com sucesso!");
+    return "Email enviado com sucesso!" + ctx.sendEmail;
   } catch (error) {
-    return error + ctx.sendEmail;
     console.error("Erro ao enviar email:", error);
+    return error + ctx.sendEmail;
   }
 }

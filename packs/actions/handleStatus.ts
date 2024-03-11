@@ -27,10 +27,7 @@ export default async function loader(
   const { risk3, supabaseClient } = ctx;
   const { clientRisk3, password, username } = risk3;
 
-  const usernameStr = typeof username === "string" ? username : username?.get();
-  const passwordSrt = typeof password === "string" ? password : password?.get();
-
-  if (!usernameStr || !passwordSrt) {
+  if (!password || !username) {
     console.error("Risk3 webhook: password or user not sete");
     return {
       error: "risk3-credentials",
@@ -38,8 +35,8 @@ export default async function loader(
   }
 
   const response = await clientRisk3["POST /api/v0/login"]({
-    username: usernameStr,
-    password: passwordSrt,
+    username: username,
+    password: password,
   }).then((res) => res.json());
 
   const { data, status, message } = response;

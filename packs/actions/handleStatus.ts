@@ -15,6 +15,7 @@ export default async function loader(
   _req: Request,
   ctx: AppContext,
 ) {
+  console.info("Hook Risk3 was called")
   const { id } = props;
 
   if (!id) {
@@ -30,6 +31,7 @@ export default async function loader(
   const passwordSrt = typeof password === "string" ? password : password?.get();
 
   if (!usernameStr || !passwordSrt) {
+    console.error("Hook Risk3 gave an error due to lack of password or configured user")
     return {
       error: "risk3-credentials",
     };
@@ -43,6 +45,7 @@ export default async function loader(
   const { data, status, message } = response;
 
   if (status === "error" && !data) {
+    console.error("Hook Risk3 gave an error in the request, message: " + message)
     return {
       error: message,
     };
@@ -65,6 +68,7 @@ export default async function loader(
     .select("*").eq(SOLICITATION_FILD_ID_RISK, id).single();
 
   if (!solicitation || solicitation.data.length === 0) {
+    console.error("Hook Risk3 gave an error in the request Supabase, message: solicitation not found")
     return {
       error: "error, solicitation not found.",
     };
@@ -78,11 +82,13 @@ export default async function loader(
     }).eq("id", solicitation.data.id);
 
   if (updateSolicitation.error !== null) {
+    console.error("Hook Risk3 gave an error in the request, message: " + updateSolicitation.error)
     return {
       error: "error, update solicitation.",
     };
   }
 
+  console.info("Hook Risk3 was successfully executed")
   return {
     status: 201,
   };

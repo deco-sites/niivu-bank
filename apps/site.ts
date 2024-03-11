@@ -2,7 +2,6 @@ import commerce, { Props as CommerceProps } from "apps/commerce/mod.ts";
 import { Section } from "deco/blocks/section.ts";
 import type { App as A, AppContext as AC } from "deco/mod.ts";
 import manifest, { Manifest } from "../manifest.gen.ts";
-import { Secret } from "apps/website/loaders/secret.ts";
 import { ClientOf, createHttpClient } from "apps/utils/http.ts";
 import creditAnalysis from "../packs/utils/creditAnalysis.ts";
 import type { Supabase } from "$store/loaders/supabase/supabaseConfig.ts";
@@ -15,12 +14,12 @@ export interface Risk3 {
    * @title Email
    * @description exemplo: "example@example.com"
    */
-  username: Secret;
+  username: string;
 
   /**
    * @title Senha
    */
-  password: Secret;
+  password: string;
 
   /**
    * @title URL
@@ -47,13 +46,14 @@ export type Props = {
   theme?: Section;
   supabaseClient: Supabase;
   risk3: Risk3;
+  sendEmail: string;
 } & CommerceProps;
 
 export type App = ReturnType<typeof Site>;
 export type AppContext = AC<App>;
 
 export default function Site(
-  { supabaseClient, risk3, theme, ...state }: Props,
+  { supabaseClient, risk3, theme, sendEmail, ...state }: Props,
 ): A<Manifest, Props, [ReturnType<typeof commerce>]> {
   const clientRisk3 = createHttpClient<creditAnalysis>({
     base: risk3.url,
@@ -69,6 +69,7 @@ export default function Site(
     state: {
       supabaseClient,
       risk3: risk3ConfigsAndClient,
+      sendEmail,
       theme,
       ...state,
     },

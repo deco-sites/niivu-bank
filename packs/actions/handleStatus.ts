@@ -15,7 +15,7 @@ export default async function loader(
   _req: Request,
   ctx: AppContext,
 ) {
-  console.info("Risk3 webhook: was called")
+  console.info("Risk3 webhook: was called");
   const { id } = props;
 
   if (!id) {
@@ -31,7 +31,7 @@ export default async function loader(
   const passwordSrt = typeof password === "string" ? password : password?.get();
 
   if (!usernameStr || !passwordSrt) {
-    console.error("Risk3 webhook: password or user not sete")
+    console.error("Risk3 webhook: password or user not sete");
     return {
       error: "risk3-credentials",
     };
@@ -45,7 +45,7 @@ export default async function loader(
   const { data, status, message } = response;
 
   if (status === "error" && !data) {
-    console.error("Risk3 webhook: Error " + message)
+    console.error("Risk3 webhook: Error " + message);
     return {
       error: message,
     };
@@ -68,7 +68,9 @@ export default async function loader(
     .select("*").eq(SOLICITATION_FILD_ID_RISK, id).single();
 
   if (!solicitation || solicitation.data.length === 0) {
-    console.error("Risk3 webhook: request Supabase, message: solicitation not found")
+    console.error(
+      "Risk3 webhook: request Supabase, message: solicitation not found",
+    );
     return {
       error: "error, solicitation not found.",
     };
@@ -82,13 +84,15 @@ export default async function loader(
     }).eq("id", solicitation.data.id);
 
   if (updateSolicitation.error !== null) {
-    console.error("Risk3 webhook: update status, message: " + updateSolicitation.error)
+    console.error(
+      "Risk3 webhook: update status, message: " + updateSolicitation.error,
+    );
     return {
       error: "error, update solicitation.",
     };
   }
 
-  console.info("Risk3 webhook: was successfully executed")
+  console.info("Risk3 webhook: was successfully executed");
   return {
     status: 201,
   };

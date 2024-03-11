@@ -1,4 +1,5 @@
 import { AppContext } from "deco-sites/niivu-bank/apps/site.ts";
+import re from "https://esm.sh/v135/preact-render-to-string@6.3.1/X-ZS8q/denonext/preact-render-to-string.mjs";
 
 export default async function loader(
   _props: unknown,
@@ -27,12 +28,13 @@ export default async function loader(
       },
       body: JSON.stringify(emailData),
     });
+  
 
     // Verificando se a requisição foi bem-sucedida
     if (!response.ok) {
       throw new Error(`Erro ao enviar email: ${response.statusText}`);
     }
-
+    return "Email enviado com sucesso!";
     console.log("Email enviado com sucesso!");
   } catch (error) {
     console.error("Erro ao enviar email:", error);

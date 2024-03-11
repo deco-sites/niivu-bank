@@ -1,5 +1,4 @@
 import { AppContext } from "deco-sites/niivu-bank/apps/site.ts";
-import re from "https://esm.sh/v135/preact-render-to-string@6.3.1/X-ZS8q/denonext/preact-render-to-string.mjs";
 
 export default async function loader(
   _props: unknown,
@@ -15,7 +14,9 @@ export default async function loader(
       sender: { name: "John Doe", email: "celso@niivobank.com.br" },
       to: [{ email: "jonasdasilvajesus@outlook.com", name: "Jane Doe" }],
       subject: "Meu assunto",
-      htmlContent: "<html><body><h1>Este é meu primeiro email transacional</h1></body></html>" + JSON.stringify(req),
+      htmlContent:
+        "<html><body><h1>Este é meu primeiro email transacional</h1></body></html>" +
+        JSON.stringify(req),
       params: { subject: "Novo Assunto", parameter: "Meu valor de parâmetro" },
     };
 
@@ -28,7 +29,6 @@ export default async function loader(
       },
       body: JSON.stringify(emailData),
     });
-  
 
     // Verificando se a requisição foi bem-sucedida
     if (!response.ok) {

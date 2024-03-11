@@ -2,11 +2,9 @@ import commerce, { Props as CommerceProps } from "apps/commerce/mod.ts";
 import { Section } from "deco/blocks/section.ts";
 import type { App as A, AppContext as AC } from "deco/mod.ts";
 import manifest, { Manifest } from "../manifest.gen.ts";
-import { Secret } from "apps/website/loaders/secret.ts";
 import { ClientOf, createHttpClient } from "apps/utils/http.ts";
 import creditAnalysis from "../packs/utils/creditAnalysis.ts";
-import type { Supabase } from "$store/loaders/supabase/supabaseConfig.ts"
-
+import type { Supabase } from "$store/loaders/supabase/supabaseConfig.ts";
 
 /**
  * @title Configurações do Risk3
@@ -51,7 +49,6 @@ export type Props = {
   sendEmail: string;
 } & CommerceProps;
 
-
 export type App = ReturnType<typeof Site>;
 export type AppContext = AC<App>;
 
@@ -67,7 +64,6 @@ export default function Site(
     ...risk3,
     clientRisk3,
   };
-
 
   return {
     state: {

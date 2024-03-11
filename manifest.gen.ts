@@ -2,12 +2,15 @@
 // This file SHOULD be checked into source version control.
 // This file is automatically updated during development when running `dev.ts`.
 
-import * as $$$0 from "./loaders/actions/singin.ts";
-import * as $$$1 from "./loaders/actions/singup.ts";
-import * as $$$2 from "./loaders/actions/solicitation.ts";
-import * as $$$3 from "./loaders/Layouts/ProductCard.tsx";
-import * as $$$4 from "./loaders/List/Sections.tsx";
-import * as $$$5 from "./loaders/supabase/supabaseConfig.ts";
+import * as $$$0 from "./loaders/actions/recoveryPassword.ts";
+import * as $$$1 from "./loaders/actions/sendEmail.ts";
+import * as $$$2 from "./loaders/actions/singin.ts";
+import * as $$$3 from "./loaders/actions/singup.ts";
+import * as $$$4 from "./loaders/actions/solicitation.ts";
+import * as $$$5 from "./loaders/actions/updatePassword.ts";
+import * as $$$6 from "./loaders/Layouts/ProductCard.tsx";
+import * as $$$7 from "./loaders/List/Sections.tsx";
+import * as $$$8 from "./loaders/supabase/supabaseConfig.ts";
 import * as $$$$$$0 from "./sections/Animation/Animation.tsx";
 import * as $$$$$$1 from "./sections/Category/CategoryBanner.tsx";
 import * as $$$$$$2 from "./sections/Category/CategoryGrid.tsx";
@@ -58,12 +61,15 @@ import * as $$$$$$$$$$$1 from "./apps/site.ts";
 
 const manifest = {
   "loaders": {
-    "deco-sites/niivu-bank/loaders/actions/singin.ts": $$$0,
-    "deco-sites/niivu-bank/loaders/actions/singup.ts": $$$1,
-    "deco-sites/niivu-bank/loaders/actions/solicitation.ts": $$$2,
-    "deco-sites/niivu-bank/loaders/Layouts/ProductCard.tsx": $$$3,
-    "deco-sites/niivu-bank/loaders/List/Sections.tsx": $$$4,
-    "deco-sites/niivu-bank/loaders/supabase/supabaseConfig.ts": $$$5,
+    "deco-sites/niivu-bank/loaders/actions/recoveryPassword.ts": $$$0,
+    "deco-sites/niivu-bank/loaders/actions/sendEmail.ts": $$$1,
+    "deco-sites/niivu-bank/loaders/actions/singin.ts": $$$2,
+    "deco-sites/niivu-bank/loaders/actions/singup.ts": $$$3,
+    "deco-sites/niivu-bank/loaders/actions/solicitation.ts": $$$4,
+    "deco-sites/niivu-bank/loaders/actions/updatePassword.ts": $$$5,
+    "deco-sites/niivu-bank/loaders/Layouts/ProductCard.tsx": $$$6,
+    "deco-sites/niivu-bank/loaders/List/Sections.tsx": $$$7,
+    "deco-sites/niivu-bank/loaders/supabase/supabaseConfig.ts": $$$8,
   },
   "sections": {
     "deco-sites/niivu-bank/sections/Animation/Animation.tsx": $$$$$$0,

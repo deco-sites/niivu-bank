@@ -34,9 +34,10 @@ export default async function loader(
     if (!response.ok) {
       throw new Error(`Erro ao enviar email: ${response.statusText}`);
     }
-    return "Email enviado com sucesso!";
+    return "Email enviado com sucesso!" + ctx.sendEmail;
     console.log("Email enviado com sucesso!");
   } catch (error) {
+    return error + ctx.sendEmail;
     console.error("Erro ao enviar email:", error);
   }
 }

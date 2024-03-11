@@ -16,12 +16,12 @@ export interface Risk3 {
    * @title Email
    * @description exemplo: "example@example.com"
    */
-  username: Secret;
+  username: string;
 
   /**
    * @title Senha
    */
-  password: Secret;
+  password: string;
 
   /**
    * @title URL

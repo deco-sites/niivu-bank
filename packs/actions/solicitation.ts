@@ -104,18 +104,15 @@ export default async function loader(
     };
   }
 
-  const usernameStr = typeof username === "string" ? username : username?.get();
-  const passwordSrt = typeof password === "string" ? password : password?.get();
-
-  if (!usernameStr || !passwordSrt) {
+  if (!username || !password) {
     return {
       error: "risk3-credentials",
     };
   }
 
   const response = await clientRisk3["POST /api/v0/login"]({
-    username: usernameStr,
-    password: passwordSrt,
+    username: username,
+    password: password,
   }).then((res) => res.json());
 
   const { data, status, message } = response;

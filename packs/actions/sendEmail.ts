@@ -7,7 +7,7 @@ export default async function loader(
 ) {
   try {
     // Obtendo a chave da API do Brevo do contexto
-    const brevoApiKey = "https://deco-sites-niivu-bank.deno.dev";
+    const brevoApiKey = ctx.sendEmail;
 
     // Dados do email
     const emailData = {

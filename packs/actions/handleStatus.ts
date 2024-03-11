@@ -15,7 +15,7 @@ export default async function loader(
   _req: Request,
   ctx: AppContext,
 ) {
-  console.info("Risk3 webhook: was called");
+  console.log("Risk3 webhook: was called");
   const { id } = props;
 
   if (!id) {
@@ -92,7 +92,7 @@ export default async function loader(
     };
   }
 
-  console.info("Risk3 webhook: was successfully executed");
+  console.log("Risk3 webhook: was successfully executed");
   return {
     status: 201,
   };

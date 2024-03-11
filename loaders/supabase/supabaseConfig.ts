@@ -2,10 +2,9 @@ import {
   createClient,
   SupabaseClient,
 } from "https://esm.sh/v135/@supabase/supabase-js@2.7.0";
-import { Secret } from "apps/website/loaders/secret.ts";
 
 export interface Props {
-  token: Secret;
+  token: string;
   url: string;
 }
 

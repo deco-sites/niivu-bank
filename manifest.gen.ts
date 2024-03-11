@@ -4,11 +4,12 @@
 
 import * as $$$0 from "./loaders/Layouts/ProductCard.tsx";
 import * as $$$1 from "./loaders/supabase/supabaseConfig.ts";
-import * as $$$2 from "./loaders/actions/sendEmail.ts";
-import * as $$$3 from "./loaders/actions/singin.ts";
-import * as $$$4 from "./loaders/actions/singup.ts";
-import * as $$$5 from "./loaders/actions/solicitation.ts";
-import * as $$$6 from "./loaders/List/Sections.tsx";
+import * as $$$2 from "./loaders/actions/handleStatus.ts";
+import * as $$$3 from "./loaders/actions/sendEmail.ts";
+import * as $$$4 from "./loaders/actions/singin.ts";
+import * as $$$5 from "./loaders/actions/singup.ts";
+import * as $$$6 from "./loaders/actions/solicitation.ts";
+import * as $$$7 from "./loaders/List/Sections.tsx";
 import * as $$$$$$0 from "./sections/Newsletter/Newsletter.tsx";
 import * as $$$$$$1 from "./sections/Animation/Animation.tsx";
 import * as $$$$$$2 from "./sections/Content/Features.tsx";
@@ -59,12 +60,13 @@ import * as $$$$$$$$$$$1 from "./apps/decohub.ts";
 
 const manifest = {
   "loaders": {
-    "deco-sites/niivu-bank/loaders/actions/sendEmail.ts": $$$2,
-    "deco-sites/niivu-bank/loaders/actions/singin.ts": $$$3,
-    "deco-sites/niivu-bank/loaders/actions/singup.ts": $$$4,
-    "deco-sites/niivu-bank/loaders/actions/solicitation.ts": $$$5,
+    "deco-sites/niivu-bank/loaders/actions/handleStatus.ts": $$$2,
+    "deco-sites/niivu-bank/loaders/actions/sendEmail.ts": $$$3,
+    "deco-sites/niivu-bank/loaders/actions/singin.ts": $$$4,
+    "deco-sites/niivu-bank/loaders/actions/singup.ts": $$$5,
+    "deco-sites/niivu-bank/loaders/actions/solicitation.ts": $$$6,
     "deco-sites/niivu-bank/loaders/Layouts/ProductCard.tsx": $$$0,
-    "deco-sites/niivu-bank/loaders/List/Sections.tsx": $$$6,
+    "deco-sites/niivu-bank/loaders/List/Sections.tsx": $$$7,
     "deco-sites/niivu-bank/loaders/supabase/supabaseConfig.ts": $$$1,
   },
   "sections": {

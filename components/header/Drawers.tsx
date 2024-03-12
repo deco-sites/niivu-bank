@@ -5,7 +5,6 @@ import Button from "$store/components/ui/Button.tsx";
 import Drawer from "$store/components/ui/Drawer.tsx";
 import Icon from "$store/components/ui/Icon.tsx";
 import { useUI } from "$store/sdk/useUI.ts";
-import { usePlatform } from "$store/sdk/usePlatform.tsx";
 import type { ComponentChildren } from "preact";
 import { lazy, Suspense } from "preact/compat";
 
@@ -19,7 +18,6 @@ export interface Props {
    * @ignore_gen true
    */
   children?: ComponentChildren;
-  platform: ReturnType<typeof usePlatform>;
 }
 
 const Aside = (
@@ -52,7 +50,7 @@ const Aside = (
   </div>
 );
 
-function Drawers({ menu, searchbar, children, platform }: Props) {
+function Drawers({ menu, searchbar, children }: Props) {
   const { displayCart, displayMenu, displaySearchDrawer } = useUI();
 
   return (
@@ -91,7 +89,7 @@ function Drawers({ menu, searchbar, children, platform }: Props) {
             title="Minha sacola"
             onClose={() => displayCart.value = false}
           >
-            <Cart platform={platform} />
+            <Cart />
           </Aside>
         }
       >

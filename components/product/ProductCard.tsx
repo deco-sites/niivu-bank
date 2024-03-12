@@ -1,4 +1,3 @@
-import type { Platform } from "$store/apps/site.ts";
 import { SendEventOnClick } from "$store/components/Analytics.tsx";
 import Avatar from "$store/components/ui/Avatar.tsx";
 import WishlistButtonVtex from "../../islands/WishlistButton/vtex.tsx";
@@ -53,7 +52,6 @@ interface Props {
   index?: number;
 
   layout?: Layout;
-  platform?: Platform;
 }
 
 const WIDTH = 200;
@@ -64,7 +62,6 @@ function ProductCard({
   preload,
   itemListName,
   layout,
-  platform,
   index,
 }: Props) {
   const { url, productID, name, image: images, offers, isVariantOf } = product;
@@ -161,18 +158,6 @@ function ProductCard({
               l?.onMouseOver?.showFavoriteIcon ? "lg:group-hover:block" : ""
             }`}
           >
-            {platform === "vtex" && (
-              <WishlistButtonVtex
-                productGroupID={productGroupID}
-                productID={productID}
-              />
-            )}
-            {platform === "wake" && (
-              <WishlistButtonWake
-                productGroupID={productGroupID}
-                productID={productID}
-              />
-            )}
           </div>
           {/* Discount % */}
           {!l?.hide?.discount && (

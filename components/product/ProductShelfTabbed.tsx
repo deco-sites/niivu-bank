@@ -8,7 +8,6 @@ import Slider from "$store/components/ui/Slider.tsx";
 import SliderJS from "$store/islands/SliderJS.tsx";
 import { useId } from "$store/sdk/useId.ts";
 import { useOffer } from "$store/sdk/useOffer.ts";
-import { usePlatform } from "$store/sdk/usePlatform.tsx";
 import type { Product } from "apps/commerce/types.ts";
 import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
 import { usePartialSection } from "deco/hooks/usePartialSection.ts";
@@ -40,7 +39,6 @@ function TabbedProductShelf({
   tabIndex,
 }: Props) {
   const id = useId();
-  const platform = usePlatform();
   const ti = typeof tabIndex === "number"
     ? Math.min(Math.max(tabIndex, 0), tabs.length)
     : 0;
@@ -86,7 +84,6 @@ function TabbedProductShelf({
                 product={product}
                 itemListName={title}
                 layout={cardLayout}
-                platform={platform}
                 index={index}
               />
             </Slider.Item>

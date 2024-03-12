@@ -10,7 +10,7 @@ const CartShopify = lazy(() => import("./shopify/Cart.tsx"));
 const CartNuvemshop = lazy(() => import("./nuvemshop/Cart.tsx"));
 
 export interface Props {
-  platform: ReturnType<typeof usePlatform>;
+  platform?: string;
 }
 
 function Cart({ platform }: Props) {

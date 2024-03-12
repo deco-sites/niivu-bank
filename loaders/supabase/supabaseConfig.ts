@@ -12,7 +12,5 @@ export type Supabase = SupabaseClient;
 
 /** @title Supabas config setup */
 export default function loader({ token, url }: Props): Supabase {
-  const tokenStr = typeof token === "string" ? token : token?.get() as string;
-
-  return createClient(url, tokenStr);
+  return createClient(url, token);
 }

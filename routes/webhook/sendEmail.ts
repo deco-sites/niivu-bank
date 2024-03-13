@@ -1,13 +1,12 @@
-export async function handler(req: unknown, ctx: unknown){
-    console.log( req.body );
-    const t = req.json()
-    console.log({ t });
+import { AppContext } from "deco-sites/niivu-bank/apps/site.ts";
+
+export async function handler(req: Request, ctx: AppContext, ...args: unknown[]){
+    // Lê o corpo da solicitação como texto
+    const bodyText = await req.text();
+    console.log("Corpo da solicitação:", bodyText);
     
-    console.log({ ctx });
-    console.log();
-    
-    
+    // Passa o corpo da solicitação como argumento para a função invocada
     return await ctx.state.invoke("deco-sites/niivu-bank/loaders/actions/sendEmail.ts", {
-        req: req,
-    })
+        reqBody: bodyText,
+    });
 }

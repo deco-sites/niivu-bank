@@ -10,3 +10,5 @@ export const EMAIL_RESGISTER_ERROR = "email-already-registered";
 export const EMAIL_RESGISTER = "email-registered";
 export const SINGIN_ERROR = "verify-password-email";
 export const SUCCESS = "success";
+export const SERVER_ERROR = "request-error";
+export const TOKEN_ERROR = "tokens-error";

@@ -13,8 +13,8 @@ function TestButton({ children }: Props) {
           await invoke({
             key: "deco-sites/niivu-bank/loaders/actions/singin.ts",
             props: {
-              email: "galam89095@fashlend.com",
-              password: "vx)Kp:Dv58[1",
+              email: "wigeb30847@fashlend.com",
+              password: "vx)Kp:Dv58[1]",
             },
           }),
         )}

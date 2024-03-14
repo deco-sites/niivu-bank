@@ -17,7 +17,9 @@ export default async function loader(
     apiKey,
     from,
     emailNiivo,
-    subject
+    templateIdReproved,
+    templateIdApproved,
+    sanderName,
     } = ctx.sendEmail;
     const { isApproved, email, name } = props;
 
@@ -30,16 +32,17 @@ export default async function loader(
       const bodyEmail = createEmailApproved({
         name,
         email,
-        sanderName: "Equipe Niivu Bank",
-        subject,
-        sanderEmail: from
+        sanderName,
+        sanderEmail: from,
+        templateIdApproved
       })
+
       const bodyEmailForNiivo = createEmailApproved({
         name,
         email,
-        sanderName: "Equipe Niivu Bank",
-        subject: "Solicitação de crédito aprovada para um cliente",
-        sanderEmail: emailNiivo
+        sanderName,
+        sanderEmail: emailNiivo,
+        templateIdApproved
       })
 
 
@@ -60,9 +63,9 @@ export default async function loader(
       const bodyEmail = createEmailRepruved({
         name,
         email,
-        sanderName: "Equipe Niivu Bank",
+        sanderName,
         sanderEmail: from,
-        subject: "Solicitação de crédito reprovada"
+        templateIdReproved
       })
 
     const response = await fetch(BREVO_API_URL, {

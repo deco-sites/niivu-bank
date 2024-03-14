@@ -14,6 +14,8 @@ import {
   STATUS_ENUM_SIGNATURE,
   STATUS_ENUM_SUSPENDED,
 } from "deco-sites/niivu-bank/packs/utils/constants.ts";
+import { INTERNAL_ERROR, SERVER_ERROR } from "$store/utils/enum.ts";
+import { getEmail } from "$store/utils/cookies.ts";
 
 interface Fields {
   phone: string;
@@ -26,13 +28,13 @@ interface Fields {
   email: string;
 }
 
-interface CNPJ extends Fields {
+interface CNPJ extends Omit<Fields, "email"> {
   type: "CNPJ";
   cnpj: string;
   business_name?: string;
 }
 
-interface CPF extends Fields {
+interface CPF extends Omit<Fields, "email"> {
   type: "CPF";
   full_name?: string;
   cpf?: string;
@@ -86,11 +88,12 @@ interface ApiResponse {
 
 type LoaderResponse =
   | { error: string }
-  | { data: SupabaseClient<ApiResponse> };
+  | { data: SupabaseClient<ApiResponse> }
+  | { status: number; message: string };
 
 export default async function loader(
   props: CNPJ | CPF,
-  _req: Request,
+  req: Request,
   ctx: AppContext,
 ): Promise<LoaderResponse> {
   const { risk3, supabaseClient } = ctx;
@@ -108,6 +111,12 @@ export default async function loader(
     return {
       error: "risk3-credentials",
     };
+  }
+
+  const email = getEmail({ supabaseClient, req });
+
+  if (typeof email !== "string") {
+    return { status: INTERNAL_ERROR, message: SERVER_ERROR };
   }
 
   const response = await clientRisk3["POST /api/v0/login"]({
@@ -149,6 +158,7 @@ export default async function loader(
       id_solicitation_risk3: records[0].id!,
       credit_status: false,
       status: Status.AnalysisDeCredito,
+      email,
     };
 
     return await supabaseClient.from(SOLICITATION_ENTITY_NAME).insert([{
@@ -174,6 +184,7 @@ export default async function loader(
       id_solicitation_risk3: records[0].id!,
       credit_status: false,
       status: Status.AnalysisDeCredito,
+      email,
     };
 
     return await supabaseClient.from(SOLICITATION_ENTITY_NAME).insert([{

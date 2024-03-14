@@ -42,11 +42,41 @@ export interface Risk3 {
   clientRisk3: ClientOf<creditAnalysis>;
 }
 
+
+/**
+ * @title Configurações de envio de email
+ */
+export interface SendEmailConfig {
+  /**
+   * @title Chave da API
+   * @description Chave da API do Brevo
+   */
+  apiKey: string;
+
+  /**
+   * @title De
+   * @description Email de origem
+   */
+  from: string;
+
+  /**
+   * @title Assunto
+   * @description Assunto do email
+   */
+
+  subject: string;
+
+  /**
+   * @title Email da equipe Niivo
+   */
+  emailNiivo: string;
+}
+
 export type Props = {
   theme?: Section;
   supabaseClient: Supabase;
   risk3: Risk3;
-  sendEmail: string;
+  sendEmail: SendEmailConfig;
 } & CommerceProps;
 
 export type App = ReturnType<typeof Site>;

@@ -31,7 +31,7 @@ export async function handler(req: Request, ctx: unknown) {
       },
     );
   } catch (error) {
-    console.error("Erro ao processar o corpo da solicitação:", error);
+    console.error("Error:", error);
     return error;
   }
 }

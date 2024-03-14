@@ -53,8 +53,14 @@ export interface SendEmailConfig {
    */
   apiKey: string;
 
+    /**
+   * @title Nome do remetente
+   * @description Email de origem
+   */
+  sanderName: string;
+
   /**
-   * @title De
+   * @title Email do remetente
    * @description Email de origem
    */
   from: string;
@@ -70,6 +76,18 @@ export interface SendEmailConfig {
    * @title Email da equipe Niivo
    */
   emailNiivo: string;
+
+  /**
+   * @title Template ID de email aprovado
+   * @description ID do template de email
+   */
+  templateIdApproved: string;
+
+  /**
+   * @title Template ID de email reprovado
+   * @description ID do template de email
+   */
+  templateIdReproved: string;
 }
 
 export type Props = {

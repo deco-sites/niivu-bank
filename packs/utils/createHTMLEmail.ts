@@ -18,10 +18,24 @@ export interface CreditRequestData {
   rg?: string;
 }
 
-interface EmailDetails {
-  to: { email: string; name: string }[];
-  templateId: string;
-  param: CreditRequestData;
+interface EmailRecipient {
+  email: string;
+  name: string;
+}
+
+interface MessageVersion {
+  to: EmailRecipient[];
+  params: CreditRequestData;
+  subject?: string;
+}
+
+interface EmailBody {
+  sender?: EmailRecipient;
+  to: EmailRecipient[];
+  subject?: string;
+  templateId: number;
+  params: CreditRequestData;
+  messageVersions?: MessageVersion[];
 }
 
 /**
@@ -36,12 +50,19 @@ interface EmailDetails {
 export function createEmail(
   name: string,
   email: string,
-  templateId: string,
+  templateId: number,
   solicitationData: CreditRequestData,
-): EmailDetails {
+): EmailBody {
   return {
     to: [{ email, name }],
     templateId,
-    param: solicitationData,
+    params: solicitationData,
+  };
+}
+
+export default interface BrevoClient {
+  "POST /v3/smtp/email": {
+    response: unknown;
+    body: EmailBody;
   };
 }

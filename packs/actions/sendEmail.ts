@@ -3,7 +3,7 @@ import {
   createEmail,
   CreditRequestData,
 } from "deco-sites/niivu-bank/packs/utils/createHTMLEmail.ts";
-import { BREVO_API_URL } from "deco-sites/niivu-bank/packs/utils/constants.ts";
+
 interface EmailData {
   isApproved: boolean;
   email: string;
@@ -25,7 +25,8 @@ export default async function loader(
       templateIdReproved,
       templateIdApproved,
       templateIdApprovedNiivo,
-    } = ctx.sendEmail;
+      clientBrevo,
+    } = ctx.brevo;
     const { isApproved, email, name, lastName, fullName, param } = props;
 
     const solicitationData: CreditRequestData = {
@@ -67,19 +68,18 @@ export default async function loader(
         solicitationData,
       );
 
-      const response = await fetch(BREVO_API_URL, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "api-key": apiKey,
-        },
-        body: JSON.stringify([approvedEmail, bodyEmailForNiivo]),
-      });
+      const response = await clientBrevo["POST /v3/smtp/email"]({}, {
+        body: approvedEmail,
+      }).then((res) => res.json());
 
-      console.log("respond approved sendEmail status", response.status);
-      return {
-        status: response.status,
-      };
+      const responseEmailNiivo = await clientBrevo["POST /v3/smtp/email"]({}, {
+        body: bodyEmailForNiivo,
+      }).then((res) => res.json());
+
+      console.log("respond approved sendEmail status", {
+        response,
+        responseEmailNiivo,
+      });
     } else {
       const bodyEmail = createEmail(
         name,
@@ -88,22 +88,14 @@ export default async function loader(
         solicitationData,
       );
 
-      const response = await fetch(BREVO_API_URL, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "api-key": apiKey,
-        },
-        body: JSON.stringify(bodyEmail),
-      });
+      const response = clientBrevo["POST /v3/smtp/email"]({}, {
+        body: bodyEmail,
+      }).then((res) => res.json());
 
-      console.log("respond repruve sendEmail status", response.status);
-      return {
-        status: response.status,
-      };
+      console.log("respond reproved sendEmail status", { response });
     }
   } catch (error) {
     console.error("Erro ao enviar email:", error);
-    return error + ctx.sendEmail;
+    return error;
   }
 }

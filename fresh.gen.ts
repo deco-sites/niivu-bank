@@ -4,7 +4,7 @@
 
 import * as $_app from "./routes/_app.tsx";
 import * as $_middleware from "./routes/_middleware.ts";
-import * as $webhook_sendEmail from "./routes/webhook/sendEmail.ts";
+import * as $webhook_sendEmail from "./routes/webhook/sendEmailRoute.ts";
 import * as $AddToCartButton_linx from "./islands/AddToCartButton/linx.tsx";
 import * as $AddToCartButton_nuvemshop from "./islands/AddToCartButton/nuvemshop.tsx";
 import * as $AddToCartButton_shopify from "./islands/AddToCartButton/shopify.tsx";

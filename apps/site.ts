@@ -42,7 +42,6 @@ export interface Risk3 {
   clientRisk3: ClientOf<creditAnalysis>;
 }
 
-
 /**
  * @title Configurações de envio de email
  */
@@ -53,39 +52,27 @@ export interface SendEmailConfig {
    */
   apiKey: string;
 
-    /**
-   * @title Nome do remetente
-   * @description Email de origem
-   */
-  sanderName: string;
-
-  /**
-   * @title Email do remetente
-   * @description Email de origem
-   */
-  from: string;
-
-  /**
-   * @title Assunto
-   * @description Assunto do email
-   */
-
-  subject: string;
-
   /**
    * @title Email da equipe Niivo
+   * @description Email que envia os dados dos clientes para a equipe Niivo
    */
   emailNiivo: string;
 
   /**
-   * @title Template ID de email aprovado
-   * @description ID do template de email
+   * @title Template ID, email para Equipe Niivo
+   * @description ID do template de email que será enviado para a equipe Niivo com os dados do cliente aprovado
+   */
+  templateIdApprovedNiivo: string;
+
+  /**
+   * @title Template ID, Cliente aprovado
+   * @description ID do template de email que será enviado para o cliente com análise de crédito aprovada
    */
   templateIdApproved: string;
 
   /**
-   * @title Template ID de email reprovado
-   * @description ID do template de email
+   * @title Template ID, Cliente reprovado
+   * @description ID do template de email que será enviado para o cliente com análise de crédito aprovada
    */
   templateIdReproved: string;
 }

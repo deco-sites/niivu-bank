@@ -1,10 +1,16 @@
 import { AppContext } from "deco-sites/niivu-bank/apps/site.ts";
-import { createEmailApproved, createEmailRepruved } from "deco-sites/niivu-bank/packs/utils/createHTMLEmail.ts";
+import {
+  createEmail,
+  CreditRequestData,
+} from "deco-sites/niivu-bank/packs/utils/createHTMLEmail.ts";
 import { BREVO_API_URL } from "deco-sites/niivu-bank/packs/utils/constants.ts";
 interface EmailData {
   isApproved: boolean;
   email: string;
   name: string;
+  fullName: string;
+  lastName: string;
+  param: CreditRequestData;
 }
 export default async function loader(
   props: EmailData,
@@ -14,73 +20,87 @@ export default async function loader(
   try {
     console.info("init sendEmail");
     const {
-    apiKey,
-    from,
-    emailNiivo,
-    templateIdReproved,
-    templateIdApproved,
-    sanderName,
+      apiKey,
+      emailNiivo,
+      templateIdReproved,
+      templateIdApproved,
+      templateIdApprovedNiivo,
     } = ctx.sendEmail;
-    const { isApproved, email, name } = props;
+    const { isApproved, email, name, lastName, fullName, param } = props;
+
+    const solicitationData: CreditRequestData = {
+      nome: name,
+      sobrenome: lastName,
+      nomeCompleto: fullName,
+      email,
+      status: param.status,
+      classificacaoAnalise: param.classificacaoAnalise,
+      telefone: param.telefone,
+      cidade: param.cidade,
+      estado: param.estado,
+      rua: param.rua,
+      numero: param.numero,
+      complemento: param.complemento,
+      cep: param.cep,
+      cnpj: param.cnpj,
+      cpf: param.cpf,
+      rg: param.rg,
+    };
 
     if (!apiKey) {
       console.log("Chave de API não encontrada");
       return "email-credentials";
     }
 
-    if(isApproved){
-      const bodyEmail = createEmailApproved({
+    if (isApproved) {
+      const approvedEmail = createEmail(
         name,
         email,
-        sanderName,
-        sanderEmail: from,
-        templateIdApproved
-      })
+        templateIdApproved,
+        solicitationData,
+      );
 
-      const bodyEmailForNiivo = createEmailApproved({
+      const bodyEmailForNiivo = createEmail(
         name,
-        email,
-        sanderName,
-        sanderEmail: emailNiivo,
-        templateIdApproved
-      })
+        emailNiivo,
+        templateIdApprovedNiivo,
+        solicitationData,
+      );
 
+      const response = await fetch(BREVO_API_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "api-key": apiKey,
+        },
+        body: JSON.stringify([approvedEmail, bodyEmailForNiivo]),
+      });
 
-    const response = await fetch(BREVO_API_URL, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "api-key": apiKey,
-      },
-      body: JSON.stringify([bodyEmail, bodyEmailForNiivo]),
-    });
-    
-    console.log("respond approved sendEmail status", response.status)
-    return {
-      status: response.status,
-    }
+      console.log("respond approved sendEmail status", response.status);
+      return {
+        status: response.status,
+      };
     } else {
-      const bodyEmail = createEmailRepruved({
+      const bodyEmail = createEmail(
         name,
         email,
-        sanderName,
-        sanderEmail: from,
-        templateIdReproved
-      })
+        templateIdReproved,
+        solicitationData,
+      );
 
-    const response = await fetch(BREVO_API_URL, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "api-key": apiKey,
-      },
-      body: JSON.stringify(bodyEmail),
-    });
+      const response = await fetch(BREVO_API_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "api-key": apiKey,
+        },
+        body: JSON.stringify(bodyEmail),
+      });
 
-    console.log("respond repruve sendEmail status", response.status)
-    return {
-      status: response.status,
-    }
+      console.log("respond repruve sendEmail status", response.status);
+      return {
+        status: response.status,
+      };
     }
   } catch (error) {
     console.error("Erro ao enviar email:", error);

@@ -1,40 +1,101 @@
 import { AppContext } from "deco-sites/niivu-bank/apps/site.ts";
+import {
+  createEmail,
+  CreditRequestData,
+} from "deco-sites/niivu-bank/packs/utils/createHTMLEmail.ts";
 
+interface EmailData {
+  isApproved: boolean;
+  email: string;
+  name: string;
+  fullName: string;
+  lastName: string;
+  param: CreditRequestData;
+}
 export default async function loader(
-  _props: unknown,
-  req: unknown,
+  props: EmailData,
+  _req: unknown,
   ctx: AppContext,
 ) {
   try {
     console.info("init sendEmail");
-    const brevoApiKey = ctx.sendEmail;
+    const {
+      apiKey,
+      emailNiivo,
+      templateIdReproved,
+      templateIdApproved,
+      templateIdApprovedNiivo,
+      clientBrevo,
+    } = ctx.brevo;
+    const { isApproved, email, name, lastName, fullName, param } = props;
 
-    const emailData = {
-      sender: { name: "John Doe", email: "celso@niivobank.com.br" },
-      to: [{ email: "jonasdasilvajesus@outlook.com", name: "Jane Doe" }],
-      subject: "Meu assunto",
-      htmlContent:
-        "<html><body><h1>Este é meu primeiro email transacional</h1></body></html>" +
-        JSON.stringify(req),
-      params: { subject: "Novo Assunto", parameter: "Meu valor de parâmetro" },
+    const solicitationData: CreditRequestData = {
+      nome: name,
+      sobrenome: lastName,
+      nomeCompleto: fullName,
+      email,
+      status: param.status,
+      classificacaoAnalise: param.classificacaoAnalise,
+      telefone: param.telefone,
+      cidade: param.cidade,
+      estado: param.estado,
+      rua: param.rua,
+      numero: param.numero,
+      complemento: param.complemento,
+      cep: param.cep,
+      cnpj: param.cnpj,
+      cpf: param.cpf,
+      rg: param.rg,
     };
 
-    const response = await fetch("https://api.brevo.com/v3/smtp/email", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "api-key": brevoApiKey,
-      },
-      body: JSON.stringify(emailData),
-    });
-
-    if (!response.ok) {
-      throw new Error(`Erro ao enviar email: ${response.statusText}`);
+    if (!apiKey) {
+      console.log("Chave de API não encontrada");
+      return "email-credentials";
     }
 
-    return "Email enviado com sucesso!" + ctx.sendEmail;
+    if (isApproved) {
+      const approvedEmail = createEmail(
+        name,
+        email,
+        templateIdApproved,
+        solicitationData,
+      );
+
+      const bodyEmailForNiivo = createEmail(
+        name,
+        emailNiivo,
+        templateIdApprovedNiivo,
+        solicitationData,
+      );
+
+      const response = await clientBrevo["POST /v3/smtp/email"]({}, {
+        body: approvedEmail,
+      }).then((res) => res.json());
+
+      const responseEmailNiivo = await clientBrevo["POST /v3/smtp/email"]({}, {
+        body: bodyEmailForNiivo,
+      }).then((res) => res.json());
+
+      console.log("respond approved sendEmail status", {
+        response,
+        responseEmailNiivo,
+      });
+    } else {
+      const bodyEmail = createEmail(
+        name,
+        email,
+        templateIdReproved,
+        solicitationData,
+      );
+
+      const response = clientBrevo["POST /v3/smtp/email"]({}, {
+        body: bodyEmail,
+      }).then((res) => res.json());
+
+      console.log("respond reproved sendEmail status", { response });
+    }
   } catch (error) {
     console.error("Erro ao enviar email:", error);
-    return error + ctx.sendEmail;
+    return error;
   }
 }

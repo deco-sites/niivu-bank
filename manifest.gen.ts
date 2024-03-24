@@ -2,17 +2,20 @@
 // This file SHOULD be checked into source version control.
 // This file is automatically updated during development when running `dev.ts`.
 
-import * as $$$0 from "./loaders/actions/handleStatus.ts";
-import * as $$$1 from "./loaders/actions/recoveryPassword.ts";
-import * as $$$2 from "./loaders/actions/sendEmail.ts";
-import * as $$$3 from "./loaders/actions/singin.ts";
-import * as $$$4 from "./loaders/actions/singup.ts";
-import * as $$$5 from "./loaders/actions/solicitation.ts";
-import * as $$$6 from "./loaders/actions/updatePassword.ts";
-import * as $$$7 from "./loaders/Layouts/ProductCard.tsx";
-import * as $$$8 from "./loaders/List/Sections.tsx";
+import * as $$$$$$$$$$$0 from "./apps/decohub.ts";
+import * as $$$$$$$$$$$1 from "./apps/site.ts";
+import * as $$$2 from "./loaders/actions/handleStatus.ts";
+import * as $$$3 from "./loaders/actions/recoveryPassword.ts";
+import * as $$$4 from "./loaders/actions/sendEmail.ts";
+import * as $$$5 from "./loaders/actions/singin.ts";
+import * as $$$6 from "./loaders/actions/singup.ts";
+import * as $$$7 from "./loaders/actions/solicitation.ts";
+import * as $$$8 from "./loaders/actions/updatePassword.ts";
+import * as $$$0 from "./loaders/Layouts/ProductCard.tsx";
+import * as $$$1 from "./loaders/List/Sections.tsx";
 import * as $$$9 from "./loaders/supabase/supabaseConfig.ts";
 import * as $$$$$$0 from "./sections/Animation/Animation.tsx";
+import * as $$$$$$45 from "./sections/authentication/AutenticationController.tsx";
 import * as $$$$$$1 from "./sections/Category/CategoryBanner.tsx";
 import * as $$$$$$2 from "./sections/Category/CategoryGrid.tsx";
 import * as $$$$$$3 from "./sections/Category/CategoryList.tsx";
@@ -57,24 +60,24 @@ import * as $$$$$$41 from "./sections/Product/Wishlist.tsx";
 import * as $$$$$$42 from "./sections/Social/InstagramPosts.tsx";
 import * as $$$$$$43 from "./sections/Social/WhatsApp.tsx";
 import * as $$$$$$44 from "./sections/Theme/Theme.tsx";
-import * as $$$$$$$$$$$0 from "./apps/decohub.ts";
-import * as $$$$$$$$$$$1 from "./apps/site.ts";
 
 const manifest = {
   "loaders": {
-    "deco-sites/niivu-bank/loaders/actions/handleStatus.ts": $$$0,
-    "deco-sites/niivu-bank/loaders/actions/recoveryPassword.ts": $$$1,
-    "deco-sites/niivu-bank/loaders/actions/sendEmail.ts": $$$2,
-    "deco-sites/niivu-bank/loaders/actions/singin.ts": $$$3,
-    "deco-sites/niivu-bank/loaders/actions/singup.ts": $$$4,
-    "deco-sites/niivu-bank/loaders/actions/solicitation.ts": $$$5,
-    "deco-sites/niivu-bank/loaders/actions/updatePassword.ts": $$$6,
-    "deco-sites/niivu-bank/loaders/Layouts/ProductCard.tsx": $$$7,
-    "deco-sites/niivu-bank/loaders/List/Sections.tsx": $$$8,
+    "deco-sites/niivu-bank/loaders/actions/handleStatus.ts": $$$2,
+    "deco-sites/niivu-bank/loaders/actions/recoveryPassword.ts": $$$3,
+    "deco-sites/niivu-bank/loaders/actions/sendEmail.ts": $$$4,
+    "deco-sites/niivu-bank/loaders/actions/singin.ts": $$$5,
+    "deco-sites/niivu-bank/loaders/actions/singup.ts": $$$6,
+    "deco-sites/niivu-bank/loaders/actions/solicitation.ts": $$$7,
+    "deco-sites/niivu-bank/loaders/actions/updatePassword.ts": $$$8,
+    "deco-sites/niivu-bank/loaders/Layouts/ProductCard.tsx": $$$0,
+    "deco-sites/niivu-bank/loaders/List/Sections.tsx": $$$1,
     "deco-sites/niivu-bank/loaders/supabase/supabaseConfig.ts": $$$9,
   },
   "sections": {
     "deco-sites/niivu-bank/sections/Animation/Animation.tsx": $$$$$$0,
+    "deco-sites/niivu-bank/sections/authentication/AutenticationController.tsx":
+      $$$$$$45,
     "deco-sites/niivu-bank/sections/Category/CategoryBanner.tsx": $$$$$$1,
     "deco-sites/niivu-bank/sections/Category/CategoryGrid.tsx": $$$$$$2,
     "deco-sites/niivu-bank/sections/Category/CategoryList.tsx": $$$$$$3,

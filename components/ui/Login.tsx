@@ -66,7 +66,7 @@ function Login() {
       </div>
       <div class="px-4 pt-6 md:p-0">
         <div class="mb-4">
-          <h1 class="h-10 text-black font-bold text-3xl">
+          <h1 class=" text-black font-bold text-3xl">
             Acessar Minha Conta
           </h1>
           <h2 class="h-5 text-black text-sm font-pangran">
@@ -115,7 +115,7 @@ function Login() {
               </button>
             </div>
           </div>
-          <div className="divider text-black bg text-xs">Ou entre com</div>
+          <div className="divider text-black bg text-xs mt-6">Ou entre com</div>
           <div class="space-y-2">
             <Button
               ariaLabel="Entre com Facebook"

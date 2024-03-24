@@ -51,7 +51,7 @@ function Login() {
           loading="lazy"
           width="306"
           height="92"
-          src="/image/Niivo_Logo_Preta_pc.png"
+          src="/image/Niivo_Logo_Preta_pc.webp"
           alt="Niivo Logo Preta PC"
           class="hidden md:block"
         />
@@ -59,7 +59,7 @@ function Login() {
           loading="lazy"
           width="150"
           height="45"
-          src="/image/Niivo_Logo_Preta_mobile.png"
+          src="/image/Niivo_Logo_Preta_mobile.webp"
           alt="Niivo Logo Preta Mobile"
           class="md:hidden"
         />

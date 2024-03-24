@@ -2,7 +2,7 @@ import { HTMLWidget, ImageWidget } from "apps/admin/widgets.ts";
 import RichText from "deco-sites/niivu-bank/sections/Content/RichText.tsx";
 import { usePartialSection } from "deco/hooks/usePartialSection.ts";
 import LoginForm from "deco-sites/niivu-bank/islands/Authentication/LoginForm.tsx";
-import LoginSSO from "../components/Autentication/Login/LoginSSO.tsx";
+import LoginSSO from "../components/Autentication/Login/SSO.tsx";
 
 interface Props {
   /**

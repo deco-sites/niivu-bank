@@ -45,7 +45,6 @@ export default function LoginForm() {
       window.location.href = "/minha-conta";
     } finally {
       isLoaging.value = false;
-      isLoaging.value = false;
     }
   };
 

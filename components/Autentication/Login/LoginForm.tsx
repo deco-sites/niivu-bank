@@ -1,0 +1,97 @@
+import { useSignal } from "@preact/signals";
+import type { JSX } from "preact";
+import { invoke } from "deco-sites/niivu-bank/runtime.ts";
+import { Input } from "deco-sites/niivu-bank/components/ui/inputs/index.tsx";
+import Button from "deco-sites/niivu-bank/components/ui/Button.tsx";
+
+export default function LoginForm() {
+  const isLoaging = useSignal(false);
+  const isError = useSignal(false);
+  const emptyInputs = useSignal({
+    email: false,
+    password: false,
+  });
+
+  const handleSubmit: JSX.GenericEventHandler<HTMLFormElement> = async (e) => {
+    e.preventDefault();
+    isError.value = false;
+    const email = (e.currentTarget.elements.namedItem("email") as RadioNodeList)
+      ?.value;
+    const password =
+      (e.currentTarget.elements.namedItem("password") as RadioNodeList)?.value;
+
+    if (!email || !password) {
+      emptyInputs.value = {
+        email: !email,
+        password: !password,
+      };
+      return;
+    }
+    try {
+      isLoaging.value = true;
+      const response = await invoke({
+        key: "deco-sites/niivu-bank/loaders/actions/singin.ts",
+        props: {
+          email: email,
+          password: password,
+        },
+      });
+
+      if (response.status === 400) {
+        isError.value = true;
+        return;
+      }
+
+      window.location.href = "/minha-conta";
+    } finally {
+      isLoaging.value = false;
+      isLoaging.value = false;
+    }
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      {isError.value && (
+        <p class="text-red-500 text-sm text-center">
+          E-mail ou senha inválidos
+        </p>
+      )}
+      <div class="space-y-4">
+        <Input.Root>
+          <Input.Label label="E-mail" class="mb-2" />
+          <Input.Text
+            name="email"
+            placeholder="exemple@gmail.com.br"
+          />
+          <Input.Error
+            message={emptyInputs.value.email
+              ? "Email vazio ou inválido"
+              : undefined}
+          />
+        </Input.Root>
+        <Input.Root>
+          <Input.Label label="Senha" class="mb-2" />
+          <Input.Password
+            name="password"
+            placeholder="**********"
+            class="rounded-b-none border-b-2 focus:border-b-2 border-b-black focus:border-b-black"
+          />
+          <Input.Error
+            message={emptyInputs.value.password
+              ? "preencha a senha"
+              : undefined}
+          />
+        </Input.Root>
+        <div class="space-y-2">
+          <Button
+            loading={isLoaging.value}
+            type="submit"
+            class="w-full h-14 bg-black text-white rounded font-bold text-xl"
+          >
+            Entrar
+          </Button>
+        </div>
+      </div>
+    </form>
+  );
+}

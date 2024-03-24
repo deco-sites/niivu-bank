@@ -25,7 +25,7 @@ export default function InputField(
   };
 
   return (
-    <>
+    <div class="relative w-full">
       <input
         name={name}
         type={newType}
@@ -34,17 +34,16 @@ export default function InputField(
         onChange={handleInputChange}
         class={`h-10 w-full px-4 border border-gray-400 rounded-t-md rounded-b-none text-black text-sm focus:outline-none ${_class}`}
       />
-
       <button
         aria-label={showPassword.value ? "Esconder senha" : "Mostrar senha"}
         type="button"
-        class="absolute inset-y-1/2 right-0 px-4 pt-1"
+        class="absolute inset-y-1/2 right-0 h-6 mr-4 mt-1 transform -translate-y-1/2"
         onClick={togglePasswordVisibility}
       >
         {showPassword.value
           ? <Icon size={24} id="Eye" class="pt-px" />
           : <Icon size={24} id="EyeClosed" />}
       </button>
-    </>
+    </div>
   );
 }

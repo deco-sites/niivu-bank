@@ -6,12 +6,12 @@ import LoginSSO from "../components/Autentication/Login/LoginSSO.tsx";
 
 interface Props {
   /**
-   * @Title Imagem de fundo
+   * @title Imagem de fundo
    */
   image: ImageWidget;
 
   /**
-   * @Title Texto do botão
+   * @title Texto do botão
    */
   buttonText: string;
 
@@ -21,12 +21,12 @@ interface Props {
   stap: "login" | "register" | "recoveryPassword";
 
   /**
-   * @Title Texto do banner
+   * @title Texto do banner
    */
   text: HTMLWidget;
 
   /**
-   * @Title Logar com facebook e google
+   * @title Logar com facebook e google
    * @description Se ativado, o botão de login com facebook e google será exibido
    */
   showLoginSSO?: boolean;

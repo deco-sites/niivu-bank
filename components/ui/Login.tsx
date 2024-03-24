@@ -48,15 +48,14 @@ function Login() {
     <div class="md:pt-32">
       <div class="flex justify-center md:justify-start md:mb-9 items-center h-16 border-b-2 border-[#E5E5E5] md:border-none">
         <img
-          loading="lazy"
           width="306"
           height="92"
           src="/image/Niivo_Logo_Preta_pc.webp"
           alt="Niivo Logo Preta PC"
           class="hidden md:block"
         />
+
         <img
-          loading="lazy"
           width="150"
           height="45"
           src="/image/Niivo_Logo_Preta_mobile.webp"

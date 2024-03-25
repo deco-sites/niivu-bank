@@ -15,6 +15,8 @@ import * as $Authentication_ChangePassword from "./islands/Authentication/Change
 import * as $Authentication_Login from "./islands/Authentication/Login.tsx";
 import * as $Authentication_RecoveryPassword from "./islands/Authentication/RecoveryPassword.tsx";
 import * as $Authentication_Signup from "./islands/Authentication/Signup.tsx";
+import * as $Cep from "./islands/Cep.tsx";
+import * as $Form from "./islands/Form.tsx";
 import * as $Header_Buttons from "./islands/Header/Buttons.tsx";
 import * as $Header_Cart_linx from "./islands/Header/Cart/linx.tsx";
 import * as $Header_Cart_nuvemshop from "./islands/Header/Cart/nuvemshop.tsx";
@@ -28,6 +30,7 @@ import * as $Input_Password from "./islands/Input/Password.tsx";
 import * as $Newsletter from "./islands/Newsletter.tsx";
 import * as $OutOfStock from "./islands/OutOfStock.tsx";
 import * as $ProductImageZoom from "./islands/ProductImageZoom.tsx";
+import * as $RenderCorpForm from "./islands/RenderCorpForm.tsx";
 import * as $SearchControls from "./islands/SearchControls.tsx";
 import * as $ShippingSimulation from "./islands/ShippingSimulation.tsx";
 import * as $SliderJS from "./islands/SliderJS.tsx";
@@ -55,6 +58,8 @@ const manifest = {
     "./islands/Authentication/RecoveryPassword.tsx":
       $Authentication_RecoveryPassword,
     "./islands/Authentication/Signup.tsx": $Authentication_Signup,
+    "./islands/Cep.tsx": $Cep,
+    "./islands/Form.tsx": $Form,
     "./islands/Header/Buttons.tsx": $Header_Buttons,
     "./islands/Header/Cart/linx.tsx": $Header_Cart_linx,
     "./islands/Header/Cart/nuvemshop.tsx": $Header_Cart_nuvemshop,
@@ -68,6 +73,7 @@ const manifest = {
     "./islands/Newsletter.tsx": $Newsletter,
     "./islands/OutOfStock.tsx": $OutOfStock,
     "./islands/ProductImageZoom.tsx": $ProductImageZoom,
+    "./islands/RenderCorpForm.tsx": $RenderCorpForm,
     "./islands/SearchControls.tsx": $SearchControls,
     "./islands/ShippingSimulation.tsx": $ShippingSimulation,
     "./islands/SliderJS.tsx": $SliderJS,

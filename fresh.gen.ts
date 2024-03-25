@@ -4,7 +4,7 @@
 
 import * as $_app from "./routes/_app.tsx";
 import * as $_middleware from "./routes/_middleware.ts";
-import * as $webhook_sendEmail from "./routes/webhook/sendEmail.ts";
+import * as $webhook_sendEmailRoute from "./routes/webhook/sendEmailRoute.ts";
 import * as $AddToCartButton_linx from "./islands/AddToCartButton/linx.tsx";
 import * as $AddToCartButton_nuvemshop from "./islands/AddToCartButton/nuvemshop.tsx";
 import * as $AddToCartButton_shopify from "./islands/AddToCartButton/shopify.tsx";
@@ -35,7 +35,7 @@ const manifest = {
   routes: {
     "./routes/_app.tsx": $_app,
     "./routes/_middleware.ts": $_middleware,
-    "./routes/webhook/sendEmail.ts": $webhook_sendEmail,
+    "./routes/webhook/sendEmailRoute.ts": $webhook_sendEmailRoute,
   },
   islands: {
     "./islands/AddToCartButton/linx.tsx": $AddToCartButton_linx,

@@ -13,7 +13,7 @@ import { AppContext } from "deco-sites/niivu-bank/apps/site.ts";
  */
 export interface Banner {
   /**
-   * @description the image's width is 496px
+   * @description A largura da imagem é 496px
    */
   image: ImageWidget;
   /** @title Altura da Imagem */

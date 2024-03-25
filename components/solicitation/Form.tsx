@@ -1,13 +1,11 @@
 import { ComponentChildren, JSX } from "preact";
 import { invoke } from "$store/runtime.ts";
-import { useUI } from "$store/sdk/useUI.ts";
 
 export interface Props {
   children: ComponentChildren;
 }
 
 function Form({ children }: Props) {
-  const { displayCorporateForm } = useUI();
   const submit: JSX.GenericEventHandler<HTMLFormElement> = async (e) => {
     // personalForm
     const full_name =
@@ -86,34 +84,7 @@ function Form({ children }: Props) {
   };
 
   return (
-    <form class="form-control" onSubmit={submit}>
-      <div role="tablist" class="tabs tabs-bordered m-auto">
-        <input
-          onClick={() => {
-            displayCorporateForm.value = false;
-          }}
-          class="tab checked:text-secondary checked:!border-secondary"
-          type="radio"
-          name="my_tabs_1"
-          id="physical-person"
-          value="CPF"
-          role="tab"
-          aria-label="Pessoa Fisíca"
-          checked
-        />
-        <input
-          onClick={() => {
-            displayCorporateForm.value = true;
-          }}
-          class="tab checked:text-secondary checked:!border-secondary"
-          type="radio"
-          name="my_tabs_1"
-          id="legal-person"
-          value="CNPJ"
-          role="tab"
-          aria-label="Pessoa Jurídica"
-        />
-      </div>
+    <form class="form-control group/form" onSubmit={submit}>
       {children}
     </form>
   );

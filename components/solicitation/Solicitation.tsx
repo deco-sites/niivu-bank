@@ -2,7 +2,7 @@ import PersonalForm from "$store/components/solicitation/PersonalForm.tsx";
 import AddressForm from "$store/components/solicitation/AddressForm.tsx";
 import CorporationForm from "$store/components/solicitation/CorporationForm.tsx";
 import Form from "$store/islands/Form.tsx";
-import IsToRender from "$store/islands/RenderCorpForm.tsx";
+import TabList from "$store/components/solicitation/TabList.tsx";
 import WarningConsent from "$store/components/solicitation/WarningConsent.tsx";
 import type { ImageWidget } from "apps/admin/widgets.ts";
 import Image from "apps/website/components/Image.tsx";
@@ -46,9 +46,10 @@ export function loader(props: Props, _req: Request, ctx: AppContext) {
 }
 
 function Solicitation(
-  { steps, richText, disclaimerText, banners, isDesktop }: ReturnType<
-    typeof loader
-  >,
+  { steps, richText, disclaimerText, banners, isDesktop }:
+    ReturnType<
+      typeof loader
+    >,
 ) {
   return (
     <div class="layout flex lg:flex-row gap-4">
@@ -61,11 +62,12 @@ function Solicitation(
         </div>
         <div dangerouslySetInnerHTML={{ __html: richText }} />
         <Form>
+          <TabList />
           <PersonalForm />
           <AddressForm />
-          <IsToRender>
+          <div class="group-has-[#legal-person:checked]/form:block hidden">
             <CorporationForm />
-          </IsToRender>
+          </div>
           <WarningConsent disclaimerText={disclaimerText} />
         </Form>
       </div>

@@ -73,7 +73,6 @@ export default function LoginForm() {
           <Input.Password
             name="password"
             placeholder="**********"
-            class="rounded-b-none border-b-2 focus:border-b-2 border-b-black focus:border-b-black"
           />
           <Input.Error
             message={emptyInputs.value.password

@@ -2,38 +2,57 @@ import { HTMLWidget, ImageWidget } from "apps/admin/widgets.ts";
 import RichText from "deco-sites/niivu-bank/sections/Content/RichText.tsx";
 import { usePartialSection } from "deco/hooks/usePartialSection.ts";
 import LoginForm from "deco-sites/niivu-bank/islands/Authentication/LoginForm.tsx";
-import LoginSSO from "../components/Autentication/Login/SSO.tsx";
+import LoginSSO from "../components/autentication/Login/SSO.tsx";
 
 interface Props {
-  /**
-   * @title Imagem de fundo
-   */
-  image: ImageWidget;
-
-  /**
-   * @title Texto do botão
-   */
-  buttonText: string;
-
   /**
    * @ignore
    */
   stap: "login" | "register" | "recoveryPassword";
 
   /**
-   * @title Texto do banner
+   * @title Configurações do banner
    */
-  text: HTMLWidget;
+  banner: {
+    /**
+     * @title Texto do banner
+     */
+    textBanner: HTMLWidget;
+
+    /**
+     * @title Imagem de fundo
+     */
+    image: ImageWidget;
+
+    /**
+     * @title Texto do botão
+     */
+    buttonText: string;
+  };
 
   /**
-   * @title Logar com facebook e google
-   * @description Se ativado, o botão de login com facebook e google será exibido
+   * @title Configurações do login
    */
-  showLoginSSO?: boolean;
+  login: {
+    /**
+     * @title Logar com facebook e google
+     * @description Se ativado, o botão de login com facebook e google será exibido
+     */
+    showLoginSSO?: boolean;
+
+    /**
+     * @title Texto do login
+     */
+    textLogin: HTMLWidget;
+  };
 }
 
 const Autentication = (
-  { image, stap = "login", buttonText, text, showLoginSSO = false }: Props,
+  {
+    stap = "login",
+    login: { showLoginSSO = false, textLogin },
+    banner: { textBanner, image, buttonText },
+  }: Props,
 ) => {
   return (
     <div class="h-screen md:flex">
@@ -47,7 +66,7 @@ const Autentication = (
         }}
       >
         <div class="space-y-6">
-          <RichText text={text} />
+          <RichText text={textBanner} />
           <button class="h-14 w-52 btn btn-outline btn-primary px-6 py-4 text-base font-inter">
             {buttonText}
           </button>
@@ -74,12 +93,7 @@ const Autentication = (
             </div>
             <div class="px-4 pt-6 md:p-0">
               <div class="mb-4">
-                <h1 class=" text-black font-bold text-3xl">
-                  Acessar Minha Conta
-                </h1>
-                <h2 class="h-5 text-black text-sm font-pangran">
-                  Digite seu e-mail e senha para acessar
-                </h2>
+                <RichText text={textLogin} />
               </div>
               <LoginForm />
               <button

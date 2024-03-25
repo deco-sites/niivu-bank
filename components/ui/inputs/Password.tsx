@@ -32,7 +32,7 @@ export default function InputField(
         placeholder={placeholder}
         value={value}
         onChange={handleInputChange}
-        class={`h-10 w-full px-4 border border-gray-400 rounded-t-md rounded-b-none text-black text-sm focus:outline-none ${_class}`}
+        class={`input input-bordered input-primary h-10 w-full px-4 border border-gray-400 rounded-t-md rounded-b-none text-sm focus:outline-none border-b-2 focus:border-b-2 border-b-black focus:border-b-black ${_class} `}
       />
       <button
         aria-label={showPassword.value ? "Esconder senha" : "Mostrar senha"}

@@ -37,6 +37,7 @@ export interface Props {
   disclaimerText: string;
   banners?: Banner[];
 
+  successLink: string;
   /**
    * @hide
    */
@@ -52,9 +53,10 @@ export function loader(props: Props, _req: Request, ctx: AppContext) {
 }
 
 function Solicitation(
-  { steps, richText, disclaimerText, banners, isDesktop, type }: ReturnType<
-    typeof loader
-  >,
+  { steps, richText, disclaimerText, banners, isDesktop, type, successLink }:
+    ReturnType<
+      typeof loader
+    >,
 ) {
   return (
     <div class="layout flex lg:flex-row gap-4">
@@ -66,7 +68,7 @@ function Solicitation(
           ))}
         </div>
         <div dangerouslySetInnerHTML={{ __html: richText }} />
-        <Form type={type}>
+        <Form type={type} successLink={successLink}>
           <TabList type={type} />
           <PersonalForm />
           <AddressForm />

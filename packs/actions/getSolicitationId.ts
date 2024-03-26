@@ -27,5 +27,5 @@ export default async function loader(
         return { status: NOT_FOUND, message: NOT_FOUND_ERROR }
     }
 
-    return { status: OK, message: data[0].id_risk3 }
+    return { status: OK, message: data[0].id }
 }

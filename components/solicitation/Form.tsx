@@ -4,9 +4,10 @@ import { invoke } from "$store/runtime.ts";
 export interface Props {
   children: ComponentChildren;
   type: "CPF" | "CNPJ";
+  successLink: string;
 }
 
-function Form({ children, type }: Props) {
+function Form({ children, type, successLink }: Props) {
   const submit: JSX.GenericEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
 
@@ -60,33 +61,37 @@ function Form({ children, type }: Props) {
     const legal_state =
       (e.currentTarget.elements.namedItem("legal-state") as HTMLInputElement)
         ?.value;
-    console.log(e.currentTarget.elements);
-    console.log(
-      await invoke({
-        key: "deco-sites/niivu-bank/loaders/actions/solicitation.ts",
-        props: {
-          type,
-          full_name,
-          phone,
-          zip_code,
-          street,
-          number,
-          complement,
-          cpf,
-          rg,
-          city,
-          state,
-          cnpj,
-          business_name,
-          legal_zip_code,
-          legal_street,
-          legal_number,
-          legal_complement,
-          legal_city,
-          legal_state,
-        },
-      }),
-    );
+
+    const solicitation = await invoke({
+      key: "deco-sites/niivu-bank/loaders/actions/solicitation.ts",
+      props: {
+        type,
+        full_name,
+        phone,
+        zip_code,
+        street,
+        number,
+        complement,
+        cpf,
+        rg,
+        city,
+        state,
+        cnpj,
+        business_name,
+        legal_zip_code,
+        legal_street,
+        legal_number,
+        legal_complement,
+        legal_city,
+        legal_state,
+      },
+    });
+
+    if ("error" in solicitation) {
+      return;
+    }
+
+    window.location.href = successLink;
   };
 
   return (

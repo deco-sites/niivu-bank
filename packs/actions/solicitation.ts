@@ -1,8 +1,5 @@
 import type { AppContext } from "$store/apps/site.ts";
 import {
-  SupabaseClient,
-} from "https://esm.sh/v135/@supabase/supabase-js@2.7.0";
-import {
   HEADER_AUTH_TOKEN,
   SOLICITATION_ENTITY_NAME,
   STATUS_ENUM_ABLE,
@@ -92,17 +89,9 @@ interface DataObjectSoliciation {
   credit_status: boolean;
 }
 
-interface ApiResponse {
-  error: null | string;
-  data: DataObjectSoliciation[];
-  count: null | number;
-  status: number;
-  statusText: string;
-}
-
 type LoaderResponse =
   | { error: string }
-  | { data: SupabaseClient<ApiResponse> }
+  | DataObjectSoliciation[]
   | { status: number; message: string };
 
 export default async function loader(
@@ -195,9 +184,15 @@ export default async function loader(
       email,
     };
 
-    return await supabaseClient.from(SOLICITATION_ENTITY_NAME).insert([{
-      ...customerWithStatus,
-    }]).select() as unknown as LoaderResponse;
+    const { data, error } = await supabaseClient.from(SOLICITATION_ENTITY_NAME)
+      .insert([{
+        ...customerWithStatus,
+      }]).select();
+    if (error) {
+      return { error: JSON.stringify(error) };
+    }
+
+    return data as DataObjectSoliciation[];
   } else {
     const { data: { records } } = await clientRisk3["POST /api/v0/analises"]({
       product: product,
@@ -249,8 +244,14 @@ export default async function loader(
       email,
     };
 
-    return await supabaseClient.from(SOLICITATION_ENTITY_NAME).insert([{
-      ...customerWithStatus,
-    }]).select() as unknown as LoaderResponse;
+    const { data, error } = await supabaseClient.from(SOLICITATION_ENTITY_NAME)
+      .insert([{
+        ...customerWithStatus,
+      }]).select();
+    if (error) {
+      return { error: JSON.stringify(error) };
+    }
+
+    return data as DataObjectSoliciation[];
   }
 }

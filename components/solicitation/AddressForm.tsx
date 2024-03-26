@@ -32,7 +32,6 @@ function AddressForm() {
             labelText="Complemento"
             id="complement"
             placeholder="Digite Seu Complemento Aqui"
-            required
           />
         </div>
 
@@ -47,7 +46,8 @@ function AddressForm() {
           <StandardInput
             labelText="Estado"
             id="state"
-            placeholder="Digite Seu Estado aqui"
+            placeholder="Digite Seu Estado aqui. Ex: RJ"
+            maxlength={2}
             required
           />
         </div>

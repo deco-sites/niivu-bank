@@ -5,10 +5,12 @@ export interface Props {
   placeholder?: string;
   required?: boolean;
   type?: string;
+  maxlength?: number;
 }
 
 function Standard(
-  { labelText, id, name, placeholder, type = "text", required }: Props,
+  { labelText, id, name, placeholder, type = "text", required, maxlength }:
+    Props,
 ) {
   return (
     <div class="flex flex-col gap-1 flex-grow">
@@ -22,6 +24,7 @@ function Standard(
         name={name ?? id}
         placeholder={placeholder}
         required={required}
+        maxlength={maxlength}
       />
     </div>
   );

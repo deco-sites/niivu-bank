@@ -1,25 +1,32 @@
-function TabList() {
+import { usePartialSection } from "deco/hooks/usePartialSection.ts";
+
+export interface Props {
+  type: "CPF" | "CNPJ";
+}
+
+function TabList({ type }: Props) {
   return (
     <div role="tablist" class="tabs tabs-bordered m-auto">
-      <input
-        class="tab checked:text-secondary checked:!border-secondary"
-        type="radio"
+      <button
+        {...usePartialSection({ props: { type: "CPF" } })}
+        class={`tab ${type === "CPF" && "text-secondary !border-secondary"}`}
         name="my_tabs_1"
         id="physical-person"
+        type="button"
         value="CPF"
-        role="tab"
-        aria-label="Pessoa Fisíca"
         checked
-      />
-      <input
-        class="tab checked:text-secondary checked:!border-secondary"
-        type="radio"
-        name="my_tabs_1"
+      >
+        Pessoa Fisíca
+      </button>
+      <button
+        {...usePartialSection({ props: { type: "CNPJ" } })}
+        class={`tab ${type === "CNPJ" && "text-secondary !border-secondary"}`}
         id="legal-person"
+        type="button"
         value="CNPJ"
-        role="tab"
-        aria-label="Pessoa Jurídica"
-      />
+      >
+        Pessoa Jurídica
+      </button>
     </div>
   );
 }

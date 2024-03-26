@@ -47,7 +47,6 @@ function CorporationForm() {
             labelText="Complemento"
             id="legal-complement"
             placeholder="Digite Seu Complemento Aqui"
-            required
           />
         </div>
 
@@ -62,7 +61,8 @@ function CorporationForm() {
           <StandardInput
             labelText="Estado"
             id="legal-state"
-            placeholder="Digite Seu Estado aqui"
+            placeholder="Digite Seu Estado aqui. Ex: RJ"
+            maxlength={2}
             required
           />
         </div>

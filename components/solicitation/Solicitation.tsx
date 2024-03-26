@@ -36,20 +36,25 @@ export interface Props {
    */
   disclaimerText: string;
   banners?: Banner[];
+
+  /**
+   * @hide
+   */
+  type?: "CPF" | "CNPJ";
 }
 
 export function loader(props: Props, _req: Request, ctx: AppContext) {
   return {
     ...props,
+    type: props.type ?? "CPF",
     isDesktop: ctx.device === "desktop",
   };
 }
 
 function Solicitation(
-  { steps, richText, disclaimerText, banners, isDesktop }:
-    ReturnType<
-      typeof loader
-    >,
+  { steps, richText, disclaimerText, banners, isDesktop, type }: ReturnType<
+    typeof loader
+  >,
 ) {
   return (
     <div class="layout flex lg:flex-row gap-4">
@@ -61,13 +66,11 @@ function Solicitation(
           ))}
         </div>
         <div dangerouslySetInnerHTML={{ __html: richText }} />
-        <Form>
-          <TabList />
+        <Form type={type}>
+          <TabList type={type} />
           <PersonalForm />
           <AddressForm />
-          <div class="group-has-[#legal-person:checked]/form:block hidden">
-            <CorporationForm />
-          </div>
+          {type === "CNPJ" && <CorporationForm />}
           <WarningConsent disclaimerText={disclaimerText} />
         </Form>
       </div>

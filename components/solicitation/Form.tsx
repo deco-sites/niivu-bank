@@ -3,10 +3,13 @@ import { invoke } from "$store/runtime.ts";
 
 export interface Props {
   children: ComponentChildren;
+  type: "CPF" | "CNPJ";
 }
 
-function Form({ children }: Props) {
+function Form({ children, type }: Props) {
   const submit: JSX.GenericEventHandler<HTMLFormElement> = async (e) => {
+    e.preventDefault();
+
     // personalForm
     const full_name =
       (e.currentTarget.elements.namedItem("name") as HTMLInputElement)?.value;
@@ -34,12 +37,12 @@ function Form({ children }: Props) {
       (e.currentTarget.elements.namedItem("state") as HTMLInputElement)?.value;
 
     // CorporationForm
-    const corporate_reason = (e.currentTarget.elements.namedItem(
+    const business_name = (e.currentTarget.elements.namedItem(
       "corporate-reason",
     ) as HTMLInputElement)?.value;
     const cnpj =
       (e.currentTarget.elements.namedItem("CNPJ") as HTMLInputElement)?.value;
-    const legal_cep =
+    const legal_zip_code =
       (e.currentTarget.elements.namedItem("legal-CEP") as HTMLInputElement)
         ?.value;
     const legal_street =
@@ -57,30 +60,33 @@ function Form({ children }: Props) {
     const legal_state =
       (e.currentTarget.elements.namedItem("legal-state") as HTMLInputElement)
         ?.value;
-
-    await invoke({
-      key: "deco-sites/niivu-bank/loaders/actions/solicitation.ts",
-      props: {
-        phone,
-        zip_code,
-        street,
-        number,
-        complement,
-        city,
-        state,
-        cpf,
-        rg,
-        full_name,
-        cnpj,
-        corporate_reason,
-        legal_cep,
-        legal_street,
-        legal_number,
-        legal_complement,
-        legal_city,
-        legal_state,
-      },
-    });
+    console.log(e.currentTarget.elements);
+    console.log(
+      await invoke({
+        key: "deco-sites/niivu-bank/loaders/actions/solicitation.ts",
+        props: {
+          type,
+          full_name,
+          phone,
+          zip_code,
+          street,
+          number,
+          complement,
+          cpf,
+          rg,
+          city,
+          state,
+          cnpj,
+          business_name,
+          legal_zip_code,
+          legal_street,
+          legal_number,
+          legal_complement,
+          legal_city,
+          legal_state,
+        },
+      }),
+    );
   };
 
   return (

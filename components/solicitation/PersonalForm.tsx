@@ -26,7 +26,6 @@ function personalForm() {
             labelText="RG"
             id="rg"
             placeholder="Digite seu RG aqui"
-            required
           />
         </div>
 

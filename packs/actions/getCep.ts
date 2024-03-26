@@ -30,8 +30,6 @@ export default async function loader(
     res,
   ) => res.json()) as Address;
 
-  console.log({ data });
-
   return {
     cep: data.cep,
     street: data.logradouro,

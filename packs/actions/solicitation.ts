@@ -128,7 +128,6 @@ export default async function loader(
   const email = await getEmail({ supabaseClient, req });
 
   if (typeof email !== "string") {
-    console.log(email);
     return { status: INTERNAL_ERROR, message: SERVER_ERROR };
   }
 
@@ -249,11 +248,9 @@ export default async function loader(
       status: Status.AnalysisDeCredito,
       email,
     };
-    const test = await supabaseClient.from(SOLICITATION_ENTITY_NAME).insert([{
+
+    return await supabaseClient.from(SOLICITATION_ENTITY_NAME).insert([{
       ...customerWithStatus,
     }]).select() as unknown as LoaderResponse;
-
-    console.log({ test });
-    return test;
   }
 }

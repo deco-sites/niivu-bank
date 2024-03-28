@@ -1,13 +1,13 @@
-import InputFieldRoot from "./InputFieldRoot.tsx";
-import InputFieldLabel from "./inputFildLabel.tsx";
-import InputFieldError from "./InputError.tsx";
-import InputText from "deco-sites/niivu-bank/components/ui/inputs/InputText.tsx";
-import InputPassword from "deco-sites/niivu-bank/components/ui/inputs/InputPassword.tsx";
+import Root from "deco-sites/niivu-bank/components/ui/inputs/Root.tsx";
+import Label from "deco-sites/niivu-bank/components/ui/inputs/Label.tsx";
+import Error from "deco-sites/niivu-bank/components/ui/inputs/Error.tsx";
+import Text from "deco-sites/niivu-bank/components/ui/inputs/Text.tsx";
+import Password from "deco-sites/niivu-bank/components/ui/inputs/Password.tsx";
 
 export const Input = {
-  Text: InputText,
-  Password: InputPassword,
-  Root: InputFieldRoot,
-  Label: InputFieldLabel,
-  Error: InputFieldError,
+  Text,
+  Password,
+  Root,
+  Label,
+  Error,
 };

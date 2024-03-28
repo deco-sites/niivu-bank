@@ -1,26 +1,34 @@
-import { Cep } from "$store/islands/Cep.tsx";
+import Cep from "$store/islands/Cep.tsx";
 import StandardInput from "$store/components/ui/inputs/Standard.tsx";
+import Divider from "$store/components/ui/Divider.tsx";
+import Container from "$store/components/ui/inputs/Container.tsx";
+import { RefObject } from "preact";
 
-function AddressForm() {
-  const divider = <div class="w-full h-[1px] bg-black bg-opacity-40" />;
+export interface Props {
+  formRef: RefObject<HTMLFormElement>;
+}
 
+function AddressForm({ formRef }: Props) {
   return (
     <>
-      <span class="font-bold py-2">Endereço</span>
-      {divider}
+      <p class="font-bold py-2">
+        <span>Endereço</span>
+      </p>
+      <Divider />
       <div class="flex flex-col gap-4 py-8">
-        <div class="flex flex-col lg:flex-row gap-2 flex-grow">
-          <Cep />
+        <Container>
+          <Cep formRef={formRef} />
 
           <StandardInput
             labelText="Rua / Avenida"
             id="street"
             placeholder="Digite Sua Rua Aqui"
             required
+            disabled
           />
-        </div>
+        </Container>
 
-        <div class="flex flex-col lg:flex-row gap-2 flex-grow">
+        <Container>
           <StandardInput
             labelText="Número"
             id="number"
@@ -33,14 +41,15 @@ function AddressForm() {
             id="complement"
             placeholder="Digite Seu Complemento Aqui"
           />
-        </div>
+        </Container>
 
-        <div class="flex flex-col lg:flex-row gap-2 flex-grow">
+        <Container>
           <StandardInput
             labelText="Cidade"
             id="city"
             placeholder="Digite Sua Cidade Aqui"
             required
+            disabled
           />
 
           <StandardInput
@@ -49,8 +58,9 @@ function AddressForm() {
             placeholder="Digite Seu Estado aqui. Ex: RJ"
             maxlength={2}
             required
+            disabled
           />
-        </div>
+        </Container>
       </div>
     </>
   );

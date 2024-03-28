@@ -27,15 +27,17 @@ export const loader = async (props: Props, _req: Request, ctx: AppContext) => {
   if (status === OK) {
     return {
       ...props,
-      risk3_id: message,
+      solicitation_id: message,
     };
   }
 
-  return { ...props, risk3_id: undefined };
+  return { ...props, solicitation_id: undefined };
 };
 
 function SucessMessage(
-  { image, icon, buttonLink, risk3_id }: Awaited<ReturnType<typeof loader>>,
+  { image, icon, buttonLink, solicitation_id }: Awaited<
+    ReturnType<typeof loader>
+  >,
 ) {
   return (
     <>
@@ -46,7 +48,7 @@ function SucessMessage(
               Sua solicitação foi enviada!
             </span>
             <span class="text-base font-bold md:text-xl">
-              O número da sua solicitação é {risk3_id}
+              O número da sua solicitação é {solicitation_id}
             </span>
             <span class="text-xs md:text-base">
               Acompanhe sua solicitação clicando no botão abaixo ou aguarde que

@@ -1,55 +1,13 @@
 import { invoke } from "$store/runtime.ts";
-
-export function Cep() {
-  const getCep = async (
-    e: Event,
-  ) => {
-    const dataInput = (e.target as HTMLInputElement).value ?? "";
-    const cep = dataInput.replace(/\D/g, "");
-
-    if (cep.length === 8) {
-      const response = await invoke({
-        key: "deco-sites/niivu-bank/loaders/actions/getCep.ts",
-        props: {
-          cep,
-        },
-      });
-
-      if (response?.status) {
-        return;
-      }
-
-      (document.getElementById("cep") as HTMLInputElement)!.value =
-        response.cep ?? "";
-      (document.getElementById("street") as HTMLInputElement)!.value =
-        response.street ?? "";
-      (document.getElementById("complement") as HTMLInputElement)!.value =
-        response.complement ?? "";
-      (document.getElementById("city") as HTMLInputElement)!.value =
-        response.city ?? "";
-      (document.getElementById("state") as HTMLInputElement)!.value =
-        response.state ?? "";
-    }
-  };
-  return (
-    <div class="flex flex-col gap-1 flex-grow">
-      <label class="text-primary font-medium" htmlFor="cep">
-        <span>CEP</span>
-      </label>
-      <input
-        onInput={getCep}
-        class="input border border-black rounded-t-lg"
-        type="text"
-        id="cep"
-        name="cep"
-        placeholder="Digite Seu Cep Aqui"
-        required
-      />
-    </div>
-  );
+import { RefObject } from "preact";
+export interface Props {
+  formRef: RefObject<HTMLFormElement>;
+  prefix?: string;
 }
 
-export function LegalCep() {
+export default function Cep({ formRef, prefix }: Props) {
+  const prefixResult: string = typeof prefix === "string" ? `${prefix}-` : "";
+
   const getCep = async (
     e: Event,
   ) => {
@@ -68,29 +26,34 @@ export function LegalCep() {
         return;
       }
 
-      (document.getElementById("legal-CEP") as HTMLInputElement)!.value =
-        response.cep ?? "";
-      (document.getElementById("legal-street") as HTMLInputElement)!.value =
-        response.street ?? "";
-      (document.getElementById("legal-complement") as HTMLInputElement)!.value =
-        response.complement ?? "";
-      (document.getElementById("legal-city") as HTMLInputElement)!.value =
-        response.city ?? "";
-      (document.getElementById("legal-state") as HTMLInputElement)!.value =
-        response.state ?? "";
+      (formRef.current!.elements.namedItem(
+        `${prefixResult}cep`,
+      ) as HTMLInputElement)!
+        .value = response.cep ?? "";
+      (formRef.current!.elements.namedItem(
+        `${prefixResult}street`,
+      ) as HTMLInputElement)!
+        .value = response.street ?? "";
+      (formRef.current!.elements.namedItem(
+        `${prefixResult}city`,
+      ) as HTMLInputElement)!.value = response.city ?? "";
+      (formRef.current!.elements.namedItem(
+        `${prefixResult}state`,
+      ) as HTMLInputElement)!
+        .value = response.state ?? "";
     }
   };
   return (
     <div class="flex flex-col gap-1 flex-grow">
-      <label class="text-primary font-medium" htmlFor="legal-CEP">
-        <span>CEP</span>
+      <label class="text-primary font-medium" htmlFor={`${prefixResult}cep`}>
+        <span>CEP*</span>
       </label>
       <input
-        onInput={getCep}
-        class="input border border-black rounded-t-lg"
+        onChange={getCep}
+        class="input"
         type="text"
-        id="legal-CEP"
-        name="legal-CEP"
+        id={`${prefixResult}cep`}
+        name={`${prefixResult}cep`}
         placeholder="Digite Seu Cep Aqui"
         required
       />

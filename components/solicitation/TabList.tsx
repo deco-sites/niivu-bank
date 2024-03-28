@@ -6,10 +6,12 @@ export interface Props {
 
 function TabList({ type }: Props) {
   return (
-    <div role="tablist" class="tabs tabs-bordered m-auto">
+    <div role="tablist" class="tabs tabs-bordered m-auto pb-8 max-md:w-full">
       <button
         {...usePartialSection({ props: { type: "CPF" } })}
-        class={`tab ${type === "CPF" && "text-secondary !border-secondary"}`}
+        class={`tab py-2 px-7 lg:py-4 lg:px-8 h-auto font-bold ${
+          type === "CPF" && "text-secondary !border-secondary"
+        }`}
         name="my_tabs_1"
         id="physical-person"
         type="button"
@@ -20,7 +22,9 @@ function TabList({ type }: Props) {
       </button>
       <button
         {...usePartialSection({ props: { type: "CNPJ" } })}
-        class={`tab ${type === "CNPJ" && "text-secondary !border-secondary"}`}
+        class={`tab py-2 px-7 lg:py-4 lg:px-8 h-auto font-bold ${
+          type === "CNPJ" && "text-secondary !border-secondary"
+        }`}
         id="legal-person"
         type="button"
         value="CNPJ"

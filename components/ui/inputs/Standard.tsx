@@ -6,25 +6,35 @@ export interface Props {
   required?: boolean;
   type?: string;
   maxlength?: number;
+  disabled?: boolean;
 }
 
 function Standard(
-  { labelText, id, name, placeholder, type = "text", required, maxlength }:
-    Props,
+  {
+    labelText,
+    id,
+    name,
+    placeholder,
+    type = "text",
+    required,
+    maxlength,
+    disabled,
+  }: Props,
 ) {
   return (
     <div class="flex flex-col gap-1 flex-grow">
       <label class="text-primary font-medium" htmlFor={id}>
-        <span>{labelText}</span>
+        <span>{`${labelText}${required ? "*" : ""}`}</span>
       </label>
       <input
-        class="input border border-black rounded-t-lg"
+        class="input"
         type={type}
         id={id}
         name={name ?? id}
         placeholder={placeholder}
         required={required}
         maxlength={maxlength}
+        disabled={disabled}
       />
     </div>
   );

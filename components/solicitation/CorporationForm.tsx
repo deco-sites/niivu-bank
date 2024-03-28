@@ -1,14 +1,22 @@
-import { LegalCep } from "$store/islands/Cep.tsx";
+import LegalCep from "$store/islands/Cep.tsx";
 import StandardInput from "$store/components/ui/inputs/Standard.tsx";
+import Divider from "$store/components/ui/Divider.tsx";
+import Container from "$store/components/ui/inputs/Container.tsx";
+import { RefObject } from "preact";
 
-function CorporationForm() {
-  const divider = <div class="w-full h-[1px] bg-black bg-opacity-40" />;
+export interface Props {
+  formRef: RefObject<HTMLFormElement>;
+}
+
+function CorporationForm({ formRef }: Props) {
   return (
     <>
-      <span class="font-bold py-2">Dados da Empresa</span>
-      {divider}
+      <p class="font-bold py-2">
+        <span>Dados da Empresa</span>
+      </p>
+      <Divider />
       <div class="flex flex-col gap-4 py-8">
-        <div class="flex flex-col lg:flex-row gap-2 flex-grow">
+        <Container>
           <StandardInput
             labelText="Razão Social"
             id="corporate-reason"
@@ -22,20 +30,21 @@ function CorporationForm() {
             placeholder="Digite Seu CNPJ Aqui"
             required
           />
-        </div>
+        </Container>
 
-        <div class="flex flex-col lg:flex-row gap-2 flex-grow">
-          <LegalCep />
+        <Container>
+          <LegalCep formRef={formRef} prefix={"legal"} />
 
           <StandardInput
             labelText="Rua / Avenida"
             id="legal-street"
             placeholder="Digite Sua Rua Aqui"
             required
+            disabled
           />
-        </div>
+        </Container>
 
-        <div class="flex flex-col lg:flex-row gap-2 flex-grow">
+        <Container>
           <StandardInput
             labelText="Número"
             id="legal-number"
@@ -48,14 +57,15 @@ function CorporationForm() {
             id="legal-complement"
             placeholder="Digite Seu Complemento Aqui"
           />
-        </div>
+        </Container>
 
-        <div class="flex flex-col lg:flex-row gap-2 flex-grow">
+        <Container>
           <StandardInput
             labelText="Cidade"
             id="legal-city"
             placeholder="Digite Sua Cidade Aqui"
             required
+            disabled
           />
 
           <StandardInput
@@ -64,8 +74,9 @@ function CorporationForm() {
             placeholder="Digite Seu Estado aqui. Ex: RJ"
             maxlength={2}
             required
+            disabled
           />
-        </div>
+        </Container>
       </div>
     </>
   );

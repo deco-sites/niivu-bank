@@ -6,5 +6,7 @@ interface InputFieldLabelProps {
 export default function InputFieldLabel(
   { label, class: _class }: InputFieldLabelProps,
 ) {
-  return <label class={`text-black text-sm ${_class}`}>{label}</label>;
+  return (
+    <label class={`text-primary text-xs md:text-sm ${_class}`}>{label}</label>
+  );
 }

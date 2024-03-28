@@ -58,7 +58,7 @@ export default function LoginForm() {
       <div class="space-y-4">
         <Input.Root>
           <Input.Label label="E-mail" class="mb-2" />
-          <Input.Text
+          <Input.Base
             name="email"
             placeholder="exemple@gmail.com.br"
           />
@@ -84,7 +84,7 @@ export default function LoginForm() {
           <Button
             loading={isLoaging.value}
             type="submit"
-            class="w-full h-14 bg-black text-white rounded font-bold text-xl"
+            class="w-full mb:h-14 bg-primary text-white rounded font-bold text-sm md:text-lg"
           >
             Entrar
           </Button>

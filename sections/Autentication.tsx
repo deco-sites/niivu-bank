@@ -50,7 +50,7 @@ const Autentication = (
   }: Props,
 ) => {
   return (
-    <div class="h-screen md:flex">
+    <div class="h-screen md:flex bg-white">
       <div
         class="hidden overflow-hidden md:flex md:flex-col w-1/2 justify-end items-center pb-52"
         style={{
@@ -67,8 +67,8 @@ const Autentication = (
           </button>
         </div>
       </div>
-      <div class="md:flex md:w-1/2 justify-center bg-white">
-        <header class="md:pt-32>">
+      <div class="md:flex md:flex-col md:w-1/2 md:pl-32 md:pt-14  2xl:my-auto">
+        <header class="md:max-w-[348px]">
           <div class="flex justify-center md:justify-start md:mb-9 items-center h-16 border-b-2 border-[#E5E5E5] md:border-none">
             <img
               width="306"
@@ -87,7 +87,7 @@ const Autentication = (
           </div>
         </header>
         {stap === "login" && (
-          <div class="px-4 pt-6 md:p-0 flex flex-col justify-center">
+          <div class="md:max-w-[348px] px-4 pt-6 md:p-0 flex flex-col">
             <div class="mb-4 text-primary">
               <h1 class="font-bold text-2xl md:text-3xl">
                 Acessar Minha Conta
@@ -102,19 +102,19 @@ const Autentication = (
               {...usePartialSection<typeof Autentication>({
                 props: { stap: "recoveryPassword" },
               })}
-              class="w-full texte-center cursor-pointer text-primary opacity-70 text-sm"
+              class="w-full texte-center cursor-pointer text-primary opacity-70 text-sm mt-2"
             >
               Esqueceu sua senha?
             </button>
             {showLoginSSO && <LoginSSO />}
-            <p class="text-black text-sm text-center mt-6">
+            <p class="text-primary text-sm text-center mt-6">
               Não tem uma conta?{" "}
               <button
                 type="button"
                 {...usePartialSection<typeof Autentication>({
                   props: { stap: "register" },
                 })}
-                class="text-black font-bold"
+                class="text-primary font-bold"
               >
                 Cadastre-se
               </button>

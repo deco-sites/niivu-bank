@@ -67,7 +67,7 @@ const Autentication = (
           </button>
         </div>
       </div>
-      <div class="md:flex md:flex-col md:w-1/2 md:pl-32 md:pt-14  2xl:my-auto">
+      <div class="md:flex md:flex-col md:w-1/2 md:items-center lg:items-start lg:pl-32 md:pt-14  2xl:my-auto">
         <header class="md:max-w-[348px]">
           <div class="flex justify-center md:justify-start md:mb-9 items-center h-16 border-b-2 border-[#E5E5E5] md:border-none">
             <img

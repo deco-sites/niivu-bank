@@ -5,9 +5,6 @@ export default {
   daisyui: { themes: [], logs: false },
   content: ["./**/*.tsx"],
   theme: {
-    fontFamily: {
-      sans: ["Pangram", "sans-serif"],
-    },
     container: { center: true },
     extend: {
       animation: {

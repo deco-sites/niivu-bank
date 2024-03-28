@@ -4,6 +4,7 @@
 
 @layer base {
 
+
   /* Allow changing font family via CMS */
   html {
     font-family: var(--font-family);
@@ -29,6 +30,15 @@
 }
 
 @layer components {
+
+  .container {
+    @apply w-11/12
+  }
+
+  .input {
+    @apply rounded-t border-[#414042] rounded-b-none focus:outline-none focus:border-b-2 focus:border-[#414042]
+  }
+
   .features {
     @apply flex items-center justify-center gap-6 flex-wrap;
     @apply relative max-w-[1280px] mx-auto;

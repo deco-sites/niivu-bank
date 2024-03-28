@@ -37,6 +37,10 @@
 
 @layer components {
 
+  .container {
+    @apply w-11/12
+  }
+
   .input {
     @apply rounded-t border-[#414042] rounded-b-none focus:outline-none focus:border-b-2 focus:border-[#414042]
   }

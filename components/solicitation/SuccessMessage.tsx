@@ -33,7 +33,7 @@ function SucessMessage(
   return (
     <>
       <div class="relative w-full">
-        <div class="layout flex gap-4 h-full text-white py-12">
+        <div class="container flex gap-4 h-full text-white py-12">
           <div class="flex flex-col gap-8">
             <span class="text-xl font-bold md:text-5xl">
               Sua solicitação foi enviada!
@@ -70,7 +70,7 @@ function SucessMessage(
         </Picture>
       </div>
       {buttonLink && (
-        <div class="layout">
+        <div class="container">
           <a class="btn bg-primary text-white" href={buttonLink}>
             Acompanhar minha solicitação
           </a>

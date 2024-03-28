@@ -2,7 +2,6 @@ import type { ImageWidget } from "apps/admin/widgets.ts";
 import { Picture, Source } from "apps/website/components/Picture.tsx";
 import Image from "apps/website/components/Image.tsx";
 import type { AppContext } from "$store/apps/site.ts";
-import { OK, TEMPORARY_REDIRECT } from "$store/utils/enum.ts";
 
 export interface IPicture {
   desktop: ImageWidget;
@@ -18,20 +17,12 @@ export interface Props {
   icon?: ImageWidget;
 }
 
-export const loader = async (props: Props, _req: Request, ctx: AppContext) => {
-  const { invoke } = ctx;
-  const { status, message } = await invoke(
-    "deco-sites/niivu-bank/loaders/actions/getSolicitationId.ts",
-  );
+export const loader = (props: Props, req: Request, _ctx: AppContext) => {
+  const url = new URL(req.url);
 
-  if (status === OK) {
-    return {
-      ...props,
-      solicitation_id: message,
-    };
-  }
+  const solicitation_id = url.searchParams.get("solicitation-id");
 
-  return { ...props, solicitation_id: undefined };
+  return { ...props, solicitation_id };
 };
 
 function SucessMessage(

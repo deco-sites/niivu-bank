@@ -73,7 +73,7 @@ function Solicitation(
   const formRef = useRef<HTMLFormElement>(null);
 
   return (
-    <div class="layout flex lg:flex-row gap-4">
+    <div class="container flex lg:flex-row gap-4">
       <div class="flex flex-col gap-4 w-full">
         {/** breadcrump */}
         <div class="flex gap-2">

@@ -1,6 +1,6 @@
 import { ComponentChildren, JSX, RefObject } from "preact";
 import { invoke } from "$store/runtime.ts";
-
+import { INTERNAL_ERROR } from "$store/utils/enum.ts";
 export interface Props {
   children: ComponentChildren;
   type: "CPF" | "CNPJ";
@@ -88,11 +88,13 @@ function Form({ children, type, successLink, formRef }: Props) {
       },
     });
 
-    if ("error" in solicitation) {
+    if ("error" in solicitation || "status" in solicitation) {
       return;
     }
 
-    window.location.href = successLink;
+    window.location.href = `${successLink}?solicitation-id=${
+      solicitation[0].id
+    }`;
   };
 
   return (

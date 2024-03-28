@@ -39,18 +39,13 @@ interface Props {
      * @description Se ativado, o botão de login com facebook e google será exibido
      */
     showLoginSSO?: boolean;
-
-    /**
-     * @title Texto do login
-     */
-    textLogin: HTMLWidget;
   };
 }
 
 const Autentication = (
   {
     stap = "login",
-    login: { showLoginSSO = false, textLogin },
+    login: { showLoginSSO = false },
     banner: { textBanner, image, buttonText },
   }: Props,
 ) => {
@@ -73,61 +68,66 @@ const Autentication = (
         </div>
       </div>
       <div class="md:flex md:w-1/2 justify-center bg-white">
+        <header class="md:pt-32>">
+          <div class="flex justify-center md:justify-start md:mb-9 items-center h-16 border-b-2 border-[#E5E5E5] md:border-none">
+            <img
+              width="306"
+              height="92"
+              src="/image/Niivo_Logo_Preta_pc.webp"
+              alt="Niivo Logo Preta PC"
+              class="hidden md:block"
+            />
+            <img
+              width="150"
+              height="45"
+              src="/image/Niivo_Logo_Preta_mobile.webp"
+              alt="Niivo Logo Preta Mobile"
+              class="md:hidden"
+            />
+          </div>
+        </header>
         {stap === "login" && (
-          <div class="md:pt-32 min-w-[346px]">
-            <div class="flex justify-center md:justify-start md:mb-9 items-center h-16 border-b-2 border-[#E5E5E5] md:border-none">
-              <img
-                width="306"
-                height="92"
-                src="/image/Niivo_Logo_Preta_pc.webp"
-                alt="Niivo Logo Preta PC"
-                class="hidden md:block"
-              />
-              <img
-                width="150"
-                height="45"
-                src="/image/Niivo_Logo_Preta_mobile.webp"
-                alt="Niivo Logo Preta Mobile"
-                class="md:hidden"
-              />
+          <div class="px-4 pt-6 md:p-0 flex flex-col justify-center">
+            <div class="mb-4 text-primary">
+              <h1 class="font-bold text-2xl md:text-3xl">
+                Acessar Minha Conta
+              </h1>
+              <h2 class="text-sm">
+                Digite seu e-mail e senha para acessar.
+              </h2>
             </div>
-            <div class="px-4 pt-6 md:p-0">
-              <div class="mb-4">
-                <RichText text={textLogin} />
-              </div>
-              <LoginForm />
+            <LoginForm />
+            <button
+              type="button"
+              {...usePartialSection<typeof Autentication>({
+                props: { stap: "recoveryPassword" },
+              })}
+              class="w-full texte-center cursor-pointer text-primary opacity-70 text-sm"
+            >
+              Esqueceu sua senha?
+            </button>
+            {showLoginSSO && <LoginSSO />}
+            <p class="text-black text-sm text-center mt-6">
+              Não tem uma conta?{" "}
               <button
                 type="button"
                 {...usePartialSection<typeof Autentication>({
-                  props: { stap: "recoveryPassword" },
+                  props: { stap: "register" },
                 })}
-                class="w-full texte-center cursor-pointer text-black opacity-70 text-sm"
+                class="text-black font-bold"
               >
-                Esqueceu sua senha?
+                Cadastre-se
               </button>
-              {showLoginSSO && <LoginSSO />}
-              <p class="text-black text-sm text-center mt-6">
-                Não tem uma conta?{" "}
-                <button
-                  type="button"
-                  {...usePartialSection<typeof Autentication>({
-                    props: { stap: "register" },
-                  })}
-                  class="text-black font-bold"
-                >
-                  Cadastre-se
-                </button>
-              </p>
-            </div>
+            </p>
           </div>
         )}
         {stap === "register" && (
-          <div class="min-w-[346px]">
+          <div class="">
             "register"
           </div>
         )}
         {stap === "recoveryPassword" && (
-          <div class="min-w-[346px]">
+          <div class="">
             "recoveryPassword"
           </div>
         )}

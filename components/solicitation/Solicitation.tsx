@@ -7,6 +7,7 @@ import WarningConsent from "$store/components/solicitation/WarningConsent.tsx";
 import type { ImageWidget } from "apps/admin/widgets.ts";
 import Image from "apps/website/components/Image.tsx";
 import { AppContext } from "deco-sites/niivu-bank/apps/site.ts";
+import { useRef } from "preact/hooks";
 
 /**
  * @titleBy alt
@@ -22,13 +23,13 @@ export interface Banner {
 }
 
 export interface Props {
-  /** @title Passos */
-  steps: string[];
   /**
-   * @format html
-   * @title Texto rico
+   * @title Título
    */
-  richText: string;
+  title: string;
+
+  /** @title Subtítulo */
+  subtitle: string;
 
   /**
    * @format html
@@ -45,34 +46,58 @@ export interface Props {
 }
 
 export function loader(props: Props, _req: Request, ctx: AppContext) {
+  const stepsDesk = ["1. Preencha a solicitação", "2. Aguarde nossa análise"];
+  const stepsMobile = ["1. Solicitação", "2. Análise"];
   return {
     ...props,
+    steps: ctx.device === "desktop" ? stepsDesk : stepsMobile,
     type: props.type ?? "CPF",
     isDesktop: ctx.device === "desktop",
   };
 }
 
 function Solicitation(
-  { steps, richText, disclaimerText, banners, isDesktop, type, successLink }:
-    ReturnType<
-      typeof loader
-    >,
+  {
+    steps,
+    title,
+    subtitle,
+    disclaimerText,
+    banners,
+    isDesktop,
+    type,
+    successLink,
+  }: ReturnType<
+    typeof loader
+  >,
 ) {
+  const formRef = useRef<HTMLFormElement>(null);
+
   return (
     <div class="layout flex lg:flex-row gap-4">
       <div class="flex flex-col gap-4 w-full">
         {/** breadcrump */}
-        <div class="flex gap-4">
+        <div class="flex gap-2">
           {steps.map((step, index) => (
-            <span class={`${index === 0 && "font-bold"} text-sm`}>{step}</span>
+            <p>
+              <span class={`${index === 0 && "font-bold"} text-sm`}>
+                {step}
+              </span>
+            </p>
           ))}
         </div>
-        <div dangerouslySetInnerHTML={{ __html: richText }} />
-        <Form type={type} successLink={successLink}>
+        <div class="flex flex-col gap-2 text-primary">
+          <p class="font-normal max-md:text-lg max-md:left-5 text-3xl left-9">
+            <span>{title}</span>
+          </p>
+          <p class="font-bold max-md:text-xs max-md:left-4 text-base left-5">
+            <span>{subtitle}</span>
+          </p>
+        </div>
+        <Form type={type} successLink={successLink} formRef={formRef}>
           <TabList type={type} />
           <PersonalForm />
-          <AddressForm />
-          {type === "CNPJ" && <CorporationForm />}
+          <AddressForm formRef={formRef} />
+          {type === "CNPJ" && <CorporationForm formRef={formRef} />}
           <WarningConsent disclaimerText={disclaimerText} />
         </Form>
       </div>

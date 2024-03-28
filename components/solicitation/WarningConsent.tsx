@@ -8,13 +8,13 @@ function warningConsent({ disclaimerText }: Props) {
       <div class="flex flex-col gap-2 group/warning">
         <div class="flex items-start gap-4">
           <input
-            class="checkbox checkbox-primary checkbox-md"
+            class="checkbox checkbox-primary checkbox-md border-[3px]"
             type="checkbox"
             name="warningConsent"
             id="warningConsent"
           />
           <div class="flex flex-col gap-2">
-            <span class="font-bold">
+            <span class="font-normal">
               Autorização
             </span>
             <div dangerouslySetInnerHTML={{ __html: disclaimerText }} />

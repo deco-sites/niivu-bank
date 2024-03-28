@@ -1,4 +1,4 @@
 export {
   default,
   loader,
-} from "$store/components/solicitation/SucessMessage.tsx";
+} from "$store/components/solicitation/SuccessMessage.tsx";

@@ -1,13 +1,14 @@
-import { ComponentChildren, JSX } from "preact";
+import { ComponentChildren, JSX, RefObject } from "preact";
 import { invoke } from "$store/runtime.ts";
 
 export interface Props {
   children: ComponentChildren;
   type: "CPF" | "CNPJ";
   successLink: string;
+  formRef: RefObject<HTMLFormElement>;
 }
 
-function Form({ children, type, successLink }: Props) {
+function Form({ children, type, successLink, formRef }: Props) {
   const submit: JSX.GenericEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
 
@@ -44,7 +45,7 @@ function Form({ children, type, successLink }: Props) {
     const cnpj =
       (e.currentTarget.elements.namedItem("CNPJ") as HTMLInputElement)?.value;
     const legal_zip_code =
-      (e.currentTarget.elements.namedItem("legal-CEP") as HTMLInputElement)
+      (e.currentTarget.elements.namedItem("legal-cep") as HTMLInputElement)
         ?.value;
     const legal_street =
       (e.currentTarget.elements.namedItem("legal-street") as HTMLInputElement)
@@ -95,7 +96,7 @@ function Form({ children, type, successLink }: Props) {
   };
 
   return (
-    <form class="form-control group/form" onSubmit={submit}>
+    <form class="form-control group/form" onSubmit={submit} ref={formRef}>
       {children}
     </form>
   );

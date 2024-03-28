@@ -4,12 +4,6 @@
 
 @layer base {
 
-  .layout {
-    width: 90%;
-    max-width: 1300px;
-    margin: auto;
-    padding: 32px 0 32px 0;
-  }
 
   /* Allow changing font family via CMS */
   html {

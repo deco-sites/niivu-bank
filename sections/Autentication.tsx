@@ -104,10 +104,10 @@ const Autentication = (
         {step === "login" && (
           <div class="max-w-[348px] m-auto md:m-0 px-4 pt-6 md:p-0 flex flex-col">
             <div class="mb-4 text-primary">
-              <h1 class="font-bold text-2xl md:text-3xl">
+              <h1 class="font-bold text-2xl md:text-3xl leading-10 tracking-tight">
                 Acessar Minha Conta
               </h1>
-              <h2 class="text-sm">
+              <h2 class="text-sm text-primary">
                 Digite seu e-mail e senha para acessar.
               </h2>
             </div>

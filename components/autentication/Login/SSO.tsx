@@ -10,7 +10,10 @@ export default function LoginSSO() {
           ariaLabel="Entre com Facebook"
           class="w-full bg-facebook border-facebook hover:border-facebook hover:bg-[#428df0] rounded font-bold text-neutral"
         >
-          <Icon size={24} id="Facebook" /> Entre com Facebook
+          <Icon size={24} id="Facebook" />
+          <span class="font-bold text-base text-center">
+           Entre com Facebook
+           </span>
         </Button>
 
         <Button

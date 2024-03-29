@@ -73,7 +73,7 @@ function Solicitation(
   const formRef = useRef<HTMLFormElement>(null);
 
   return (
-    <div class="container flex lg:flex-row gap-4">
+    <div class="container flex lg:flex-row gap-4 pt-6 pb-16">
       <div class="flex flex-col gap-4 w-full">
         {/** breadcrump */}
         <div class="flex gap-2">
@@ -102,7 +102,7 @@ function Solicitation(
         </Form>
       </div>
       {banners?.length && isDesktop && (
-        <div class="flex flex-col gap-4 max-lg:hidden">
+        <div class="flex flex-col gap-4 max-lg:hidden shrink-0">
           {banners.map(({ alt, image, height }) => (
             <Image src={image} width={496} height={height} alt={alt} />
           ))}

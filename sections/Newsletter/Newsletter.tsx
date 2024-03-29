@@ -64,7 +64,7 @@ export default function Newsletter(props: Props) {
           placeholder={form.placeholder}
         />
         <button
-          class={`btn ${isReverse ? "btn-accent" : ""}`}
+          class={`btn btn-primary ${isReverse ? "btn-accent" : ""}`}
           type="submit"
         >
           {form.buttonText}

@@ -5,6 +5,7 @@ import manifest, { Manifest } from "../manifest.gen.ts";
 import { ClientOf, createHttpClient } from "apps/utils/http.ts";
 import creditAnalysis from "../packs/utils/creditAnalysis.ts";
 import type { Supabase } from "$store/loaders/supabase/supabaseConfig.ts";
+import BrevoClient from "deco-sites/niivu-bank/packs/utils/createHTMLEmail.ts";
 
 /**
  * @title Configurações do Risk3
@@ -42,22 +43,75 @@ export interface Risk3 {
   clientRisk3: ClientOf<creditAnalysis>;
 }
 
+/**
+ * @title Configurações de envio de email
+ */
+export interface SendEmailConfig {
+  /**
+   * @title Brevo Chave da API
+   */
+  apiKey: string;
+
+  /**
+   * @title Brevo URL
+   */
+  baseUrl: string;
+
+  /**
+   * @title Email da equipe Niivo
+   * @description Email que envia os dados dos clientes para a equipe Niivo
+   */
+  emailNiivo: string;
+
+  /**
+   * @title Template ID, email para Equipe Niivo
+   * @description ID do template de email que será enviado para a equipe Niivo com os dados do cliente aprovado
+   */
+  templateIdApprovedNiivo: number;
+
+  /**
+   * @title Template ID, Cliente aprovado
+   * @description ID do template de email que será enviado para o cliente com análise de crédito aprovada
+   */
+  templateIdApproved: number;
+
+  /**
+   * @title Template ID, Cliente reprovado
+   * @description ID do template de email que será enviado para o cliente com análise de crédito aprovada
+   */
+  templateIdReproved: number;
+
+  /**
+   * @title Cliente do Brevo
+   * @ignore
+   */
+  clientBrevo: ClientOf<BrevoClient>;
+}
+
 export type Props = {
   theme?: Section;
   supabaseClient: Supabase;
   risk3: Risk3;
-  sendEmail: string;
+  brevo: SendEmailConfig;
 } & CommerceProps;
 
 export type App = ReturnType<typeof Site>;
 export type AppContext = AC<App>;
 
 export default function Site(
-  { supabaseClient, risk3, theme, sendEmail, ...state }: Props,
+  { supabaseClient, risk3, theme, brevo, ...state }: Props,
 ): A<Manifest, Props, [ReturnType<typeof commerce>]> {
   const clientRisk3 = createHttpClient<creditAnalysis>({
     base: risk3.url,
     headers: new Headers({ "accept": "application/json" }),
+  });
+
+  const clientBrevo = createHttpClient<BrevoClient>({
+    base: brevo.baseUrl,
+    headers: new Headers({
+      "accept": "application/json",
+      "api-key": brevo.apiKey,
+    }),
   });
 
   const risk3ConfigsAndClient = {
@@ -65,11 +119,16 @@ export default function Site(
     clientRisk3,
   };
 
+  const brevoConfigsAndClient = {
+    ...brevo,
+    clientBrevo,
+  };
+
   return {
     state: {
       supabaseClient,
       risk3: risk3ConfigsAndClient,
-      sendEmail,
+      brevo: brevoConfigsAndClient,
       theme,
       ...state,
     },

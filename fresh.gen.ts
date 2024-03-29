@@ -4,14 +4,14 @@
 
 import * as $_app from "./routes/_app.tsx";
 import * as $_middleware from "./routes/_middleware.ts";
-import * as $webhook_sendEmail from "./routes/webhook/sendEmail.ts";
+import * as $webhook_sendEmailRoute from "./routes/webhook/sendEmailRoute.ts";
 import * as $AddToCartButton_linx from "./islands/AddToCartButton/linx.tsx";
 import * as $AddToCartButton_nuvemshop from "./islands/AddToCartButton/nuvemshop.tsx";
 import * as $AddToCartButton_shopify from "./islands/AddToCartButton/shopify.tsx";
 import * as $AddToCartButton_vnda from "./islands/AddToCartButton/vnda.tsx";
 import * as $AddToCartButton_vtex from "./islands/AddToCartButton/vtex.tsx";
 import * as $AddToCartButton_wake from "./islands/AddToCartButton/wake.tsx";
-import * as $Authentication_LoginForm from "./islands/Authentication/LoginForm.tsx";
+import * as $Authentication_Login from "./islands/Authentication/Login.tsx";
 import * as $Header_Buttons from "./islands/Header/Buttons.tsx";
 import * as $Header_Cart_linx from "./islands/Header/Cart/linx.tsx";
 import * as $Header_Cart_nuvemshop from "./islands/Header/Cart/nuvemshop.tsx";
@@ -36,7 +36,7 @@ const manifest = {
   routes: {
     "./routes/_app.tsx": $_app,
     "./routes/_middleware.ts": $_middleware,
-    "./routes/webhook/sendEmail.ts": $webhook_sendEmail,
+    "./routes/webhook/sendEmailRoute.ts": $webhook_sendEmailRoute,
   },
   islands: {
     "./islands/AddToCartButton/linx.tsx": $AddToCartButton_linx,
@@ -45,7 +45,7 @@ const manifest = {
     "./islands/AddToCartButton/vnda.tsx": $AddToCartButton_vnda,
     "./islands/AddToCartButton/vtex.tsx": $AddToCartButton_vtex,
     "./islands/AddToCartButton/wake.tsx": $AddToCartButton_wake,
-    "./islands/Authentication/LoginForm.tsx": $Authentication_LoginForm,
+    "./islands/Authentication/Login.tsx": $Authentication_Login,
     "./islands/Header/Buttons.tsx": $Header_Buttons,
     "./islands/Header/Cart/linx.tsx": $Header_Cart_linx,
     "./islands/Header/Cart/nuvemshop.tsx": $Header_Cart_nuvemshop,

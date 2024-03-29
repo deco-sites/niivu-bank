@@ -120,7 +120,7 @@ interface AnalysisRequestResponse {
   };
 }
 
-export default interface creditAnalysis {
+export default interface CreditAnalysis {
   "GET /version": {
     response: {
       version: string;

@@ -1,7 +1,7 @@
 import { HTMLWidget, ImageWidget } from "apps/admin/widgets.ts";
 import RichText from "deco-sites/niivu-bank/sections/Content/RichText.tsx";
 import { usePartialSection } from "deco/hooks/usePartialSection.ts";
-import LoginForm from "deco-sites/niivu-bank/islands/Authentication/LoginForm.tsx";
+import LoginForm from "../islands/Authentication/Login.tsx";
 import LoginSSO from "deco-sites/niivu-bank/components/autentication/Login/SSO.tsx";
 import { Picture, Source } from "apps/website/components/Picture.tsx";
 

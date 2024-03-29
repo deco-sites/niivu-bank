@@ -39,6 +39,10 @@
     @apply border-l border-transparent duration-200 whitespace-pre-line text-center;
     @apply flex flex-col items-center justify-start gap-8 py-10 px-8 lg:px-12;
   }
+
+  .btn {
+    height: 56px;
+  }
 }
 
 .group:disabled .group-disabled\:animate-progress {

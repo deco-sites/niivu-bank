@@ -2,7 +2,7 @@ import { HTMLWidget, ImageWidget } from "apps/admin/widgets.ts";
 import RichText from "deco-sites/niivu-bank/sections/Content/RichText.tsx";
 import { usePartialSection } from "deco/hooks/usePartialSection.ts";
 import LoginForm from "deco-sites/niivu-bank/islands/Authentication/LoginForm.tsx";
-import LoginSSO from "../components/autentication/Login/SSO.tsx";
+import LoginSSO from "deco-sites/niivu-bank/components/autentication/Login/SSO.tsx";
 
 interface Props {
   /**
@@ -68,8 +68,7 @@ const Autentication = (
         </div>
       </div>
       <div class="md:flex md:flex-col md:w-1/2 md:items-center lg:items-start lg:pl-32 md:pt-14  2xl:my-auto">
-        <header class="md:max-w-[348px]">
-          <div class="flex justify-center md:justify-start md:mb-9 items-center h-16 border-b-2 border-[#E5E5E5] md:border-none">
+        <header class="w-full h-16 md:h-auto flex justify-center items-center md:justify-normal md:items-start md:max-w-[348px] border-b-2 md:border-none">
             <img
               width="306"
               height="92"
@@ -82,12 +81,11 @@ const Autentication = (
               height="45"
               src="/image/Niivo_Logo_Preta_mobile.webp"
               alt="Niivo Logo Preta Mobile"
-              class="md:hidden"
-            />
-          </div>
+              class="md:hidden h-11"
+            />  
         </header>
         {stap === "login" && (
-          <div class="md:max-w-[348px] px-4 pt-6 md:p-0 flex flex-col">
+          <div class="max-w-[348px] m-auto md:m-0 px-4 pt-6 md:p-0 flex flex-col">
             <div class="mb-4 text-primary">
               <h1 class="font-bold text-2xl md:text-3xl">
                 Acessar Minha Conta

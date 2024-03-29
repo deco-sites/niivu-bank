@@ -42,7 +42,7 @@ export default function Password(
       >
         {showPassword.value
           ? <Icon size={24} id="Eye" />
-          : <Icon size={24} id="EyeClosed"  class="pt-px"/>}
+          : <Icon size={24} id="EyeClosed" class="pt-px" />}
       </button>
     </div>
   );

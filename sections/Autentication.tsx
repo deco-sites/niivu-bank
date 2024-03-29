@@ -16,17 +16,17 @@ interface Props {
    */
   banner: {
     /**
-     * @title Texto do banner
+     * @description Texto do banner
      */
     textBanner: HTMLWidget;
 
     /**
-     * @title Imagem de fundo
+     * @description Imagem de fundo
      */
     image: ImageWidget;
 
     /**
-     * @title Texto do botão
+     * @description Texto do botão
      */
     buttonText: string;
   };
@@ -41,14 +41,20 @@ interface Props {
      */
     showLoginSSO?: boolean;
   };
+
+  /**
+   * @title Imagem do header
+   */
   header: {
-        /** @description Image for small screens */
-        mobile: ImageWidget;
-        /** @description Image for small screens */
-        desktop: ImageWidget;
-        /** @description image alt text */
-        alt?: string;
-  }
+    /**
+     * @description Imagem para tela pequena
+     */
+    mobile: ImageWidget;
+    /** @description Imagem para tela grande*/
+    desktop: ImageWidget;
+    /** @description Descrição da imagem  */
+    alt?: string;
+  };
 }
 
 const Autentication = (

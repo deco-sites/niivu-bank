@@ -6,7 +6,7 @@ export default {
   content: ["./**/*.tsx"],
   theme: {
     colors: {
-      'facebook': '#1877F2',
+      "facebook": "#1877F2",
     },
     container: { center: true },
     extend: {

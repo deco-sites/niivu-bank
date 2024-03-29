@@ -3,6 +3,7 @@ import RichText from "deco-sites/niivu-bank/sections/Content/RichText.tsx";
 import { usePartialSection } from "deco/hooks/usePartialSection.ts";
 import LoginForm from "deco-sites/niivu-bank/islands/Authentication/LoginForm.tsx";
 import LoginSSO from "deco-sites/niivu-bank/components/autentication/Login/SSO.tsx";
+import { Picture, Source } from "apps/website/components/Picture.tsx";
 
 interface Props {
   /**
@@ -40,6 +41,14 @@ interface Props {
      */
     showLoginSSO?: boolean;
   };
+  header: {
+        /** @description Image for small screens */
+        mobile: ImageWidget;
+        /** @description Image for small screens */
+        desktop: ImageWidget;
+        /** @description image alt text */
+        alt?: string;
+  }
 }
 
 const Autentication = (
@@ -47,6 +56,7 @@ const Autentication = (
     step = "login",
     login: { showLoginSSO = false },
     banner: { textBanner, image, buttonText },
+    header: { mobile, alt, desktop },
   }: Props,
 ) => {
   return (
@@ -68,21 +78,22 @@ const Autentication = (
         </div>
       </div>
       <div class="md:flex md:flex-col md:w-1/2 md:items-center lg:items-start lg:pl-32 md:pt-14  2xl:my-auto">
-        <header class="w-full h-16 md:h-auto flex justify-center items-center md:justify-normal md:items-start md:max-w-[348px] border-b-2 md:border-none">
-            <img
-              width="306"
-              height="92"
-              src="/image/Niivo_Logo_Preta_pc.webp"
-              alt="Niivo Logo Preta PC"
-              class="hidden md:block"
+        <header class="w-full h-16 md:h-auto flex justify-center items-center md:justify-normal md:items-start md:max-w-[348px] border-b-2 border-b-neutral-200 md:border-none">
+          <Picture preload>
+            <Source
+              src={mobile}
+              width={150}
+              height={45}
+              media="(max-width: 767px)"
             />
-            <img
-              width="150"
-              height="45"
-              src="/image/Niivo_Logo_Preta_mobile.webp"
-              alt="Niivo Logo Preta Mobile"
-              class="md:hidden h-11"
-            />  
+            <Source
+              src={desktop}
+              width={306}
+              height={92}
+              media="(min-width: 767px)"
+            />
+            <img src={desktop} alt={alt ?? "Niivo Logo Preta Mobile"} />
+          </Picture>
         </header>
         {step === "login" && (
           <div class="max-w-[348px] m-auto md:m-0 px-4 pt-6 md:p-0 flex flex-col">

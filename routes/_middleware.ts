@@ -7,7 +7,7 @@ import { Manifest } from "$store/manifest.gen.ts";
 import {
   SOLICITATION_ENTITY_NAME,
 } from "deco-sites/niivu-bank/packs/utils/constants.ts";
-import { Emails } from "$store/loaders/solicitacao/emailsConfig.ts";
+import { Emails } from "../loaders/configs/emailsConfig.ts";
 
 export async function handler(
   req: Request,

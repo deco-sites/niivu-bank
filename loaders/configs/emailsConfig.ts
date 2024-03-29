@@ -1,6 +1,7 @@
 export type Emails = { emails: string[] };
 
 export interface Props {
+  /** @title Lista de Emails */
   data: Emails;
 }
 

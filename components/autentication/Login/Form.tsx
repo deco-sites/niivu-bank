@@ -51,7 +51,7 @@ export default function LoginForm() {
   return (
     <form onSubmit={handleSubmit}>
       {isError.value && (
-        <p class="text-red-500 text-sm text-center">
+        <p class="text-error text-sm text-center">
           E-mail ou senha inválidos
         </p>
       )}
@@ -84,7 +84,7 @@ export default function LoginForm() {
           <Button
             loading={isLoaging.value}
             type="submit"
-            class="w-full mb:h-14 bg-primary text-white rounded font-bold text-sm md:text-lg"
+            class="w-full bg-primary text-neutral rounded font-bold text-sm md:text-lg"
           >
             Entrar
           </Button>

@@ -8,14 +8,14 @@ export default function LoginSSO() {
       <div class="space-y-2">
         <Button
           ariaLabel="Entre com Facebook"
-          class="w-full h-14 bg-blue-facebook text-white rounded font-bold text-base"
+          class="w-full bg-facebook border-facebook hover:border-facebook hover:bg-[#428df0] rounded font-bold text-neutral"
         >
           <Icon size={24} id="Facebook" /> Entre com Facebook
         </Button>
 
         <Button
           ariaLabel="Entre com Google"
-          class="w-full h-14 bg-white rounded  shadow-md"
+          class="w-full btn-neutral rounded  shadow-md"
         >
           <Icon size={24} id="Google" />{" "}
           <span class="text-black opacity-55 font-bold text-base">

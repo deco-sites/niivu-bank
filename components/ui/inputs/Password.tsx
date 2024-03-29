@@ -2,15 +2,15 @@ import { useSignal } from "@preact/signals";
 import { ChangeEvent } from "https://esm.sh/v128/preact@10.19.2/compat/src/index.js";
 import Icon from "deco-sites/niivu-bank/components/ui/Icon.tsx";
 
-interface InputFieldProps {
+interface Props {
   placeholder: string;
   value?: string;
   class?: string;
   name?: string;
 }
 
-export default function InputField(
-  { placeholder, class: _class, value, name }: InputFieldProps,
+export default function Password(
+  { placeholder, class: _class, value, name }: Props,
 ) {
   const showPassword = useSignal(false);
   const newType = showPassword.value ? "text" : "password";
@@ -37,12 +37,12 @@ export default function InputField(
       <button
         aria-label={showPassword.value ? "Esconder senha" : "Mostrar senha"}
         type="button"
-        class="absolute inset-y-1/2 right-0 h-6 mr-4 mt-1 transform -translate-y-1/2"
+        class="absolute inset-y-1/2 right-0 h-6 mr-4 transform -translate-y-1/2"
         onClick={togglePasswordVisibility}
       >
         {showPassword.value
-          ? <Icon size={24} id="Eye" class="pt-px" />
-          : <Icon size={24} id="EyeClosed" />}
+          ? <Icon size={24} id="Eye" />
+          : <Icon size={24} id="EyeClosed"  class="pt-px"/>}
       </button>
     </div>
   );

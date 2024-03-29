@@ -5,6 +5,9 @@ export default {
   daisyui: { themes: [], logs: false },
   content: ["./**/*.tsx"],
   theme: {
+    colors: {
+      'facebook': '#1877F2',
+    },
     container: { center: true },
     extend: {
       animation: {

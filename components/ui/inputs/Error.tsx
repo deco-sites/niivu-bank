@@ -4,6 +4,6 @@ export default function InputFieldError(
   if (!message) {
     return null;
   } else {
-    return <p class="text-red-500 text-xs">{message}</p>;
+    return <p class="text-error text-xs">{message}</p>;
   }
 }

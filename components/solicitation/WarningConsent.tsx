@@ -5,7 +5,7 @@ export interface Props {
 function warningConsent({ disclaimerText }: Props) {
   return (
     <>
-      <div class="flex flex-col gap-2 group/warning">
+      <div class="flex flex-col gap-10 group/warning">
         <div class="flex items-start gap-4">
           <input
             class="checkbox checkbox-primary checkbox-md border-[3px]"

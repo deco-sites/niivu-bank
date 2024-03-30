@@ -43,6 +43,20 @@
   .btn {
     height: 56px;
   }
+
+  .input {
+    height: 40px;
+    border: 1px solid #414042;
+    border-radius: 4px 4px 0px 0px;
+  }
+
+  .input:focus {
+    border: 1px solid #414042;
+    border-bottom: 2px solid #414042;
+    outline: none;
+  }
+
+  
 }
 
 .group:disabled .group-disabled\:animate-progress {

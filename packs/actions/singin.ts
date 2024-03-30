@@ -3,11 +3,13 @@ import { setCookies } from "$store/utils/cookies.ts";
 import {
   BAD_REQUEST,
   EMAIL_ERROR,
+  HAS_SOLICITATION,
+  NO_SOLICITATION,
   OK,
   PASSWORD_ERROR,
   SINGIN_ERROR,
-  SUCCESS,
 } from "$store/utils/enum.ts";
+import { SOLICITATION_ENTITY_NAME } from "deco-sites/niivu-bank/packs/utils/constants.ts";
 
 export interface Props {
   email: string;
@@ -44,7 +46,9 @@ export default async function loader(
     return { status: BAD_REQUEST, message: SINGIN_ERROR };
   }
 
+  const checkSolicitation = await supabaseClient.from(SOLICITATION_ENTITY_NAME).select().eq('email', email).single()
+  
   setCookies(data.session.access_token, ctx.response.headers);
 
-  return { status: OK, message: SUCCESS };
+  return { status: OK, message: checkSolicitation.error ? NO_SOLICITATION : HAS_SOLICITATION};
 }

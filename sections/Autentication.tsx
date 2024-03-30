@@ -124,7 +124,7 @@ const Autentication = (
             </button>
             {showLoginSSO && <LoginSSO />}
             <p class="text-primary text-sm text-center mt-6">
-              Não tem uma conta?{" "}               
+              Não tem uma conta?{" "}
               <button
                 type="button"
                 {...usePartialSection<typeof Autentication>({
@@ -144,7 +144,7 @@ const Autentication = (
                 Abra agora sua Conta Digital
               </h1>
             </div>
-           <SignupForm />
+            <SignupForm />
           </div>
         )}
         {step === "recoveryPassword" && (

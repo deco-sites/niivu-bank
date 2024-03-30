@@ -6,7 +6,7 @@ import { Input } from "deco-sites/niivu-bank/components/ui/inputs/index.tsx";
 interface PasswordValidationResult {
   isValid: boolean;
   errors: string[];
-};
+}
 
 interface EmptyInputs<T> {
   [key: string]: T;
@@ -15,7 +15,7 @@ interface EmptyInputs<T> {
 export default function SignupForm() {
   const isLoaging = useSignal(false);
   const isDiffPasswords = useSignal(false);
-  const password = useSignal('');
+  const password = useSignal("");
   const emptyInputs = useSignal({
     email: false,
     password: false,
@@ -28,7 +28,7 @@ export default function SignupForm() {
       maxLength: /^.{1,64}$/,
       minLetters: /^(.*[a-zA-Z]){2,}.*$/,
       minNumbers: /^(.*\d){2,}.*$/,
-      minSpecialChars: /^(?=.*[!@#$%^&*()_+{}:<>?]).*$/
+      minSpecialChars: /^(?=.*[!@#$%^&*()_+{}:<>?]).*$/,
     };
 
     const errors: EmptyInputs<string> = {
@@ -36,15 +36,15 @@ export default function SignupForm() {
       maxLength: "Máximo de 64 caracteres",
       minLetters: "Pelo menos 2 letras",
       minNumbers: "Pelo menos 2 números",
-      minSpecialChars: "Pelo menos 1 caracter especial"
+      minSpecialChars: "Pelo menos 1 caracter especial",
     };
 
     const validationResult: PasswordValidationResult = {
       isValid: true,
-      errors: []
+      errors: [],
     };
 
-    Object.keys(regexParts).forEach(key => {
+    Object.keys(regexParts).forEach((key) => {
       if (!regexParts[key].test(password)) {
         validationResult.isValid = false;
         validationResult.errors.push(errors[key]);
@@ -54,13 +54,17 @@ export default function SignupForm() {
     return validationResult;
   };
 
-  const getPasswordErrorComponents = (validationResult: PasswordValidationResult) => {
+  const getPasswordErrorComponents = (
+    validationResult: PasswordValidationResult,
+  ) => {
     const errorComponents: JSX.Element[] = [];
 
     if (!validationResult.isValid) {
-      errorComponents.push(<Input.Label key="topLabel" label="Sua senha deve ter:" class="mt-3" />);
+      errorComponents.push(
+        <Input.Label key="topLabel" label="Sua senha deve ter:" class="mt-3" />,
+      );
       validationResult.errors.forEach((error, index) => {
-          errorComponents.push(<Input.Label key={index} label={error} />);
+        errorComponents.push(<Input.Label key={index} label={error} />);
       });
     }
 
@@ -72,8 +76,9 @@ export default function SignupForm() {
     isDiffPasswords.value = false;
     const email = (e.currentTarget.elements.namedItem("email") as RadioNodeList)
       ?.value;
-    const passwordComfirm = (e.currentTarget.elements.namedItem("passwordComfirm") as RadioNodeList)
-    ?.value;
+    const passwordComfirm =
+      (e.currentTarget.elements.namedItem("passwordComfirm") as RadioNodeList)
+        ?.value;
 
     if (!email || !password.value || !passwordComfirm) {
       emptyInputs.value = {
@@ -86,14 +91,17 @@ export default function SignupForm() {
     if (validatePassword(password.value).errors.length > 0) {
       return;
     }
-    if (passwordComfirm.length && password.value.length && password.value !== passwordComfirm) {
+    if (
+      passwordComfirm.length && password.value.length &&
+      password.value !== passwordComfirm
+    ) {
       isDiffPasswords.value = true;
       return;
     }
 
     try {
       isLoaging.value = true;
-      const response = await invoke({
+      await invoke({
         key: "deco-sites/niivu-bank/loaders/actions/singup.ts",
         props: {
           email: email,
@@ -147,11 +155,10 @@ export default function SignupForm() {
               : undefined}
           />
           <Input.Error
-            message={isDiffPasswords.value
-              ? "senhas não coincidem"
-              : undefined}
+            message={isDiffPasswords.value ? "senhas não coincidem" : undefined}
           />
-          { password.value.length > 3 && getPasswordErrorComponents(validatePassword(password.value))}
+          {password.value.length > 3 &&
+            getPasswordErrorComponents(validatePassword(password.value))}
         </Input.Root>
         <div class="space-y-2">
           <div class="flex flex-col mt-6 gap-10 group/warning">
@@ -167,7 +174,10 @@ export default function SignupForm() {
                   Autorização
                 </span>
                 <span class="text-sm">
-                  Autorizo o NIIVO BANK e empresas coligadas a consultar as minhas informações nas bases de dados cadastrais disponíveis, inclusive no SCR (Sistema de cadastro gerido pelo Banco Central do Brasil).
+                  Autorizo o NIIVO BANK e empresas coligadas a consultar as
+                  minhas informações nas bases de dados cadastrais disponíveis,
+                  inclusive no SCR (Sistema de cadastro gerido pelo Banco
+                  Central do Brasil).
                 </span>
               </div>
             </div>

@@ -29,6 +29,31 @@
 }
 
 @layer components {
+
+  .container {
+    @apply w-11/12
+  }
+
+  .tooltip::before {
+    bottom: calc(var(--tooltip-offset) + 5px);
+    @apply max-w-64 text-start px-4 py-2 font-normal
+  }
+
+  .tooltip::after {
+    bottom: var(--tooltip-offset);
+   @apply border-x-[6px] border-t-8 border-b-0 border-transparent border-t-primary
+  }
+  
+  .tooltip-bottom.tooltip::after {
+    bottom: var(--tooltip-offset);
+   @apply border-x-[6px] border-b-8 border-t-0 border-transparent border-b-primary
+  }
+
+  .tooltip-bottom.tooltip::before {
+    top: var(--tooltip-offset);
+    bottom: auto
+  }
+
   .features {
     @apply flex items-center justify-center gap-6 flex-wrap;
     @apply relative max-w-[1280px] mx-auto;

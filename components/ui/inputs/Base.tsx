@@ -13,7 +13,7 @@ export default function Base(
       name={name}
       type={type ?? "text"}
       placeholder={placeholder}
-      class={`h-10 w-full px-4 border border-gray-400 rounded-t-md rounded-b-none text-primary text-sm focus:outline-none focus:border-b-2 focus:border-b-black ${_class}`}
+      class={`input w-full text-primary text-sm ${_class}`}
     />
   );
 }

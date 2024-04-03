@@ -42,14 +42,18 @@ export default function LoginForm() {
         return;
       }
 
-      window.location.href = "/minha-conta";
+      if (response.message === "no-solicitation") {
+        window.location.href = "/minha-conta/solicitacao";
+      } else {
+        window.location.href = "/minha-conta/solicitacao/status";
+      }
     } finally {
       isLoaging.value = false;
     }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} method="POST">
       {isError.value && (
         <p class="text-error text-sm text-center">
           E-mail ou senha inválidos

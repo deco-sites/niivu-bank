@@ -4,12 +4,13 @@ import { usePartialSection } from "deco/hooks/usePartialSection.ts";
 import LoginForm from "../islands/Authentication/Login.tsx";
 import LoginSSO from "deco-sites/niivu-bank/components/autentication/Login/SSO.tsx";
 import { Picture, Source } from "apps/website/components/Picture.tsx";
+import SignupForm from "deco-sites/niivu-bank/islands/Authentication/Signup.tsx";
 
 interface Props {
   /**
    * @ignore
    */
-  step: "login" | "register" | "recoveryPassword";
+  step: "login" | "signup" | "recoveryPassword";
 
   /**
    * @title Configurações do banner
@@ -83,7 +84,7 @@ const Autentication = (
           </button>
         </div>
       </div>
-      <div class="md:flex md:flex-col md:w-1/2 md:items-center lg:items-start lg:pl-32 md:pt-14  2xl:my-auto">
+      <div class="md:flex md:flex-col md:w-1/2 md:items-center lg:items-start lg:pl-32 md:pt-14 bg-white 2xl:my-auto">
         <header class="w-full h-16 md:h-auto flex justify-center items-center md:justify-normal md:items-start md:max-w-[348px] border-b-2 border-b-neutral-200 md:border-none">
           <Picture preload>
             <Source
@@ -127,7 +128,7 @@ const Autentication = (
               <button
                 type="button"
                 {...usePartialSection<typeof Autentication>({
-                  props: { step: "register" },
+                  props: { step: "signup" },
                 })}
                 class="text-primary font-bold"
               >
@@ -136,9 +137,14 @@ const Autentication = (
             </p>
           </div>
         )}
-        {step === "register" && (
-          <div class="">
-            "register"
+        {step === "signup" && (
+          <div class="max-w-[348px] m-auto md:m-0 px-4 pt-6 md:p-0 flex flex-col">
+            <div class="mb-8 text-primary">
+              <h1 class="font-bold text-2xl md:text-2xl leading-10 tracking-tight">
+                Abra agora sua Conta Digital
+              </h1>
+            </div>
+            <SignupForm />
           </div>
         )}
         {step === "recoveryPassword" && (

@@ -5,6 +5,9 @@ import LoginForm from "../islands/Authentication/Login.tsx";
 import LoginSSO from "deco-sites/niivu-bank/components/autentication/Login/SSO.tsx";
 import { Picture, Source } from "apps/website/components/Picture.tsx";
 import SignupForm from "deco-sites/niivu-bank/islands/Authentication/Signup.tsx";
+import { redirect, type SectionProps } from "deco/mod.ts";
+import { getCookie } from "$store/utils/cookies.ts";
+import { TEMPORARY_REDIRECT } from "deco-sites/niivu-bank/utils/enum.ts";
 
 interface Props {
   /**
@@ -58,13 +61,28 @@ interface Props {
   };
 }
 
+export function loader(
+  props: Props,
+  req: Request,
+) {
+  const cookie = getCookie(req);
+
+  if (cookie) {
+    redirect(new URL("/minha-conta", req.url));
+  }
+
+  return {
+    ...props,
+  };
+}
+
 const Autentication = (
   {
     step = "login",
     login: { showLoginSSO = false },
     banner: { textBanner, image, buttonText },
     header: { mobile, alt, desktop },
-  }: Props,
+  }: SectionProps<typeof loader>,
 ) => {
   return (
     <div class="h-screen md:flex bg-white">

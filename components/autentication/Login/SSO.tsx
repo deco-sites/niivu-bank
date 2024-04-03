@@ -12,8 +12,8 @@ export default function LoginSSO() {
         >
           <Icon size={24} id="Facebook" />
           <span class="font-bold text-base text-center">
-           Entre com Facebook
-           </span>
+            Entre com Facebook
+          </span>
         </Button>
 
         <Button

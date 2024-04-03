@@ -25,7 +25,7 @@ export default function loader(
 
   supabaseClient.auth.resetPasswordForEmail(email, {
     redirectTo: `${url.host}/`,
-  });
+  })
 
   return { status: OK, message: SUCCESS };
 }

@@ -28,7 +28,7 @@ export default async function loader(
   const { clientRisk3, password, username } = risk3;
 
   if (!password || !username) {
-    console.error("Risk3 webhook: password or user not sete");
+    console.error("Risk3 webhook: password or user not set.");
     return {
       error: "risk3-credentials",
     };

@@ -39,7 +39,7 @@ export default async function loader(
     };
   }
 
-  const email = getEmail({ supabaseClient, access_token });
+  const email = await getEmail({ supabaseClient, access_token });
 
   if (typeof email !== "string") {
     return { status: INTERNAL_ERROR, message: SERVER_ERROR };
@@ -53,7 +53,8 @@ export default async function loader(
   const { error } = await supabaseClient.auth.updateUser({
     password: password,
   });
-
+  console.log(error);
+  
   if (error) {
     return { status: INTERNAL_ERROR, message: SERVER_ERROR };
   }

@@ -5,6 +5,7 @@ import LoginForm from "../islands/Authentication/Login.tsx";
 import LoginSSO from "deco-sites/niivu-bank/components/autentication/Login/SSO.tsx";
 import { Picture, Source } from "apps/website/components/Picture.tsx";
 import SignupForm from "deco-sites/niivu-bank/islands/Authentication/Signup.tsx";
+import RecoveryPasswordForm from "deco-sites/niivu-bank/components/autentication/RecoveryPassword/index.tsx";
 
 interface Props {
   /**
@@ -60,7 +61,7 @@ interface Props {
 
 const Autentication = (
   {
-    step = "login",
+    step = "recoveryPassword",
     login: { showLoginSSO = false },
     banner: { textBanner, image, buttonText },
     header: { mobile, alt, desktop },
@@ -84,7 +85,7 @@ const Autentication = (
           </button>
         </div>
       </div>
-      <div class="md:flex md:flex-col md:w-1/2 md:items-center lg:items-start lg:pl-32 md:pt-14 bg-white 2xl:my-auto">
+      <div class="md:flex md:flex-col md:w-1/2 md:items-center lg:items-start lg:pl-32 md:pt-14 bg-white 2xl:pt-0 2xl:my-auto">
         <header class="w-full h-16 md:h-auto flex justify-center items-center md:justify-normal md:items-start md:max-w-[348px] border-b-2 border-b-neutral-200 md:border-none">
           <Picture preload>
             <Source
@@ -148,9 +149,17 @@ const Autentication = (
           </div>
         )}
         {step === "recoveryPassword" && (
-          <div class="">
-            "recoveryPassword"
+          <div class="max-w-[348px] m-auto md:m-0 px-4 pt-6 md:pt-0 md:px-0 flex flex-col">
+          <div class="mb-8 text-primary">
+            <h1 class="font-bold text-2xl md:text-2xl leading-10 tracking-tight">
+              Recupere sua senha
+            </h1>
+            <h2 class="text-sm text-primary">
+              Digite seu e-mail e receberar as instruções para recuperar senha.
+            </h2>
           </div>
+         <RecoveryPasswordForm />
+        </div>
         )}
       </div>
     </div>

@@ -8,7 +8,7 @@ import {
 } from "deco-sites/niivu-bank/utils/enum.ts";
 import { SOLICITATION_ENTITY_NAME } from "deco-sites/niivu-bank/packs/utils/constants.ts";
 
-interface DataObjectSoliciation {
+export interface DataObjectSoliciation {
   id: number;
   id_solicitation_risk3: number | null;
   business_name: string | null;
@@ -28,11 +28,16 @@ interface DataObjectSoliciation {
   credit_status: boolean;
 }
 
+export interface Error {
+  status: number;
+  message: string;
+}
+
 export default async function loader(
   _props: unknown,
   req: Request,
   ctx: AppContext,
-) {
+): Promise<DataObjectSoliciation | Error> {
   const { supabaseClient } = ctx;
   const email = await getEmail({ supabaseClient, req });
 
@@ -50,5 +55,5 @@ export default async function loader(
     return { status: BAD_REQUEST, message: EMAIL_ERROR };
   }
 
-  return (data as unknown as DataObjectSoliciation[])[0]?.status;
+  return (data as unknown as DataObjectSoliciation[])[0];
 }

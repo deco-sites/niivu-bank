@@ -2,6 +2,7 @@ import { StatusType } from "$store/packs/utils/constants.ts";
 import type { AppContext } from "$store/apps/site.ts";
 import Step from "./Step.tsx";
 import Icon from "$store/components/ui/Icon.tsx";
+import { DataObjectSoliciation, Error } from "$store/packs/solicitation/get.ts";
 
 export interface ToolTip {
   /** @title Em cima */
@@ -31,25 +32,25 @@ export interface Props {
   status: Status[];
   /** @title Mensagem */
   message?: string;
+
+  solicitation: DataObjectSoliciation | Error;
 }
 
-export const loader = async (props: Props, _req: Request, ctx: AppContext) => {
-  const statusMessage = await ctx.invoke(
-    "deco-sites/niivu-bank/loaders/actions/analysiStatus.ts",
-  );
+export const loader = (props: Props, _req: Request, ctx: AppContext) => {
+  const statusMessage = props.solicitation.status;
 
   if (typeof statusMessage !== "string") {
     return {
       ...props,
       statusMessage: "Abertura de Conta",
-      isDesk: ctx.device === "desktop",
+      isDesktop: ctx.device === "desktop",
     };
   }
-  return { ...props, statusMessage, isDesk: ctx.device === "desktop" };
+  return { ...props, statusMessage, isDesktop: ctx.device === "desktop" };
 };
 
 function FollowSolicitation(
-  { status, message, isDesk, statusMessage = "Abertura de Conta" }: Awaited<
+  { status, message, isDesktop, statusMessage = "Abertura de Conta" }: Awaited<
     ReturnType<typeof loader>
   >,
 ) {
@@ -65,9 +66,11 @@ function FollowSolicitation(
 
   const hasMessage = message && message.length > 0;
 
+  const steps = isDesktop ? status : selectedItems;
+
   return (
     <div class="container flex flex-col gap-32 pb-48">
-      {isDesk && (
+      {isDesktop && (
         <div>
           <h1 class="font-bold text-3xl leading-10 text-primary">
             Acompanhe aqui sua proposta
@@ -79,26 +82,14 @@ function FollowSolicitation(
         </div>
       )}
       <ul class="timeline max-lg:w-full mx-auto last:lg:w-24 first:lg:w-24">
-        {/** Desk */}
-        {isDesk &&
-          status.map((props, index) => (
-            <Step
-              index={index}
-              statusIndex={statusIndex}
-              isLastStep={index === status.length - 1}
-              {...props}
-            />
-          ))}
-        {/** Mobile */}
-        {!isDesk &&
-          selectedItems.map((props, index) => (
-            <Step
-              index={index}
-              statusIndex={statusIndex}
-              isLastStep={index === selectedItems.length - 1}
-              {...props}
-            />
-          ))}
+        {steps.map((props, index, array) => (
+          <Step
+            index={index}
+            statusIndex={statusIndex}
+            isLastStep={index === array.length - 1}
+            {...props}
+          />
+        ))}
       </ul>
       {hasMessage ||
         status[statusIndex].message && (

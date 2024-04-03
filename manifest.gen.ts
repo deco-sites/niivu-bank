@@ -2,16 +2,16 @@
 // This file SHOULD be checked into source version control.
 // This file is automatically updated during development when running `dev.ts`.
 
-import * as $$$0 from "./loaders/actions/analysiStatus.ts";
-import * as $$$1 from "./loaders/actions/handleStatus.ts";
-import * as $$$2 from "./loaders/actions/recoveryPassword.ts";
-import * as $$$3 from "./loaders/actions/sendEmail.ts";
-import * as $$$4 from "./loaders/actions/singin.ts";
-import * as $$$5 from "./loaders/actions/singup.ts";
-import * as $$$6 from "./loaders/actions/solicitation.ts";
-import * as $$$7 from "./loaders/actions/updatePassword.ts";
-import * as $$$8 from "./loaders/Layouts/ProductCard.tsx";
-import * as $$$9 from "./loaders/List/Sections.tsx";
+import * as $$$0 from "./loaders/actions/handleStatus.ts";
+import * as $$$1 from "./loaders/actions/recoveryPassword.ts";
+import * as $$$2 from "./loaders/actions/sendEmail.ts";
+import * as $$$3 from "./loaders/actions/singin.ts";
+import * as $$$4 from "./loaders/actions/singup.ts";
+import * as $$$5 from "./loaders/actions/solicitation.ts";
+import * as $$$6 from "./loaders/actions/updatePassword.ts";
+import * as $$$7 from "./loaders/Layouts/ProductCard.tsx";
+import * as $$$8 from "./loaders/List/Sections.tsx";
+import * as $$$9 from "./loaders/solicitation/get.ts";
 import * as $$$10 from "./loaders/supabase/supabaseConfig.ts";
 import * as $$$$$$0 from "./sections/Animation/Animation.tsx";
 import * as $$$$$$1 from "./sections/authentication/AutenticationController.tsx";
@@ -46,7 +46,7 @@ import * as $$$$$$29 from "./sections/Miscellaneous/CampaignTimer.tsx";
 import * as $$$$$$30 from "./sections/Miscellaneous/CookieConsent.tsx";
 import * as $$$$$$31 from "./sections/Miscellaneous/Slide.tsx";
 import * as $$$$$$32 from "./sections/Newsletter/Newsletter.tsx";
-import * as $$$$$$33 from "./sections/Private/FollowSolicitation.tsx";
+import * as $$$$$$33 from "./sections/Private/StatusBar.tsx";
 import * as $$$$$$34 from "./sections/Product/ImageGalleryFrontBack.tsx";
 import * as $$$$$$35 from "./sections/Product/ImageGallerySlider.tsx";
 import * as $$$$$$36 from "./sections/Product/NotFound.tsx";
@@ -65,16 +65,16 @@ import * as $$$$$$$$$$$1 from "./apps/site.ts";
 
 const manifest = {
   "loaders": {
-    "deco-sites/niivu-bank/loaders/actions/analysiStatus.ts": $$$0,
-    "deco-sites/niivu-bank/loaders/actions/handleStatus.ts": $$$1,
-    "deco-sites/niivu-bank/loaders/actions/recoveryPassword.ts": $$$2,
-    "deco-sites/niivu-bank/loaders/actions/sendEmail.ts": $$$3,
-    "deco-sites/niivu-bank/loaders/actions/singin.ts": $$$4,
-    "deco-sites/niivu-bank/loaders/actions/singup.ts": $$$5,
-    "deco-sites/niivu-bank/loaders/actions/solicitation.ts": $$$6,
-    "deco-sites/niivu-bank/loaders/actions/updatePassword.ts": $$$7,
-    "deco-sites/niivu-bank/loaders/Layouts/ProductCard.tsx": $$$8,
-    "deco-sites/niivu-bank/loaders/List/Sections.tsx": $$$9,
+    "deco-sites/niivu-bank/loaders/actions/handleStatus.ts": $$$0,
+    "deco-sites/niivu-bank/loaders/actions/recoveryPassword.ts": $$$1,
+    "deco-sites/niivu-bank/loaders/actions/sendEmail.ts": $$$2,
+    "deco-sites/niivu-bank/loaders/actions/singin.ts": $$$3,
+    "deco-sites/niivu-bank/loaders/actions/singup.ts": $$$4,
+    "deco-sites/niivu-bank/loaders/actions/solicitation.ts": $$$5,
+    "deco-sites/niivu-bank/loaders/actions/updatePassword.ts": $$$6,
+    "deco-sites/niivu-bank/loaders/Layouts/ProductCard.tsx": $$$7,
+    "deco-sites/niivu-bank/loaders/List/Sections.tsx": $$$8,
+    "deco-sites/niivu-bank/loaders/solicitation/get.ts": $$$9,
     "deco-sites/niivu-bank/loaders/supabase/supabaseConfig.ts": $$$10,
   },
   "sections": {
@@ -112,7 +112,7 @@ const manifest = {
     "deco-sites/niivu-bank/sections/Miscellaneous/CookieConsent.tsx": $$$$$$30,
     "deco-sites/niivu-bank/sections/Miscellaneous/Slide.tsx": $$$$$$31,
     "deco-sites/niivu-bank/sections/Newsletter/Newsletter.tsx": $$$$$$32,
-    "deco-sites/niivu-bank/sections/Private/FollowSolicitation.tsx": $$$$$$33,
+    "deco-sites/niivu-bank/sections/Private/StatusBar.tsx": $$$$$$33,
     "deco-sites/niivu-bank/sections/Product/ImageGalleryFrontBack.tsx":
       $$$$$$34,
     "deco-sites/niivu-bank/sections/Product/ImageGallerySlider.tsx": $$$$$$35,

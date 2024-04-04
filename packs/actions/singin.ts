@@ -46,9 +46,13 @@ export default async function loader(
     return { status: BAD_REQUEST, message: SINGIN_ERROR };
   }
 
-  const checkSolicitation = await supabaseClient.from(SOLICITATION_ENTITY_NAME).select().eq('email', email).single()
-  
+  const checkSolicitation = await supabaseClient.from(SOLICITATION_ENTITY_NAME)
+    .select().eq("email", email).single();
+
   setCookies(data.session.access_token, ctx.response.headers);
 
-  return { status: OK, message: checkSolicitation.error ? NO_SOLICITATION : HAS_SOLICITATION};
+  return {
+    status: OK,
+    message: checkSolicitation.error ? NO_SOLICITATION : HAS_SOLICITATION,
+  };
 }

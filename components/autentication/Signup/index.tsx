@@ -2,11 +2,13 @@ import { useSignal } from "@preact/signals";
 import type { JSX } from "preact";
 import { invoke } from "deco-sites/niivu-bank/runtime.ts";
 import { Input } from "deco-sites/niivu-bank/components/ui/inputs/index.tsx";
+import { EMAIL_RESGISTER_ERROR } from "deco-sites/niivu-bank/utils/enum.ts";
+import Loading from "deco-sites/niivu-bank/components/daisy/Loading.tsx";
 
 interface PasswordValidationResult {
   isValid: boolean;
   errors: string[];
-};
+}
 
 interface EmptyInputs<T> {
   [key: string]: T;
@@ -15,7 +17,8 @@ interface EmptyInputs<T> {
 export default function SignupForm() {
   const isLoaging = useSignal(false);
   const isDiffPasswords = useSignal(false);
-  const password = useSignal('');
+  const password = useSignal("");
+  const emailError = useSignal(false);
   const emptyInputs = useSignal({
     email: false,
     password: false,
@@ -26,25 +29,27 @@ export default function SignupForm() {
     const regexParts: EmptyInputs<RegExp> = {
       minLength: /^.{8,}$/,
       maxLength: /^.{1,64}$/,
-      minLetters: /^(.*[a-zA-Z]){2,}.*$/,
+      minLowercaseLetters: /^(.*[a-z]){2,}.*$/,
+      minUppercaseLetters: /^(.*[A-Z]){1,}.*$/,
       minNumbers: /^(.*\d){2,}.*$/,
-      minSpecialChars: /^(?=.*[!@#$%^&*()_+{}:<>?]).*$/
+      minSpecialChars: /^(?=.*[!@#$%^&*()_+{}:<>?]).*$/,
     };
 
     const errors: EmptyInputs<string> = {
       minLength: "No mínimo 8 caracteres",
       maxLength: "Máximo de 64 caracteres",
-      minLetters: "Pelo menos 2 letras",
+      minLowercaseLetters: "Pelo menos 2 letras",
+      minUppercaseLetters: "Pelo menos 1 caracter maiusculo",
       minNumbers: "Pelo menos 2 números",
-      minSpecialChars: "Pelo menos 1 caracter especial"
+      minSpecialChars: "Pelo menos 1 caracter especial",
     };
 
     const validationResult: PasswordValidationResult = {
       isValid: true,
-      errors: []
+      errors: [],
     };
 
-    Object.keys(regexParts).forEach(key => {
+    Object.keys(regexParts).forEach((key) => {
       if (!regexParts[key].test(password)) {
         validationResult.isValid = false;
         validationResult.errors.push(errors[key]);
@@ -54,13 +59,17 @@ export default function SignupForm() {
     return validationResult;
   };
 
-  const getPasswordErrorComponents = (validationResult: PasswordValidationResult) => {
+  const getPasswordErrorComponents = (
+    validationResult: PasswordValidationResult,
+  ) => {
     const errorComponents: JSX.Element[] = [];
 
     if (!validationResult.isValid) {
-      errorComponents.push(<Input.Label key="topLabel" label="Sua senha deve ter:" class="mt-3" />);
+      errorComponents.push(
+        <Input.Label key="topLabel" label="Sua senha deve ter:" class="mt-3" />,
+      );
       validationResult.errors.forEach((error, index) => {
-          errorComponents.push(<Input.Label key={index} label={error} />);
+        errorComponents.push(<Input.Label key={index} label={error} />);
       });
     }
 
@@ -72,8 +81,9 @@ export default function SignupForm() {
     isDiffPasswords.value = false;
     const email = (e.currentTarget.elements.namedItem("email") as RadioNodeList)
       ?.value;
-    const passwordComfirm = (e.currentTarget.elements.namedItem("passwordComfirm") as RadioNodeList)
-    ?.value;
+    const passwordComfirm =
+      (e.currentTarget.elements.namedItem("passwordComfirm") as RadioNodeList)
+        ?.value;
 
     if (!email || !password.value || !passwordComfirm) {
       emptyInputs.value = {
@@ -86,7 +96,10 @@ export default function SignupForm() {
     if (validatePassword(password.value).errors.length > 0) {
       return;
     }
-    if (passwordComfirm.length && password.value.length && password.value !== passwordComfirm) {
+    if (
+      passwordComfirm.length && password.value.length &&
+      password.value !== passwordComfirm
+    ) {
       isDiffPasswords.value = true;
       return;
     }
@@ -101,7 +114,12 @@ export default function SignupForm() {
         },
       });
 
-      window.location.href = "/minha-conta/solicitacao";
+      if (response.message === EMAIL_RESGISTER_ERROR) {
+        emailError.value = true;
+      }
+      if (response.status === 201) {
+        window.location.href = "/entrar?step=login";
+      }
     } finally {
       isLoaging.value = false;
     }
@@ -110,6 +128,11 @@ export default function SignupForm() {
   return (
     <form onSubmit={handleSubmit} method="POST">
       <div class="space-y-4">
+        <Input.Error
+          message={emailError.value
+            ? "Um problema aconteceu, tente novamente mais tarde"
+            : undefined}
+        />
         <Input.Root>
           <Input.Label label="E-mail" class="mb-2" />
           <Input.Base
@@ -147,11 +170,10 @@ export default function SignupForm() {
               : undefined}
           />
           <Input.Error
-            message={isDiffPasswords.value
-              ? "senhas não coincidem"
-              : undefined}
+            message={isDiffPasswords.value ? "senhas não coincidem" : undefined}
           />
-          { password.value.length > 3 && getPasswordErrorComponents(validatePassword(password.value))}
+          {password.value.length > 3 &&
+            getPasswordErrorComponents(validatePassword(password.value))}
         </Input.Root>
         <div class="space-y-2">
           <div class="flex flex-col mt-6 gap-10 group/warning">
@@ -167,15 +189,20 @@ export default function SignupForm() {
                   Autorização
                 </span>
                 <span class="text-sm">
-                  Autorizo o NIIVO BANK e empresas coligadas a consultar as minhas informações nas bases de dados cadastrais disponíveis, inclusive no SCR (Sistema de cadastro gerido pelo Banco Central do Brasil).
+                  Autorizo o NIIVO BANK e empresas coligadas a consultar as
+                  minhas informações nas bases de dados cadastrais disponíveis,
+                  inclusive no SCR (Sistema de cadastro gerido pelo Banco
+                  Central do Brasil).
                 </span>
               </div>
             </div>
             <button
               type="submit"
-              class="btn btn-accent text-xl text-primary pointer-events-none text-white group-has-[input:checked]/warning:pointer-events-auto group-has-[input:checked]/warning:btn-primary"
+              class="btn btn-accent text-xl pointer-events-none group-has-[input:checked]/warning:pointer-events-auto group-has-[input:checked]/warning:btn-primary text-white"
             >
-              Enviar
+              {isLoaging.value
+                ? <Loading style="loading-spinner" size="loading-sm" />
+                : "Cadastrar"}
             </button>
           </div>
         </div>

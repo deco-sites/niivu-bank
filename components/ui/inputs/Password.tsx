@@ -21,7 +21,7 @@ export default function Password(
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const newValue = e.currentTarget.value;
-    if (signal){
+    if (signal) {
       signal.value = newValue;
     }
   };

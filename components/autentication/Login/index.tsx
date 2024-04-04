@@ -41,10 +41,10 @@ export default function LoginForm() {
         isError.value = true;
         return;
       }
-      
-      if(response.message === "no-solicitation"){
+
+      if (response.message === "no-solicitation") {
         window.location.href = "/minha-conta/solicitacao";
-      }else{
+      } else {
         window.location.href = "/minha-conta/solicitacao/status";
       }
     } finally {

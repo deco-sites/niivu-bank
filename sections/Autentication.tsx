@@ -12,7 +12,7 @@ import {
   RECOVERY_PASSWORD,
   SIGNUP,
 } from "deco-sites/niivu-bank/utils/enum.ts";
-import { Title } from "deco-sites/niivu-bank/components/ui/Title.tsx";
+import Title from "deco-sites/niivu-bank/components/ui/Title.tsx";
 
 interface Props {
   /**

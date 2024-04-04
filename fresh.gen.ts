@@ -11,6 +11,7 @@ import * as $AddToCartButton_shopify from "./islands/AddToCartButton/shopify.tsx
 import * as $AddToCartButton_vnda from "./islands/AddToCartButton/vnda.tsx";
 import * as $AddToCartButton_vtex from "./islands/AddToCartButton/vtex.tsx";
 import * as $AddToCartButton_wake from "./islands/AddToCartButton/wake.tsx";
+import * as $Authentication_ChangePassword from "./islands/Authentication/ChangePassword.tsx";
 import * as $Authentication_Login from "./islands/Authentication/Login.tsx";
 import * as $Authentication_RecoveryPassword from "./islands/Authentication/RecoveryPassword.tsx";
 import * as $Authentication_Signup from "./islands/Authentication/Signup.tsx";
@@ -48,6 +49,8 @@ const manifest = {
     "./islands/AddToCartButton/vnda.tsx": $AddToCartButton_vnda,
     "./islands/AddToCartButton/vtex.tsx": $AddToCartButton_vtex,
     "./islands/AddToCartButton/wake.tsx": $AddToCartButton_wake,
+    "./islands/Authentication/ChangePassword.tsx":
+      $Authentication_ChangePassword,
     "./islands/Authentication/Login.tsx": $Authentication_Login,
     "./islands/Authentication/RecoveryPassword.tsx":
       $Authentication_RecoveryPassword,

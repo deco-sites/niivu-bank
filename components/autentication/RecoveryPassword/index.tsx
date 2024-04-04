@@ -30,8 +30,10 @@ export default function RecoveryPasswordForm() {
           email: email,
         },
       });
-      console.log(response);
-    //window.location.href = "/minha-conta/solicitacao";
+
+      if (response.status === 200) {
+        window.location.href = "/entrar";
+      }
     } finally {
       isLoaging.value = false;
     }

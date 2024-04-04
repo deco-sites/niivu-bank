@@ -8,12 +8,14 @@ import SignupForm from "deco-sites/niivu-bank/islands/Authentication/Signup.tsx"
 import { redirect, type SectionProps } from "deco/mod.ts";
 import { getCookie } from "$store/utils/cookies.ts";
 import {
+  CHANGE_PASSWORD,
   LOGIN,
   RECOVERY_PASSWORD,
   SIGNUP,
 } from "deco-sites/niivu-bank/utils/enum.ts";
 import Title from "deco-sites/niivu-bank/components/ui/Title.tsx";
 import RecoveryPasswordForm from "deco-sites/niivu-bank/components/autentication/RecoveryPassword/index.tsx";
+import ChangePassword from "deco-sites/niivu-bank/islands/Authentication/ChangePassword.tsx";
 
 interface Props {
   /**
@@ -71,6 +73,7 @@ const StepConstants = {
   login: LOGIN,
   signup: SIGNUP,
   recoveryPassword: RECOVERY_PASSWORD,
+  changePassword: CHANGE_PASSWORD,
 } as const;
 
 export type Step = typeof StepConstants[keyof typeof StepConstants];
@@ -108,6 +111,19 @@ const Autentication = (
     header: { mobile, alt, desktop },
   }: SectionProps<typeof loader>,
 ) => {
+  const ButtonToLogin = () => {
+    return (
+      <button
+        type="button"
+        {...usePartialSection<typeof Autentication>({
+          props: { step: LOGIN },
+        })}
+        class="text-primary text-sm text-center mt-6 hover:text-secondary"
+      >
+        <span class="font-bold">Entre</span> na sua conta
+      </button>
+    );
+  };
   return (
     <div class="h-screen md:flex bg-white">
       <div
@@ -144,7 +160,7 @@ const Autentication = (
             <img src={desktop} alt={alt ?? "Niivo Logo Preta Mobile"} />
           </Picture>
         </header>
-        {step === "login" && (
+        {step === LOGIN && (
           <div class="max-w-[348px] m-auto md:m-0 px-4 pt-6 md:p-0 flex flex-col">
             <Title
               title="Acessar Minha Conta"
@@ -155,7 +171,7 @@ const Autentication = (
             <button
               type="button"
               {...usePartialSection<typeof Autentication>({
-                props: { step: "recoveryPassword" },
+                props: { step: RECOVERY_PASSWORD },
               })}
               class="w-full texte-center cursor-pointer text-primary opacity-70 text-sm mt-2 hover:text-secondary"
             >
@@ -167,7 +183,7 @@ const Autentication = (
               <button
                 type="button"
                 {...usePartialSection<typeof Autentication>({
-                  props: { step: "signup" },
+                  props: { step: SIGNUP },
                 })}
                 class="text-primary font-bold hover:text-secondary"
               >
@@ -176,33 +192,34 @@ const Autentication = (
             </p>
           </div>
         )}
-        {step === "signup" && (
+        {step === SIGNUP && (
           <div class="max-w-[348px] m-auto md:m-0 px-4 pt-6 md:p-0 flex flex-col">
             <Title title="Abra agora sua Conta Digital" class="mb-3 text-2xl" />
             <SignupForm />
-            <button
-              type="button"
-              {...usePartialSection<typeof Autentication>({
-                props: { step: "login" },
-              })}
-              class="text-primary text-sm text-center mt-6 hover:text-secondary"
-            >
-              <span class="font-bold">Entre</span> na sua conta
-            </button>
+            <ButtonToLogin />
           </div>
         )}
-        {step === "recoveryPassword" && (
+        {step === RECOVERY_PASSWORD && (
           <div class="max-w-[348px] m-auto md:m-0 px-4 pt-6 md:pt-0 md:px-0 flex flex-col">
-          <div class="mb-8 text-primary">
-            <h1 class="font-bold text-2xl md:text-2xl leading-10 tracking-tight">
-              Recupere sua senha
-            </h1>
-            <h2 class="text-sm text-primary">
-              Digite seu e-mail e receberar as instruções para recuperar senha.
-            </h2>
+            <Title
+              title="Recupere sua senha"
+              subTitle="Digite seu e-mail e receberar as instruções para recuperar senha."
+              class="mb-8 text-2xl"
+            />
+            <RecoveryPasswordForm />
+            <ButtonToLogin />
           </div>
-         <RecoveryPasswordForm />
-        </div>
+        )}
+        {step === CHANGE_PASSWORD && (
+          <div class="max-w-[348px] w-full m-auto md:m-0 px-4 pt-6 md:pt-0 md:px-0 flex flex-col">
+            <Title
+              title="Recupere sua senha"
+              subTitle="Digite sua nova senha e confirme"
+              class="mb-8 text-3xl"
+            />
+            <ChangePassword />
+            <ButtonToLogin />
+          </div>
         )}
       </div>
     </div>

@@ -36,21 +36,21 @@
 
   .tooltip::before {
     bottom: calc(var(--tooltip-offset) + 5px);
-    @apply max-w-64 text-start px-4 py-2 font-normal
+    @apply text-[#FDFEFF] bg-[#00000099]/60 max-w-64 text-start px-4 py-2 font-normal
   }
 
   .tooltip::after {
-    bottom: var(--tooltip-offset);
-   @apply border-x-[6px] border-t-8 border-b-0 border-transparent border-t-primary
+    bottom: calc(var(--tooltip-offset) - 3px);
+   @apply border-x-[6px] border-t-8 border-b-0 border-transparent border-t-[#00000099]/60
   }
   
   .tooltip-bottom.tooltip::after {
     bottom: var(--tooltip-offset);
-   @apply border-x-[6px] border-b-8 border-t-0 border-transparent border-b-primary
+   @apply border-x-[6px] border-b-8 border-t-0 border-transparent border-b-[#00000099]/60
   }
 
   .tooltip-bottom.tooltip::before {
-    top: var(--tooltip-offset);
+    top: calc(var(--tooltip-offset) + 2px);
     bottom: auto
   }
 

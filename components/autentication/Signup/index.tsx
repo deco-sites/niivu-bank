@@ -2,6 +2,8 @@ import { useSignal } from "@preact/signals";
 import type { JSX } from "preact";
 import { invoke } from "deco-sites/niivu-bank/runtime.ts";
 import { Input } from "deco-sites/niivu-bank/components/ui/inputs/index.tsx";
+import { EMAIL_RESGISTER_ERROR } from "deco-sites/niivu-bank/utils/enum.ts";
+import Loading from "deco-sites/niivu-bank/components/daisy/Loading.tsx";
 
 interface PasswordValidationResult {
   isValid: boolean;
@@ -16,6 +18,7 @@ export default function SignupForm() {
   const isLoaging = useSignal(false);
   const isDiffPasswords = useSignal(false);
   const password = useSignal("");
+  const emailError = useSignal(false);
   const emptyInputs = useSignal({
     email: false,
     password: false,
@@ -26,7 +29,8 @@ export default function SignupForm() {
     const regexParts: EmptyInputs<RegExp> = {
       minLength: /^.{8,}$/,
       maxLength: /^.{1,64}$/,
-      minLetters: /^(.*[a-zA-Z]){2,}.*$/,
+      minLowercaseLetters: /^(.*[a-z]){2,}.*$/,
+      minUppercaseLetters: /^(.*[A-Z]){1,}.*$/,
       minNumbers: /^(.*\d){2,}.*$/,
       minSpecialChars: /^(?=.*[!@#$%^&*()_+{}:<>?]).*$/,
     };
@@ -34,7 +38,8 @@ export default function SignupForm() {
     const errors: EmptyInputs<string> = {
       minLength: "No mínimo 8 caracteres",
       maxLength: "Máximo de 64 caracteres",
-      minLetters: "Pelo menos 2 letras",
+      minLowercaseLetters: "Pelo menos 2 letras",
+      minUppercaseLetters: "Pelo menos 1 caracter maiusculo",
       minNumbers: "Pelo menos 2 números",
       minSpecialChars: "Pelo menos 1 caracter especial",
     };
@@ -101,7 +106,7 @@ export default function SignupForm() {
 
     try {
       isLoaging.value = true;
-      await invoke({
+      const response = await invoke({
         key: "deco-sites/niivu-bank/loaders/actions/singup.ts",
         props: {
           email: email,
@@ -109,7 +114,12 @@ export default function SignupForm() {
         },
       });
 
-      window.location.href = "/minha-conta/solicitacao";
+      if (response.message === EMAIL_RESGISTER_ERROR) {
+        emailError.value = true;
+      }
+      if (response.status === 201) {
+        window.location.href = "/entrar?step=login";
+      }
     } finally {
       isLoaging.value = false;
     }
@@ -118,6 +128,7 @@ export default function SignupForm() {
   return (
     <form onSubmit={handleSubmit} method="POST">
       <div class="space-y-4">
+        <Input.Error message={emailError.value ? "" : undefined} />
         <Input.Root>
           <Input.Label label="E-mail" class="mb-2" />
           <Input.Base
@@ -183,9 +194,11 @@ export default function SignupForm() {
             </div>
             <button
               type="submit"
-              class="btn btn-accent text-xl text-primary pointer-events-none text-white group-has-[input:checked]/warning:pointer-events-auto group-has-[input:checked]/warning:btn-primary"
+              class="btn btn-accent text-xl pointer-events-none group-has-[input:checked]/warning:pointer-events-auto group-has-[input:checked]/warning:btn-primary text-white"
             >
-              Enviar
+              {isLoaging.value
+                ? <Loading style="loading-spinner" size="loading-sm" />
+                : "Cadastrar"}
             </button>
           </div>
         </div>

@@ -14,3 +14,7 @@ export const SERVER_ERROR = "request-error";
 export const TOKEN_ERROR = "tokens-error";
 export const HAS_SOLICITATION = "has-solicitation";
 export const NO_SOLICITATION = "no-solicitation";
+
+export const LOGIN = "login";
+export const SIGNUP = "signup";
+export const RECOVERY_PASSWORD = "recoveryPassword";

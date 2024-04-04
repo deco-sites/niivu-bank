@@ -7,13 +7,17 @@ import { Picture, Source } from "apps/website/components/Picture.tsx";
 import SignupForm from "deco-sites/niivu-bank/islands/Authentication/Signup.tsx";
 import { redirect, type SectionProps } from "deco/mod.ts";
 import { getCookie } from "$store/utils/cookies.ts";
-import { TEMPORARY_REDIRECT } from "deco-sites/niivu-bank/utils/enum.ts";
+import {
+  LOGIN,
+  RECOVERY_PASSWORD,
+  SIGNUP,
+} from "deco-sites/niivu-bank/utils/enum.ts";
 
 interface Props {
   /**
    * @ignore
    */
-  step: "login" | "signup" | "recoveryPassword";
+  step: Step;
 
   /**
    * @title Configurações do banner
@@ -61,18 +65,36 @@ interface Props {
   };
 }
 
+const StepConstants = {
+  login: LOGIN,
+  signup: SIGNUP,
+  recoveryPassword: RECOVERY_PASSWORD,
+} as const;
+
+export type Step = typeof StepConstants[keyof typeof StepConstants];
+
 export function loader(
   props: Props,
   req: Request,
 ) {
   const cookie = getCookie(req);
+  const { searchParams } = new URL(req.url);
+  const stepParams = searchParams.get("step");
 
   if (cookie) {
     redirect(new URL("/minha-conta", req.url));
   }
 
+  const validSteps = Object.values(StepConstants);
+  const step = !props.step
+    ? stepParams && validSteps.includes(stepParams as Step)
+      ? stepParams as Step
+      : undefined
+    : props.step;
+
   return {
     ...props,
+    step,
   };
 }
 
@@ -157,7 +179,7 @@ const Autentication = (
         )}
         {step === "signup" && (
           <div class="max-w-[348px] m-auto md:m-0 px-4 pt-6 md:p-0 flex flex-col">
-            <div class="mb-8 text-primary">
+            <div class="mb-3 text-primary">
               <h1 class="font-bold text-2xl md:text-2xl leading-10 tracking-tight">
                 Abra agora sua Conta Digital
               </h1>

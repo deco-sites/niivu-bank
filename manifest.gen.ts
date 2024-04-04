@@ -11,7 +11,7 @@ import * as $$$5 from "./loaders/actions/solicitation.ts";
 import * as $$$6 from "./loaders/actions/updatePassword.ts";
 import * as $$$7 from "./loaders/Layouts/ProductCard.tsx";
 import * as $$$8 from "./loaders/List/Sections.tsx";
-import * as $$$9 from "./loaders/solicitation/get.ts";
+import * as $$$9 from "./loaders/solicitation/getDetails.ts";
 import * as $$$10 from "./loaders/supabase/supabaseConfig.ts";
 import * as $$$$$$0 from "./sections/Animation/Animation.tsx";
 import * as $$$$$$1 from "./sections/authentication/AutenticationController.tsx";
@@ -74,7 +74,7 @@ const manifest = {
     "deco-sites/niivu-bank/loaders/actions/updatePassword.ts": $$$6,
     "deco-sites/niivu-bank/loaders/Layouts/ProductCard.tsx": $$$7,
     "deco-sites/niivu-bank/loaders/List/Sections.tsx": $$$8,
-    "deco-sites/niivu-bank/loaders/solicitation/get.ts": $$$9,
+    "deco-sites/niivu-bank/loaders/solicitation/getDetails.ts": $$$9,
     "deco-sites/niivu-bank/loaders/supabase/supabaseConfig.ts": $$$10,
   },
   "sections": {

@@ -128,7 +128,11 @@ export default function SignupForm() {
   return (
     <form onSubmit={handleSubmit} method="POST">
       <div class="space-y-4">
-        <Input.Error message={emailError.value ? "" : undefined} />
+        <Input.Error
+          message={emailError.value
+            ? "Um problema aconteceu, tente novamente mais tarde"
+            : undefined}
+        />
         <Input.Root>
           <Input.Label label="E-mail" class="mb-2" />
           <Input.Base

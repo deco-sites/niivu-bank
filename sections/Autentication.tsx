@@ -146,7 +146,7 @@ const Autentication = (
     <div class="h-screen md:flex bg-white">
       <div
         class={`relative hidden overflow-hidden md:flex md:flex-col w-1/2 justify-end items-center pb-52 px-auto ${
-          image?.src && "bg-gradient-to-l from-success to-info"
+          !image?.src && "bg-gradient-to-l from-success to-info"
         }`}
       >
         <div

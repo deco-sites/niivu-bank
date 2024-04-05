@@ -170,6 +170,9 @@ const Autentication = (
               alt={image.alt}
               width={image.width}
               height={image.height}
+              preload
+              loading="eager"
+              fetchPriority="high"
               class="object-cover h-full w-full"
             />
           )}

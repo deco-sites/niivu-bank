@@ -3,6 +3,10 @@ import type { JSX } from "preact";
 import { invoke } from "deco-sites/niivu-bank/runtime.ts";
 import { Input } from "deco-sites/niivu-bank/components/ui/inputs/index.tsx";
 import Button from "deco-sites/niivu-bank/components/ui/Button.tsx";
+import {
+  EMPTY_INVALID_EMAIL,
+  ERROR_EMPTY_PASSWORD,
+} from "deco-sites/niivu-bank/components/autentication/constants.ts";
 
 export default function LoginForm() {
   const isLoaging = useSignal(false);
@@ -67,9 +71,7 @@ export default function LoginForm() {
             placeholder="exemple@gmail.com.br"
           />
           <Input.Error
-            message={emptyInputs.value.email
-              ? "Email vazio ou inválido"
-              : undefined}
+            message={emptyInputs.value.email ? EMPTY_INVALID_EMAIL : undefined}
           />
         </Input.Root>
         <Input.Root>
@@ -80,7 +82,7 @@ export default function LoginForm() {
           />
           <Input.Error
             message={emptyInputs.value.password
-              ? "preencha a senha"
+              ? ERROR_EMPTY_PASSWORD
               : undefined}
           />
         </Input.Root>

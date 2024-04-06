@@ -3,12 +3,11 @@ import type { JSX } from "preact";
 import { invoke } from "deco-sites/niivu-bank/runtime.ts";
 import { Input } from "deco-sites/niivu-bank/components/ui/inputs/index.tsx";
 import Button from "deco-sites/niivu-bank/components/ui/Button.tsx";
+import { EMPTY_INVALID_EMAIL } from "deco-sites/niivu-bank/components/autentication/constants.ts";
 
 export default function RecoveryPasswordForm() {
   const isLoaging = useSignal(false);
-  const emptyInputs = useSignal({
-    email: false,
-  });
+  const emailEmpty = useSignal(false);
 
   const handleSubmit: JSX.GenericEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
@@ -16,9 +15,7 @@ export default function RecoveryPasswordForm() {
       ?.value;
 
     if (!email) {
-      emptyInputs.value = {
-        email: !email,
-      };
+      emailEmpty.value = !email;
       return;
     }
 
@@ -49,9 +46,7 @@ export default function RecoveryPasswordForm() {
             placeholder="exemple@gmail.com.br"
           />
           <Input.Error
-            message={emptyInputs.value.email
-              ? "Email vazio ou inválido"
-              : undefined}
+            message={emailEmpty.value ? EMPTY_INVALID_EMAIL : undefined}
           />
         </Input.Root>
         <Button

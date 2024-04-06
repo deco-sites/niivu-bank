@@ -1,1 +1,1 @@
-export { default } from "../../components/autentication/Login/index.tsx";
+export { default } from "../../components/autentication/login/Form.tsx";

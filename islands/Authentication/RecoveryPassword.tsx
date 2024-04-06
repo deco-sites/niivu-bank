@@ -1,1 +1,1 @@
-export { default } from "../../components/autentication/RecoveryPassword/index.tsx";
+export { default } from "../../components/autentication/recovery_password/Form.tsx";

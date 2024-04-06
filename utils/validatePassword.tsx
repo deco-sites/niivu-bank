@@ -1,10 +1,4 @@
-import { Input } from "deco-sites/niivu-bank/components/ui/inputs/index.tsx";
-import { JSX } from "deco/deps.ts";
-
-interface PasswordValidationResult {
-  isValid: boolean;
-  errors: string[];
-}
+import { PasswordValidationResult } from "deco-sites/niivu-bank/components/ui/inputs/PasswordErrors.tsx";
 
 interface EmptyInputs<T> {
   [key: string]: T;
@@ -47,26 +41,4 @@ export function validatePassword(password: string) {
   });
 
   return validationResult;
-}
-
-/**
- * Gets password error components based on validation result.
- * @param {PasswordValidationResult} validationResult The result of password validation.
- * @returns {JSX.Element[]} The password error components.
- */
-export function getPasswordErrorComponents(
-  validationResult: PasswordValidationResult,
-) {
-  const errorComponents: JSX.Element[] = [];
-
-  if (!validationResult.isValid) {
-    errorComponents.push(
-      <Input.Label key="topLabel" label="Sua senha deve ter:" class="mt-3" />,
-    );
-    validationResult.errors.forEach((error, index) => {
-      errorComponents.push(<Input.Label key={index} label={error} />);
-    });
-  }
-
-  return errorComponents;
 }

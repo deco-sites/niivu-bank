@@ -4,15 +4,13 @@ import { invoke } from "deco-sites/niivu-bank/runtime.ts";
 import { Input } from "deco-sites/niivu-bank/components/ui/inputs/index.tsx";
 import { EMAIL_RESGISTER_ERROR } from "deco-sites/niivu-bank/utils/enum.ts";
 import Loading from "deco-sites/niivu-bank/components/daisy/Loading.tsx";
-
-interface PasswordValidationResult {
-  isValid: boolean;
-  errors: string[];
-}
-
-interface EmptyInputs<T> {
-  [key: string]: T;
-}
+import { validatePassword } from "deco-sites/niivu-bank/utils/validatePassword.tsx";
+import {
+  EMPTY_INVALID_EMAIL,
+  ERROR_EMPTY_PASSWORD,
+  GENERIC_ERROR,
+} from "deco-sites/niivu-bank/components/autentication/constants.ts";
+import { PasswordErrors } from "deco-sites/niivu-bank/components/ui/inputs/PasswordErrors.tsx";
 
 export default function SignupForm() {
   const isLoaging = useSignal(false);
@@ -24,57 +22,6 @@ export default function SignupForm() {
     password: false,
     confirmPassword: false,
   });
-
-  const validatePassword = (password: string) => {
-    const regexParts: EmptyInputs<RegExp> = {
-      minLength: /^.{8,}$/,
-      maxLength: /^.{1,64}$/,
-      minLowercaseLetters: /^(.*[a-z]){2,}.*$/,
-      minUppercaseLetters: /^(.*[A-Z]){1,}.*$/,
-      minNumbers: /^(.*\d){2,}.*$/,
-      minSpecialChars: /^(?=.*[!@#$%^&*()_+{}:<>?]).*$/,
-    };
-
-    const errors: EmptyInputs<string> = {
-      minLength: "No mínimo 8 caracteres",
-      maxLength: "Máximo de 64 caracteres",
-      minLowercaseLetters: "Pelo menos 2 letras",
-      minUppercaseLetters: "Pelo menos 1 caracter maiusculo",
-      minNumbers: "Pelo menos 2 números",
-      minSpecialChars: "Pelo menos 1 caracter especial",
-    };
-
-    const validationResult: PasswordValidationResult = {
-      isValid: true,
-      errors: [],
-    };
-
-    Object.keys(regexParts).forEach((key) => {
-      if (!regexParts[key].test(password)) {
-        validationResult.isValid = false;
-        validationResult.errors.push(errors[key]);
-      }
-    });
-
-    return validationResult;
-  };
-
-  const getPasswordErrorComponents = (
-    validationResult: PasswordValidationResult,
-  ) => {
-    const errorComponents: JSX.Element[] = [];
-
-    if (!validationResult.isValid) {
-      errorComponents.push(
-        <Input.Label key="topLabel" label="Sua senha deve ter:" class="mt-3" />,
-      );
-      validationResult.errors.forEach((error, index) => {
-        errorComponents.push(<Input.Label key={index} label={error} />);
-      });
-    }
-
-    return errorComponents;
-  };
 
   const handleSubmit: JSX.GenericEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
@@ -129,9 +76,7 @@ export default function SignupForm() {
     <form onSubmit={handleSubmit} method="POST">
       <div class="space-y-4">
         <Input.Error
-          message={emailError.value
-            ? "Um problema aconteceu, tente novamente mais tarde"
-            : undefined}
+          message={emailError.value ? GENERIC_ERROR : undefined}
         />
         <Input.Root>
           <Input.Label label="E-mail" class="mb-2" />
@@ -140,9 +85,7 @@ export default function SignupForm() {
             placeholder="exemple@gmail.com.br"
           />
           <Input.Error
-            message={emptyInputs.value.email
-              ? "Email vazio ou inválido"
-              : undefined}
+            message={emptyInputs.value.email ? EMPTY_INVALID_EMAIL : undefined}
           />
         </Input.Root>
         <Input.Root>
@@ -154,7 +97,7 @@ export default function SignupForm() {
           />
           <Input.Error
             message={emptyInputs.value.password
-              ? "preencha a senha"
+              ? ERROR_EMPTY_PASSWORD
               : undefined}
           />
         </Input.Root>
@@ -166,14 +109,17 @@ export default function SignupForm() {
           />
           <Input.Error
             message={emptyInputs.value.confirmPassword
-              ? "preencha a senha"
+              ? ERROR_EMPTY_PASSWORD
               : undefined}
           />
           <Input.Error
             message={isDiffPasswords.value ? "senhas não coincidem" : undefined}
           />
-          {password.value.length > 3 &&
-            getPasswordErrorComponents(validatePassword(password.value))}
+          {password.value.length > 3 && (
+            <PasswordErrors
+              validationResult={validatePassword(password.value)}
+            />
+          )}
         </Input.Root>
         <div class="space-y-2">
           <div class="flex flex-col mt-6 gap-10 group/warning">

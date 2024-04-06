@@ -2,7 +2,7 @@ import { HTMLWidget, ImageWidget } from "apps/admin/widgets.ts";
 import RichText from "deco-sites/niivu-bank/sections/Content/RichText.tsx";
 import { usePartialSection } from "deco/hooks/usePartialSection.ts";
 import LoginForm from "../islands/Authentication/Login.tsx";
-import LoginSSO from "deco-sites/niivu-bank/components/autentication/Login/SSO.tsx";
+import LoginSSO from "../components/autentication/login/SSO.tsx";
 import { Picture, Source } from "apps/website/components/Picture.tsx";
 import SignupForm from "deco-sites/niivu-bank/islands/Authentication/Signup.tsx";
 import { redirect, type SectionProps } from "deco/mod.ts";
@@ -14,7 +14,7 @@ import {
   SIGNUP,
 } from "deco-sites/niivu-bank/utils/enum.ts";
 import Title from "deco-sites/niivu-bank/components/ui/Title.tsx";
-import RecoveryPasswordForm from "deco-sites/niivu-bank/components/autentication/RecoveryPassword/index.tsx";
+import RecoveryPasswordForm from "../components/autentication/recovery_password/Form.tsx";
 import ChangePassword from "deco-sites/niivu-bank/islands/Authentication/ChangePassword.tsx";
 
 interface Props {
@@ -105,7 +105,7 @@ export function loader(
 
 const Autentication = (
   {
-    step = "recoveryPassword",
+    step = LOGIN,
     login: { showLoginSSO = false },
     banner: { textBanner, image, buttonText },
     header: { mobile, alt, desktop },
@@ -120,10 +120,11 @@ const Autentication = (
         })}
         class="text-primary text-sm text-center mt-6 hover:text-secondary"
       >
-        <span class="font-bold">Entre</span> na sua conta
+        <strong>Entre</strong> na sua conta
       </button>
     );
   };
+
   return (
     <div class="h-screen md:flex bg-white">
       <div

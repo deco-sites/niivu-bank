@@ -3,7 +3,6 @@ import type { JSX } from "preact";
 import { invoke } from "deco-sites/niivu-bank/runtime.ts";
 import { Input } from "deco-sites/niivu-bank/components/ui/inputs/index.tsx";
 import {
-  getPasswordErrorComponents,
   validatePassword,
 } from "deco-sites/niivu-bank/utils/validatePassword.tsx";
 import Button from "deco-sites/niivu-bank/components/ui/Button.tsx";
@@ -11,6 +10,11 @@ import {
   ACCESS_TOKEN,
   REFRESH_TOKEN,
 } from "deco-sites/niivu-bank/utils/enum.ts";
+import {
+  ERROR_EMPTY_PASSWORD,
+  GENERIC_ERROR,
+} from "deco-sites/niivu-bank/components/autentication/constants.ts";
+import { PasswordErrors } from "deco-sites/niivu-bank/components/ui/inputs/PasswordErrors.tsx";
 
 export default function ChangePassword() {
   const isLoaging = useSignal(false);
@@ -81,7 +85,10 @@ export default function ChangePassword() {
       });
 
       if (response.status === 200) {
-        window.location.href = "/entrar";
+        window.location.href = "/entrar?step=login";
+        const url = new URL(window.location.href);
+        url.searchParams.set("step", "login");
+        history.pushState(null, "", url.toString());
       }
       if (response.status === 500) {
         error.value = true;
@@ -95,9 +102,7 @@ export default function ChangePassword() {
     <form onSubmit={handleSubmit} method="POST">
       <div class="space-y-4">
         <Input.Error
-          message={error.value
-            ? "Um problema aconteceu, tente novamente mais tarde"
-            : undefined}
+          message={error.value ? GENERIC_ERROR : undefined}
         />
         <Input.Root>
           <Input.Label label="Senha" class="mb-2" />
@@ -108,7 +113,7 @@ export default function ChangePassword() {
           />
           <Input.Error
             message={emptyInputs.value.password
-              ? "preencha a senha"
+              ? ERROR_EMPTY_PASSWORD
               : undefined}
           />
         </Input.Root>
@@ -120,14 +125,17 @@ export default function ChangePassword() {
           />
           <Input.Error
             message={emptyInputs.value.confirmPassword
-              ? "preencha a senha"
+              ? ERROR_EMPTY_PASSWORD
               : undefined}
           />
           <Input.Error
             message={isDiffPasswords.value ? "senhas não coincidem" : undefined}
           />
-          {password.value.length > 3 &&
-            getPasswordErrorComponents(validatePassword(password.value))}
+          {password.value.length > 3 && (
+            <PasswordErrors
+              validationResult={validatePassword(password.value)}
+            />
+          )}
         </Input.Root>
         <div class="space-y-2">
           <Button

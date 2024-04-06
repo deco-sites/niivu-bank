@@ -139,7 +139,7 @@ export default function ChangePassword() {
             type="submit"
             class="w-full bg-primary text-neutral rounded font-bold text-sm md:text-lg"
           >
-            nova senha
+            Mudar senha
           </Button>
         </div>
       </div>

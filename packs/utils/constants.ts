@@ -15,3 +15,22 @@ export const CLASSIFICATION_APPROVED = "verde";
 export const RESPONSE_RISK3_APPROVED = "aprovado";
 
 export const HEADER_AUTH_TOKEN = "Venidera-AuthToken";
+
+export type StatusType =
+  | "Analise de Crédito"
+  | "Abertura de Conta"
+  | "Assinatura"
+  | "Habilitado"
+  | "Em operação";
+
+// TODO: Try to improve in deco this. The schema reader don't read enums
+// export enum StatusEnum {
+//   STATUS_ENUM_CREDIT_ANALYSIS,
+//   STATUS_ENUM_ACCOUNT_OPENING,
+//   STATUS_ENUM_RISK3_FAILED,
+//   STATUS_ENUM_SIGNATURE,
+//   STATUS_ENUM_ABLE,
+//   STATUS_ENUM_IN_OPERATION,
+//   STATUS_ENUM_SUSPENDED,
+//   STATUS_ENUM_DISAPPROVED,
+// }

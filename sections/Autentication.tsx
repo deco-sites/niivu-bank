@@ -204,7 +204,7 @@ const Autentication = (
           <div class="max-w-[348px] m-auto md:m-0 px-4 pt-6 md:pt-0 md:px-0 flex flex-col">
             <Title
               title="Recupere sua senha"
-              subTitle="Digite seu e-mail e receberar as instruções para recuperar senha."
+              subTitle="Digite seu e-mail para receber as instruções para recuperar senha."
               class="mb-8 text-2xl"
             />
             <RecoveryPasswordForm />

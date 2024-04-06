@@ -1,101 +1,68 @@
-import type { Props as SearchbarProps } from "$store/components/search/Searchbar.tsx";
-import Drawers from "$store/islands/Header/Drawers.tsx";
-import type { ImageWidget } from "apps/admin/widgets.ts";
-import type { SiteNavigationElement } from "apps/commerce/types.ts";
-import Alert from "./Alert.tsx";
-import Navbar from "./Navbar.tsx";
-import { headerHeight } from "./constants.ts";
+import { ImageWidget } from "apps/admin/widgets.ts";
+import Step from "./Step.tsx";
+import NavBar from "./NavBar.tsx";
+import { AppContext } from "deco-sites/niivu-bank/apps/site.ts";
+
+export interface IStep {
+  /** @title Título */
+  title: string;
+
+  /**
+   * @title É o Atual?
+   * @description Esse campo deve ser selecionado apenas uma vez em um dos passos. Ele Vai definir em que etapa o usuário está.
+   */
+  isCurrent?: boolean;
+}
+
+/** @titleBy label */
+export interface Url {
+  label: string;
+  url: string;
+}
 
 export interface Logo {
-  src: ImageWidget;
+  desk: ImageWidget;
+  mobile: ImageWidget;
   alt: string;
-  width?: number;
-  height?: number;
-}
-export interface Buttons {
-  hideSearchButton?: boolean;
-  hideAccountButton?: boolean;
-  hideWishlistButton?: boolean;
-  hideCartButton?: boolean;
 }
 
 export interface Props {
-  alerts?: string[];
-
-  /** @title Search Bar */
-  searchbar?: Omit<SearchbarProps, "platform">;
-
-  /**
-   * @title Navigation items
-   * @description Navigation items used both on mobile and desktop menus
-   */
-  navItems?: SiteNavigationElement[] | null;
-
-  /** @title Logo */
-  logo?: Logo;
-
-  logoPosition?: "left" | "center";
-
-  buttons?: Buttons;
+  /** @description (150px)x(45px) */
+  logo: Logo;
+  urls?: Url[];
+  steps?: IStep[];
 }
 
-function Header({
-  alerts,
-  searchbar,
-  navItems = [
-    {
-      "@type": "SiteNavigationElement",
-      name: "Feminino",
-      url: "/",
-    },
-    {
-      "@type": "SiteNavigationElement",
-      name: "Masculino",
-      url: "/",
-    },
-    {
-      "@type": "SiteNavigationElement",
-      name: "Sale",
-      url: "/",
-    },
-    {
-      "@type": "SiteNavigationElement",
-      name: "Linktree",
-      url: "/",
-    },
-  ],
-  logo = {
-    src:
-      "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/986b61d4-3847-4867-93c8-b550cb459cc7",
-    width: 100,
-    height: 16,
-    alt: "Logo",
-  },
-  logoPosition = "center",
-  buttons,
-}: Props) {
-  const items = navItems ?? [];
+export const loader = (props: Props, _req: Request, ctx: AppContext) => {
+  return { ...props, isDesktop: ctx.device === "desktop" };
+};
 
+function Header({ logo, steps, urls, isDesktop }: ReturnType<typeof loader>) {
+  const statusIndex = steps?.findIndex(({ isCurrent }) => isCurrent);
   return (
-    <>
-      <header style={{ height: headerHeight }}>
-        <Drawers
-          menu={{ items }}
-          searchbar={searchbar}
-        >
-          <div class="bg-base-100 fixed w-full z-50">
-            {alerts && alerts.length > 0 && <Alert alerts={alerts} />}
-            <Navbar
-              items={items}
-              searchbar={searchbar}
-              logo={logo}
-              logoPosition={logoPosition}
-              buttons={buttons}
+    <header>
+      <div class="w-full border-b border-[#F4F4F4] max-lg:border-[#E5E5E5] max-lg:h-16 h-28">
+        <NavBar
+          logo={logo}
+          steps={steps}
+          urls={urls}
+          statusIndex={statusIndex ?? 0}
+          isDesktop={isDesktop}
+        />
+      </div>
+      {!isDesktop && (
+        <ul class="timeline max-lg:w-full mx-auto">
+          {steps?.map((props, index, array) => (
+            <Step
+              {...props}
+              index={index}
+              isLastStep={index === array.length - 1}
+              statusIndex={statusIndex ?? 0}
             />
-          </div>
-        </Drawers>
-      </header>
-    </>
+          ))}
+        </ul>
+      )}
+    </header>
   );
 }
 

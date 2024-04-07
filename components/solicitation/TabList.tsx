@@ -9,7 +9,7 @@ function TabList({ type }: Props) {
     <div role="tablist" class="tabs tabs-bordered m-auto pb-8 max-md:w-full">
       <button
         {...usePartialSection({ props: { type: "CPF" } })}
-        class={`tab py-2 px-7 lg:py-4 lg:px-8 h-auto font-bold ${
+        class={`tab py-2 px-7 lg:py-4 lg:px-8 h-auto font-bold leading-[14px] ${
           type === "CPF" && "text-secondary !border-secondary"
         }`}
         name="my_tabs_1"
@@ -22,7 +22,7 @@ function TabList({ type }: Props) {
       </button>
       <button
         {...usePartialSection({ props: { type: "CNPJ" } })}
-        class={`tab py-2 px-7 lg:py-4 lg:px-8 h-auto font-bold ${
+        class={`tab py-2 px-7 lg:py-4 lg:px-8 h-auto font-bold leading-[14px] ${
           type === "CNPJ" && "text-secondary !border-secondary"
         }`}
         id="legal-person"

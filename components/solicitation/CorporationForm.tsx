@@ -3,6 +3,7 @@ import StandardInput from "$store/components/ui/inputs/Standard.tsx";
 import Divider from "$store/components/ui/Divider.tsx";
 import Container from "$store/components/ui/inputs/Container.tsx";
 import { RefObject } from "preact";
+import Cnpj from "$store/islands/Cnpj.tsx";
 
 export interface Props {
   formRef: RefObject<HTMLFormElement>;
@@ -24,12 +25,7 @@ function CorporationForm({ formRef }: Props) {
             required
           />
 
-          <StandardInput
-            labelText="CNPJ"
-            id="CNPJ"
-            placeholder="Digite Seu CNPJ Aqui"
-            required
-          />
+          <Cnpj placeholder="Digite Seu CNPJ Aqui" />
         </Container>
 
         <Container>

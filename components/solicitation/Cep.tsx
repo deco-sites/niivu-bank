@@ -42,6 +42,9 @@ export default function Cep({ formRef, prefix }: Props) {
       ) as HTMLInputElement)!
         .value = response.state ?? "";
     }
+
+    (e.target as HTMLInputElement).value = cep
+      .replace(/^(\d{5})(\d)/, "$1-$2");
   };
   return (
     <div class="flex flex-col gap-1 flex-grow">

@@ -7,8 +7,9 @@ import {
 import { CreditRequestData } from "deco-sites/niivu-bank/packs/utils/createHTMLEmail.ts";
 
 export async function handler(req: Request, ctx: unknown) {
+  console.log("email iniciado");
   try {
-    //o body da requisição é um stream, então precisamos ler o corpo da requisição
+    //o body da requisição é um stream
     const bodyText = await req.text();
     const cleanBodyText = bodyText.replace(/\n/g, "").replace(/\s+/g, " ");
     const fixedBodyText = cleanBodyText.replace(/"{/g, "'{").replace(
@@ -69,6 +70,7 @@ export async function handler(req: Request, ctx: unknown) {
       rg: record.rg,
     };
 
+    //@ts-ignore 
     return await ctx.state.invoke(
       "deco-sites/niivu-bank/loaders/actions/sendEmail.ts",
       {

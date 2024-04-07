@@ -4,12 +4,14 @@ import Divider from "$store/components/ui/Divider.tsx";
 import Container from "$store/components/ui/inputs/Container.tsx";
 import { RefObject } from "preact";
 import Cnpj from "$store/islands/Cnpj.tsx";
+import type { Inputs } from "./Solicitation.tsx";
 
 export interface Props {
   formRef: RefObject<HTMLFormElement>;
+  inputs?: Inputs;
 }
 
-function CorporationForm({ formRef }: Props) {
+function CorporationForm({ formRef, inputs }: Props) {
   return (
     <>
       <p class="font-bold py-2">
@@ -21,20 +23,27 @@ function CorporationForm({ formRef }: Props) {
           <StandardInput
             labelText="Razão Social"
             id="corporate-reason"
-            placeholder="Digite a Razão Social Aqui"
+            placeholder={inputs?.corporateReason.placeholder ??
+              "Digite a Razão Social Aqui"}
             required
           />
 
-          <Cnpj placeholder="Digite Seu CNPJ Aqui" />
+          <Cnpj
+            placeholder={inputs?.cnpj.placeholder ?? "Digite Seu CNPJ Aqui"}
+          />
         </Container>
 
         <Container>
-          <LegalCep formRef={formRef} prefix={"legal"} />
+          <LegalCep
+            placeholder={inputs?.cep.placeholder ?? "Digite Seu Cep Aqui"}
+            formRef={formRef}
+            prefix={"legal"}
+          />
 
           <StandardInput
             labelText="Rua / Avenida"
             id="legal-street"
-            placeholder="Digite Sua Rua Aqui"
+            placeholder={inputs?.street.placeholder ?? "Digite Sua Rua Aqui"}
             required
             disabled
           />
@@ -44,14 +53,15 @@ function CorporationForm({ formRef }: Props) {
           <StandardInput
             labelText="Número"
             id="legal-number"
-            placeholder="xxx"
+            placeholder={inputs?.number.placeholder ?? "xxx"}
             required
           />
 
           <StandardInput
             labelText="Complemento"
             id="legal-complement"
-            placeholder="Digite Seu Complemento Aqui"
+            placeholder={inputs?.complement.placeholder ??
+              "Digite Seu Complemento Aqui"}
           />
         </Container>
 
@@ -59,7 +69,7 @@ function CorporationForm({ formRef }: Props) {
           <StandardInput
             labelText="Cidade"
             id="legal-city"
-            placeholder="Digite Sua Cidade Aqui"
+            placeholder={inputs?.city.placeholder ?? "Digite Sua Cidade Aqui"}
             required
             disabled
           />
@@ -67,7 +77,8 @@ function CorporationForm({ formRef }: Props) {
           <StandardInput
             labelText="Estado"
             id="legal-state"
-            placeholder="Digite Seu Estado aqui. Ex: RJ"
+            placeholder={inputs?.state.placeholder ??
+              "Digite Seu Estado aqui. Ex: RJ"}
             maxlength={2}
             required
             disabled

@@ -22,6 +22,38 @@ export interface Banner {
   alt: string;
 }
 
+export interface Input {
+  placeholder?: string;
+  /**
+   * We need to pass another prop because admin don't read object.oneKey. In this case just render the "oneKey".
+   * @hide
+   */
+  test?: "sou um bug";
+}
+export interface Inputs {
+  /** @title Nome */
+  name: Input;
+  cpf: Input;
+  RG: Input;
+  /** @title Telefone */
+  phone: Input;
+  email: Input;
+  cep: Input;
+  /** @title Rua / Avenida */
+  street: Input;
+  /** @title Número */
+  number: Input;
+  /** @title Complemento */
+  complement: Input;
+  /** @title Cidade */
+  city: Input;
+  /** @title Estado */
+  state: Input;
+  /** @title Razão Social */
+  corporateReason: Input;
+  cnpj: Input;
+}
+
 export interface Props {
   /**
    * @title Título
@@ -37,7 +69,7 @@ export interface Props {
    */
   disclaimerText: string;
   banners?: Banner[];
-
+  inputs?: Inputs;
   successLink: string;
   /**
    * @hide
@@ -66,6 +98,7 @@ function Solicitation(
     isDesktop,
     type,
     successLink,
+    inputs,
   }: ReturnType<
     typeof loader
   >,
@@ -95,9 +128,11 @@ function Solicitation(
         </div>
         <Form type={type} successLink={successLink} formRef={formRef}>
           <TabList type={type} />
-          <PersonalForm />
-          <AddressForm formRef={formRef} />
-          {type === "CNPJ" && <CorporationForm formRef={formRef} />}
+          <PersonalForm inputs={inputs} />
+          <AddressForm formRef={formRef} inputs={inputs} />
+          {type === "CNPJ" && (
+            <CorporationForm formRef={formRef} inputs={inputs} />
+          )}
           <WarningConsent disclaimerText={disclaimerText} />
         </Form>
       </div>

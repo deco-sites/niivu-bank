@@ -3,9 +3,10 @@ import { RefObject } from "preact";
 export interface Props {
   formRef: RefObject<HTMLFormElement>;
   prefix?: string;
+  placeholder: string;
 }
 
-export default function Cep({ formRef, prefix }: Props) {
+export default function Cep({ formRef, prefix, placeholder }: Props) {
   const prefixResult: string = typeof prefix === "string" ? `${prefix}-` : "";
 
   const getCep = async (
@@ -57,7 +58,7 @@ export default function Cep({ formRef, prefix }: Props) {
         type="text"
         id={`${prefixResult}cep`}
         name={`${prefixResult}cep`}
-        placeholder="Digite Seu Cep Aqui"
+        placeholder={placeholder}
         required
       />
     </div>

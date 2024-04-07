@@ -2,17 +2,20 @@ import { HTMLWidget, ImageWidget } from "apps/admin/widgets.ts";
 import RichText from "deco-sites/niivu-bank/sections/Content/RichText.tsx";
 import { usePartialSection } from "deco/hooks/usePartialSection.ts";
 import LoginForm from "../islands/Authentication/Login.tsx";
-import LoginSSO from "deco-sites/niivu-bank/components/autentication/Login/SSO.tsx";
+import LoginSSO from "../components/autentication/login/SSO.tsx";
 import { Picture, Source } from "apps/website/components/Picture.tsx";
 import SignupForm from "deco-sites/niivu-bank/islands/Authentication/Signup.tsx";
 import { redirect, type SectionProps } from "deco/mod.ts";
 import { getCookie } from "$store/utils/cookies.ts";
 import {
+  CHANGE_PASSWORD,
   LOGIN,
   RECOVERY_PASSWORD,
   SIGNUP,
 } from "deco-sites/niivu-bank/utils/enum.ts";
 import Title from "deco-sites/niivu-bank/components/ui/Title.tsx";
+import RecoveryPasswordForm from "../components/autentication/recovery_password/Form.tsx";
+import ChangePassword from "deco-sites/niivu-bank/islands/Authentication/ChangePassword.tsx";
 
 interface Props {
   /**
@@ -70,6 +73,7 @@ const StepConstants = {
   login: LOGIN,
   signup: SIGNUP,
   recoveryPassword: RECOVERY_PASSWORD,
+  changePassword: CHANGE_PASSWORD,
 } as const;
 
 export type Step = typeof StepConstants[keyof typeof StepConstants];
@@ -101,12 +105,31 @@ export function loader(
 
 const Autentication = (
   {
-    step = "login",
+    step = LOGIN,
     login: { showLoginSSO = false },
     banner: { textBanner, image, buttonText },
     header: { mobile, alt, desktop },
   }: SectionProps<typeof loader>,
 ) => {
+  const ButtonPartial = (
+    { text = "Entre na sua conta", step = LOGIN }: {
+      text?: string;
+      step?: Step;
+    },
+  ) => {
+    return (
+      <button
+        type="button"
+        {...usePartialSection<typeof Autentication>({
+          props: { step },
+        })}
+        class="w-full texte-center cursor-pointer text-primary opacity-70 text-sm mt-2 hover:text-secondary"
+      >
+        {text}
+      </button>
+    );
+  };
+
   return (
     <div class="h-screen md:flex bg-white">
       <div
@@ -125,7 +148,7 @@ const Autentication = (
           </button>
         </div>
       </div>
-      <div class="md:flex md:flex-col md:w-1/2 md:items-center lg:items-start lg:pl-32 md:pt-14 bg-white 2xl:my-auto">
+      <div class="md:flex md:flex-col md:w-1/2 md:items-center lg:items-start lg:pl-32 md:pt-14 bg-white 2xl:pt-0 2xl:my-auto">
         <header class="w-full mb-4 h-16 md:h-auto flex justify-center items-center md:justify-normal md:items-start md:max-w-[348px] border-b-2 border-b-neutral-200 md:border-none">
           <Picture preload>
             <Source
@@ -143,7 +166,7 @@ const Autentication = (
             <img src={desktop} alt={alt ?? "Niivo Logo Preta Mobile"} />
           </Picture>
         </header>
-        {step === "login" && (
+        {step === LOGIN && (
           <div class="max-w-[348px] m-auto md:m-0 px-4 pt-6 md:p-0 flex flex-col">
             <Title
               title="Acessar Minha Conta"
@@ -151,22 +174,17 @@ const Autentication = (
               class="mb-4 text-3xl"
             />
             <LoginForm />
-            <button
-              type="button"
-              {...usePartialSection<typeof Autentication>({
-                props: { step: "recoveryPassword" },
-              })}
-              class="w-full texte-center cursor-pointer text-primary opacity-70 text-sm mt-2 hover:text-secondary"
-            >
-              Esqueceu sua senha?
-            </button>
+            <ButtonPartial
+              text="Esqueceu sua senha?"
+              step={RECOVERY_PASSWORD}
+            />
             {showLoginSSO && <LoginSSO />}
             <p class="text-primary text-sm text-center mt-6">
               Não tem uma conta?{" "}
               <button
                 type="button"
                 {...usePartialSection<typeof Autentication>({
-                  props: { step: "signup" },
+                  props: { step: SIGNUP },
                 })}
                 class="text-primary font-bold hover:text-secondary"
               >
@@ -175,24 +193,33 @@ const Autentication = (
             </p>
           </div>
         )}
-        {step === "signup" && (
+        {step === SIGNUP && (
           <div class="max-w-[348px] m-auto md:m-0 px-4 pt-6 md:p-0 flex flex-col">
             <Title title="Abra agora sua Conta Digital" class="mb-3 text-2xl" />
             <SignupForm />
-            <button
-              type="button"
-              {...usePartialSection<typeof Autentication>({
-                props: { step: "login" },
-              })}
-              class="text-primary text-sm text-center mt-6 hover:text-secondary"
-            >
-              <span class="font-bold">Entre</span> na sua conta
-            </button>
+            <ButtonPartial />
           </div>
         )}
-        {step === "recoveryPassword" && (
-          <div class="">
-            "recoveryPassword"
+        {step === RECOVERY_PASSWORD && (
+          <div class="max-w-[348px] m-auto md:m-0 px-4 pt-6 md:pt-0 md:px-0 flex flex-col">
+            <Title
+              title="Recupere sua senha"
+              subTitle="Digite seu e-mail para receber as instruções para recuperar senha."
+              class="mb-8 text-2xl"
+            />
+            <RecoveryPasswordForm />
+            <ButtonPartial />
+          </div>
+        )}
+        {step === CHANGE_PASSWORD && (
+          <div class="max-w-[348px] w-full m-auto md:m-0 px-4 pt-6 md:pt-0 md:px-0 flex flex-col">
+            <Title
+              title="Recupere sua senha"
+              subTitle="Digite sua nova senha e confirme"
+              class="mb-8 text-3xl"
+            />
+            <ChangePassword />
+            <ButtonPartial />
           </div>
         )}
       </div>

@@ -18,3 +18,9 @@ export const NO_SOLICITATION = "no-solicitation";
 export const LOGIN = "login";
 export const SIGNUP = "signup";
 export const RECOVERY_PASSWORD = "recoveryPassword";
+export const CHANGE_PASSWORD = "changePassword";
+
+export const ACCESS_TOKEN = "access_token";
+export const REFRESH_TOKEN = "refresh_token";
+export const TOKEN_TYPE = "token_type";
+export const TYPW = "type";

@@ -57,6 +57,7 @@ export function createEmail(
       "email":"brevo@brevo.com",
       "name":"Brevo"
     },
+    subject:"This is my default subject line",
     to: [{ email, name }],
     htmlContent:"<!DOCTYPE html><html><body><p>{{params.email}} {{params.nomeCompleto}} </p></body></html>",
     params: solicitationData,

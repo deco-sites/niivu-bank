@@ -53,6 +53,10 @@ export function createEmail(
   solicitationData: CreditRequestData,
 ): EmailBody {
   return {
+    sender:{
+      "email":"brevo@brevo.com",
+      "name":"Brevo"
+    },
     to: [{ email, name }],
     htmlContent:"<!DOCTYPE html><html><body><p>{{params.email}} {{params.nomeCompleto}} </p></body></html>",
     params: solicitationData,

@@ -69,7 +69,8 @@ export async function handler(req: Request, ctx: unknown) {
       cpf: record.cpf,
       rg: record.rg,
     };
-    console.log(param);
+    
+    console.log("invoke actions sendEmail");
 
     //@ts-ignore 
     return await ctx.state.invoke(

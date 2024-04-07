@@ -10,8 +10,6 @@ export async function handler(req: Request, ctx: unknown) {
   console.log("email iniciado");
   try {
     //o body da requisição é um stream
-    console.log(req);
-    console.log( await req.text());
     const bodyText = await req.text();
     const cleanBodyText = bodyText.replace(/\n/g, "").replace(/\s+/g, " ");
     const fixedBodyText = cleanBodyText.replace(/"{/g, "'{").replace(

@@ -54,10 +54,10 @@ export function createEmail(
 ): EmailBody {
   return {
     sender:{
-      "email":"brevo@brevo.com",
-      "name":"Brevo"
+      email:"jonasdasilvajesus@outlook.com",
+      name:"Jonas"
     },
-    subject:"This is my default subject line",
+    subject:"Hello world",
     to: [{ email, name }],
     htmlContent:"<!DOCTYPE html><html><body><p>{{params.email}} {{params.nomeCompleto}} </p></body></html>",
     params: solicitationData,

@@ -10,13 +10,15 @@ export async function handler(req: Request, ctx: unknown) {
   console.log("email iniciado");
   try {
     //o body da requisição é um stream
+    console.log(req);
+    console.log( await req.text());
     const bodyText = await req.text();
     const cleanBodyText = bodyText.replace(/\n/g, "").replace(/\s+/g, " ");
     const fixedBodyText = cleanBodyText.replace(/"{/g, "'{").replace(
       /}"/g,
       "}'",
     );
-
+    console.log(fixedBodyText);
     const objetoJSON = eval(
       "(" + fixedBodyText + ")",
     ) as unknown as WebhookRequestSupabase;
@@ -69,6 +71,7 @@ export async function handler(req: Request, ctx: unknown) {
       cpf: record.cpf,
       rg: record.rg,
     };
+    console.log(param);
 
     //@ts-ignore 
     return await ctx.state.invoke(

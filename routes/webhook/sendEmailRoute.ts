@@ -82,7 +82,7 @@ export async function handler(req: Request, ctx: unknown) {
         fullName: record.full_name,
         name: nameSplit ? nameSplit[0] : undefined,
         lastName: nameSplit ? nameSplit[nameSplit.length - 1] : undefined,
-        param,
+        param
       },
     );
   } catch (error) {

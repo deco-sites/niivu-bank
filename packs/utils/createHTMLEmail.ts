@@ -33,8 +33,8 @@ interface EmailBody {
   sender?: EmailRecipient;
   to: EmailRecipient[];
   subject?: string;
-  templateId: number;
   params: CreditRequestData;
+  htmlContent: string;
   messageVersions?: MessageVersion[];
 }
 
@@ -50,12 +50,11 @@ interface EmailBody {
 export function createEmail(
   name: string,
   email: string,
-  templateId: number,
   solicitationData: CreditRequestData,
 ): EmailBody {
   return {
     to: [{ email, name }],
-    templateId,
+    htmlContent:"<!DOCTYPE html><html><body><p>{{params.email}} {{params.nomeCompleto}} </p></body></html>",
     params: solicitationData,
   };
 }

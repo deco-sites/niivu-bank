@@ -57,14 +57,12 @@ export default async function loader(
       const approvedEmail = createEmail(
         name,
         email,
-        templateIdApproved,
         solicitationData,
       );
 
       const bodyEmailForNiivo = createEmail(
         name,
         emailNiivo,
-        templateIdApprovedNiivo,
         solicitationData,
       );
 
@@ -84,7 +82,6 @@ export default async function loader(
       const bodyEmail = createEmail(
         name,
         email,
-        templateIdReproved,
         solicitationData,
       );
 

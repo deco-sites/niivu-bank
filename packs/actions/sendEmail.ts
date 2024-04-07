@@ -91,7 +91,7 @@ export default async function loader(
         body: bodyEmail,
       }).then((res) => res.json());
 
-      console.log("respond reproved sendEmail status", { response });
+      console.log("response reproved sendEmail status", { response });
     }
   } catch (error) {
     console.error("Erro ao enviar email:", error);

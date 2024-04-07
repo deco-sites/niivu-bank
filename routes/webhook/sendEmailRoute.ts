@@ -69,15 +69,15 @@ export async function handler(req: Request, ctx: unknown) {
       cpf: record.cpf,
       rg: record.rg,
     };
-    
+
     console.log("invoke actions sendEmail");
 
     //@ts-ignore 
     return await ctx.state.invoke(
       "deco-sites/niivu-bank/loaders/actions/sendEmail.ts",
       {
-        isApproved: true,
-        isReproved: false,
+        isApproved: false,
+        isReproved: true,
         email: record.email,
         fullName: record.full_name,
         name: nameSplit ? nameSplit[0] : undefined,

@@ -75,8 +75,8 @@ export async function handler(req: Request, ctx: unknown) {
     return await ctx.state.invoke(
       "deco-sites/niivu-bank/loaders/actions/sendEmail.ts",
       {
-        isApproved,
-        isReproved,
+        isApproved: true,
+        isReproved: false,
         email: record.email,
         fullName: record.full_name,
         name: nameSplit ? nameSplit[0] : undefined,

@@ -1,4 +1,4 @@
-export const emailBase = `
+export const emailBase = `<html><head></head><body>
 <div style="width: 500px;">
     <div style="width: 100%; height: 80px; display: flex; justify-content: start; padding: 22px 0 0 28px;">
         <img style="height: 53px; width: 179px;" src="https://s3-alpha-sig.figma.com/img/28aa/7703/d410c57f1cf60e6651f0418754bf28d9?Expires=1713139200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=dnVUWGce2LGe2ciO9r9Yv0tzIE3IKKF5oOW5UiWscDdP2PSZtrhKh3Pj3xKMi9QhSUgc3unXGaQd1ZbrQHm6cB8FW6tXf6zfPvbLgveYSi50gRPs2k9ZMe65Q1i0F8xPOun3qFL0GqXIUpCKADJBdwtj-nW6ltxKfP4ndfHC0KmuJoj1pzRqMh815NUTjsOjyMxShMTTKw78aFQqnKCLW9YPN~UTuzcNhXgXdx0aOBWqd8qstvzxbJwmkSi7kFND~glu28dXYaRAw9Mo77cea7TSyzzIn5L9WGawDqm85CZeGMpcYrXnB461um7V2lbajvhNxRZ4uloLKyAd9zp0LA__" alt="Niivo Logo">
@@ -22,4 +22,5 @@ export const emailBase = `
         <strong style="color: white;">Acompanhe a Niivo nas redes sociais</strong>
     </div>
 </div>
+</body></html>
 `;

@@ -87,7 +87,7 @@ export default async function loader(
 
       console.log(bodyEmail);
 
-      const response = clientBrevo["POST /v3/smtp/email"]({}, {
+      const response = await clientBrevo["POST /v3/smtp/email"]({}, {
         body: bodyEmail,
       }).then((res) => res.json());
 

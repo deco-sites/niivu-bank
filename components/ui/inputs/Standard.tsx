@@ -22,9 +22,9 @@ function Standard(
   }: Props,
 ) {
   return (
-    <div class="flex flex-col gap-1 flex-grow">
+    <div class="flex flex-col gap-2 flex-grow">
       <label class="text-primary font-medium" htmlFor={id}>
-        <span>{`${labelText}${required ? "*" : ""}`}</span>
+        <span class="text-sm">{`${labelText}${required ? "*" : ""}`}</span>
       </label>
       <input
         class="input"

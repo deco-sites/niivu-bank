@@ -81,7 +81,13 @@
     outline: none;
   }
 
-  
+  .btn-neutral{
+    color: white;
+  }
+  .btn-neutral:hover {
+    background-color: #414042;
+    border: none;
+  }
 }
 
 .group:disabled .group-disabled\:animate-progress {

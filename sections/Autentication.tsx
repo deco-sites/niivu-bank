@@ -16,43 +16,48 @@ import {
 import Title from "deco-sites/niivu-bank/components/ui/Title.tsx";
 import RecoveryPasswordForm from "../components/autentication/recovery_password/Form.tsx";
 import ChangePassword from "deco-sites/niivu-bank/islands/Authentication/ChangePassword.tsx";
+import Image from "apps/website/components/Image.tsx";
+import Button from "deco-sites/niivu-bank/components/ui/Button.tsx";
 
 interface Props {
   /**
-   * @ignore
+   * @title Alinhamento do texto dentro do banner
+   * @format button-group
+   * @options deco-sites/niivu-bank/loaders/customAdmin/icons.ts
    */
-  step: Step;
+  textAlignment?: "Em cima" | "No centro" | "Em baixo";
 
   /**
    * @title Configurações do banner
    */
   banner: {
     /**
-     * @description Texto do banner
+     * @title Texto do banner
      */
-    textBanner: HTMLWidget;
+    textBanner?: HTMLWidget;
 
     /**
-     * @description Imagem de fundo
+     * @title Texto do botão
      */
-    image: ImageWidget;
+    buttonText?: string;
 
     /**
-     * @description Texto do botão
+     * @title Imagem de fundo
      */
-    buttonText: string;
+    image?: {
+      src: ImageWidget;
+      alt: string;
+      width: number;
+      height: number;
+    };
   };
 
   /**
-   * @title Configurações do login
+   * @title Logar com facebook e google
+   * @description Se ativado, o botão de login com facebook e google será exibido
+   * @default false
    */
-  login: {
-    /**
-     * @title Logar com facebook e google
-     * @description Se ativado, o botão de login com facebook e google será exibido
-     */
-    showLoginSSO?: boolean;
-  };
+  showLoginSSO?: boolean;
 
   /**
    * @title Imagem do header
@@ -67,6 +72,11 @@ interface Props {
     /** @description Descrição da imagem  */
     alt?: string;
   };
+
+  /**
+   * @ignore
+   */
+  step: Step;
 }
 
 const StepConstants = {
@@ -106,11 +116,18 @@ export function loader(
 const Autentication = (
   {
     step = LOGIN,
-    login: { showLoginSSO = false },
+    textAlignment,
+    showLoginSSO,
     banner: { textBanner, image, buttonText },
     header: { mobile, alt, desktop },
   }: SectionProps<typeof loader>,
 ) => {
+  const verticalAlignment: { [key: string]: string } = {
+    "Em baixo": "items-end",
+    "No centro": "items-center",
+    "Em cima": "items-start",
+  } as const;
+
   const ButtonPartial = (
     { text = "Entre na sua conta", step = LOGIN }: {
       text?: string;
@@ -130,23 +147,42 @@ const Autentication = (
     );
   };
 
+
   return (
     <div class="h-screen md:flex bg-white">
       <div
-        class="hidden overflow-hidden md:flex md:flex-col w-1/2 justify-end items-center pb-52"
-        style={{
-          backgroundImage: `url(${image})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
-        }}
+        class={`relative hidden overflow-hidden md:flex md:flex-col w-1/2 justify-end items-center pb-52 px-auto ${
+          !image?.src && "bg-gradient-to-l from-success to-info"
+        }`}
       >
-        <div class="space-y-6">
-          <RichText text={textBanner} />
-          <button class="h-14 w-52 btn btn-outline btn-primary px-6 py-4 text-base font-inter">
-            {buttonText}
-          </button>
+        <div
+          class={`z-10 h-full w-full flex justify-center ${
+            textAlignment && verticalAlignment[textAlignment]
+          }`}
+        >
+          <span class="space-y-6">
+            {textBanner && <RichText text={textBanner} />}
+            {buttonText && (
+              <Button class="h-14 w-52 btn btn-outline btn-neutral px-6 py-4 text-base">
+                {buttonText}
+              </Button>
+            )}
+          </span>
         </div>
+        <span class="absolute top-0 left-0 h-screen">
+          {image && (
+            <Image
+              src={image.src}
+              alt={image.alt}
+              width={image.width}
+              height={image.height}
+              preload
+              loading="eager"
+              fetchPriority="high"
+              class="object-cover h-full w-full"
+            />
+          )}
+        </span>
       </div>
       <div class="md:flex md:flex-col md:w-1/2 md:items-center lg:items-start lg:pl-32 md:pt-14 bg-white 2xl:pt-0 2xl:my-auto">
         <header class="w-full mb-4 h-16 md:h-auto flex justify-center items-center md:justify-normal md:items-start md:max-w-[348px] border-b-2 border-b-neutral-200 md:border-none">

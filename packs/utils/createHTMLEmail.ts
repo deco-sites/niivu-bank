@@ -1,5 +1,3 @@
-import { emailBase } from "deco-sites/niivu-bank/email-tamplate/emailBase.ts";
-
 export interface CreditRequestData {
   nomeNegocio?: string;
   status: boolean;
@@ -35,8 +33,8 @@ interface EmailBody {
   sender?: EmailRecipient;
   to: EmailRecipient[];
   subject?: string;
+  templateId: number;
   params: CreditRequestData;
-  htmlContent: string;
   messageVersions?: MessageVersion[];
 }
 
@@ -52,16 +50,12 @@ interface EmailBody {
 export function createEmail(
   name: string,
   email: string,
+  templateId: number,
   solicitationData: CreditRequestData,
 ): EmailBody {
   return {
-    sender:{
-      email:"jonasdasilvajesus@outlook.com",
-      name:"Jonas"
-    },
-    subject:"Hello world",
     to: [{ email, name }],
-    htmlContent: emailBase,
+    templateId,
     params: solicitationData,
   };
 }

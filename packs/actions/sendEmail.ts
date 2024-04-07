@@ -57,12 +57,14 @@ export default async function loader(
       const approvedEmail = createEmail(
         name,
         email,
+        templateIdApproved,
         solicitationData,
       );
 
       const bodyEmailForNiivo = createEmail(
         name,
         emailNiivo,
+        templateIdApprovedNiivo,
         solicitationData,
       );
 
@@ -82,16 +84,13 @@ export default async function loader(
       const bodyEmail = createEmail(
         name,
         email,
+        templateIdReproved,
         solicitationData,
       );
 
-      console.log(bodyEmail);
-
-      const response = await clientBrevo["POST /v3/smtp/email"]({}, {
+      await clientBrevo["POST /v3/smtp/email"]({}, {
         body: bodyEmail,
       }).then((res) => res.json());
-
-      console.log("response reproved sendEmail status", { response });
     }
   } catch (error) {
     console.error("Erro ao enviar email:", error);

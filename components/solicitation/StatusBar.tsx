@@ -2,7 +2,10 @@ import { StatusType } from "$store/packs/utils/constants.ts";
 import type { AppContext } from "$store/apps/site.ts";
 import Step from "./Step.tsx";
 import Icon from "$store/components/ui/Icon.tsx";
-import { DataObjectSoliciation, Error } from "../../packs/solicitation/getDetails.ts";
+import {
+  DataObjectSoliciation,
+  Error,
+} from "../../packs/solicitation/getDetails.ts";
 import { Head } from "https://deno.land/x/fresh@1.6.3/runtime.ts";
 
 export interface ToolTip {

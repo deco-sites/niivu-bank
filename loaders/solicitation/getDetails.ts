@@ -1,1 +1,1 @@
-export { default } from "../../packs/solicitation/getDetails.ts"
+export { default } from "../../packs/solicitation/getDetails.ts";

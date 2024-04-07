@@ -30,7 +30,7 @@ export async function handler(req: Request, ctx: unknown) {
     //   return;
     // }
 
-    // const analysisRisk3 = record.credit_status;
+    const analysisRisk3 = record.credit_status;
     // const isApproved = analysisRisk3 &&
     //   (record.analysis_classification === STATUS_ENUM_ACCOUNT_OPENING &&
     //     old_record.analysis_classification !== STATUS_ENUM_ACCOUNT_OPENING);
@@ -72,17 +72,17 @@ export async function handler(req: Request, ctx: unknown) {
 
     console.log("invoke actions sendEmail");
 
-    //@ts-ignore 
+    //@ts-ignore
     return await ctx.state.invoke(
       "deco-sites/niivu-bank/loaders/actions/sendEmail.ts",
       {
-        isApproved: false,
-        isReproved: true,
+        isApproved: analysisRisk3,
+        isReproved: !analysisRisk3,
         email: record.email,
         fullName: record.full_name,
         name: nameSplit ? nameSplit[0] : undefined,
         lastName: nameSplit ? nameSplit[nameSplit.length - 1] : undefined,
-        param
+        param,
       },
     );
   } catch (error) {

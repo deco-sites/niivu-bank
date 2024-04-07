@@ -147,7 +147,6 @@ const Autentication = (
     );
   };
 
-
   return (
     <div class="h-screen md:flex bg-white">
       <div

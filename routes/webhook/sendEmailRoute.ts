@@ -23,33 +23,33 @@ export async function handler(req: Request, ctx: unknown) {
 
     const { type, record, old_record } = objetoJSON;
 
-    if (
-      type !== "UPDATE" ||
-      record.analysis_classification === STATUS_ENUM_CREDIT_ANALYSIS
-    ) {
-      return;
-    }
+    // if (
+    //   type !== "UPDATE" ||
+    //   record.analysis_classification === STATUS_ENUM_CREDIT_ANALYSIS
+    // ) {
+    //   return;
+    // }
 
-    const analysisRisk3 = record.credit_status;
-    const isApproved = analysisRisk3 &&
-      (record.analysis_classification === STATUS_ENUM_ACCOUNT_OPENING &&
-        old_record.analysis_classification !== STATUS_ENUM_ACCOUNT_OPENING);
-    const isReproved = !analysisRisk3 &&
-      record.analysis_classification === STATUS_ENUM_DISAPPROVED;
-    if (!isApproved && !isReproved) {
-      return;
-    }
-    if (isApproved && isReproved) {
-      console.error(
-        "Erro ao enviar email, status de análise inválido solicitation aprovado e Reprovada ao mesmo tempo",
-        {
-          idRisk3Solicitation: record.id_risk3,
-          isApproved,
-          isReproved,
-        },
-      );
-      return;
-    }
+    // const analysisRisk3 = record.credit_status;
+    // const isApproved = analysisRisk3 &&
+    //   (record.analysis_classification === STATUS_ENUM_ACCOUNT_OPENING &&
+    //     old_record.analysis_classification !== STATUS_ENUM_ACCOUNT_OPENING);
+    // const isReproved = !analysisRisk3 &&
+    //   record.analysis_classification === STATUS_ENUM_DISAPPROVED;
+    // if (!isApproved && !isReproved) {
+    //   return;
+    // }
+    // if (isApproved && isReproved) {
+    //   console.error(
+    //     "Erro ao enviar email, status de análise inválido solicitation aprovado e Reprovada ao mesmo tempo",
+    //     {
+    //       idRisk3Solicitation: record.id_risk3,
+    //       isApproved,
+    //       isReproved,
+    //     },
+    //   );
+    //   return;
+    // }
 
     const nameSplit = record.full_name?.split(" ");
     const param: CreditRequestData = {

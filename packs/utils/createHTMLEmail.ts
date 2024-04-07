@@ -1,3 +1,5 @@
+import { emailBase } from "deco-sites/niivu-bank/email-tamplate/emailBase.ts";
+
 export interface CreditRequestData {
   nomeNegocio?: string;
   status: boolean;
@@ -59,7 +61,7 @@ export function createEmail(
     },
     subject:"Hello world",
     to: [{ email, name }],
-    htmlContent:"<!DOCTYPE html><html><body><p>{{params.email}} {{params.nomeCompleto}} </p></body></html>",
+    htmlContent: emailBase,
     params: solicitationData,
   };
 }

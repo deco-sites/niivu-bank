@@ -54,7 +54,7 @@ export default function RecoveryPasswordForm() {
           type="submit"
           class="w-full bg-primary text-neutral rounded font-bold text-sm md:text-lg"
         >
-          Enviar solicitação
+          Recuperar senha
         </Button>
       </div>
     </form>

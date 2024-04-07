@@ -128,16 +128,21 @@ const Autentication = (
     "Em cima": "items-start",
   } as const;
 
-  const ButtonToLogin = () => {
+  const ButtonPartial = (
+    { text = "Entre na sua conta", step = LOGIN }: {
+      text?: string;
+      step?: Step;
+    },
+  ) => {
     return (
       <button
         type="button"
         {...usePartialSection<typeof Autentication>({
-          props: { step: LOGIN },
+          props: { step },
         })}
-        class="text-primary text-sm text-center mt-6 hover:text-secondary"
+        class="w-full texte-center cursor-pointer text-primary opacity-70 text-sm mt-2 hover:text-secondary"
       >
-        <strong>Entre</strong> na sua conta
+        {text}
       </button>
     );
   };
@@ -205,15 +210,10 @@ const Autentication = (
               class="mb-4 text-3xl"
             />
             <LoginForm />
-            <button
-              type="button"
-              {...usePartialSection<typeof Autentication>({
-                props: { step: RECOVERY_PASSWORD },
-              })}
-              class="w-full texte-center cursor-pointer text-primary opacity-70 text-sm mt-2 hover:text-secondary"
-            >
-              Esqueceu sua senha?
-            </button>
+            <ButtonPartial
+              text="Esqueceu sua senha?"
+              step={RECOVERY_PASSWORD}
+            />
             {showLoginSSO && <LoginSSO />}
             <p class="text-primary text-sm text-center mt-6">
               Não tem uma conta?{" "}
@@ -233,18 +233,18 @@ const Autentication = (
           <div class="max-w-[348px] m-auto md:m-0 px-4 pt-6 md:p-0 flex flex-col">
             <Title title="Abra agora sua Conta Digital" class="mb-3 text-2xl" />
             <SignupForm />
-            <ButtonToLogin />
+            <ButtonPartial />
           </div>
         )}
         {step === RECOVERY_PASSWORD && (
           <div class="max-w-[348px] m-auto md:m-0 px-4 pt-6 md:pt-0 md:px-0 flex flex-col">
             <Title
               title="Recupere sua senha"
-              subTitle="Digite seu e-mail e receberar as instruções para recuperar senha."
+              subTitle="Digite seu e-mail para receber as instruções para recuperar senha."
               class="mb-8 text-2xl"
             />
             <RecoveryPasswordForm />
-            <ButtonToLogin />
+            <ButtonPartial />
           </div>
         )}
         {step === CHANGE_PASSWORD && (
@@ -255,7 +255,7 @@ const Autentication = (
               class="mb-8 text-3xl"
             />
             <ChangePassword />
-            <ButtonToLogin />
+            <ButtonPartial />
           </div>
         )}
       </div>

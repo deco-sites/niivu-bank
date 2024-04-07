@@ -50,7 +50,9 @@ export type AvailableIcons =
   | "Eye"
   | "EyeClosed"
   | "Facebook"
-  | "Google";
+  | "Google"
+  | "RoundCheck"
+  | "Schedule";
 
 interface Props extends JSX.SVGAttributes<SVGSVGElement> {
   /**

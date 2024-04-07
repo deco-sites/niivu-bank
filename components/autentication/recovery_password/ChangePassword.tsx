@@ -42,8 +42,7 @@ export default function ChangePassword() {
       }
     }
   };
-
-  if (location && location.hash) {
+  if (location) {
     getAccessToken();
   }
 
@@ -85,10 +84,7 @@ export default function ChangePassword() {
       });
 
       if (response.status === 200) {
-        window.location.href = "/entrar?step=login";
-        const url = new URL(window.location.href);
-        url.searchParams.set("step", "login");
-        history.pushState(null, "", url.toString());
+        window.location.href = "/entrar";
       }
       if (response.status === 500) {
         error.value = true;
@@ -143,7 +139,7 @@ export default function ChangePassword() {
             type="submit"
             class="w-full bg-primary text-neutral rounded font-bold text-sm md:text-lg"
           >
-            nova senha
+            Mudar senha
           </Button>
         </div>
       </div>

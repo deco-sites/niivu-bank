@@ -82,7 +82,7 @@ export default function SignupForm() {
           <Input.Label label="E-mail" class="mb-2" />
           <Input.Base
             name="email"
-            placeholder="exemple@gmail.com.br"
+            placeholder="exemplo@email.com.br"
           />
           <Input.Error
             message={emptyInputs.value.email ? EMPTY_INVALID_EMAIL : undefined}

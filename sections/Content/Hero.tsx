@@ -1,6 +1,6 @@
 import type { ImageWidget } from "apps/admin/widgets.ts";
 import Image from "apps/website/components/Image.tsx";
-
+import TestButton from "$store/islands/TestButton.tsx";
 export interface CTA {
   id?: string;
   href: string;
@@ -33,6 +33,7 @@ export default function HeroFlats({
 }: Props) {
   return (
     <div>
+      <TestButton>Me clique</TestButton>
       <div class="mx-auto flex flex-col items-center gap-8">
         <div
           class={`flex w-full xl:container xl:mx-auto py-20 mx-5 md:mx-10 z-10 ${

@@ -15,6 +15,10 @@ import * as $Authentication_ChangePassword from "./islands/Authentication/Change
 import * as $Authentication_Login from "./islands/Authentication/Login.tsx";
 import * as $Authentication_RecoveryPassword from "./islands/Authentication/RecoveryPassword.tsx";
 import * as $Authentication_Signup from "./islands/Authentication/Signup.tsx";
+import * as $Cep from "./islands/Cep.tsx";
+import * as $Cnpj from "./islands/Cnpj.tsx";
+import * as $Cpf from "./islands/Cpf.tsx";
+import * as $Form from "./islands/Form.tsx";
 import * as $Header_Buttons from "./islands/Header/Buttons.tsx";
 import * as $Header_Cart_linx from "./islands/Header/Cart/linx.tsx";
 import * as $Header_Cart_nuvemshop from "./islands/Header/Cart/nuvemshop.tsx";
@@ -55,6 +59,10 @@ const manifest = {
     "./islands/Authentication/RecoveryPassword.tsx":
       $Authentication_RecoveryPassword,
     "./islands/Authentication/Signup.tsx": $Authentication_Signup,
+    "./islands/Cep.tsx": $Cep,
+    "./islands/Cnpj.tsx": $Cnpj,
+    "./islands/Cpf.tsx": $Cpf,
+    "./islands/Form.tsx": $Form,
     "./islands/Header/Buttons.tsx": $Header_Buttons,
     "./islands/Header/Cart/linx.tsx": $Header_Cart_linx,
     "./islands/Header/Cart/nuvemshop.tsx": $Header_Cart_nuvemshop,

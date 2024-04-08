@@ -3,6 +3,7 @@ export const OK = 200;
 export const BAD_REQUEST = 400;
 export const INTERNAL_ERROR = 500;
 export const TEMPORARY_REDIRECT = 307;
+export const NOT_FOUND = 404;
 
 export const PASSWORD_ERROR = "password-strenght";
 export const EMAIL_ERROR = "email-invalid";
@@ -12,6 +13,7 @@ export const SINGIN_ERROR = "verify-password-email";
 export const SUCCESS = "success";
 export const SERVER_ERROR = "request-error";
 export const TOKEN_ERROR = "tokens-error";
+
 export const HAS_SOLICITATION = "has-solicitation";
 export const NO_SOLICITATION = "no-solicitation";
 
@@ -24,3 +26,4 @@ export const ACCESS_TOKEN = "access_token";
 export const REFRESH_TOKEN = "refresh_token";
 export const TOKEN_TYPE = "token_type";
 export const TYPW = "type";
+export const NOT_FOUND_ERROR = "not-found";

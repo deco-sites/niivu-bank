@@ -4,6 +4,7 @@
 
 @layer base {
 
+
   /* Allow changing font family via CMS */
   html {
     font-family: var(--font-family);
@@ -52,6 +53,10 @@
   .tooltip-bottom.tooltip::before {
     top: calc(var(--tooltip-offset) + 2px);
     bottom: auto
+  }
+
+  .input {
+    @apply rounded-t border-[#414042] rounded-b-none focus:outline-none focus:border-b-2 focus:border-[#414042]
   }
 
   .features {

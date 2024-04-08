@@ -7,48 +7,49 @@ import {
 import { CreditRequestData } from "deco-sites/niivu-bank/packs/utils/createHTMLEmail.ts";
 
 export async function handler(req: Request, ctx: unknown) {
+  console.log("email iniciado");
   try {
-    //o body da requisição é um stream, então precisamos ler o corpo da requisição
+    //o body da requisição é um stream
     const bodyText = await req.text();
     const cleanBodyText = bodyText.replace(/\n/g, "").replace(/\s+/g, " ");
     const fixedBodyText = cleanBodyText.replace(/"{/g, "'{").replace(
       /}"/g,
       "}'",
     );
-
+    console.log(fixedBodyText);
     const objetoJSON = eval(
       "(" + fixedBodyText + ")",
     ) as unknown as WebhookRequestSupabase;
 
     const { type, record, old_record } = objetoJSON;
 
-    if (
-      type !== "UPDATE" ||
-      record.analysis_classification === STATUS_ENUM_CREDIT_ANALYSIS
-    ) {
-      return;
-    }
+    // if (
+    //   type !== "UPDATE" ||
+    //   record.analysis_classification === STATUS_ENUM_CREDIT_ANALYSIS
+    // ) {
+    //   return;
+    // }
 
     const analysisRisk3 = record.credit_status;
-    const isApproved = analysisRisk3 &&
-      (record.analysis_classification === STATUS_ENUM_ACCOUNT_OPENING &&
-        old_record.analysis_classification !== STATUS_ENUM_ACCOUNT_OPENING);
-    const isReproved = !analysisRisk3 &&
-      record.analysis_classification === STATUS_ENUM_DISAPPROVED;
-    if (!isApproved && !isReproved) {
-      return;
-    }
-    if (isApproved && isReproved) {
-      console.error(
-        "Erro ao enviar email, status de análise inválido solicitation aprovado e Reprovada ao mesmo tempo",
-        {
-          idRisk3Solicitation: record.id_risk3,
-          isApproved,
-          isReproved,
-        },
-      );
-      return;
-    }
+    // const isApproved = analysisRisk3 &&
+    //   (record.analysis_classification === STATUS_ENUM_ACCOUNT_OPENING &&
+    //     old_record.analysis_classification !== STATUS_ENUM_ACCOUNT_OPENING);
+    // const isReproved = !analysisRisk3 &&
+    //   record.analysis_classification === STATUS_ENUM_DISAPPROVED;
+    // if (!isApproved && !isReproved) {
+    //   return;
+    // }
+    // if (isApproved && isReproved) {
+    //   console.error(
+    //     "Erro ao enviar email, status de análise inválido solicitation aprovado e Reprovada ao mesmo tempo",
+    //     {
+    //       idRisk3Solicitation: record.id_risk3,
+    //       isApproved,
+    //       isReproved,
+    //     },
+    //   );
+    //   return;
+    // }
 
     const nameSplit = record.full_name?.split(" ");
     const param: CreditRequestData = {
@@ -69,11 +70,14 @@ export async function handler(req: Request, ctx: unknown) {
       rg: record.rg,
     };
 
+    console.log("invoke actions sendEmail");
+
+    //@ts-ignore
     return await ctx.state.invoke(
       "deco-sites/niivu-bank/loaders/actions/sendEmail.ts",
       {
-        isApproved,
-        isReproved,
+        isApproved: analysisRisk3,
+        isReproved: !analysisRisk3,
         email: record.email,
         fullName: record.full_name,
         name: nameSplit ? nameSplit[0] : undefined,

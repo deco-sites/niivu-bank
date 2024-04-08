@@ -4,6 +4,7 @@
 
 @layer base {
 
+
   /* Allow changing font family via CMS */
   html {
     font-family: var(--font-family);
@@ -29,8 +30,33 @@
 }
 
 @layer components {
+
   .container {
     @apply w-11/12
+  }
+
+  .tooltip::before {
+    bottom: calc(var(--tooltip-offset) + 5px);
+    @apply text-[#FDFEFF] bg-[#00000099]/60 max-w-64 text-start px-4 py-2 font-normal
+  }
+
+  .tooltip::after {
+    bottom: calc(var(--tooltip-offset) - 3px);
+   @apply border-x-[6px] border-t-8 border-b-0 border-transparent border-t-[#00000099]/60
+  }
+  
+  .tooltip-bottom.tooltip::after {
+    bottom: var(--tooltip-offset);
+   @apply border-x-[6px] border-b-8 border-t-0 border-transparent border-b-[#00000099]/60
+  }
+
+  .tooltip-bottom.tooltip::before {
+    top: calc(var(--tooltip-offset) + 2px);
+    bottom: auto
+  }
+
+  .input {
+    @apply rounded-t border-[#414042] rounded-b-none focus:outline-none focus:border-b-2 focus:border-[#414042]
   }
 
   .features {
@@ -42,6 +68,30 @@
     @apply w-[380px] max-w-[380px] lg:h-[380px] bg-[#F4F4F4] rounded-3xl;
     @apply border-l border-transparent duration-200 whitespace-pre-line text-center;
     @apply flex flex-col items-center justify-start gap-8 py-10 px-8 lg:px-12;
+  }
+
+  .btn {
+    height: 56px;
+  }
+
+  .input {
+    height: 40px;
+    border: 1px solid #414042;
+    border-radius: 4px 4px 0px 0px;
+  }
+
+  .input:focus {
+    border: 1px solid #414042;
+    border-bottom: 2px solid #414042;
+    outline: none;
+  }
+
+  .btn-neutral{
+    color: white;
+  }
+  .btn-neutral:hover {
+    background-color: #414042;
+    border: none;
   }
 }
 

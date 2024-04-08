@@ -88,11 +88,9 @@ export default async function loader(
         solicitationData,
       );
 
-      const response = clientBrevo["POST /v3/smtp/email"]({}, {
+      await clientBrevo["POST /v3/smtp/email"]({}, {
         body: bodyEmail,
       }).then((res) => res.json());
-
-      console.log("respond reproved sendEmail status", { response });
     }
   } catch (error) {
     console.error("Erro ao enviar email:", error);

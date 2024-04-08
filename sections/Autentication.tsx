@@ -18,6 +18,7 @@ import RecoveryPasswordForm from "../components/autentication/recovery_password/
 import ChangePassword from "deco-sites/niivu-bank/islands/Authentication/ChangePassword.tsx";
 import Image from "apps/website/components/Image.tsx";
 import Button from "deco-sites/niivu-bank/components/ui/Button.tsx";
+import type { AppContext } from "$store/apps/site.ts";
 
 interface Props {
   /**
@@ -88,16 +89,21 @@ const StepConstants = {
 
 export type Step = typeof StepConstants[keyof typeof StepConstants];
 
-export function loader(
+export async function loader(
   props: Props,
   req: Request,
+  ctx: AppContext
 ) {
+  const { supabaseClient } = ctx
   const cookie = getCookie(req);
   const { searchParams } = new URL(req.url);
   const stepParams = searchParams.get("step");
-
+  
   if (cookie) {
-    redirect(new URL("/minha-conta", req.url));
+    const { data } = await supabaseClient.auth.getUser(cookie);
+    if(data.user) {
+      redirect(new URL("/minha-conta", req.url));
+    }
   }
 
   const validSteps = Object.values(StepConstants);

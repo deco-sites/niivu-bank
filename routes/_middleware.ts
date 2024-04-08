@@ -54,13 +54,21 @@ export async function handler(
         // @ts-ignore Because we can't change the types.
         "Emails de Solicitação",
       ) as Emails ?? { emails: [] };
-
       const hasAdminEmail = emails.some((email) => email === data.user.email);
-      const { error } = await supabaseClient.from(SOLICITATION_ENTITY_NAME)
+      
+      const {data: solicitationData, error} = await supabaseClient.from(SOLICITATION_ENTITY_NAME)
         .select().eq(
           "email",
           data.user.email,
         );
+
+      const solicitation = solicitationData?.[0]
+      if(solicitation.id_risk3 && !hasAdminEmail){
+        return new Response("", {
+          status: TEMPORARY_REDIRECT,
+          headers: { location: "/minha-conta/acompanhar-solicitacao" },
+        });
+      }
 
       if (error && !hasAdminEmail) {
         return new Response("", {

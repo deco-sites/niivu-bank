@@ -1,1 +1,4 @@
-export { default, loader } from "$store/components/solicitation/Solicitation.tsx";
+export {
+  default,
+  loader,
+} from "$store/components/solicitation/Solicitation.tsx";

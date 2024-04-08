@@ -19,15 +19,6 @@ import * as $Cep from "./islands/Cep.tsx";
 import * as $Cnpj from "./islands/Cnpj.tsx";
 import * as $Cpf from "./islands/Cpf.tsx";
 import * as $Form from "./islands/Form.tsx";
-import * as $Header_Buttons from "./islands/Header/Buttons.tsx";
-import * as $Header_Cart_linx from "./islands/Header/Cart/linx.tsx";
-import * as $Header_Cart_nuvemshop from "./islands/Header/Cart/nuvemshop.tsx";
-import * as $Header_Cart_shopify from "./islands/Header/Cart/shopify.tsx";
-import * as $Header_Cart_vnda from "./islands/Header/Cart/vnda.tsx";
-import * as $Header_Cart_vtex from "./islands/Header/Cart/vtex.tsx";
-import * as $Header_Cart_wake from "./islands/Header/Cart/wake.tsx";
-import * as $Header_Drawers from "./islands/Header/Drawers.tsx";
-import * as $Header_Searchbar from "./islands/Header/Searchbar.tsx";
 import * as $Input_Password from "./islands/Input/Password.tsx";
 import * as $Newsletter from "./islands/Newsletter.tsx";
 import * as $OutOfStock from "./islands/OutOfStock.tsx";
@@ -63,15 +54,6 @@ const manifest = {
     "./islands/Cnpj.tsx": $Cnpj,
     "./islands/Cpf.tsx": $Cpf,
     "./islands/Form.tsx": $Form,
-    "./islands/Header/Buttons.tsx": $Header_Buttons,
-    "./islands/Header/Cart/linx.tsx": $Header_Cart_linx,
-    "./islands/Header/Cart/nuvemshop.tsx": $Header_Cart_nuvemshop,
-    "./islands/Header/Cart/shopify.tsx": $Header_Cart_shopify,
-    "./islands/Header/Cart/vnda.tsx": $Header_Cart_vnda,
-    "./islands/Header/Cart/vtex.tsx": $Header_Cart_vtex,
-    "./islands/Header/Cart/wake.tsx": $Header_Cart_wake,
-    "./islands/Header/Drawers.tsx": $Header_Drawers,
-    "./islands/Header/Searchbar.tsx": $Header_Searchbar,
     "./islands/Input/Password.tsx": $Input_Password,
     "./islands/Newsletter.tsx": $Newsletter,
     "./islands/OutOfStock.tsx": $OutOfStock,

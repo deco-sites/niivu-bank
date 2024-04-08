@@ -1,7 +1,7 @@
 import { ImageWidget } from "apps/admin/widgets.ts";
 import Step from "./Step.tsx";
-import NavBar from "./NavBar.tsx";
 import { AppContext } from "deco-sites/niivu-bank/apps/site.ts";
+import NavBar from "deco-sites/niivu-bank/components/header/Navbar.tsx";
 
 export interface IStep {
   /** @title Título */

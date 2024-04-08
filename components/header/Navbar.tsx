@@ -4,7 +4,7 @@ import {
   Url,
 } from "deco-sites/niivu-bank/components/header/Header.tsx";
 import Image from "apps/website/components/Image.tsx";
-import Step from "./Step.tsx";
+import Step from "deco-sites/niivu-bank/components/header/Step.tsx";
 
 export interface Props {
   /** @description (150px)x(45px) */

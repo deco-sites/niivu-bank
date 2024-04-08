@@ -26,7 +26,6 @@ export async function handler(
   const res = await ctx.next();
   if (isMyAccount) {
     const cookie = getCookie(req);
-
     if (cookie === undefined) {
       return new Response("", {
         status: TEMPORARY_REDIRECT,
@@ -38,13 +37,12 @@ export async function handler(
       // @ts-ignore Because we can't change the types.
       "SupaBase Client",
     ) as Supabase;
-
     const { data, error } = await supabaseClient.auth.getUser(cookie);
 
     if (error) {
       return new Response("", {
         status: TEMPORARY_REDIRECT,
-        headers: { location: "/" },
+        headers: { location: "/entrar" },
       });
     }
 
@@ -58,14 +56,13 @@ export async function handler(
       ) as Emails ?? { emails: [] };
 
       const hasAdminEmail = emails.some((email) => email === data.user.email);
-
       const { error } = await supabaseClient.from(SOLICITATION_ENTITY_NAME)
         .select().eq(
           "email",
           data.user.email,
         );
 
-      if (!error && !hasAdminEmail) {
+      if (error && !hasAdminEmail) {
         return new Response("", {
           status: TEMPORARY_REDIRECT,
           headers: { location: "/" },

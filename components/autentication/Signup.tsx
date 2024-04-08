@@ -65,7 +65,7 @@ export default function SignupForm() {
         emailError.value = true;
       }
       if (response.status === 201) {
-        window.location.href = "/entrar?step=login";
+        window.location.href = "/entrar";
       }
     } finally {
       isLoaging.value = false;

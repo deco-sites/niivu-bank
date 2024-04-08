@@ -2,6 +2,7 @@ import { ImageWidget } from "apps/admin/widgets.ts";
 import Step from "./Step.tsx";
 import { AppContext } from "deco-sites/niivu-bank/apps/site.ts";
 import NavBar from "deco-sites/niivu-bank/components/header/Navbar.tsx";
+import Button from "deco-sites/niivu-bank/components/ui/Button.tsx";
 
 export interface IStep {
   /** @title Título */

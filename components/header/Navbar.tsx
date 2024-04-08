@@ -5,6 +5,8 @@ import {
 } from "deco-sites/niivu-bank/components/header/Header.tsx";
 import Image from "apps/website/components/Image.tsx";
 import Step from "deco-sites/niivu-bank/components/header/Step.tsx";
+import Button from "deco-sites/niivu-bank/components/ui/Button.tsx";
+import Icon from "deco-sites/niivu-bank/components/ui/Icon.tsx";
 
 export interface Props {
   /** @description (150px)x(45px) */
@@ -15,7 +17,7 @@ export interface Props {
   isDesktop: boolean;
 }
 
-function NavBar({ logo, steps, statusIndex, isDesktop }: Props) {
+function NavBar({ logo, steps, statusIndex, isDesktop, urls }: Props) {
   return (
     <div class="container h-full flex items-center justify-between mx-auto">
       {isDesktop && <Image src={logo.desk} class="" width={212} height={63} />}
@@ -32,6 +34,15 @@ function NavBar({ logo, steps, statusIndex, isDesktop }: Props) {
           />
         ))}
       </ul>
+      {/* 16px, 32px, 13px, 32px */}
+      <a href={`/entrar`}>
+      <Button class="flex items-center max-h-9 w-24 btn btn-outline btn-secondary text-base px-0">
+        <Icon id='User' width={20} height={20} />
+        <span class="mt-px">
+          Entrar
+        </span>
+      </Button>
+      </a>
     </div>
   );
 }

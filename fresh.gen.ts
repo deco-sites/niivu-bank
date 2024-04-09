@@ -15,10 +15,13 @@ import * as $Authentication_ChangePassword from "./islands/Authentication/Change
 import * as $Authentication_Login from "./islands/Authentication/Login.tsx";
 import * as $Authentication_RecoveryPassword from "./islands/Authentication/RecoveryPassword.tsx";
 import * as $Authentication_Signup from "./islands/Authentication/Signup.tsx";
+import * as $ButtonLogout from "./islands/ButtonLogout.tsx";
 import * as $Cep from "./islands/Cep.tsx";
 import * as $Cnpj from "./islands/Cnpj.tsx";
 import * as $Cpf from "./islands/Cpf.tsx";
 import * as $Form from "./islands/Form.tsx";
+import * as $Header_Dreawer from "./islands/Header/Dreawer.tsx";
+import * as $Header_MenuButton from "./islands/Header/MenuButton.tsx";
 import * as $Input_Password from "./islands/Input/Password.tsx";
 import * as $Newsletter from "./islands/Newsletter.tsx";
 import * as $OutOfStock from "./islands/OutOfStock.tsx";
@@ -49,10 +52,13 @@ const manifest = {
     "./islands/Authentication/RecoveryPassword.tsx":
       $Authentication_RecoveryPassword,
     "./islands/Authentication/Signup.tsx": $Authentication_Signup,
+    "./islands/ButtonLogout.tsx": $ButtonLogout,
     "./islands/Cep.tsx": $Cep,
     "./islands/Cnpj.tsx": $Cnpj,
     "./islands/Cpf.tsx": $Cpf,
     "./islands/Form.tsx": $Form,
+    "./islands/Header/Dreawer.tsx": $Header_Dreawer,
+    "./islands/Header/MenuButton.tsx": $Header_MenuButton,
     "./islands/Input/Password.tsx": $Input_Password,
     "./islands/Newsletter.tsx": $Newsletter,
     "./islands/OutOfStock.tsx": $OutOfStock,

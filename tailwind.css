@@ -74,6 +74,10 @@
     height: 56px;
   }
 
+  .btn-sm{
+    height: 37px;
+  }
+
   .input {
     height: 40px;
     border: 1px solid #414042;

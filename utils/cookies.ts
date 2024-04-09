@@ -51,3 +51,34 @@ export async function getEmail(
 
   return email;
 }
+
+export async function validateCookie({
+  supabaseClient,
+  req,
+  access_token,
+}: {
+  supabaseClient: Supabase;
+  req: Request;
+  access_token?: string;
+}) {
+  let cookie;
+  if (!access_token && req) {
+    cookie = getCookie(req);
+  }
+
+  const { data } = await supabaseClient.auth.getUser(
+    access_token ?? cookie,
+  );
+
+  if (!data.user) {
+    return {
+      isValid: false,
+    };
+  } else {
+    return {
+      isValid: true,
+      email: data.user.email,
+      id: data.user.id,
+    };
+  }
+}

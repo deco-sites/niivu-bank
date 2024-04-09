@@ -92,16 +92,16 @@ export type Step = typeof StepConstants[keyof typeof StepConstants];
 export async function loader(
   props: Props,
   req: Request,
-  ctx: AppContext
+  ctx: AppContext,
 ) {
-  const { supabaseClient } = ctx
+  const { supabaseClient } = ctx;
   const cookie = getCookie(req);
   const { searchParams } = new URL(req.url);
   const stepParams = searchParams.get("step");
-  
+
   if (cookie) {
     const { data } = await supabaseClient.auth.getUser(cookie);
-    if(data.user) {
+    if (data.user) {
       redirect(new URL("/minha-conta", req.url));
     }
   }

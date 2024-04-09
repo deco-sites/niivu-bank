@@ -71,10 +71,7 @@ export async function handler(
 
       const solicitation = solicitationData?.[0];
       if (solicitation?.id_risk3 && !hasAdminEmail) {
-        return new Response("", {
-          status: TEMPORARY_REDIRECT,
-          headers: { location: "/minha-conta/acompanhar-solicitacao" },
-        });
+        return
       }
 
       if (error && !hasAdminEmail) {

@@ -43,13 +43,15 @@ function Navbar(
   }: Props,
 ) {
   const isLoggedAndSolicitationSend = isLogged && isSolicitationSend;
-  const showButtonLogout =
-    isLoggedAndSolicitationSend && pathname === "/minha-conta/solicitacao" ||
-    pathname === "/minha-conta/solicitacao/sucesso";
+  const isLoggedAndNotSolicitationSend = isLogged && !isSolicitationSend;
+
+  const showButtonLogout = isLoggedAndNotSolicitationSend &&
+    pathname === "/minha-conta/solicitacao";
   const showUserInfo =
-    isLoggedAndSolicitationSend && pathname === "/minha-conta" ||
+    isLoggedAndSolicitationSend && pathname.includes("/minha-conta") ||
     pathname === "/minha-conta/acompanhar-solicitacao";
-  const showMenu = isLoggedAndSolicitationSend && pathname === "/minha-conta" ||
+  const showMenu =
+    isLoggedAndSolicitationSend && pathname.includes("/minha-conta") ||
     pathname === "/minha-conta/acompanhar-solicitacao";
   const showStep = isLoggedAndSolicitationSend &&
     pathname.includes("/minha-conta/solicitacao");
@@ -60,7 +62,7 @@ function Navbar(
         <Image src={logo.desk} width={212} height={63} class="md:mb-6" />
       )}
       {!isDesktop && <Image src={logo.mobile} width={150} height={45} />}
-      {showStep &&
+      {!showMenu && showStep &&
         (
           <ul class="timeline max-lg:hidden mx-auto">
             {steps?.map((props, index, array) => (
@@ -73,7 +75,7 @@ function Navbar(
             ))}
           </ul>
         )}
-      {showMenu && (
+      {!showStep && showMenu && (
         <ul class="hidden md:flex items-center w-full pl-28 gap-12">
           {urls?.map((item) => <NavItem item={item} />)}
         </ul>
@@ -86,13 +88,13 @@ function Navbar(
           </Button>
         </a>
       )}
-      {showUserInfo &&
+      {!showButtonLogout && showUserInfo &&
         (
           <div class="hidden w-40 h-full md:flex items-center justify-end">
             <UserInfo userName={userData.name} />
           </div>
         )}
-      {showButtonLogout &&
+      {!showUserInfo && showButtonLogout &&
         (
           <div class="w-40 h-full flex items-center justify-end">
             <ButtonLogout />

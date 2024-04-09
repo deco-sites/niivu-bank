@@ -1,6 +1,8 @@
 import { ComponentChildren, JSX, RefObject } from "preact";
 import { invoke } from "$store/runtime.ts";
 import { INTERNAL_ERROR } from "$store/utils/enum.ts";
+import { Signal } from "@preact/signals";
+import { useUI } from "deco-sites/niivu-bank/sdk/useUI.ts";
 export interface Props {
   children: ComponentChildren;
   type: "CPF" | "CNPJ";
@@ -8,8 +10,11 @@ export interface Props {
   formRef: RefObject<HTMLFormElement>;
 }
 
-function Form({ children, type, successLink, formRef }: Props) {
+function Form({ children, type, successLink, formRef}: Props) {
+  const { sendSolicitationLoading } = useUI();
   const submit: JSX.GenericEventHandler<HTMLFormElement> = async (e) => {
+    sendSolicitationLoading.value = true;
+    
     e.preventDefault();
 
     // personalForm
@@ -89,6 +94,7 @@ function Form({ children, type, successLink, formRef }: Props) {
     });
 
     if ("error" in solicitation || "status" in solicitation) {
+      sendSolicitationLoading.value = false;
       return;
     }
 

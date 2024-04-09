@@ -1,8 +1,12 @@
+import { useUI } from "deco-sites/niivu-bank/sdk/useUI.ts";
+import Loading from "deco-sites/niivu-bank/components/daisy/Loading.tsx";
+
 export interface Props {
   disclaimerText: string;
 }
 
-function warningConsent({ disclaimerText }: Props) {
+function WarningConsent({ disclaimerText }: Props) {
+  const { sendSolicitationLoading } = useUI();
   return (
     <>
       <div class="flex flex-col gap-10 group/warning">
@@ -24,11 +28,11 @@ function warningConsent({ disclaimerText }: Props) {
           type="submit"
           class="btn btn-accent pointer-events-none w-72 text-white group-has-[input:checked]/warning:pointer-events-auto group-has-[input:checked]/warning:btn-primary"
         >
-          Enviar
+          {sendSolicitationLoading.value? <Loading size="loading-md" style="loading-spinner"/>: "Enviar"}
         </button>
       </div>
     </>
   );
 }
 
-export default warningConsent;
+export default WarningConsent;

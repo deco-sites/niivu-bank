@@ -7,10 +7,12 @@ import { signal } from "@preact/signals";
 
 const displayMenu = signal(false);
 const displayCorporateForm = signal(false);
+const sendSolicitationLoading = signal(false);
 
 const state = {
   displayMenu,
   displayCorporateForm,
+  sendSolicitationLoading
 };
 
 export const useUI = () => state;

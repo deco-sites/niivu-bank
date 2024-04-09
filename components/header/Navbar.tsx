@@ -47,12 +47,8 @@ function Navbar(
 
   const showButtonLogout = isLoggedAndNotSolicitationSend &&
     pathname === "/minha-conta/solicitacao";
-  const showUserInfo =
-    isLoggedAndSolicitationSend && pathname.includes("/minha-conta") ||
-    pathname === "/minha-conta/acompanhar-solicitacao";
-  const showMenu =
-    isLoggedAndSolicitationSend && pathname.includes("/minha-conta") ||
-    pathname === "/minha-conta/acompanhar-solicitacao";
+  const showUserInfoAndMenu =
+    isLoggedAndSolicitationSend && pathname.includes("/minha-conta")
   const showStep = isLoggedAndSolicitationSend &&
     pathname.includes("/minha-conta/solicitacao");
 
@@ -62,7 +58,7 @@ function Navbar(
         <Image src={logo.desk} width={212} height={63} class="md:mb-6" />
       )}
       {!isDesktop && <Image src={logo.mobile} width={150} height={45} />}
-      {!showMenu && showStep &&
+      {!showButtonLogout && showStep &&
         (
           <ul class="timeline max-lg:hidden mx-auto">
             {steps?.map((props, index, array) => (
@@ -75,7 +71,7 @@ function Navbar(
             ))}
           </ul>
         )}
-      {!showStep && showMenu && (
+      {!showStep && showButtonLogout && (
         <ul class="hidden md:flex items-center w-full pl-28 gap-12">
           {urls?.map((item) => <NavItem item={item} />)}
         </ul>
@@ -88,19 +84,19 @@ function Navbar(
           </Button>
         </a>
       )}
-      {!showButtonLogout && showUserInfo &&
+      {!showButtonLogout && showUserInfoAndMenu &&
         (
           <div class="hidden w-40 h-full md:flex items-center justify-end">
             <UserInfo userName={userData.name} />
           </div>
         )}
-      {!showUserInfo && showButtonLogout &&
+      {!showUserInfoAndMenu && showButtonLogout &&
         (
           <div class="w-40 h-full flex items-center justify-end">
             <ButtonLogout />
           </div>
         )}
-      {showMenu && <MenuButton />}
+      {showButtonLogout && <MenuButton />}
     </div>
   );
 }

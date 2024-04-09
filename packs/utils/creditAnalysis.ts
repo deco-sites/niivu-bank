@@ -139,7 +139,7 @@ export default interface CreditAnalysis {
       "Venidera-AuthToken": string;
     };
   };
-  "POST /api/v0/analises/cpf": {
+  "POST /api/v0/niivo_api/cpf": {
     response: CreditAnalysisResponse;
     headers: {
       "Venidera-AuthToken": string;
@@ -148,7 +148,7 @@ export default interface CreditAnalysis {
       cpfs: string[];
     };
   };
-  "POST /api/v0/analises": {
+  "POST /api/v0/niivo_api": {
     response: CreditAnalysisResponse;
     headers: {
       "Venidera-AuthToken": string;

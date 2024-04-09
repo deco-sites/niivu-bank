@@ -51,7 +51,7 @@ function Navbar(
     isLoggedAndSolicitationSend && pathname.includes("/minha-conta") ||
     pathname === "/minha-conta/acompanhar-solicitacao";
   const showMenu =
-    isLoggedAndSolicitationSend && pathname.includes("/minha-conta") ||
+    isLoggedAndSolicitationSend && pathname === "/minha-conta" ||
     pathname === "/minha-conta/acompanhar-solicitacao";
   const showStep = isLoggedAndSolicitationSend &&
     pathname.includes("/minha-conta/solicitacao");

@@ -23,6 +23,7 @@ export async function handler(
   const isMyAccount = new URLPattern({ pathname: "/minha-conta*" }).test(
     req.url,
   );
+
   const res = await ctx.next();
   if (isMyAccount) {
     const cookie = getCookie(req);
@@ -46,9 +47,13 @@ export async function handler(
       });
     }
 
+    const justMyAccount = new URLPattern({ pathname: "/minha-conta" }).test(
+      req.url,
+    );
     const isSolicitation = new URLPattern({
       pathname: "/minha-conta/solicitacao",
     }).test(req.url);
+
     if (isSolicitation) {
       const { emails } = await ctx.state.invoke(
         // @ts-ignore Because we can't change the types.
@@ -66,10 +71,7 @@ export async function handler(
 
       const solicitation = solicitationData?.[0];
       if (solicitation?.id_risk3 && !hasAdminEmail) {
-        return new Response("", {
-          status: TEMPORARY_REDIRECT,
-          headers: { location: "/minha-conta/acompanhar-solicitacao" },
-        });
+        return
       }
 
       if (error && !hasAdminEmail) {
@@ -78,6 +80,11 @@ export async function handler(
           headers: { location: "/" },
         });
       }
+    } else if (justMyAccount) {
+      return new Response("", {
+        status: TEMPORARY_REDIRECT,
+        headers: { location: "/minha-conta/solicitacao" },
+      });
     }
   }
 

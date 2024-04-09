@@ -49,7 +49,7 @@ export default function LoginForm() {
       if (response.message === "no-solicitation") {
         window.location.href = "/minha-conta/solicitacao";
       } else {
-        window.location.href = "/minha-conta/acompanhar-solicitacao";
+        window.location.href = "/minha-conta";
       }
     } finally {
       isLoaging.value = false;

@@ -55,15 +55,17 @@ export async function handler(
         "Emails de Solicitação",
       ) as Emails ?? { emails: [] };
       const hasAdminEmail = emails.some((email) => email === data.user.email);
-      
-      const {data: solicitationData, error} = await supabaseClient.from(SOLICITATION_ENTITY_NAME)
+
+      const { data: solicitationData, error } = await supabaseClient.from(
+        SOLICITATION_ENTITY_NAME,
+      )
         .select().eq(
           "email",
           data.user.email,
         );
 
-      const solicitation = solicitationData?.[0]
-      if(solicitation?.id_risk3 && !hasAdminEmail){
+      const solicitation = solicitationData?.[0];
+      if (solicitation?.id_risk3 && !hasAdminEmail) {
         return new Response("", {
           status: TEMPORARY_REDIRECT,
           headers: { location: "/minha-conta/acompanhar-solicitacao" },

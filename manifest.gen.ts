@@ -8,16 +8,17 @@ import * as $$$2 from "./loaders/actions/getCep.ts";
 import * as $$$3 from "./loaders/actions/handleStatus.ts";
 import * as $$$4 from "./loaders/actions/recoveryPassword.ts";
 import * as $$$5 from "./loaders/actions/sendEmail.ts";
-import * as $$$6 from "./loaders/actions/singin.ts";
-import * as $$$7 from "./loaders/actions/singup.ts";
-import * as $$$8 from "./loaders/actions/solicitation.ts";
-import * as $$$9 from "./loaders/actions/updatePassword.ts";
-import * as $$$10 from "./loaders/configs/emailsConfig.ts";
-import * as $$$11 from "./loaders/customAdmin/icons.ts";
+import * as $$$6 from "./loaders/actions/signOut.ts";
+import * as $$$7 from "./loaders/actions/singin.ts";
+import * as $$$8 from "./loaders/actions/singup.ts";
+import * as $$$9 from "./loaders/actions/solicitation.ts";
+import * as $$$10 from "./loaders/actions/updatePassword.ts";
+import * as $$$11 from "./loaders/configs/emailsConfig.ts";
+import * as $$$12 from "./loaders/customAdmin/icons.ts";
 import * as $$$0 from "./loaders/Layouts/ProductCard.tsx";
 import * as $$$1 from "./loaders/List/Sections.tsx";
-import * as $$$12 from "./loaders/solicitation/getDetails.ts";
-import * as $$$13 from "./loaders/supabase/supabaseConfig.ts";
+import * as $$$13 from "./loaders/solicitation/getDetails.ts";
+import * as $$$14 from "./loaders/supabase/supabaseConfig.ts";
 import * as $$$$$$0 from "./sections/Animation/Animation.tsx";
 import * as $$$$$$1 from "./sections/Autentication.tsx";
 import * as $$$$$$2 from "./sections/Category/CategoryBanner.tsx";
@@ -74,16 +75,17 @@ const manifest = {
     "deco-sites/niivu-bank/loaders/actions/handleStatus.ts": $$$3,
     "deco-sites/niivu-bank/loaders/actions/recoveryPassword.ts": $$$4,
     "deco-sites/niivu-bank/loaders/actions/sendEmail.ts": $$$5,
-    "deco-sites/niivu-bank/loaders/actions/singin.ts": $$$6,
-    "deco-sites/niivu-bank/loaders/actions/singup.ts": $$$7,
-    "deco-sites/niivu-bank/loaders/actions/solicitation.ts": $$$8,
-    "deco-sites/niivu-bank/loaders/actions/updatePassword.ts": $$$9,
-    "deco-sites/niivu-bank/loaders/configs/emailsConfig.ts": $$$10,
-    "deco-sites/niivu-bank/loaders/customAdmin/icons.ts": $$$11,
+    "deco-sites/niivu-bank/loaders/actions/signOut.ts": $$$6,
+    "deco-sites/niivu-bank/loaders/actions/singin.ts": $$$7,
+    "deco-sites/niivu-bank/loaders/actions/singup.ts": $$$8,
+    "deco-sites/niivu-bank/loaders/actions/solicitation.ts": $$$9,
+    "deco-sites/niivu-bank/loaders/actions/updatePassword.ts": $$$10,
+    "deco-sites/niivu-bank/loaders/configs/emailsConfig.ts": $$$11,
+    "deco-sites/niivu-bank/loaders/customAdmin/icons.ts": $$$12,
     "deco-sites/niivu-bank/loaders/Layouts/ProductCard.tsx": $$$0,
     "deco-sites/niivu-bank/loaders/List/Sections.tsx": $$$1,
-    "deco-sites/niivu-bank/loaders/solicitation/getDetails.ts": $$$12,
-    "deco-sites/niivu-bank/loaders/supabase/supabaseConfig.ts": $$$13,
+    "deco-sites/niivu-bank/loaders/solicitation/getDetails.ts": $$$13,
+    "deco-sites/niivu-bank/loaders/supabase/supabaseConfig.ts": $$$14,
   },
   "sections": {
     "deco-sites/niivu-bank/sections/Animation/Animation.tsx": $$$$$$0,

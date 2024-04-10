@@ -21,7 +21,6 @@ export interface Props {
   urls?: Url[];
   steps?: IStep[];
   statusIndex: number;
-  isDesktop: boolean;
   pathname: string;
   isLogged: boolean;
   userData: {
@@ -37,7 +36,6 @@ function Navbar(
     logo,
     steps,
     statusIndex,
-    isDesktop,
     urls,
     pathname,
     isLogged,

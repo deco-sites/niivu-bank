@@ -24,9 +24,17 @@ export interface Url {
   url: string;
 }
 
+/**
+ * @title Imagem do header
+ */
 export interface Logo {
+  /**
+   * @description Imagem para tela pequena
+   */
   desk: ImageWidget;
+  /** @description Imagem para tela grande*/
   mobile: ImageWidget;
+  /** @description Descrição da imagem  */
   alt: string;
 }
 
@@ -95,7 +103,6 @@ function Header(
             steps={steps}
             urls={urls}
             statusIndex={statusIndex ?? 0}
-            isDesktop={isDesktop}
             pathname={pathname}
             isLogged={isLogged}
             userData={userData}

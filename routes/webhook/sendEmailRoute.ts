@@ -1,12 +1,25 @@
 import { WebhookRequestSupabase } from "deco-sites/niivu-bank/packs/types.ts";
+import { FreshContext } from "$fresh/server.ts";
 import {
   STATUS_ENUM_ACCOUNT_OPENING,
   STATUS_ENUM_CREDIT_ANALYSIS,
   STATUS_ENUM_DISAPPROVED,
 } from "deco-sites/niivu-bank/packs/utils/constants.ts";
 import { CreditRequestData } from "deco-sites/niivu-bank/packs/utils/createHTMLEmail.ts";
+import { DecoState } from "deco/types.ts";
+import { Manifest } from "deco-sites/niivu-bank/manifest.gen.ts";
 
-export async function handler(req: Request, ctx: unknown) {
+export async function handler(
+  req: Request,
+  ctx: FreshContext<
+    DecoState<
+      Record<string | number | symbol, never>,
+      Record<string | number | symbol, never>,
+      //@ts-ignore Um erro bizarro acontecendo quando remove o ts-ignore
+      Manifest
+    >
+  >,
+) {
   console.log("email iniciado");
   try {
     //o body da requisição é um stream
@@ -71,13 +84,11 @@ export async function handler(req: Request, ctx: unknown) {
     };
 
     console.log("invoke actions sendEmail");
-
-    //@ts-ignore
     return await ctx.state.invoke(
       "deco-sites/niivu-bank/loaders/actions/sendEmail.ts",
       {
-        isApproved: analysisRisk3,
-        isReproved: !analysisRisk3,
+        isApproved: isApproved,
+        isReproved: isReproved,
         email: record.email,
         fullName: record.full_name,
         name: nameSplit ? nameSplit[0] : undefined,

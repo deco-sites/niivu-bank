@@ -4,6 +4,7 @@ import ButtonLogout from "deco-sites/niivu-bank/islands/ButtonLogout.tsx";
 
 export interface Props {
   urls?: Url[];
+  isLogged?: boolean;
 }
 
 function MenuItem({ item }: { item: Url }) {
@@ -18,7 +19,7 @@ function MenuItem({ item }: { item: Url }) {
   );
 }
 
-function Menu({ urls }: Props) {
+function Menu({ urls, isLogged }: Props) {
   return (
     <ul class="px-4 w-screen flex flex-col">
       {urls?.map((item) => (
@@ -26,9 +27,11 @@ function Menu({ urls }: Props) {
           <MenuItem item={item} />
         </li>
       ))}
-      <li class="h-10 flex items-center">
-        <ButtonLogout />
-      </li>
+      {isLogged && (
+        <li class="h-10 flex items-center">
+          <ButtonLogout />
+        </li>
+      )}
     </ul>
   );
 }

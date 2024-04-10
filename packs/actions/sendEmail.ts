@@ -6,6 +6,7 @@ import {
 
 interface EmailData {
   isApproved: boolean;
+  isReproved: boolean;
   email: string;
   name: string;
   fullName: string;
@@ -27,7 +28,8 @@ export default async function loader(
       templateIdApprovedNiivo,
       clientBrevo,
     } = ctx.brevo;
-    const { isApproved, email, name, lastName, fullName, param } = props;
+    const { isApproved, isReproved, email, name, lastName, fullName, param } =
+      props;
 
     const solicitationData: CreditRequestData = {
       nome: name,
@@ -80,7 +82,7 @@ export default async function loader(
         response,
         responseEmailNiivo,
       });
-    } else {
+    } else if (isReproved) {
       const bodyEmail = createEmail(
         name,
         email,

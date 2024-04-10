@@ -87,7 +87,7 @@ function Header(
   return (
     <header>
       <Drawers
-        menu={{ urls }}
+        menu={{ urls, isLogged }}
       >
         <div class="w-full border-b border-base-300 max-lg:border-[#E5E5E5] max-lg:h-16 h-28">
           <Navbar

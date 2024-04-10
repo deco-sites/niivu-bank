@@ -28,7 +28,9 @@ function WarningConsent({ disclaimerText }: Props) {
           type="submit"
           class="btn btn-accent pointer-events-none w-72 text-white group-has-[input:checked]/warning:pointer-events-auto group-has-[input:checked]/warning:btn-primary"
         >
-          {sendSolicitationLoading.value? <Loading size="loading-md" style="loading-spinner"/>: "Enviar"}
+          {sendSolicitationLoading.value
+            ? <Loading size="loading-md" style="loading-spinner" />
+            : "Enviar"}
         </button>
       </div>
     </>

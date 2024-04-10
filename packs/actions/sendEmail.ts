@@ -11,6 +11,7 @@ import {
 
 interface EmailData {
   isApproved: boolean;
+  isReproved: boolean;
   email: string;
   name: string;
   fullName: string;
@@ -29,7 +30,8 @@ export default async function loader(
       emailNiivo,
       clientBrevo,
     } = ctx.brevo;
-    const { isApproved, email, name, lastName, fullName, param } = props;
+    const { isApproved, isReproved, email, name, lastName, fullName, param } =
+      props;
 
     const solicitationData: CreditRequestData = {
       nome: name,
@@ -87,9 +89,7 @@ export default async function loader(
       await clientBrevo["POST /v3/smtp/email"]({}, {
         body: bodyEmailForNiivo,
       }).then((res) => res.json());
-
-      console.log("Email send");
-    } else {
+    } else if (isReproved) {
       const bodyEmail = createEmailHTML(
         name,
         email,

@@ -13,6 +13,7 @@ const Menu = lazy(() =>
 interface Props {
   menu: {
     urls: Url[];
+    isLogged?: boolean;
   };
   /**
    * @ignore_gen true

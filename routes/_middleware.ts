@@ -69,17 +69,13 @@ export async function handler(
     const solicitation = solicitationData?.[0];
 
     if (isSolicitation) {
-      console.log({ solicitationData, solicitationError });
-      console.log(solicitation?.id_risk3 && !hasAdminEmail);
       if (solicitation?.id_risk3 && !hasAdminEmail) {
         return new Response("", {
           status: TEMPORARY_REDIRECT,
           headers: { location: "/minha-conta" },
         });
       }
-
-      console.log({ solicitationError, hasAdminEmail });
-
+      
       if (solicitationError && !hasAdminEmail) {
         return new Response("", {
           status: TEMPORARY_REDIRECT,

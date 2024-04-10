@@ -153,7 +153,8 @@ export default async function loader(
       cpfs: [props.cpf!],
     };
 
-    const { data: { records } } = await clientRisk3["POST /api/v0/niivo_api/cpf"](
+    const { data: { records } } = await clientRisk3
+      ["POST /api/v0/niivo_api/cpf"](
         {},
         {
           body,

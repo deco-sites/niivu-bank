@@ -97,6 +97,10 @@
     background-color: #414042;
     border: none;
   }
+
+  .btn-outline.btn-secondary:hover {
+    color: #F2F2F2;
+  }
 }
 
 .group:disabled .group-disabled\:animate-progress {

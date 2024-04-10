@@ -7,10 +7,13 @@ import Image from "apps/website/components/Image.tsx";
 import Step from "deco-sites/niivu-bank/components/header/Step.tsx";
 import Button from "deco-sites/niivu-bank/components/ui/Button.tsx";
 import NavItem from "deco-sites/niivu-bank/components/header/NavItem.tsx";
-import Icon from "deco-sites/niivu-bank/components/ui/Icon.tsx";
-import UserInfo from "deco-sites/niivu-bank/components/ui/UserInfo.tsx";
-import ButtonLogout from "deco-sites/niivu-bank/islands/ButtonLogout.tsx";
 import MenuButton from "deco-sites/niivu-bank/components/header/MenuButton.tsx";
+import { UserHandle } from "deco-sites/niivu-bank/components/header/UserHandle.tsx";
+import {
+  PATH_MY_ACCOUT,
+  PATH_SOLICITATION,
+} from "deco-sites/niivu-bank/components/header/Constants.ts";
+import { Picture, Source } from "apps/website/components/Picture.tsx";
 
 export interface Props {
   /** @description (150px)x(45px) */
@@ -18,7 +21,6 @@ export interface Props {
   urls?: Url[];
   steps?: IStep[];
   statusIndex: number;
-  isDesktop: boolean;
   pathname: string;
   isLogged: boolean;
   userData: {
@@ -34,7 +36,6 @@ function Navbar(
     logo,
     steps,
     statusIndex,
-    isDesktop,
     urls,
     pathname,
     isLogged,
@@ -42,23 +43,38 @@ function Navbar(
     userData,
   }: Props,
 ) {
-  const isLoggedAndSolicitationSend = isLogged && isSolicitationSend;
-  const isLoggedAndNotSolicitationSend = isLogged && !isSolicitationSend;
-
-  const showButtonLogout = isLoggedAndNotSolicitationSend &&
-    pathname === "/minha-conta/solicitacao";
-  const showUserInfoAndMenu = isLoggedAndSolicitationSend &&
-    pathname.includes("/minha-conta");
-  const showStep = isLoggedAndSolicitationSend &&
-    pathname.includes("/minha-conta/solicitacao");
+  const showLogoutButton =
+    isLogged && !isSolicitationSend && pathname === PATH_SOLICITATION ||
+    pathname === PATH_MY_ACCOUT;
+  const showMenu = pathname === PATH_MY_ACCOUT ||
+    pathname === PATH_SOLICITATION || pathname === "/";
+  const showUserInfo = isLogged && isSolicitationSend && (
+    pathname.includes(PATH_SOLICITATION) || pathname === "/"
+  );
+  const showStep = isLogged && isSolicitationSend &&
+    pathname.includes(PATH_SOLICITATION);
 
   return (
     <div class="container h-full flex items-center justify-between text-center">
-      {isDesktop && (
-        <Image src={logo.desk} width={212} height={63} class="md:mb-6" />
-      )}
-      {!isDesktop && <Image src={logo.mobile} width={150} height={45} />}
-      {!showButtonLogout && showStep &&
+      <a href="/">
+        <Picture preload>
+          <Source
+            src={logo.mobile}
+            width={150}
+            height={45}
+            media="(max-width: 767px)"
+          />
+          <Source
+            src={logo.desk}
+            width={306}
+            height={92}
+            class="md:mb-6"
+            media="(min-width: 767px)"
+          />
+          <img src={logo.desk} alt={logo.alt ?? "Niivo Logo Preta Mobile"} />
+        </Picture>
+      </a>
+      {!showLogoutButton && showStep &&
         (
           <ul class="timeline max-lg:hidden mx-auto">
             {steps?.map((props, index, array) => (
@@ -71,32 +87,18 @@ function Navbar(
             ))}
           </ul>
         )}
-      {!showStep && showButtonLogout && (
+      {!showStep && showMenu && (
         <ul class="hidden md:flex items-center w-full pl-28 gap-12">
           {urls?.map((item) => <NavItem item={item} />)}
         </ul>
       )}
-      {!isLogged && (
-        <a href={`/entrar`}>
-          <Button class="flex items-center max-h-9 w-24 btn-sm btn-outline btn-secondary text-base px-0">
-            <Icon id="User" width={20} height={24} />
-            Entrar
-          </Button>
-        </a>
-      )}
-      {!showButtonLogout && showUserInfoAndMenu &&
-        (
-          <div class="hidden w-40 h-full md:flex items-center justify-end">
-            <UserInfo userName={userData.name} />
-          </div>
-        )}
-      {!showUserInfoAndMenu && showButtonLogout &&
-        (
-          <div class="w-40 h-full flex items-center justify-end">
-            <ButtonLogout />
-          </div>
-        )}
-      {showButtonLogout && <MenuButton />}
+      <UserHandle
+        isLogged={isLogged}
+        showUserInfo={showUserInfo}
+        showButtonLogout={showLogoutButton}
+        userName={userData.name}
+      />
+      {showMenu && <MenuButton />}
     </div>
   );
 }

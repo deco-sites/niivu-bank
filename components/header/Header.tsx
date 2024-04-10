@@ -24,9 +24,17 @@ export interface Url {
   url: string;
 }
 
+/**
+ * @title Imagem do header
+ */
 export interface Logo {
+  /**
+   * @description Imagem para tela pequena
+   */
   desk: ImageWidget;
+  /** @description Imagem para tela grande*/
   mobile: ImageWidget;
+  /** @description Descrição da imagem  */
   alt: string;
 }
 
@@ -45,11 +53,10 @@ export async function loader(props: Props, req: Request, ctx: AppContext) {
   const isLogged = authUserData.isValid;
   const { data: solicitationData, error } = await supabaseClient.from(
     SOLICITATION_ENTITY_NAME,
-  )
-    .select().eq(
-      "email",
-      authUserData.email,
-    );
+  ).select().eq(
+    "email",
+    authUserData.email,
+  );
   const solicitation = solicitationData?.[0];
   const isSolicitationSend = !!solicitation?.id_risk3;
   const userName = solicitation?.full_name?.split(" ");
@@ -87,7 +94,7 @@ function Header(
   return (
     <header>
       <Drawers
-        menu={{ urls }}
+        menu={{ urls, isLogged }}
       >
         <div class="w-full border-b border-base-300 max-lg:border-[#E5E5E5] max-lg:h-16 h-28">
           <Navbar
@@ -95,7 +102,6 @@ function Header(
             steps={steps}
             urls={urls}
             statusIndex={statusIndex ?? 0}
-            isDesktop={isDesktop}
             pathname={pathname}
             isLogged={isLogged}
             userData={userData}

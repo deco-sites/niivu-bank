@@ -48,8 +48,9 @@ function Navbar(
     pathname === PATH_MY_ACCOUT;
   const showMenu = pathname === PATH_MY_ACCOUT ||
     pathname === PATH_SOLICITATION || pathname === "/";
-  const showUserInfo = isLogged && isSolicitationSend &&(
-    pathname.includes(PATH_SOLICITATION) || pathname === "/");
+  const showUserInfo = isLogged && isSolicitationSend && (
+    pathname.includes(PATH_SOLICITATION) || pathname === "/"
+  );
   const showStep = isLogged && isSolicitationSend &&
     pathname.includes(PATH_SOLICITATION);
 

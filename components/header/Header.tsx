@@ -53,8 +53,7 @@ export async function loader(props: Props, req: Request, ctx: AppContext) {
   const isLogged = authUserData.isValid;
   const { data: solicitationData, error } = await supabaseClient.from(
     SOLICITATION_ENTITY_NAME,
-  )
-    .select().eq(
+  ).select().eq(
       "email",
       authUserData.email,
     );

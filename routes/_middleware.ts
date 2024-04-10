@@ -75,7 +75,7 @@ export async function handler(
           headers: { location: "/minha-conta" },
         });
       }
-
+      
       if (solicitationError && !hasAdminEmail) {
         return new Response("", {
           status: TEMPORARY_REDIRECT,

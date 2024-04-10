@@ -1,8 +1,13 @@
 import { AppContext } from "deco-sites/niivu-bank/apps/site.ts";
 import {
-  createEmail,
+  createEmailHTML,
   CreditRequestData,
 } from "deco-sites/niivu-bank/packs/utils/createHTMLEmail.ts";
+import {
+  APPROVED_CREDIT,
+  APPROVED_CUSTOMER,
+  DISAPPROVED_CREDIT,
+} from "deco-sites/niivu-bank/email-tamplate/MinifiedTemplates.ts";
 
 interface EmailData {
   isApproved: boolean;
@@ -23,9 +28,6 @@ export default async function loader(
     const {
       apiKey,
       emailNiivo,
-      templateIdReproved,
-      templateIdApproved,
-      templateIdApprovedNiivo,
       clientBrevo,
     } = ctx.brevo;
     const { isApproved, isReproved, email, name, lastName, fullName, param } =
@@ -56,43 +58,54 @@ export default async function loader(
     }
 
     if (isApproved) {
-      const approvedEmail = createEmail(
+      const approvedEmail = createEmailHTML(
         name,
         email,
-        templateIdApproved,
         solicitationData,
+        "Credito Aprovado",
+        {
+          email: emailNiivo,
+          name: "Niivo",
+        },
+        APPROVED_CREDIT,
       );
 
-      const bodyEmailForNiivo = createEmail(
+      const bodyEmailForNiivo = createEmailHTML(
         name,
         emailNiivo,
-        templateIdApprovedNiivo,
         solicitationData,
+        "Cliente Aprovado",
+        {
+          email: emailNiivo,
+          name: "Niivo",
+        },
+        APPROVED_CUSTOMER,
       );
 
-      const response = await clientBrevo["POST /v3/smtp/email"]({}, {
+      await clientBrevo["POST /v3/smtp/email"]({}, {
         body: approvedEmail,
       }).then((res) => res.json());
 
-      const responseEmailNiivo = await clientBrevo["POST /v3/smtp/email"]({}, {
+      await clientBrevo["POST /v3/smtp/email"]({}, {
         body: bodyEmailForNiivo,
       }).then((res) => res.json());
-
-      console.log("respond approved sendEmail status", {
-        response,
-        responseEmailNiivo,
-      });
     } else if (isReproved) {
-      const bodyEmail = createEmail(
+      const bodyEmail = createEmailHTML(
         name,
         email,
-        templateIdReproved,
         solicitationData,
+        "Credito Reprovado",
+        {
+          email: emailNiivo,
+          name: "Niivo",
+        },
+        DISAPPROVED_CREDIT,
       );
 
       await clientBrevo["POST /v3/smtp/email"]({}, {
         body: bodyEmail,
       }).then((res) => res.json());
+      console.log("Email send");
     }
   } catch (error) {
     console.error("Erro ao enviar email:", error);

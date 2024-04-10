@@ -64,24 +64,6 @@ export interface SendEmailConfig {
   emailNiivo: string;
 
   /**
-   * @title Template ID, email para Equipe Niivo
-   * @description ID do template de email que será enviado para a equipe Niivo com os dados do cliente aprovado
-   */
-  templateIdApprovedNiivo: number;
-
-  /**
-   * @title Template ID, Cliente aprovado
-   * @description ID do template de email que será enviado para o cliente com análise de crédito aprovada
-   */
-  templateIdApproved: number;
-
-  /**
-   * @title Template ID, Cliente reprovado
-   * @description ID do template de email que será enviado para o cliente com análise de crédito aprovada
-   */
-  templateIdReproved: number;
-
-  /**
    * @title Cliente do Brevo
    * @ignore
    */

@@ -29,13 +29,12 @@ interface MessageVersion {
   subject?: string;
 }
 
-interface EmailBody {
-  sender?: EmailRecipient;
-  to: EmailRecipient[];
-  subject?: string;
-  templateId: number;
+interface EmailHTMLBody {
+  sender: EmailRecipient;
+  subject: string;
+  htmlContent: string;
   params: CreditRequestData;
-  messageVersions?: MessageVersion[];
+  messageVersions: MessageVersion[];
 }
 
 /**
@@ -47,15 +46,24 @@ interface EmailBody {
  * @returns {EmailDetails} - Body of the email to be sent.
  */
 
-export function createEmail(
+export function createEmailHTML(
   name: string,
   email: string,
-  templateId: number,
   solicitationData: CreditRequestData,
-): EmailBody {
+  subject: string,
+  sender: EmailRecipient,
+  htmlContent: string,
+): EmailHTMLBody {
   return {
-    to: [{ email, name }],
-    templateId,
+    sender,
+    messageVersions: [
+      {
+        to: [{ email, name }],
+        params: solicitationData,
+      },
+    ],
+    subject,
+    htmlContent,
     params: solicitationData,
   };
 }
@@ -63,6 +71,6 @@ export function createEmail(
 export default interface BrevoClient {
   "POST /v3/smtp/email": {
     response: unknown;
-    body: EmailBody;
+    body: EmailHTMLBody;
   };
 }

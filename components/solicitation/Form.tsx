@@ -10,11 +10,11 @@ export interface Props {
   formRef: RefObject<HTMLFormElement>;
 }
 
-function Form({ children, type, successLink, formRef}: Props) {
+function Form({ children, type, successLink, formRef }: Props) {
   const { sendSolicitationLoading } = useUI();
   const submit: JSX.GenericEventHandler<HTMLFormElement> = async (e) => {
     sendSolicitationLoading.value = true;
-    
+
     e.preventDefault();
 
     // personalForm

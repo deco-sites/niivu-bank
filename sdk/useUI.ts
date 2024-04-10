@@ -12,7 +12,7 @@ const sendSolicitationLoading = signal(false);
 const state = {
   displayMenu,
   displayCorporateForm,
-  sendSolicitationLoading
+  sendSolicitationLoading,
 };
 
 export const useUI = () => state;

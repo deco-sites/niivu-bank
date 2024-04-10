@@ -47,8 +47,8 @@ function Navbar(
 
   const showButtonLogout = isLoggedAndNotSolicitationSend &&
     pathname === "/minha-conta/solicitacao";
-  const showUserInfoAndMenu =
-    isLoggedAndSolicitationSend && pathname.includes("/minha-conta")
+  const showUserInfoAndMenu = isLoggedAndSolicitationSend &&
+    pathname.includes("/minha-conta");
   const showStep = isLoggedAndSolicitationSend &&
     pathname.includes("/minha-conta/solicitacao");
 

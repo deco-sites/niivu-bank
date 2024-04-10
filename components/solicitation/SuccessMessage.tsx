@@ -84,12 +84,12 @@ function SucessMessage(
       </div>
       {buttonLink && (
         <div class="container">
-          <a  href={buttonLink}>
-          <Button class="bg-primary text-neutral rounded max-sm:w-full">
-            <p class="text-white">
-              Acompanhar minha solicitação
-            </p>
-          </Button>
+          <a href={buttonLink}>
+            <Button class="bg-primary text-neutral rounded max-sm:w-full">
+              <p class="text-white">
+                Acompanhar minha solicitação
+              </p>
+            </Button>
           </a>
         </div>
       )}

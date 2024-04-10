@@ -48,29 +48,31 @@ function Navbar(
     pathname === PATH_MY_ACCOUT;
   const showMenu = pathname === PATH_MY_ACCOUT ||
     pathname === PATH_SOLICITATION || pathname === "/";
-  const showUserInfo = isLogged && isSolicitationSend &&
-    pathname.includes(PATH_SOLICITATION);
+  const showUserInfo = isLogged && isSolicitationSend &&(
+    pathname.includes(PATH_SOLICITATION) || pathname === "/");
   const showStep = isLogged && isSolicitationSend &&
     pathname.includes(PATH_SOLICITATION);
 
   return (
     <div class="container h-full flex items-center justify-between text-center">
-      <Picture preload>
-        <Source
-          src={logo.mobile}
-          width={150}
-          height={45}
-          media="(max-width: 767px)"
-        />
-        <Source
-          src={logo.desk}
-          width={306}
-          height={92}
-          class="md:mb-6"
-          media="(min-width: 767px)"
-        />
-        <img src={logo.desk} alt={logo.alt ?? "Niivo Logo Preta Mobile"} />
-      </Picture>
+      <a href="/">
+        <Picture preload>
+          <Source
+            src={logo.mobile}
+            width={150}
+            height={45}
+            media="(max-width: 767px)"
+          />
+          <Source
+            src={logo.desk}
+            width={306}
+            height={92}
+            class="md:mb-6"
+            media="(min-width: 767px)"
+          />
+          <img src={logo.desk} alt={logo.alt ?? "Niivo Logo Preta Mobile"} />
+        </Picture>
+      </a>
       {!showLogoutButton && showStep &&
         (
           <ul class="timeline max-lg:hidden mx-auto">

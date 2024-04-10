@@ -25,9 +25,11 @@ export function UserHandle(
       )}
       {showUserInfo && userName &&
         (
-          <div class="hidden h-full md:flex items-center justify-end">
-            <UserInfo userName={userName} />
-          </div>
+          <a href="/minha-conta">
+            <div class="hidden h-full md:flex items-center justify-end">
+              <UserInfo userName={userName} />
+            </div>
+          </a>
         )}
       {showButtonLogout &&
         (

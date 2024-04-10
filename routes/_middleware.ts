@@ -53,34 +53,39 @@ export async function handler(
     const isSolicitation = new URLPattern({
       pathname: "/minha-conta/solicitacao",
     }).test(req.url);
+    const { emails } = await ctx.state.invoke(
+      // @ts-ignore Because we can't change the types.
+      "Emails de Solicitação",
+    ) as Emails ?? { emails: [] };
+    const hasAdminEmail = emails.some((email) => email === data.user.email);
 
-    if (isSolicitation) {
-      const { emails } = await ctx.state.invoke(
-        // @ts-ignore Because we can't change the types.
-        "Emails de Solicitação",
-      ) as Emails ?? { emails: [] };
-      const hasAdminEmail = emails.some((email) => email === data.user.email);
-
-      const { data: solicitationData, error } = await supabaseClient.from(
-        SOLICITATION_ENTITY_NAME,
-      )
-        .select().eq(
-          "email",
-          data.user.email,
-        );
-
+    const { data: solicitationData, error: solicitationError  } = await supabaseClient.from(
+      SOLICITATION_ENTITY_NAME,
+    ).select().eq(
+        "email",
+        data.user.email,
+      );
       const solicitation = solicitationData?.[0];
+    
+    if (isSolicitation) {
+      console.log({ solicitationData, solicitationError });
+      console.log(solicitation?.id_risk3 && !hasAdminEmail);
       if (solicitation?.id_risk3 && !hasAdminEmail) {
-        return
+        return new Response("", {
+          status: TEMPORARY_REDIRECT,
+          headers: { location: "/minha-conta" },
+        });
       }
 
-      if (error && !hasAdminEmail) {
+      console.log({ solicitationError, hasAdminEmail });
+      
+      if (solicitationError && !hasAdminEmail) {
         return new Response("", {
           status: TEMPORARY_REDIRECT,
           headers: { location: "/" },
         });
       }
-    } else if (justMyAccount) {
+    } else if (justMyAccount && !solicitation?.id_risk3) {
       return new Response("", {
         status: TEMPORARY_REDIRECT,
         headers: { location: "/minha-conta/solicitacao" },

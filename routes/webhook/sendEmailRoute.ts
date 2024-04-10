@@ -16,12 +16,11 @@ export async function handler(req: Request, ctx: unknown) {
       /}"/g,
       "}'",
     );
-    console.log(fixedBodyText);
-    const objetoJSON = eval(
+    const objectJSON = eval(
       "(" + fixedBodyText + ")",
     ) as unknown as WebhookRequestSupabase;
 
-    const { type, record, old_record } = objetoJSON;
+    const { type, record, old_record } = objectJSON;
 
     if (
       type !== "UPDATE" ||

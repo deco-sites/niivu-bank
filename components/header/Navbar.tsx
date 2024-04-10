@@ -13,6 +13,7 @@ import {
   PATH_MY_ACCOUT,
   PATH_SOLICITATION,
 } from "deco-sites/niivu-bank/components/header/Constants.ts";
+import { Picture, Source } from "apps/website/components/Picture.tsx";
 
 export interface Props {
   /** @description (150px)x(45px) */
@@ -56,10 +57,22 @@ function Navbar(
 
   return (
     <div class="container h-full flex items-center justify-between text-center">
-      {isDesktop && (
-        <Image src={logo.desk} width={212} height={63} class="md:mb-6" />
-      )}
-      {!isDesktop && <Image src={logo.mobile} width={150} height={45} />}
+      <Picture preload>
+        <Source
+          src={logo.mobile}
+          width={150}
+          height={45}
+          media="(max-width: 767px)"
+        />
+        <Source
+          src={logo.desk}
+          width={306}
+          height={92}
+          class="md:mb-6"
+          media="(min-width: 767px)"
+        />
+        <img src={logo.desk} alt={logo.alt ?? "Niivo Logo Preta Mobile"} />
+      </Picture>
       {!showLogoutButton && showStep &&
         (
           <ul class="timeline max-lg:hidden mx-auto">

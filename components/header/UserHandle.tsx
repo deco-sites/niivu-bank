@@ -13,7 +13,6 @@ interface Props {
 export function UserHandle(
   { isLogged, showUserInfo, showButtonLogout, userName }: Props,
 ) {
-  console.log(isLogged, showUserInfo, showButtonLogout, userName);
   return (
     <>
       {!isLogged && (

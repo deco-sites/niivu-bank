@@ -154,7 +154,7 @@ export default async function loader(
     };
 
     const { data: { records } } = await clientRisk3
-      ["POST /api/v0/analises/cpf"](
+      ["POST /api/v0/niivo_api/cpf"](
         {},
         {
           body,
@@ -194,7 +194,7 @@ export default async function loader(
 
     return data as DataObjectSoliciation[];
   } else {
-    const { data: { records } } = await clientRisk3["POST /api/v0/analises"]({
+    const { data: { records } } = await clientRisk3["POST /api/v0/niivo_api"]({
       product: product,
     }, {
       headers: headers,

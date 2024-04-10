@@ -59,17 +59,16 @@ export async function handler(
     ) as Emails ?? { emails: [] };
     const hasAdminEmail = emails.some((email) => email === data.user.email);
 
-    const { data: solicitationData, error: solicitationError  } = await supabaseClient.from(
-      SOLICITATION_ENTITY_NAME,
-    ).select().eq(
+    const { data: solicitationData, error: solicitationError } =
+      await supabaseClient.from(
+        SOLICITATION_ENTITY_NAME,
+      ).select().eq(
         "email",
         data.user.email,
       );
-      const solicitation = solicitationData?.[0];
-    
+    const solicitation = solicitationData?.[0];
+
     if (isSolicitation) {
-      console.log({ solicitationData, solicitationError });
-      console.log(solicitation?.id_risk3 && !hasAdminEmail);
       if (solicitation?.id_risk3 && !hasAdminEmail) {
         return new Response("", {
           status: TEMPORARY_REDIRECT,
@@ -77,8 +76,6 @@ export async function handler(
         });
       }
 
-      console.log({ solicitationError, hasAdminEmail });
-      
       if (solicitationError && !hasAdminEmail) {
         return new Response("", {
           status: TEMPORARY_REDIRECT,

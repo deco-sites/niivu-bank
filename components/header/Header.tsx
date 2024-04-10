@@ -54,9 +54,9 @@ export async function loader(props: Props, req: Request, ctx: AppContext) {
   const { data: solicitationData, error } = await supabaseClient.from(
     SOLICITATION_ENTITY_NAME,
   ).select().eq(
-      "email",
-      authUserData.email,
-    );
+    "email",
+    authUserData.email,
+  );
   const solicitation = solicitationData?.[0];
   const isSolicitationSend = !!solicitation?.id_risk3;
   const userName = solicitation?.full_name?.split(" ");

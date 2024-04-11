@@ -1,12 +1,20 @@
 import Icon from "deco-sites/niivu-bank/components/ui/Icon.tsx";
 import { invoke } from "deco-sites/niivu-bank/runtime.ts";
+import { supabase } from "deco/deps.ts";
 
 export default function ButtonLogout() {
+  const logout = async () => {
+  try {
+    await invoke({ key: "deco-sites/niivu-bank/loaders/actions/signOut.ts" })
+  } finally {
+    window.location.href = "/"
+  }
+  
+  }
   return (
     <button
       class="group flex items-center"
-      onClick={() =>
-        invoke({ key: "deco-sites/niivu-bank/loaders/actions/signOut.ts" })}
+      onClick={logout}
     >
       <Icon
         id="SignOut"

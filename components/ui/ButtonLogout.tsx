@@ -4,13 +4,12 @@ import { supabase } from "deco/deps.ts";
 
 export default function ButtonLogout() {
   const logout = async () => {
-  try {
-    await invoke({ key: "deco-sites/niivu-bank/loaders/actions/signOut.ts" })
-  } finally {
-    window.location.href = "/"
-  }
-  
-  }
+    try {
+      await invoke({ key: "deco-sites/niivu-bank/loaders/actions/signOut.ts" });
+    } finally {
+      window.location.href = "/";
+    }
+  };
   return (
     <button
       class="group flex items-center"

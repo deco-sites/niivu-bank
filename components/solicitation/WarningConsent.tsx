@@ -7,6 +7,7 @@ export interface Props {
 
 function WarningConsent({ disclaimerText }: Props) {
   const { sendSolicitationLoading } = useUI();
+
   return (
     <>
       <div class="flex flex-col gap-10 group/warning">

@@ -3,12 +3,22 @@ import Divider from "$store/components/ui/Divider.tsx";
 import Container from "$store/components/ui/inputs/Container.tsx";
 import Cpf from "$store/islands/Cpf.tsx";
 import type { Inputs } from "./Solicitation.tsx";
+import { useUI } from "deco-sites/niivu-bank/sdk/useUI.ts";
+import {
+  ERROR_REQUIRED,
+  PLACEHOLDER_CPF,
+  PLACEHOLDER_NAME,
+  PLACEHOLDER_PHONE,
+  PLACEHOLDER_RG,
+} from "deco-sites/niivu-bank/components/solicitation/constants.ts";
 
 export interface Props {
   inputs?: Inputs;
 }
 
 function personalForm({ inputs }: Props) {
+  const { errosForm } = useUI();
+  const { full_name, phone, cpf } = errosForm.value;
   return (
     <>
       <p class="font-bold py-2">
@@ -18,26 +28,35 @@ function personalForm({ inputs }: Props) {
       <div class="flex flex-col gap-4 py-8">
         <StandardInput
           labelText="Nome"
-          id="name"
-          placeholder={inputs?.name.placeholder ?? "Nome Completo"}
+          id="full_name"
+          placeholder={inputs?.name.placeholder ?? PLACEHOLDER_NAME}
           required
+          messageError={full_name ? ERROR_REQUIRED : undefined}
         />
 
         <Container>
-          <Cpf placeholder={inputs?.cpf.placeholder ?? "xxx.xxx.xxx-xx"} />
+          <Cpf
+            placeholder={inputs?.cpf.placeholder ?? PLACEHOLDER_CPF}
+            messageError={cpf.empty
+              ? ERROR_REQUIRED
+              : cpf.invalid
+              ? cpf.message
+              : undefined}
+          />
 
           <StandardInput
             labelText="RG"
             id="rg"
-            placeholder={inputs?.RG.placeholder ?? "Digite seu RG aqui"}
+            placeholder={inputs?.RG.placeholder ?? PLACEHOLDER_RG}
           />
         </Container>
 
         <StandardInput
           labelText="Telefone"
           id="phone"
-          placeholder={inputs?.phone.placeholder ?? "+55 (xx) xxxxx-xxxx"}
+          placeholder={inputs?.phone.placeholder ?? PLACEHOLDER_PHONE}
           required
+          messageError={phone ? ERROR_REQUIRED : undefined}
         />
       </div>
     </>

@@ -55,8 +55,8 @@ export default async function loader(
     { headers },
   ).then((res) => res.json());
 
-  const { analise: { classificacao } } = analisys.data;
-  const isApproved = classificacao === CLASSIFICATION_APPROVED;
+  const { analise } = analisys.data;
+  const isApproved = analise?.classificacao === CLASSIFICATION_APPROVED;
   const statusCredit = isApproved
     ? STATUS_ENUM_ACCOUNT_OPENING
     : STATUS_ENUM_RISK3_FAILED;
@@ -77,7 +77,7 @@ export default async function loader(
     .update({
       status: statusCredit,
       credit_status: isApproved,
-      analysis_classification: classificacao,
+      analysis_classification: analise?.classificacao,
     }).eq("id", solicitation.data.id);
 
   if (updateSolicitation.error !== null) {

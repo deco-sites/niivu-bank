@@ -7,6 +7,7 @@ import {
   Error,
 } from "../../packs/solicitation/getDetails.ts";
 import { Head } from "https://deno.land/x/fresh@1.6.3/runtime.ts";
+import { validateCookie } from "deco-sites/niivu-bank/utils/cookies.ts";
 
 export interface ToolTip {
   /**
@@ -41,13 +42,18 @@ export interface Props {
   solicitation: DataObjectSoliciation | Error;
 }
 
-export const loader = (props: Props, _req: Request, ctx: AppContext) => {
+export const loader = async (props: Props, req: Request, ctx: AppContext) => {
   const statusMessage = props.solicitation.status;
+
+  const { supabaseClient } = ctx;
+  const authUserData = await validateCookie({ supabaseClient, req });
+  const { data } = await supabaseClient.from("solicitation")
+    .select("*").eq("email", authUserData?.email).single();
 
   if (typeof statusMessage !== "string") {
     return {
       ...props,
-      statusMessage: "Abertura de Conta",
+      statusMessage: data.status ?? "Abertura de Conta",
       isDesktop: ctx.device === "desktop",
     };
   }

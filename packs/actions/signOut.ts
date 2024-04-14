@@ -13,8 +13,11 @@ export default async function loader(
   const newHeaders = new Headers(req.headers);
   newHeaders.append("Set-Cookie", `${COOKIE_NAME}=; Max-Age=0; Path=/`);
 
-  return new Response(JSON.stringify({ message: "Logout successful", status: OK }), {
-    status: OK,
-    headers: newHeaders
-  })
+  return new Response(
+    JSON.stringify({ message: "Logout successful", status: OK }),
+    {
+      status: OK,
+      headers: newHeaders,
+    },
+  );
 }

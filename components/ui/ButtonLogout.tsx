@@ -4,7 +4,9 @@ import { invoke } from "deco-sites/niivu-bank/runtime.ts";
 export default function ButtonLogout() {
   const logout = async () => {
     try {
-      const response = await invoke({ key: "deco-sites/niivu-bank/loaders/actions/signOut.ts" });;
+      const response = await invoke({
+        key: "deco-sites/niivu-bank/loaders/actions/signOut.ts",
+      });
       if (response.status !== 200) {
         throw new Error("Logout request failed");
       }

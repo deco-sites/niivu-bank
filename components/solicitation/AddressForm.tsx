@@ -4,9 +4,7 @@ import Divider from "$store/components/ui/Divider.tsx";
 import Container from "$store/components/ui/inputs/Container.tsx";
 import { RefObject } from "preact";
 import type { Inputs } from "./Solicitation.tsx";
-import { useUI } from "deco-sites/niivu-bank/sdk/useUI.ts";
 import {
-  ERROR_REQUIRED,
   PLACEHOLDER_CITY,
   PLACEHOLDER_COMPLEMENT,
   PLACEHOLDER_NUMBER,
@@ -14,14 +12,17 @@ import {
   PLACEHOLDER_STREET,
   PLACEHOLDER_ZIP_CODE,
 } from "deco-sites/niivu-bank/components/solicitation/constants.ts";
+import { showFormError } from "deco-sites/niivu-bank/utils/showFormError.ts";
+import { useFormErrors } from "deco-sites/niivu-bank/sdk/useFormErros.tsx";
+
 export interface Props {
   formRef: RefObject<HTMLFormElement>;
   inputs?: Inputs;
 }
 
 function AddressForm({ formRef, inputs }: Props) {
-  const { errosForm } = useUI();
-  const { state, street, zip_code, city, complement, number } = errosForm.value;
+  const { errors } = useFormErrors();
+  const { state, street, zip_code, city, complement, number } = errors.value;
   return (
     <>
       <p class="font-bold py-2">
@@ -33,7 +34,7 @@ function AddressForm({ formRef, inputs }: Props) {
           <Cep
             placeholder={inputs?.cep.placeholder ?? PLACEHOLDER_ZIP_CODE}
             formRef={formRef}
-            messageError={zip_code ? ERROR_REQUIRED : undefined}
+            messageError={showFormError(zip_code)}
           />
 
           <StandardInput
@@ -42,7 +43,7 @@ function AddressForm({ formRef, inputs }: Props) {
             placeholder={inputs?.street.placeholder ?? PLACEHOLDER_STREET}
             required
             disabled
-            messageError={street ? ERROR_REQUIRED : undefined}
+            messageError={showFormError(street)}
           />
         </Container>
 
@@ -52,7 +53,7 @@ function AddressForm({ formRef, inputs }: Props) {
             id="number"
             placeholder={inputs?.number.placeholder ?? PLACEHOLDER_NUMBER}
             required
-            messageError={number ? ERROR_REQUIRED : undefined}
+            messageError={showFormError(number)}
           />
 
           <StandardInput
@@ -60,7 +61,7 @@ function AddressForm({ formRef, inputs }: Props) {
             id="complement"
             placeholder={inputs?.complement.placeholder ??
               PLACEHOLDER_COMPLEMENT}
-            messageError={complement ? ERROR_REQUIRED : undefined}
+            messageError={showFormError(complement)}
           />
         </Container>
 
@@ -71,7 +72,7 @@ function AddressForm({ formRef, inputs }: Props) {
             placeholder={inputs?.city.placeholder ?? PLACEHOLDER_CITY}
             required
             disabled
-            messageError={city ? ERROR_REQUIRED : undefined}
+            messageError={showFormError(city)}
           />
 
           <StandardInput
@@ -82,7 +83,7 @@ function AddressForm({ formRef, inputs }: Props) {
             maxlength={2}
             required
             disabled
-            messageError={state ? ERROR_REQUIRED : undefined}
+            messageError={showFormError(state)}
           />
         </Container>
       </div>

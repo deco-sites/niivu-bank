@@ -3,22 +3,23 @@ import Divider from "$store/components/ui/Divider.tsx";
 import Container from "$store/components/ui/inputs/Container.tsx";
 import Cpf from "$store/islands/Cpf.tsx";
 import type { Inputs } from "./Solicitation.tsx";
-import { useUI } from "deco-sites/niivu-bank/sdk/useUI.ts";
 import {
-  ERROR_REQUIRED,
   PLACEHOLDER_CPF,
   PLACEHOLDER_NAME,
   PLACEHOLDER_PHONE,
   PLACEHOLDER_RG,
 } from "deco-sites/niivu-bank/components/solicitation/constants.ts";
+import { useFormErrors } from "deco-sites/niivu-bank/sdk/useFormErros.tsx";
+import { showFormError } from "deco-sites/niivu-bank/utils/showFormError.ts";
+import PhoneFormatter from "deco-sites/niivu-bank/components/solicitation/Phone.tsx";
 
 export interface Props {
   inputs?: Inputs;
 }
 
 function personalForm({ inputs }: Props) {
-  const { errosForm } = useUI();
-  const { full_name, phone, cpf } = errosForm.value;
+  const { errors } = useFormErrors();
+  const { full_name, phone, cpf } = errors.value;
   return (
     <>
       <p class="font-bold py-2">
@@ -31,17 +32,13 @@ function personalForm({ inputs }: Props) {
           id="full_name"
           placeholder={inputs?.name.placeholder ?? PLACEHOLDER_NAME}
           required
-          messageError={full_name ? ERROR_REQUIRED : undefined}
+          messageError={showFormError(full_name)}
         />
 
         <Container>
           <Cpf
             placeholder={inputs?.cpf.placeholder ?? PLACEHOLDER_CPF}
-            messageError={cpf.empty
-              ? ERROR_REQUIRED
-              : cpf.invalid
-              ? cpf.message
-              : undefined}
+            messageError={showFormError(cpf)}
           />
 
           <StandardInput
@@ -51,12 +48,9 @@ function personalForm({ inputs }: Props) {
           />
         </Container>
 
-        <StandardInput
-          labelText="Telefone"
-          id="phone"
+        <PhoneFormatter
           placeholder={inputs?.phone.placeholder ?? PLACEHOLDER_PHONE}
-          required
-          messageError={phone ? ERROR_REQUIRED : undefined}
+          messageError={showFormError(phone)}
         />
       </div>
     </>

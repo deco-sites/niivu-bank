@@ -16,6 +16,8 @@ import {
   PLACEHOLDER_STREET,
   PLACEHOLDER_ZIP_CODE,
 } from "deco-sites/niivu-bank/components/solicitation/constants.ts";
+import { showFormError } from "deco-sites/niivu-bank/utils/showFormError.ts";
+import { useFormErrors } from "deco-sites/niivu-bank/sdk/useFormErros.tsx";
 
 export interface Props {
   formRef: RefObject<HTMLFormElement>;
@@ -23,7 +25,7 @@ export interface Props {
 }
 
 function CorporationForm({ formRef, inputs }: Props) {
-  const { errosForm } = useUI();
+  const { errors } = useFormErrors();
   const {
     business_name,
     legal_city,
@@ -33,7 +35,7 @@ function CorporationForm({ formRef, inputs }: Props) {
     legal_zip_code,
     legal_complement,
     CNPJ,
-  } = errosForm.value;
+  } = errors.value;
   return (
     <>
       <p class="font-bold py-2">
@@ -48,16 +50,12 @@ function CorporationForm({ formRef, inputs }: Props) {
             placeholder={inputs?.corporateReason.placeholder ??
               PLACEHOLDER_CORPORATE_REASON}
             required
-            messageError={business_name ? ERROR_REQUIRED : undefined}
+            messageError={showFormError(business_name)}
           />
 
           <Cnpj
             placeholder={inputs?.cnpj.placeholder ?? PLACEHOLDER_CNPJ}
-            messageError={CNPJ.empty
-              ? ERROR_REQUIRED
-              : CNPJ.invalid
-              ? CNPJ.message
-              : undefined}
+            messageError={showFormError(CNPJ)}
           />
         </Container>
 
@@ -66,7 +64,7 @@ function CorporationForm({ formRef, inputs }: Props) {
             placeholder={inputs?.cep.placeholder ?? PLACEHOLDER_ZIP_CODE}
             formRef={formRef}
             prefix={"legal"}
-            messageError={legal_zip_code ? ERROR_REQUIRED : undefined}
+            messageError={showFormError(legal_zip_code)}
           />
 
           <StandardInput
@@ -75,7 +73,7 @@ function CorporationForm({ formRef, inputs }: Props) {
             placeholder={inputs?.street.placeholder ?? PLACEHOLDER_STREET}
             required
             disabled
-            messageError={legal_street ? ERROR_REQUIRED : undefined}
+            messageError={showFormError(legal_street)}
           />
         </Container>
 
@@ -85,7 +83,7 @@ function CorporationForm({ formRef, inputs }: Props) {
             id="legal_number"
             placeholder={inputs?.number.placeholder ?? PLACEHOLDER_NUMBER}
             required
-            messageError={legal_number ? ERROR_REQUIRED : undefined}
+            messageError={showFormError(legal_number)}
           />
 
           <StandardInput
@@ -93,7 +91,7 @@ function CorporationForm({ formRef, inputs }: Props) {
             id="legal_complement"
             placeholder={inputs?.complement.placeholder ??
               PLACEHOLDER_COMPLEMENT}
-            messageError={legal_complement ? ERROR_REQUIRED : undefined}
+            messageError={showFormError(legal_complement)}
           />
         </Container>
 
@@ -104,7 +102,7 @@ function CorporationForm({ formRef, inputs }: Props) {
             placeholder={inputs?.city.placeholder ?? PLACEHOLDER_CITY}
             required
             disabled
-            messageError={legal_city ? ERROR_REQUIRED : undefined}
+            messageError={showFormError(legal_city)}
           />
 
           <StandardInput
@@ -115,7 +113,7 @@ function CorporationForm({ formRef, inputs }: Props) {
             maxlength={2}
             required
             disabled
-            messageError={legal_state ? ERROR_REQUIRED : undefined}
+            messageError={showFormError(legal_state)}
           />
         </Container>
       </div>

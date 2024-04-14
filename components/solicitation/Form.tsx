@@ -6,6 +6,7 @@ import validateField from "deco-sites/niivu-bank/utils/ValidadeForm/Field.ts";
 import getFormValues from "deco-sites/niivu-bank/utils/getFormValues.ts";
 import { invoke } from "deco-sites/niivu-bank/runtime.ts";
 import formatCNPJ from "deco-sites/niivu-bank/utils/formatCNPJ.ts";
+import { useFormErrors } from "deco-sites/niivu-bank/sdk/useFormErros.tsx";
 
 export interface Props {
   children: ComponentChildren;
@@ -14,17 +15,31 @@ export interface Props {
   formRef: RefObject<HTMLFormElement>;
 }
 
-interface FieldValidation {
+export type FieldValidation = Record<string, FieldValidationConfig>;
+
+export interface FieldValidationConfig {
   field?: string;
   minLength: number;
   condition?: boolean;
   validator?: (value: string) => boolean;
 }
 
-function Form({ children, type, successLink, formRef }: Props) {
-  const { sendSolicitationLoading, errosForm } = useUI();
+export interface ErrosForm {
+  [key: string]: {
+    empty: boolean;
+    invalid: boolean;
+    messageInvalid: string;
+    messageEmpty: string;
+  };
+}
 
-  const fieldValidations: Record<string, FieldValidation> = {
+interface SendSolicitation {
+  type: "CPF" | "CNPJ";
+  [key: string]: string | undefined;
+}
+
+function Form({ children, type, successLink, formRef }: Props) {
+  const fieldsValidations: FieldValidation = {
     full_name: { minLength: 3 },
     phone: { minLength: 9 },
     cpf: { minLength: 14, validator: validateCPF },
@@ -44,15 +59,41 @@ function Form({ children, type, successLink, formRef }: Props) {
     legal_number: { minLength: 1, condition: type === "CNPJ" },
     legal_city: { minLength: 3, condition: type === "CNPJ" },
     legal_state: { minLength: 2, condition: type === "CNPJ" },
+  } as const;
+
+  const { sendSolicitationLoading, sendSolicitationError } = useUI();
+  const { hasErrors, setFormErrors } = useFormErrors();
+
+  const setError = (fieldName: string, type: "empty" | "invalid") => {
+    if (type === "empty") {
+      setFormErrors({
+        [fieldName]: {
+          empty: true,
+          invalid: false,
+          message: `Campo obrigatório`,
+        },
+      });
+    }
+
+    if (type === "invalid") {
+      setFormErrors({
+        [fieldName]: {
+          empty: false,
+          invalid: true,
+          message: `${fieldName} inválido`,
+        },
+      });
+    }
   };
 
-  const hasError = () => {
-    const arrayError = Object.values(errosForm.value);
-
-    if (arrayError.filter((item) => item).length > 0) {
-      return true;
-    }
-    return false;
+  const clearError = (fieldName: string) => {
+    setFormErrors({
+      [fieldName]: {
+        empty: false,
+        invalid: false,
+        message: "",
+      },
+    });
   };
 
   const handleFieldValidation = (
@@ -62,31 +103,18 @@ function Form({ children, type, successLink, formRef }: Props) {
     validator?: (value: string) => boolean,
   ) => {
     if (!validateField(fieldValue, minLength)) {
-      errosForm.value = {
-        ...errosForm.value,
-        [fieldName]: true,
-      };
+      setError(fieldName, "empty");
       sendSolicitationLoading.value = false;
       return;
     }
 
     if (validator && !validator(fieldValue!)) {
-      errosForm.value = {
-        ...errosForm.value,
-        [fieldName]: {
-          // @ts-ignore - This is a valid assignment
-          ...errosForm.value[fieldName],
-          invalid: true,
-        },
-      };
+      setError(fieldName, "invalid");
       sendSolicitationLoading.value = false;
       return;
     }
 
-    errosForm.value = {
-      ...errosForm.value,
-      [fieldName]: false,
-    };
+    clearError(fieldName);
   };
 
   const submit: JSX.GenericEventHandler<HTMLFormElement> = async (e) => {
@@ -94,37 +122,50 @@ function Form({ children, type, successLink, formRef }: Props) {
     sendSolicitationLoading.value = true;
 
     const formValues = getFormValues(e);
+    Object.entries(fieldsValidations).forEach(
+      ([fieldName, validationConfig]) => {
+        const { minLength, condition, validator } = validationConfig;
+        if (condition !== undefined && condition === false) return;
 
-    for (const fieldName in fieldValidations) {
-      const { minLength, condition, validator } = fieldValidations[fieldName];
-      if (condition !== undefined && !condition) continue;
+        const fieldValue = formValues[fieldName];
 
-      const fieldValue = formValues[fieldName];
-      handleFieldValidation(fieldName, fieldValue, minLength, validator);
-    }
-
-    if (hasError()) {
-      sendSolicitationLoading.value = false;
-      return;
-    }
-
-    const solicitation = await invoke({
-      key: "deco-sites/niivu-bank/loaders/actions/solicitation.ts",
-      props: {
-        type,
-        cnpj: formatCNPJ(formValues.CNPJ),
-        ...formValues,
+        handleFieldValidation(fieldName, fieldValue, minLength, validator);
       },
-    });
+    );
 
-    if ("error" in solicitation || "status" in solicitation) {
+    if (hasErrors()) {
       sendSolicitationLoading.value = false;
       return;
     }
 
-    window.location.href = `${successLink}?solicitation-id=${
-      solicitation[0].id
-    }`;
+    try {
+      const props: SendSolicitation = {
+        type,
+        ...formValues,
+      };
+      if (type === "CNPJ") {
+        props.cnpj = formatCNPJ(formValues?.CNPJ);
+      }
+      const solicitation = await invoke({
+        key: "deco-sites/niivu-bank/loaders/actions/solicitation.ts",
+        props,
+      });
+
+      if ("error" in solicitation || "status" in solicitation) {
+        sendSolicitationLoading.value = false;
+        return;
+      }
+
+      window.location.href = `${successLink}?solicitation-id=${
+        solicitation[0].id
+      }`;
+    } catch (error) {
+      console.log(error);
+      sendSolicitationError.value = true;
+      return;
+    } finally {
+      sendSolicitationLoading.value = false;
+    }
   };
 
   return (

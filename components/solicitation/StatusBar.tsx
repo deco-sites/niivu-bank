@@ -1,4 +1,4 @@
-import { StatusType } from "$store/packs/utils/constants.ts";
+import { SOLICITATION_ENTITY_NAME, StatusType } from "$store/packs/utils/constants.ts";
 import type { AppContext } from "$store/apps/site.ts";
 import Step from "./Step.tsx";
 import Icon from "$store/components/ui/Icon.tsx";
@@ -47,7 +47,7 @@ export const loader = async (props: Props, req: Request, ctx: AppContext) => {
 
   const { supabaseClient } = ctx;
   const authUserData = await validateCookie({ supabaseClient, req });
-  const { data } = await supabaseClient.from("solicitation")
+  const { data } = await supabaseClient.from(SOLICITATION_ENTITY_NAME)
     .select("*").eq("email", authUserData?.email).single();
 
   if (typeof statusMessage !== "string") {

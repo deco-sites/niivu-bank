@@ -2,11 +2,21 @@ import Icon from "deco-sites/niivu-bank/components/ui/Icon.tsx";
 import { invoke } from "deco-sites/niivu-bank/runtime.ts";
 
 export default function ButtonLogout() {
+  const logout = async () => {
+    try {
+      const response = await invoke({ key: "deco-sites/niivu-bank/loaders/actions/signOut.ts" });;
+      if (response.status !== 200) {
+        throw new Error("Logout request failed");
+      }
+      window.location.href = "/";
+    } catch (error) {
+      console.error("Error logging out:", error);
+    }
+  };
   return (
     <button
       class="group flex items-center"
-      onClick={() =>
-        invoke({ key: "deco-sites/niivu-bank/loaders/actions/signOut.ts" })}
+      onClick={logout}
     >
       <Icon
         id="SignOut"

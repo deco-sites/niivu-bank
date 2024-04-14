@@ -1,4 +1,7 @@
-import { SOLICITATION_ENTITY_NAME, StatusType } from "$store/packs/utils/constants.ts";
+import {
+  SOLICITATION_ENTITY_NAME,
+  StatusType,
+} from "$store/packs/utils/constants.ts";
 import type { AppContext } from "$store/apps/site.ts";
 import Step from "./Step.tsx";
 import Icon from "$store/components/ui/Icon.tsx";

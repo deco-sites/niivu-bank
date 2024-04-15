@@ -80,7 +80,7 @@ function Form({ children, type, successLink, formRef }: Props) {
         [fieldName]: {
           empty: false,
           invalid: true,
-          message: `${fieldName} inválido`,
+          message: `${fieldName?.toUpperCase()} inválido`,
         },
       });
     }

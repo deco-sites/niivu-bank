@@ -1,8 +1,11 @@
+import { Input } from "deco-sites/niivu-bank/components/ui/inputs/index.tsx";
+
 export interface Props {
   placeholder: string;
+  messageError?: string;
 }
 
-const CnpjFormatter = ({ placeholder }: Props) => {
+const CnpjFormatter = ({ placeholder, messageError }: Props) => {
   const handleChange = (e: Event) => {
     const input = e.target as HTMLInputElement;
     const value = input.value.replace(/\D/g, "");
@@ -28,7 +31,9 @@ const CnpjFormatter = ({ placeholder }: Props) => {
         required
         maxlength={18}
         onChange={handleChange}
+        onPaste={handleChange}
       />
+      <Input.Error message={messageError?.length ? messageError : undefined} />
     </div>
   );
 };

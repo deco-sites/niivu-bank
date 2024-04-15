@@ -1,3 +1,5 @@
+import { Input } from "deco-sites/niivu-bank/components/ui/inputs/index.tsx";
+
 export interface Props {
   labelText: string;
   id: string;
@@ -7,6 +9,7 @@ export interface Props {
   type?: string;
   maxlength?: number;
   disabled?: boolean;
+  messageError?: string;
 }
 
 function Standard(
@@ -19,6 +22,7 @@ function Standard(
     required,
     maxlength,
     disabled,
+    messageError,
   }: Props,
 ) {
   return (
@@ -27,7 +31,7 @@ function Standard(
         <span class="text-sm">{`${labelText}${required ? "*" : ""}`}</span>
       </label>
       <input
-        class="input"
+        class="input input-bordered"
         type={type}
         id={id}
         name={name ?? id}
@@ -36,6 +40,7 @@ function Standard(
         maxlength={maxlength}
         disabled={disabled}
       />
+      <Input.Error message={messageError?.length ? messageError : undefined} />
     </div>
   );
 }

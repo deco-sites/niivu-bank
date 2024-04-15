@@ -4,7 +4,7 @@ import { invoke } from "deco-sites/niivu-bank/runtime.ts";
 import { Input } from "deco-sites/niivu-bank/components/ui/inputs/index.tsx";
 import {
   validatePassword,
-} from "deco-sites/niivu-bank/utils/validatePassword.tsx";
+} from "deco-sites/niivu-bank/utils/ValidadeForm/Password.ts";
 import Button from "deco-sites/niivu-bank/components/ui/Button.tsx";
 import {
   ACCESS_TOKEN,

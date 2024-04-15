@@ -3,7 +3,7 @@ import type { JSX } from "preact";
 import { invoke } from "deco-sites/niivu-bank/runtime.ts";
 import { Input } from "deco-sites/niivu-bank/components/ui/inputs/index.tsx";
 import { EMAIL_RESGISTER_ERROR } from "deco-sites/niivu-bank/utils/enum.ts";
-import { validatePassword } from "deco-sites/niivu-bank/utils/validatePassword.tsx";
+import { validatePassword } from "../../utils/ValidadeForm/Password.ts";
 import {
   EMPTY_INVALID_EMAIL,
   ERROR_EMPTY_PASSWORD,
@@ -16,7 +16,7 @@ interface Props {
   disclaimerText: string;
 }
 
-export default function SignupForm({ disclaimerText }: Props) {
+export default function SignupForm({disclaimerText}: Props) {
   const isLoaging = useSignal(false);
   const isDiffPasswords = useSignal(false);
   const password = useSignal("");

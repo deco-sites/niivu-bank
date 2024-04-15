@@ -20,7 +20,7 @@ interface CreditAnalysisResponse {
       cpfs_inserted: number;
       cpfs_not_inserted: number;
     };
-    records: Record[];
+    records: RecordRisk[];
   };
 }
 
@@ -32,7 +32,7 @@ type message =
   | "Autenticação necessária."
   | "Expecting value: line 2 column 12 (char 13)";
 
-interface Record {
+export interface RecordRisk {
   cpf?: string;
   cnpj?: string;
   status: string | "error";

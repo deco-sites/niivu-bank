@@ -3,7 +3,6 @@ import type { JSX } from "preact";
 import { invoke } from "deco-sites/niivu-bank/runtime.ts";
 import { Input } from "deco-sites/niivu-bank/components/ui/inputs/index.tsx";
 import { EMAIL_RESGISTER_ERROR } from "deco-sites/niivu-bank/utils/enum.ts";
-import Loading from "deco-sites/niivu-bank/components/daisy/Loading.tsx";
 import { validatePassword } from "../../utils/ValidadeForm/Password.ts";
 import {
   EMPTY_INVALID_EMAIL,
@@ -11,8 +10,13 @@ import {
   GENERIC_ERROR,
 } from "deco-sites/niivu-bank/components/autentication/constants.ts";
 import { PasswordErrors } from "deco-sites/niivu-bank/components/ui/inputs/PasswordErrors.tsx";
+import WarningConsent from "deco-sites/niivu-bank/islands/WarningConsent.tsx";
 
-export default function SignupForm() {
+interface Props {
+  disclaimerText: string;
+}
+
+export default function SignupForm({disclaimerText}: Props) {
   const isLoaging = useSignal(false);
   const isDiffPasswords = useSignal(false);
   const password = useSignal("");
@@ -121,37 +125,10 @@ export default function SignupForm() {
             />
           )}
         </Input.Root>
-        <div class="space-y-2">
-          <div class="flex flex-col mt-6 gap-10 group/warning">
-            <div class="flex items-start gap-4">
-              <input
-                class="checkbox checkbox-primary checkbox-md border-[3px]"
-                type="checkbox"
-                name="warningConsent"
-                id="warningConsent"
-              />
-              <div class="flex flex-col gap-2">
-                <span class="font-normal">
-                  Autorização
-                </span>
-                <span class="text-sm">
-                  Autorizo o NIIVO BANK e empresas coligadas a consultar as
-                  minhas informações nas bases de dados cadastrais disponíveis,
-                  inclusive no SCR (Sistema de cadastro gerido pelo Banco
-                  Central do Brasil).
-                </span>
-              </div>
-            </div>
-            <button
-              type="submit"
-              class="btn btn-accent text-xl pointer-events-none group-has-[input:checked]/warning:pointer-events-auto group-has-[input:checked]/warning:btn-primary text-white"
-            >
-              {isLoaging.value
-                ? <Loading style="loading-spinner" size="loading-sm" />
-                : "Cadastrar"}
-            </button>
-          </div>
-        </div>
+        <WarningConsent
+          disclaimerText={disclaimerText}
+          buttonLabel="Cadastrar"
+        />
       </div>
     </form>
   );

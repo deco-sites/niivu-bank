@@ -1,6 +1,4 @@
-import PersonalForm from "$store/components/solicitation/PersonalForm.tsx";
 import AddressForm from "$store/components/solicitation/AddressForm.tsx";
-import CorporationForm from "$store/components/solicitation/CorporationForm.tsx";
 import Form from "$store/islands/Form.tsx";
 import TabList from "$store/components/solicitation/TabList.tsx";
 import WarningConsent from "$store/components/solicitation/WarningConsent.tsx";
@@ -8,6 +6,8 @@ import type { ImageWidget } from "apps/admin/widgets.ts";
 import Image from "apps/website/components/Image.tsx";
 import { AppContext } from "deco-sites/niivu-bank/apps/site.ts";
 import { useRef } from "preact/hooks";
+import CorporationForm from "deco-sites/niivu-bank/islands/CorporationForm.tsx";
+import PersonalForm from "deco-sites/niivu-bank/islands/PersonalForm.tsx";
 
 /**
  * @titleBy alt

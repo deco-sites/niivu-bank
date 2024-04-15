@@ -4,7 +4,7 @@ import { invoke } from "deco-sites/niivu-bank/runtime.ts";
 import { Input } from "deco-sites/niivu-bank/components/ui/inputs/index.tsx";
 import { EMAIL_RESGISTER_ERROR } from "deco-sites/niivu-bank/utils/enum.ts";
 import Loading from "deco-sites/niivu-bank/components/daisy/Loading.tsx";
-import { validatePassword } from "deco-sites/niivu-bank/utils/validatePassword.tsx";
+import { validatePassword } from "../../utils/ValidadeForm/Password.ts";
 import {
   EMPTY_INVALID_EMAIL,
   ERROR_EMPTY_PASSWORD,

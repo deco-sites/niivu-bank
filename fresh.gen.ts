@@ -18,6 +18,7 @@ import * as $Authentication_Signup from "./islands/Authentication/Signup.tsx";
 import * as $ButtonLogout from "./islands/ButtonLogout.tsx";
 import * as $Cep from "./islands/Cep.tsx";
 import * as $Cnpj from "./islands/Cnpj.tsx";
+import * as $CorporationForm from "./islands/CorporationForm.tsx";
 import * as $Cpf from "./islands/Cpf.tsx";
 import * as $Form from "./islands/Form.tsx";
 import * as $Header_Dreawer from "./islands/Header/Dreawer.tsx";
@@ -25,6 +26,7 @@ import * as $Header_MenuButton from "./islands/Header/MenuButton.tsx";
 import * as $Input_Password from "./islands/Input/Password.tsx";
 import * as $Newsletter from "./islands/Newsletter.tsx";
 import * as $OutOfStock from "./islands/OutOfStock.tsx";
+import * as $PersonalForm from "./islands/PersonalForm.tsx";
 import * as $ProductImageZoom from "./islands/ProductImageZoom.tsx";
 import * as $SearchControls from "./islands/SearchControls.tsx";
 import * as $ShippingSimulation from "./islands/ShippingSimulation.tsx";
@@ -56,6 +58,7 @@ const manifest = {
     "./islands/ButtonLogout.tsx": $ButtonLogout,
     "./islands/Cep.tsx": $Cep,
     "./islands/Cnpj.tsx": $Cnpj,
+    "./islands/CorporationForm.tsx": $CorporationForm,
     "./islands/Cpf.tsx": $Cpf,
     "./islands/Form.tsx": $Form,
     "./islands/Header/Dreawer.tsx": $Header_Dreawer,
@@ -63,6 +66,7 @@ const manifest = {
     "./islands/Input/Password.tsx": $Input_Password,
     "./islands/Newsletter.tsx": $Newsletter,
     "./islands/OutOfStock.tsx": $OutOfStock,
+    "./islands/PersonalForm.tsx": $PersonalForm,
     "./islands/ProductImageZoom.tsx": $ProductImageZoom,
     "./islands/SearchControls.tsx": $SearchControls,
     "./islands/ShippingSimulation.tsx": $ShippingSimulation,

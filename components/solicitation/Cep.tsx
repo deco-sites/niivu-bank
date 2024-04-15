@@ -1,14 +1,17 @@
 import { invoke } from "$store/runtime.ts";
 import { RefObject } from "preact";
+import { Input } from "deco-sites/niivu-bank/components/ui/inputs/index.tsx";
 export interface Props {
   formRef: RefObject<HTMLFormElement>;
   prefix?: string;
   placeholder: string;
+  messageError?: string;
 }
 
-export default function Cep({ formRef, prefix, placeholder }: Props) {
-  const prefixResult: string = typeof prefix === "string" ? `${prefix}-` : "";
-
+export default function Cep(
+  { formRef, prefix, placeholder, messageError }: Props,
+) {
+  const prefixResult: string = typeof prefix === "string" ? `${prefix}_` : "";
   const getCep = async (
     e: Event,
   ) => {
@@ -22,13 +25,11 @@ export default function Cep({ formRef, prefix, placeholder }: Props) {
           cep,
         },
       });
-
       if (response?.status) {
         return;
       }
-
       (formRef.current!.elements.namedItem(
-        `${prefixResult}cep`,
+        `${prefixResult}zip_code`,
       ) as HTMLInputElement)!
         .value = response.cep ?? "";
       (formRef.current!.elements.namedItem(
@@ -54,13 +55,15 @@ export default function Cep({ formRef, prefix, placeholder }: Props) {
       </label>
       <input
         onChange={getCep}
+        onPaste={getCep}
         class="input"
         type="text"
-        id={`${prefixResult}cep`}
-        name={`${prefixResult}cep`}
+        id={`${prefixResult}zip_code`}
+        name={`${prefixResult}zip_code`}
         placeholder={placeholder}
         required
       />
+      <Input.Error message={messageError?.length ? messageError : undefined} />
     </div>
   );
 }

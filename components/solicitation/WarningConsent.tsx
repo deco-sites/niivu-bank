@@ -15,7 +15,7 @@ function WarningConsent(
 ) {
   const { sendSolicitationLoading, sendSolicitationError } = useUI();
   const checkbox = useSignal(false);
-  const isLoaging = sendSolicitationLoading.value || loading
+  const isLoaging = sendSolicitationLoading.value || loading;
 
   return (
     <div class="relative">
@@ -44,7 +44,7 @@ function WarningConsent(
           type={checkbox.value || !isLoaging ? "submit" : "button"}
           class={`btn btn-accent pointer-events-none text-white group-has-[input:checked]/warning:pointer-events-auto group-has-[input:checked]/warning:btn-primary text-xl ${buttonSize}`}
         >
-          {isLoaging 
+          {isLoaging
             ? <Loading size="loading-md" style="loading-spinner" />
             : buttonLabel}
         </button>

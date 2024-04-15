@@ -133,7 +133,7 @@ function Solicitation(
           {type === "CNPJ" && (
             <CorporationForm formRef={formRef} inputs={inputs} />
           )}
-          <WarningConsent disclaimerText={disclaimerText} />
+          <WarningConsent disclaimerText={disclaimerText} buttonSize="w-72" />
         </Form>
       </div>
       {banners?.length && isDesktop && (

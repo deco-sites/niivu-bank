@@ -13,7 +13,7 @@ export function validatePassword(password: string) {
   const regexParts: EmptyInputs<RegExp> = {
     minLength: /^.{8,}$/,
     maxLength: /^.{1,64}$/,
-    minLowercaseLetters: /^(.*[a-z]){2,}.*$/,
+    minLowercaseLetters: /^(.*[a-z]){1,}.*$/,
     minUppercaseLetters: /^(.*[A-Z]){1,}.*$/,
     minNumbers: /^(.*\d){2,}.*$/,
     minSpecialChars: /^(?=.*[!@#$%^&*()_+{}:<>?]).*$/,

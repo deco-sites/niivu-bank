@@ -154,7 +154,7 @@ const Autentication = (
         {...usePartialSection<typeof Autentication>({
           props: { step },
         })}
-        class="w-full texte-center cursor-pointer text-primary opacity-70 text-sm mt-2 hover:text-secondary"
+        class="w-full text-center cursor-pointer text-primary opacity-70 text-sm mt-2 hover:text-secondary"
       >
         {text}
       </button>
@@ -162,7 +162,7 @@ const Autentication = (
   };
 
   return (
-    <div class="h-screen md:flex bg-white">
+    <div class="h-full min-h-screen md:flex bg-white">
       <div
         class={`relative hidden overflow-hidden md:flex md:flex-col w-1/2 justify-end items-center pb-52 px-auto ${
           !image?.src && "bg-gradient-to-l from-success to-info"
@@ -182,7 +182,7 @@ const Autentication = (
             )}
           </span>
         </div>
-        <span class="absolute top-0 left-0 h-screen">
+        <span class="absolute top-0 left-0 h-full">
           {image && (
             <Image
               src={image.src}

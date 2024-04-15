@@ -16,7 +16,7 @@ interface Props {
   disclaimerText: string;
 }
 
-export default function SignupForm({disclaimerText}: Props) {
+export default function SignupForm({ disclaimerText }: Props) {
   const isLoaging = useSignal(false);
   const isDiffPasswords = useSignal(false);
   const password = useSignal("");

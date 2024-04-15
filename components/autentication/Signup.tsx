@@ -5,7 +5,6 @@ import { Input } from "deco-sites/niivu-bank/components/ui/inputs/index.tsx";
 import { EMAIL_RESGISTER_ERROR } from "deco-sites/niivu-bank/utils/enum.ts";
 import { validatePassword } from "deco-sites/niivu-bank/utils/validatePassword.tsx";
 import {
-  DISCLAMER_TEXT,
   EMPTY_INVALID_EMAIL,
   ERROR_EMPTY_PASSWORD,
   GENERIC_ERROR,
@@ -13,7 +12,11 @@ import {
 import { PasswordErrors } from "deco-sites/niivu-bank/components/ui/inputs/PasswordErrors.tsx";
 import WarningConsent from "deco-sites/niivu-bank/islands/WarningConsent.tsx";
 
-export default function SignupForm() {
+interface Props {
+  disclaimerText: string;
+}
+
+export default function SignupForm({disclaimerText}: Props) {
   const isLoaging = useSignal(false);
   const isDiffPasswords = useSignal(false);
   const password = useSignal("");
@@ -123,7 +126,7 @@ export default function SignupForm() {
           )}
         </Input.Root>
         <WarningConsent
-          disclaimerText={DISCLAMER_TEXT}
+          disclaimerText={disclaimerText}
           buttonLabel="Cadastrar"
         />
       </div>

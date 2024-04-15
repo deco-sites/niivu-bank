@@ -11,8 +11,14 @@ import {
   STATUS_ENUM_SIGNATURE,
   STATUS_ENUM_SUSPENDED,
 } from "deco-sites/niivu-bank/packs/utils/constants.ts";
-import { INTERNAL_ERROR, SERVER_ERROR } from "$store/utils/enum.ts";
+import {
+  INTERNAL_ERROR,
+  RISK3_ERROR,
+  SERVER_ERROR,
+  SUPABASE_ERROR,
+} from "$store/utils/enum.ts";
 import { getEmail } from "$store/utils/cookies.ts";
+import { RecordRisk } from "deco-sites/niivu-bank/packs/utils/creditAnalysis.ts";
 
 interface Fields {
   full_name: string;
@@ -152,20 +158,25 @@ export default async function loader(
     const body = {
       cpfs: [props.cpf!],
     };
+    let recordsData: RecordRisk[];
 
-    const { data: { records } } = await clientRisk3
-      ["POST /api/v0/niivo_api/cpf"](
-        {},
-        {
-          body,
-          headers,
-        },
-      ).then((res) => res.json());
-
-    // This API returns 400 even when it is correct
-    clientRisk3["POST /api/v0/logout"]({}, {
-      headers,
-    });
+    try {
+      const { data: { records } } = await clientRisk3
+        ["POST /api/v0/niivo_api/cpf"](
+          {},
+          {
+            body,
+            headers,
+          },
+        ).then((res) => res.json());
+      recordsData = records;
+      // This API returns 400 even when it is correct
+      clientRisk3["POST /api/v0/logout"]({}, {
+        headers,
+      });
+    } catch (_error) {
+      return { status: INTERNAL_ERROR, message: RISK3_ERROR };
+    }
 
     const customerWithStatus: Entity = {
       full_name,
@@ -178,7 +189,7 @@ export default async function loader(
       rg: rg?.replace(/\D/g, ""),
       city,
       state,
-      id_risk3: records[0].id!,
+      id_risk3: recordsData[0].id!,
       credit_status: false,
       status: Status.AnalysisDeCredito,
       email,
@@ -189,19 +200,33 @@ export default async function loader(
         ...customerWithStatus,
       }]).select();
     if (error) {
-      return { error: JSON.stringify(error) };
+      return { status: INTERNAL_ERROR, message: SUPABASE_ERROR };
     }
 
     return data as DataObjectSoliciation[];
   } else {
-    const { data: { records } } = await clientRisk3["POST /api/v0/niivo_api"]({
-      product: product,
-    }, {
+    let recordsData: RecordRisk[];
+    try {
+      const { data: { records } } = await clientRisk3["POST /api/v0/niivo_api"](
+        {
+          product: product,
+        },
+        {
+          headers: headers,
+          body: {
+            cnpjs: [props.cnpj!],
+          },
+        },
+      ).then((res) => res.json());
+      recordsData = records;
+    } catch (_error) {
+      return { status: INTERNAL_ERROR, message: RISK3_ERROR };
+    }
+
+    // This API returns 400 even when it is correct
+    clientRisk3["POST /api/v0/logout"]({}, {
       headers: headers,
-      body: {
-        cnpjs: [props.cnpj!],
-      },
-    }).then((res) => res.json());
+    });
 
     const {
       cnpj,
@@ -213,11 +238,6 @@ export default async function loader(
       legal_city,
       legal_state,
     } = props;
-
-    // This API returns 400 even when it is correct
-    clientRisk3["POST /api/v0/logout"]({}, {
-      headers: headers,
-    });
 
     const customerWithStatus: Entity = {
       full_name,
@@ -238,7 +258,7 @@ export default async function loader(
       legal_complement,
       legal_city,
       legal_state,
-      id_risk3: records[0].id!,
+      id_risk3: recordsData[0].id!,
       credit_status: false,
       status: Status.AnalysisDeCredito,
       email,
@@ -249,9 +269,8 @@ export default async function loader(
         ...customerWithStatus,
       }]).select();
     if (error) {
-      return { error: JSON.stringify(error) };
+      return { status: INTERNAL_ERROR, message: SUPABASE_ERROR };
     }
-
     return data as DataObjectSoliciation[];
   }
 }

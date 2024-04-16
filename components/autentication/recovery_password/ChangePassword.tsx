@@ -98,11 +98,11 @@ export default function ChangePassword({ urlChangePassword }: Props) {
     }
   };
 
-  if(urlChangePassword?.length){
+  if (urlChangePassword?.length) {
     return (
       <div class="space-y-4">
         <p class="text-lg">
-        Confirma que deseja prosseguir para a alteração de sua senha?
+          Confirma que deseja prosseguir para a alteração de sua senha?
         </p>
         <Button
           type="button"

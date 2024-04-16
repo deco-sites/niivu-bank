@@ -269,7 +269,7 @@ const Autentication = (
               subTitle="Digite sua nova senha e confirme"
               class="mb-8 text-3xl"
             />
-            <ChangePassword urlChangePassword={urlChangePassword}/>
+            <ChangePassword urlChangePassword={urlChangePassword} />
             <ButtonPartial />
           </div>
         )}

@@ -123,6 +123,7 @@ export async function loader(
   return {
     ...props,
     step,
+    urlChangePassword: searchParams.get("url"),
   };
 }
 
@@ -132,6 +133,7 @@ const Autentication = (
     textAlignment,
     showLoginSSO,
     disclaimerText,
+    urlChangePassword,
     banner: { textBanner, image, buttonText },
     header: { mobile, alt, desktop },
   }: SectionProps<typeof loader>,
@@ -267,7 +269,7 @@ const Autentication = (
               subTitle="Digite sua nova senha e confirme"
               class="mb-8 text-3xl"
             />
-            <ChangePassword />
+            <ChangePassword urlChangePassword={urlChangePassword}/>
             <ButtonPartial />
           </div>
         )}

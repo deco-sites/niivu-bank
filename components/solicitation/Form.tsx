@@ -156,9 +156,7 @@ function Form({ children, type, successLink, formRef }: Props) {
         return;
       }
 
-      window.location.href = `${successLink}?solicitation-id=${
-        solicitation[0].id
-      }`;
+      window.location.href = successLink
     } catch (error) {
       console.log(error);
       sendSolicitationError.value = true;

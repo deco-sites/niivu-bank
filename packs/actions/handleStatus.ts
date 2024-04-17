@@ -64,7 +64,7 @@ export default async function loader(
   const solicitation = await supabaseClient.from(SOLICITATION_ENTITY_NAME)
     .select("*").eq(SOLICITATION_FILD_ID_RISK, id).single();
 
-  if (!solicitation || solicitation.data.length === 0) {
+  if (!solicitation || solicitation.status === 406 || solicitation?.data?.length === 0) {
     console.error(
       "Risk3 webhook: request Supabase, message: solicitation not found",
     );

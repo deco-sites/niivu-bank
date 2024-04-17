@@ -86,6 +86,7 @@ export default function SignupForm({disclaimerText}: Props) {
           <Input.Label label="E-mail" class="mb-2" />
           <Input.Base
             name="email"
+            type="email"
             placeholder="exemplo@email.com.br"
           />
           <Input.Error

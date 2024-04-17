@@ -10,7 +10,7 @@ import { SOLICITATION_ENTITY_NAME } from "deco-sites/niivu-bank/packs/utils/cons
 
 export interface DataObjectSoliciation {
   id: number;
-  id_solicitation_risk3: number | null;
+  id_risk3: string | null;
   business_name: string | null;
   full_name: string;
   email: string;
@@ -51,7 +51,7 @@ export default async function loader(
       email,
     );
 
-  if (error) {
+  if (error || data.length === 0) {
     return { status: BAD_REQUEST, message: EMAIL_ERROR };
   }
 

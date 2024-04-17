@@ -13,6 +13,7 @@ import {
   PATH_SOLICITATION_SUCCESS,
 } from "deco-sites/niivu-bank/components/header/Constants.ts";
 import { Picture, Source } from "apps/website/components/Picture.tsx";
+import type { UserData } from "deco-sites/niivu-bank/components/header/Header.tsx";
 
 export interface Props {
   /** @description (150px)x(45px) */
@@ -22,11 +23,7 @@ export interface Props {
   statusIndex: number;
   pathname: string;
   isLogged: boolean;
-  userData: {
-    name: string;
-    email?: string;
-    solicitation: string;
-  };
+  userData: UserData;
   isSolicitationSend: boolean;
   showStep: boolean;
   isDesktop: boolean;
@@ -98,7 +95,7 @@ function Navbar(
         isLogged={isLogged}
         showUserInfo={showUserInfo}
         showButtonLogout={showLogoutButton}
-        userName={userData.name}
+        userName={userData?.name}
       />
       {!isDesktop && showMenu && <MenuButton />}
     </div>

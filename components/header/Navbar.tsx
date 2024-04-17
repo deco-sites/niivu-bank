@@ -3,9 +3,7 @@ import {
   Logo,
   Url,
 } from "deco-sites/niivu-bank/components/header/Header.tsx";
-import Image from "apps/website/components/Image.tsx";
 import Step from "deco-sites/niivu-bank/components/header/Step.tsx";
-import Button from "deco-sites/niivu-bank/components/ui/Button.tsx";
 import NavItem from "deco-sites/niivu-bank/components/header/NavItem.tsx";
 import MenuButton from "deco-sites/niivu-bank/components/header/MenuButton.tsx";
 import { UserHandle } from "deco-sites/niivu-bank/components/header/UserHandle.tsx";
@@ -14,6 +12,7 @@ import {
   PATH_SOLICITATION,
 } from "deco-sites/niivu-bank/components/header/Constants.ts";
 import { Picture, Source } from "apps/website/components/Picture.tsx";
+import type { UserData } from "deco-sites/niivu-bank/components/header/Header.tsx";
 
 export interface Props {
   /** @description (150px)x(45px) */
@@ -23,11 +22,7 @@ export interface Props {
   statusIndex: number;
   pathname: string;
   isLogged: boolean;
-  userData: {
-    name: string;
-    email?: string;
-    solicitation: string;
-  };
+  userData: UserData;
   isSolicitationSend: boolean;
 }
 
@@ -96,7 +91,7 @@ function Navbar(
         isLogged={isLogged}
         showUserInfo={showUserInfo}
         showButtonLogout={showLogoutButton}
-        userName={userData.name}
+        userName={userData?.name}
       />
       {showMenu && <MenuButton />}
     </div>

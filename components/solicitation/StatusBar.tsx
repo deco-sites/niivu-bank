@@ -111,7 +111,7 @@ function FollowSolicitation(
           ))}
         </ul>
         {status[statusIndex]?.message && (
-          <div class="absolute top-28 flex items-center p-4 gap-4 mx-auto rounded-sm bg-[#E7E4FF] max-w-[605px]">
+          <div class="absolute md:sticky top-28 flex items-center p-4 gap-4 mx-auto rounded-sm bg-[#E7E4FF] max-w-[605px]">
             <Icon id="Schedule" class="shrink-0" width={24} height={24} />
             <div
               dangerouslySetInnerHTML={{

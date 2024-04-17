@@ -5,6 +5,10 @@ import { SectionProps } from "deco/mod.ts";
 import Drawers from "deco-sites/niivu-bank/components/header/Drawer.tsx";
 import Navbar from "deco-sites/niivu-bank/components/header/Navbar.tsx";
 import {
+  PATH_SOLICITATION,
+  PATH_SOLICITATION_SUCCESS,
+} from "deco-sites/niivu-bank/components/header/Constants.ts";
+import {
   DataObjectSoliciation,
   Error,
 } from "deco-sites/niivu-bank/packs/solicitation/getDetails.ts";
@@ -103,6 +107,9 @@ function Header(
   const statusIndex = isSolicitationSend
     ? steps?.length! - 1
     : steps?.findIndex((step) => step.isCurrent);
+  const showStep = isLogged &&
+    (!isSolicitationSend || pathname.includes(PATH_SOLICITATION_SUCCESS)) &&
+    pathname.includes(PATH_SOLICITATION);
   return (
     <header>
       <Drawers
@@ -118,11 +125,12 @@ function Header(
             isLogged={isLogged}
             userData={userData}
             isSolicitationSend={isSolicitationSend}
+            showStep={showStep}
+            isDesktop={isDesktop}
           />
         </div>
       </Drawers>
-      {!isDesktop && isLogged && isSolicitationSend &&
-        pathname?.includes("/minha-conta/solicitacao") && (
+      {!isDesktop && showStep && (
         <ul class="timeline max-lg:w-full mx-auto">
           {steps?.map((props, index, array) => (
             <Step

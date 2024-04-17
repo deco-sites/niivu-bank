@@ -51,7 +51,7 @@ export default async function loader(
       email,
     );
 
-  if (error) {
+  if (error || data.length === 0) {
     return { status: BAD_REQUEST, message: EMAIL_ERROR };
   }
 

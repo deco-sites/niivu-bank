@@ -6,7 +6,7 @@ import Button from "deco-sites/niivu-bank/components/ui/Button.tsx";
 import {
   DataObjectSoliciation,
   Error,
-} from "../../packs/solicitation/getDetails.ts";
+} from "deco-sites/niivu-bank/packs/solicitation/getDetails.ts";
 import { redirect } from "deco/mod.ts";
 
 export interface IPicture {
@@ -25,11 +25,12 @@ export interface Props {
   solicitation: DataObjectSoliciation | Error;
 }
 
-export const loader = (props: Props, _req: Request, _ctx: AppContext) => {
+export const loader = (props: Props, req: Request, _ctx: AppContext) => {
   const statusMessage = props.solicitation.status;
-
-  if (typeof statusMessage === "number") {
-    redirect("/minha-conta/solicitacao");
+  const url = new URL(req.url);
+  if (typeof statusMessage !== "string") {
+    // We need to pass the complete url. Only with relative urls don't work.
+    redirect(`${url.origin}/minha-conta/solicitacao`);
   }
 
   return {

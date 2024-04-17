@@ -24,7 +24,7 @@ export default function loader(
   const url = new URL(req.url);
 
   supabaseClient.auth.resetPasswordForEmail(email, {
-    redirectTo: `${url.host}/entrar?step=changePassword`,
+    redirectTo: `${url.origin}/entrar?step=changePassword`,
   });
 
   return { status: OK, message: SUCCESS };

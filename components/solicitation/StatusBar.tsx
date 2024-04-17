@@ -79,14 +79,12 @@ function FollowSolicitation(
 
   return (
     <>
-      <Head>
-        <style
-          dangerouslySetInnerHTML={{
-            __html:
-              "@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap')",
-          }}
-        />
-      </Head>
+      <style
+        dangerouslySetInnerHTML={{
+          __html:
+            "@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap')",
+        }}
+      />
       <div class="relative container flex flex-col gap-5 lg:gap-32 pb-48 pt-5 lg:pt-6">
         {isDesktop && (
           <div>
@@ -114,6 +112,7 @@ function FollowSolicitation(
           <div class="absolute md:sticky top-28 flex items-center p-4 gap-4 mx-auto rounded-sm bg-[#E7E4FF] max-w-[605px]">
             <Icon id="Schedule" class="shrink-0" width={24} height={24} />
             <div
+              class="[font-family:Inter]"
               dangerouslySetInnerHTML={{
                 __html: status[statusIndex].message ?? "",
               }}

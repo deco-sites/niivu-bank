@@ -70,6 +70,8 @@ export async function validateCookie({
     access_token ?? cookie,
   );
 
+  console.log(data);
+
   if (!data.user) {
     return {
       isValid: false,

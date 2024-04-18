@@ -37,6 +37,12 @@ export interface Risk3 {
   product: "express" | "express_light";
 
   /**
+   * @title Cores de aprovados
+   * @description As cores nessa lista vão ser consideradas crédito aprovado do risk3
+   */
+  colorSolicitation: string[];
+
+  /**
    * @title Cliente do Risk3
    * @ignore
    */

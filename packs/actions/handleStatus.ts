@@ -1,6 +1,5 @@
 import type { AppContext } from "$store/apps/site.ts";
 import {
-  CLASSIFICATION_APPROVED,
   HEADER_AUTH_TOKEN,
   SOLICITATION_ENTITY_NAME,
   SOLICITATION_FILD_ID_RISK,
@@ -25,7 +24,7 @@ export default async function loader(
   }
 
   const { risk3, supabaseClient } = ctx;
-  const { clientRisk3, password, username } = risk3;
+  const { clientRisk3, password, username, colorSolicitation } = risk3;
 
   if (!password || !username) {
     console.error("Risk3 webhook: password or user not set.");
@@ -56,7 +55,10 @@ export default async function loader(
   ).then((res) => res.json());
 
   const { analise } = analisys.data;
-  const isApproved = analise?.classificacao === CLASSIFICATION_APPROVED;
+  const isApproved = colorSolicitation?.find((cor) =>
+    cor.toLowerCase() === analise?.classificacao.toLowerCase()
+  );
+
   const statusCredit = isApproved
     ? STATUS_ENUM_ACCOUNT_OPENING
     : STATUS_ENUM_RISK3_FAILED;
@@ -64,7 +66,10 @@ export default async function loader(
   const solicitation = await supabaseClient.from(SOLICITATION_ENTITY_NAME)
     .select("*").eq(SOLICITATION_FILD_ID_RISK, id).single();
 
-  if (!solicitation || solicitation.status === 406 || solicitation?.data?.length === 0) {
+  if (
+    !solicitation || solicitation.status === 406 ||
+    solicitation?.data?.length === 0
+  ) {
     console.error(
       "Risk3 webhook: request Supabase, message: solicitation not found",
     );
@@ -77,7 +82,7 @@ export default async function loader(
     .update({
       status: statusCredit,
       credit_status: isApproved,
-      analysis_classification: analise?.classificacao,
+      analysis_classification: analise?.classificacao ?? "sem classificação",
     }).eq("id", solicitation.data.id);
 
   if (updateSolicitation.error !== null) {

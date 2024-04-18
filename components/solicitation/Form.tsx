@@ -156,7 +156,7 @@ function Form({ children, type, successLink, formRef }: Props) {
         return;
       }
 
-      window.location.href = successLink
+      window.location.href = successLink;
     } catch (error) {
       console.log(error);
       sendSolicitationError.value = true;

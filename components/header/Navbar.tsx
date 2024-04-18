@@ -3,17 +3,17 @@ import {
   Logo,
   Url,
 } from "deco-sites/niivu-bank/components/header/Header.tsx";
-import Image from "apps/website/components/Image.tsx";
 import Step from "deco-sites/niivu-bank/components/header/Step.tsx";
-import Button from "deco-sites/niivu-bank/components/ui/Button.tsx";
 import NavItem from "deco-sites/niivu-bank/components/header/NavItem.tsx";
 import MenuButton from "deco-sites/niivu-bank/components/header/MenuButton.tsx";
 import { UserHandle } from "deco-sites/niivu-bank/components/header/UserHandle.tsx";
 import {
   PATH_MY_ACCOUT,
   PATH_SOLICITATION,
+  PATH_SOLICITATION_SUCCESS,
 } from "deco-sites/niivu-bank/components/header/Constants.ts";
 import { Picture, Source } from "apps/website/components/Picture.tsx";
+import type { UserData } from "deco-sites/niivu-bank/components/header/Header.tsx";
 
 export interface Props {
   /** @description (150px)x(45px) */
@@ -23,12 +23,10 @@ export interface Props {
   statusIndex: number;
   pathname: string;
   isLogged: boolean;
-  userData: {
-    name: string;
-    email?: string;
-    solicitation: string;
-  };
+  userData: UserData;
   isSolicitationSend: boolean;
+  showStep: boolean;
+  isDesktop: boolean;
 }
 
 function Navbar(
@@ -41,18 +39,19 @@ function Navbar(
     isLogged,
     isSolicitationSend,
     userData,
+    showStep,
+    isDesktop,
   }: Props,
 ) {
-  const showLogoutButton =
-    isLogged && !isSolicitationSend && pathname === PATH_SOLICITATION ||
-    pathname === PATH_MY_ACCOUT;
+  const showLogoutButton = isDesktop && isLogged && !isSolicitationSend &&
+      pathname === PATH_SOLICITATION ||
+    pathname === PATH_MY_ACCOUT && isDesktop;
   const showMenu = pathname === PATH_MY_ACCOUT ||
-    pathname === PATH_SOLICITATION || pathname === "/";
+    pathname === PATH_SOLICITATION || pathname === "/" ||
+    pathname.includes(PATH_SOLICITATION_SUCCESS);
   const showUserInfo = isLogged && isSolicitationSend && (
     pathname.includes(PATH_SOLICITATION) || pathname === "/"
   );
-  const showStep = isLogged && isSolicitationSend &&
-    pathname.includes(PATH_SOLICITATION);
 
   return (
     <div class="container h-full flex items-center justify-between text-center">
@@ -66,17 +65,17 @@ function Navbar(
           />
           <Source
             src={logo.desk}
-            width={306}
-            height={92}
+            width={212}
+            height={63}
             class="md:mb-6"
             media="(min-width: 767px)"
           />
           <img src={logo.desk} alt={logo.alt ?? "Niivo Logo Preta Mobile"} />
         </Picture>
       </a>
-      {!showLogoutButton && showStep &&
+      {showStep &&
         (
-          <ul class="timeline max-lg:hidden mx-auto">
+          <ul class="timeline max-lg:hidden mt-6">
             {steps?.map((props, index, array) => (
               <Step
                 {...props}
@@ -96,9 +95,9 @@ function Navbar(
         isLogged={isLogged}
         showUserInfo={showUserInfo}
         showButtonLogout={showLogoutButton}
-        userName={userData.name}
+        userName={userData?.name}
       />
-      {showMenu && <MenuButton />}
+      {!isDesktop && showMenu && <MenuButton />}
     </div>
   );
 }

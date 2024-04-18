@@ -4,7 +4,7 @@ import { invoke } from "deco-sites/niivu-bank/runtime.ts";
 import { Input } from "deco-sites/niivu-bank/components/ui/inputs/index.tsx";
 import {
   validatePassword,
-} from "deco-sites/niivu-bank/utils/validatePassword.tsx";
+} from "deco-sites/niivu-bank/utils/ValidadeForm/Password.ts";
 import Button from "deco-sites/niivu-bank/components/ui/Button.tsx";
 import {
   ACCESS_TOKEN,
@@ -16,7 +16,11 @@ import {
 } from "deco-sites/niivu-bank/components/autentication/constants.ts";
 import { PasswordErrors } from "deco-sites/niivu-bank/components/ui/inputs/PasswordErrors.tsx";
 
-export default function ChangePassword() {
+interface Props {
+  urlChangePassword: string | null;
+}
+
+export default function ChangePassword({ urlChangePassword }: Props) {
   const isLoaging = useSignal(false);
   const isDiffPasswords = useSignal(false);
   const password = useSignal("");
@@ -93,6 +97,23 @@ export default function ChangePassword() {
       isLoaging.value = false;
     }
   };
+
+  if (urlChangePassword?.length) {
+    return (
+      <div class="space-y-4">
+        <p class="text-lg">
+          Confirma que deseja prosseguir para a alteração de sua senha?
+        </p>
+        <Button
+          type="button"
+          class="w-full bg-primary text-neutral rounded font-bold text-sm md:text-lg"
+          onClick={() => window.location.href = urlChangePassword}
+        >
+          Confirmar
+        </Button>
+      </div>
+    );
+  }
 
   return (
     <form onSubmit={handleSubmit} method="POST">

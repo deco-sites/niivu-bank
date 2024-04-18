@@ -75,6 +75,13 @@ interface Props {
   };
 
   /**
+   * @format html
+   * @title Descrição do aceite de termos.
+   * @description Texto que será exibido para o usuário e deve ser confirmado para criar a conta.
+   */
+  disclaimerText: string;
+
+  /**
    * @ignore
    */
   step: Step;
@@ -116,6 +123,7 @@ export async function loader(
   return {
     ...props,
     step,
+    urlChangePassword: searchParams.get("url"),
   };
 }
 
@@ -124,6 +132,8 @@ const Autentication = (
     step = LOGIN,
     textAlignment,
     showLoginSSO,
+    disclaimerText,
+    urlChangePassword,
     banner: { textBanner, image, buttonText },
     header: { mobile, alt, desktop },
   }: SectionProps<typeof loader>,
@@ -146,7 +156,7 @@ const Autentication = (
         {...usePartialSection<typeof Autentication>({
           props: { step },
         })}
-        class="w-full texte-center cursor-pointer text-primary opacity-70 text-sm mt-2 hover:text-secondary"
+        class="w-full text-center cursor-pointer text-primary opacity-70 text-sm mt-2 hover:text-secondary"
       >
         {text}
       </button>
@@ -154,7 +164,7 @@ const Autentication = (
   };
 
   return (
-    <div class="h-screen md:flex bg-white">
+    <div class="h-full min-h-screen md:flex bg-white">
       <div
         class={`relative hidden overflow-hidden md:flex md:flex-col w-1/2 justify-end items-center pb-52 px-auto ${
           !image?.src && "bg-gradient-to-l from-success to-info"
@@ -174,7 +184,7 @@ const Autentication = (
             )}
           </span>
         </div>
-        <span class="absolute top-0 left-0 h-screen">
+        <span class="absolute top-0 left-0 h-full">
           {image && (
             <Image
               src={image.src}
@@ -237,7 +247,7 @@ const Autentication = (
         {step === SIGNUP && (
           <div class="max-w-[348px] m-auto md:m-0 px-4 pt-6 md:p-0 flex flex-col">
             <Title title="Abra agora sua Conta Digital" class="mb-3 text-2xl" />
-            <SignupForm />
+            <SignupForm disclaimerText={disclaimerText} />
             <ButtonPartial />
           </div>
         )}
@@ -259,7 +269,7 @@ const Autentication = (
               subTitle="Digite sua nova senha e confirme"
               class="mb-8 text-3xl"
             />
-            <ChangePassword />
+            <ChangePassword urlChangePassword={urlChangePassword} />
             <ButtonPartial />
           </div>
         )}

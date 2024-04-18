@@ -1,8 +1,11 @@
+import { Input } from "deco-sites/niivu-bank/components/ui/inputs/index.tsx";
+
 export interface Props {
   placeholder: string;
+  messageError?: string;
 }
 
-const CPFFormatter = ({ placeholder }: Props) => {
+const CPFFormatter = ({ placeholder, messageError }: Props) => {
   const handleChange = (e: Event) => {
     const input = e.target as HTMLInputElement;
     const value = input.value.replace(/\D/g, "");
@@ -31,7 +34,9 @@ const CPFFormatter = ({ placeholder }: Props) => {
         required
         maxlength={14}
         onChange={handleChange}
+        onPaste={handleChange}
       />
+      <Input.Error message={messageError?.length ? messageError : undefined} />
     </div>
   );
 };

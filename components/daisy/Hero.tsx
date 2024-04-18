@@ -1,5 +1,4 @@
 import Image from "apps/website/components/Image.tsx";
-import TestButton from "deco-sites/niivu-bank/islands/TestButton.tsx";
 
 export interface Props {
   title: string;

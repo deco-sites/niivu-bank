@@ -3,6 +3,11 @@ import { Picture, Source } from "apps/website/components/Picture.tsx";
 import Image from "apps/website/components/Image.tsx";
 import type { AppContext } from "$store/apps/site.ts";
 import Button from "deco-sites/niivu-bank/components/ui/Button.tsx";
+import {
+  DataObjectSoliciation,
+  Error,
+} from "deco-sites/niivu-bank/packs/solicitation/getDetails.ts";
+import { redirect } from "deco/mod.ts";
 
 export interface IPicture {
   desktop: ImageWidget;
@@ -16,14 +21,22 @@ export interface Props {
   buttonLink?: string;
   /** @title Icone */
   icon?: ImageWidget;
+
+  solicitation: DataObjectSoliciation | Error;
 }
 
 export const loader = (props: Props, req: Request, _ctx: AppContext) => {
+  const statusMessage = props.solicitation.status;
   const url = new URL(req.url);
+  if (typeof statusMessage !== "string") {
+    // We need to pass the complete url. Only with relative urls don't work.
+    redirect(`${url.origin}/minha-conta/solicitacao`);
+  }
 
-  const solicitation_id = url.searchParams.get("solicitation-id");
-
-  return { ...props, solicitation_id };
+  return {
+    ...props,
+    solicitation_id: (props.solicitation as DataObjectSoliciation).id,
+  };
 };
 
 function SucessMessage(

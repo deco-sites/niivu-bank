@@ -8,11 +8,13 @@ import { signal } from "@preact/signals";
 const displayMenu = signal(false);
 const displayCorporateForm = signal(false);
 const sendSolicitationLoading = signal(false);
+const sendSolicitationError = signal(false);
 
 const state = {
   displayMenu,
   displayCorporateForm,
   sendSolicitationLoading,
+  sendSolicitationError,
 };
 
 export const useUI = () => state;

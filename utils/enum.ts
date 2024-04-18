@@ -13,6 +13,8 @@ export const SINGIN_ERROR = "verify-password-email";
 export const SUCCESS = "success";
 export const SERVER_ERROR = "request-error";
 export const TOKEN_ERROR = "tokens-error";
+export const RISK3_ERROR = "risk3-error";
+export const SUPABASE_ERROR = "supabase-error";
 
 export const HAS_SOLICITATION = "has-solicitation";
 export const NO_SOLICITATION = "no-solicitation";

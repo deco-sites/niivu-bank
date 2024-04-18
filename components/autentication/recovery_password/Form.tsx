@@ -43,6 +43,7 @@ export default function RecoveryPasswordForm() {
           <Input.Label label="E-mail" class="mb-2" />
           <Input.Base
             name="email"
+            type="email"
             placeholder="exemple@gmail.com.br"
           />
           <Input.Error

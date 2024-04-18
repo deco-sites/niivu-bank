@@ -12,6 +12,7 @@ import {
   DataObjectSoliciation,
   Error,
 } from "deco-sites/niivu-bank/packs/solicitation/getDetails.ts";
+import { INTERNAL_ERROR } from "deco-sites/niivu-bank/utils/enum.ts";
 
 export interface IStep {
   /** @title Título */
@@ -74,7 +75,9 @@ export function loader(props: Props, req: Request, ctx: AppContext) {
   const statusMessage = props.solicitation.status;
 
   if (typeof statusMessage !== "string") {
-    data.isLogged = false;
+    if (statusMessage === INTERNAL_ERROR) {
+      data.isLogged = false;
+    }
     data.userData = null;
     return data;
   }

@@ -58,6 +58,7 @@ export default function Cep(
         onPaste={getCep}
         class="input"
         type="text"
+        maxLength={9}
         id={`${prefixResult}zip_code`}
         name={`${prefixResult}zip_code`}
         placeholder={placeholder}

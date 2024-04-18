@@ -43,7 +43,7 @@ export interface Props {
   solicitation: DataObjectSoliciation | Error;
 }
 
-export const loader = (props: Props, req: Request, ctx: AppContext) => {
+export const loader = (props: Props, _req: Request, ctx: AppContext) => {
   const statusMessage = props.solicitation.status;
 
   if (typeof statusMessage !== "string") {

@@ -1,4 +1,7 @@
-import { StatusType } from "$store/packs/utils/constants.ts";
+import {
+  SOLICITATION_ENTITY_NAME,
+  StatusType,
+} from "$store/packs/utils/constants.ts";
 import type { AppContext } from "$store/apps/site.ts";
 import Step from "./Step.tsx";
 import Icon from "$store/components/ui/Icon.tsx";
@@ -6,7 +9,6 @@ import {
   DataObjectSoliciation,
   Error,
 } from "../../packs/solicitation/getDetails.ts";
-import { Head } from "https://deno.land/x/fresh@1.6.3/runtime.ts";
 
 export interface ToolTip {
   /**
@@ -47,7 +49,7 @@ export const loader = (props: Props, _req: Request, ctx: AppContext) => {
   if (typeof statusMessage !== "string") {
     return {
       ...props,
-      statusMessage: "Abertura de Conta",
+      statusMessage: statusMessage ?? "Abertura de Conta",
       isDesktop: ctx.device === "desktop",
     };
   }

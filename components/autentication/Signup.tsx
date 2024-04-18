@@ -128,6 +128,7 @@ export default function SignupForm({ disclaimerText }: Props) {
         <WarningConsent
           disclaimerText={disclaimerText}
           buttonLabel="Cadastrar"
+          loading={isLoaging.value}
         />
       </div>
     </form>

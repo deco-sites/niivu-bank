@@ -7,15 +7,17 @@ export interface Props {
   disclaimerText: string;
   buttonSize?: string;
   buttonLabel?: string;
-  isLoading?: boolean;
+  loading?: boolean;
 }
 
 function WarningConsent(
-  { disclaimerText, isLoading, buttonSize, buttonLabel = "Enviar" }: Props,
+  { disclaimerText, loading = false, buttonSize, buttonLabel = "Enviar" }:
+    Props,
 ) {
   const { sendSolicitationLoading, sendSolicitationError } = useUI();
-
   const checkbox = useSignal(false);
+  const isLoaging = sendSolicitationLoading.value || loading;
+  const isButtonType = !checkbox.value && !isLoaging;
 
   return (
     <div class="relative">
@@ -41,10 +43,12 @@ function WarningConsent(
           </p>
         )}
         <button
-          type={checkbox.value ? "submit" : "button"}
-          class={`btn btn-accent pointer-events-none text-white group-has-[input:checked]/warning:pointer-events-auto group-has-[input:checked]/warning:btn-primary text-xl ${buttonSize}`}
+          type={isButtonType ? "submit" : "button"}
+          class={`btn btn-accent pointer-events-none text-white group-has-[input:checked]/warning:pointer-events-auto group-has-[input:checked]/warning:btn-primary text-xl ${buttonSize} ${
+            isLoaging && "cursor-not-allowed btn-accent"
+          }`}
         >
-          {sendSolicitationLoading.value || isLoading
+          {isLoaging
             ? <Loading size="loading-md" style="loading-spinner" />
             : buttonLabel}
         </button>

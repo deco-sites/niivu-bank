@@ -13,10 +13,11 @@ import { PasswordErrors } from "deco-sites/niivu-bank/components/ui/inputs/Passw
 import WarningConsent from "deco-sites/niivu-bank/islands/WarningConsent.tsx";
 
 interface Props {
+  title?: string;
   disclaimerText: string;
 }
 
-export default function SignupForm({ disclaimerText }: Props) {
+export default function SignupForm({ disclaimerText, title }: Props) {
   const isLoaging = useSignal(false);
   const isDiffPasswords = useSignal(false);
   const password = useSignal("");
@@ -127,6 +128,7 @@ export default function SignupForm({ disclaimerText }: Props) {
           )}
         </Input.Root>
         <WarningConsent
+          title={title}
           disclaimerText={disclaimerText}
           buttonLabel="Cadastrar"
           loading={isLoaging.value}

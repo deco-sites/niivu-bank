@@ -75,6 +75,11 @@ interface Props {
   };
 
   /**
+   * @title Titulo do aceite de termos.
+   */
+  title?: string;
+
+  /**
    * @format html
    * @title Descrição do aceite de termos.
    * @description Texto que será exibido para o usuário e deve ser confirmado para criar a conta.
@@ -134,6 +139,7 @@ const Autentication = (
     showLoginSSO,
     disclaimerText,
     urlChangePassword,
+    title,
     banner: { textBanner, image, buttonText },
     header: { mobile, alt, desktop },
   }: SectionProps<typeof loader>,
@@ -247,7 +253,7 @@ const Autentication = (
         {step === SIGNUP && (
           <div class="max-w-[348px] m-auto md:m-0 px-4 pt-6 md:p-0 flex flex-col">
             <Title title="Abra agora sua Conta Digital" class="mb-3 text-2xl" />
-            <SignupForm disclaimerText={disclaimerText} />
+            <SignupForm title={title} disclaimerText={disclaimerText} />
             <ButtonPartial />
           </div>
         )}

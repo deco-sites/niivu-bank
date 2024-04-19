@@ -4,6 +4,7 @@ import { ERROR_SEND_SOLICITATION } from "deco-sites/niivu-bank/components/solici
 import { useSignal } from "@preact/signals";
 
 export interface Props {
+  title?: string;
   disclaimerText: string;
   buttonSize?: string;
   buttonLabel?: string;
@@ -11,14 +12,18 @@ export interface Props {
 }
 
 function WarningConsent(
-  { disclaimerText, loading = false, buttonSize, buttonLabel = "Enviar" }:
-    Props,
+  {
+    title,
+    disclaimerText,
+    loading = false,
+    buttonSize,
+    buttonLabel = "Enviar",
+  }: Props,
 ) {
   const { sendSolicitationLoading, sendSolicitationError } = useUI();
   const checkbox = useSignal(false);
   const isLoaging = sendSolicitationLoading.value || loading;
   const isButtonType = !checkbox.value && !isLoaging;
-
   return (
     <div class="relative">
       <div class="flex flex-col gap-10 group/warning">
@@ -31,9 +36,11 @@ function WarningConsent(
             id="warningConsent"
           />
           <div class="flex flex-col gap-2">
-            <span class="font-normal">
-              Autorização
-            </span>
+            {title?.length && (
+              <span class="font-normal">
+                {title}
+              </span>
+            )}
             <div dangerouslySetInnerHTML={{ __html: disclaimerText }} />
           </div>
         </div>

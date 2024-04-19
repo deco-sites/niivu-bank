@@ -47,7 +47,8 @@ function Navbar(
   const isSolicitationPage = pathname === PATH_SOLICITATION;
   const isMyAccountPage = pathname === PATH_MY_ACCOUNT;
 
-  const showLogoutButton = isDesktop && isLogged && (!isSolicitationSend  || isMyAccountPage) &&
+  const showLogoutButton = isDesktop && isLogged &&
+    (!isSolicitationSend || isMyAccountPage) &&
     (isSolicitationPage || isMyAccountPage || (isHomePage && isDesktop));
   const showMenu = isMyAccountPage ||
     isSolicitationPage || isHomePage ||

@@ -43,7 +43,7 @@ function WarningConsent(
           </p>
         )}
         <button
-          type={isButtonType ? "submit" : "button"}
+          type={isButtonType ? "button" : "submit"}
           class={`btn btn-accent pointer-events-none text-white group-has-[input:checked]/warning:pointer-events-auto group-has-[input:checked]/warning:btn-primary text-xl ${buttonSize} ${
             isLoaging && "cursor-not-allowed btn-accent"
           }`}

@@ -8,7 +8,7 @@ import NavItem from "deco-sites/niivu-bank/components/header/NavItem.tsx";
 import MenuButton from "deco-sites/niivu-bank/components/header/MenuButton.tsx";
 import { UserHandle } from "deco-sites/niivu-bank/components/header/UserHandle.tsx";
 import {
-  PATH_MY_ACCOUT,
+  PATH_MY_ACCOUNT,
   PATH_SOLICITATION,
   PATH_SOLICITATION_SUCCESS,
 } from "deco-sites/niivu-bank/components/header/Constants.ts";
@@ -43,14 +43,17 @@ function Navbar(
     isDesktop,
   }: Props,
 ) {
+  const isHomePage = pathname === "/";
+  const isSolicitationPage = pathname === PATH_SOLICITATION;
+  const isMyAccountPage = pathname === PATH_MY_ACCOUNT;
+
   const showLogoutButton = isDesktop && isLogged && !isSolicitationSend &&
-      pathname === PATH_SOLICITATION ||
-    pathname === PATH_MY_ACCOUT && isDesktop;
-  const showMenu = pathname === PATH_MY_ACCOUT ||
-    pathname === PATH_SOLICITATION || pathname === "/" ||
+    (isSolicitationPage || isMyAccountPage || (isHomePage && isDesktop));
+  const showMenu = isMyAccountPage ||
+    isSolicitationPage || isHomePage ||
     pathname.includes(PATH_SOLICITATION_SUCCESS);
   const showUserInfo = isLogged && isSolicitationSend && (
-    pathname.includes(PATH_SOLICITATION) || pathname === "/"
+    pathname.includes(PATH_SOLICITATION) || isHomePage
   );
 
   return (

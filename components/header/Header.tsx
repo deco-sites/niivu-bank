@@ -112,7 +112,7 @@ function Header(
     : steps?.findIndex((step) => step.isCurrent);
   const showStep = isLogged &&
     (!isSolicitationSend || pathname.includes(PATH_SOLICITATION_SUCCESS)) &&
-    pathname.includes(PATH_SOLICITATION);
+    (pathname.includes(PATH_SOLICITATION) && !isDesktop);
   return (
     <header>
       <Drawers

@@ -43,25 +43,25 @@ export async function handler(
     }
 
     const analysisRisk3 = record.credit_status;
-    const isApproved = analysisRisk3 &&
-      (record.analysis_classification === STATUS_ENUM_ACCOUNT_OPENING &&
-        old_record.analysis_classification !== STATUS_ENUM_ACCOUNT_OPENING);
-    const isReproved = !analysisRisk3 &&
-      record.analysis_classification === STATUS_ENUM_DISAPPROVED;
-    if (!isApproved && !isReproved) {
-      return;
-    }
-    if (isApproved && isReproved) {
-      console.error(
-        "Erro ao enviar email, status de análise inválido solicitation aprovado e Reprovada ao mesmo tempo",
-        {
-          idRisk3Solicitation: record.id_risk3,
-          isApproved,
-          isReproved,
-        },
-      );
-      return;
-    }
+    // const isApproved = analysisRisk3 &&
+    //   (record.analysis_classification === STATUS_ENUM_ACCOUNT_OPENING &&
+    //     old_record.analysis_classification !== STATUS_ENUM_ACCOUNT_OPENING);
+    // const isReproved = !analysisRisk3 &&
+    //   record.analysis_classification === STATUS_ENUM_DISAPPROVED;
+    // if (!isApproved && !isReproved) {
+    //   return;
+    // }
+    // if (isApproved && isReproved) {
+    //   console.error(
+    //     "Erro ao enviar email, status de análise inválido solicitation aprovado e Reprovada ao mesmo tempo",
+    //     {
+    //       idRisk3Solicitation: record.id_risk3,
+    //       isApproved,
+    //       isReproved,
+    //     },
+    //   );
+    //   return;
+    // }
 
     const nameSplit = record.full_name?.split(" ");
     const param: CreditRequestData = {
@@ -86,8 +86,8 @@ export async function handler(
     return await ctx.state.invoke(
       "deco-sites/niivu-bank/loaders/actions/sendEmail.ts",
       {
-        isApproved: isApproved,
-        isReproved: isReproved,
+        isApproved: analysisRisk3,
+        isReproved: !analysisRisk3,
         email: record.email,
         fullName: record.full_name,
         name: nameSplit ? nameSplit[0] : undefined,

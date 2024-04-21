@@ -47,13 +47,11 @@ function Navbar(
   const isSolicitationPage = pathname === PATH_SOLICITATION;
   const isMyAccountPage = pathname === PATH_MY_ACCOUNT;
 
-  const showLogoutButton = isDesktop && isLogged &&
-    (!isSolicitationSend || isMyAccountPage) &&
-    (isSolicitationPage || isMyAccountPage || (isHomePage && isDesktop));
+  const showLogoutButton = isDesktop && isLogged && isMyAccountPage;
   const showMenu = isMyAccountPage ||
     isSolicitationPage || isHomePage ||
     pathname.includes(PATH_SOLICITATION_SUCCESS);
-  const showUserInfo = isLogged && isSolicitationSend && !isMyAccountPage;
+  const showUserInfo = isLogged && isDesktop && !isMyAccountPage;
 
   return (
     <div class="container h-full flex items-center justify-between text-center">

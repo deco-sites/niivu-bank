@@ -10,7 +10,7 @@ export function PasswordErrors({
 }: { validationResult: PasswordValidationResult }) {
   return (
     <>
-      {validationResult.isValid && (
+      {!validationResult.isValid && (
         <Input.Label key="topLabel" label="Sua senha deve ter:" class="mt-3" />
       )}
       {validationResult.errors.map((error, index) => {

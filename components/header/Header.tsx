@@ -20,7 +20,7 @@ export interface IStep {
 
   /**
    * @title É o Atual?
-   * @description Esse campo deve ser selecionado apenas uma vez em um dos passos. Ele Vai definir em que etapa o usuário está.
+   * @description Esse campo deve ser selecionado apenas uma vez em um dos passos. Ele Vai definir em que etapa o usuário inicia.
    */
   isCurrent?: boolean;
 }
@@ -51,6 +51,11 @@ export interface Props {
   urls: Url[];
   /** @ignore */
   steps?: IStep[];
+
+  /** @title mostrar o step?
+   * @description Se o usuário está logado e a solicitação foi enviada, o step é mostrado
+   */
+  showStep?: boolean;
 
   solicitation: DataObjectSoliciation | Error;
 }
@@ -104,15 +109,14 @@ function Header(
     pathname,
     isLogged,
     userData,
+    showStep = false,
     isSolicitationSend,
   }: SectionProps<typeof loader>,
 ) {
   const statusIndex = isSolicitationSend
     ? steps?.length! - 1
     : steps?.findIndex((step) => step.isCurrent);
-  const showStep = isLogged &&
-    (!isSolicitationSend || pathname.includes(PATH_SOLICITATION_SUCCESS)) &&
-    (pathname.includes(PATH_SOLICITATION) && !isDesktop);
+
   return (
     <header>
       <Drawers

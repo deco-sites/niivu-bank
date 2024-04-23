@@ -20,11 +20,11 @@ export interface Props {
   logo: Logo;
   urls?: Url[];
   steps?: IStep[];
+  showNavItems?: boolean;
   statusIndex: number;
   pathname: string;
   isLogged: boolean;
   userData: UserData;
-  isSolicitationSend: boolean;
   showStep: boolean;
   isDesktop: boolean;
 }
@@ -33,11 +33,11 @@ function Navbar(
   {
     logo,
     steps,
+    showNavItems,
     statusIndex,
     urls,
     pathname,
     isLogged,
-    isSolicitationSend,
     userData,
     showStep,
     isDesktop,
@@ -86,7 +86,7 @@ function Navbar(
             ))}
           </ul>
         )}
-      {!showStep && showMenu && (
+      {showMenu && showNavItems && (
         <ul class="hidden md:flex items-center w-full pl-28 gap-12">
           {urls?.map((item) => <NavItem item={item} />)}
         </ul>

@@ -52,10 +52,14 @@ export interface Props {
   /** @ignore */
   steps?: IStep[];
 
-  /** @title mostrar o step?
+  /**
+   * @title mostrar o step?
    * @description Se o usuário está logado e a solicitação foi enviada, o step é mostrado
    */
   showStep?: boolean;
+
+  /** @title Mostrar os itens de navegação */
+  showNavItems?: boolean;
 
   solicitation: DataObjectSoliciation | Error;
 }
@@ -109,6 +113,7 @@ function Header(
     pathname,
     isLogged,
     userData,
+    showNavItems = true,
     showStep = false,
     isSolicitationSend,
   }: SectionProps<typeof loader>,
@@ -124,6 +129,7 @@ function Header(
       >
         <div class="w-full border-b border-base-300 max-lg:border-[#E5E5E5] max-lg:h-16 h-28">
           <Navbar
+            showNavItems={showNavItems}
             logo={logo}
             steps={steps}
             urls={urls}
@@ -131,7 +137,6 @@ function Header(
             pathname={pathname}
             isLogged={isLogged}
             userData={userData}
-            isSolicitationSend={isSolicitationSend}
             showStep={showStep}
             isDesktop={isDesktop}
           />

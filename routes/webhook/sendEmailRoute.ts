@@ -42,9 +42,9 @@ export async function handler(
     ) {
       return;
     }
-
-    const isApproved = record.analysis_classification === STATUS_ENUM_ACCOUNT_OPENING;
-    const isReproved = record.analysis_classification === STATUS_ENUM_DISAPPROVED;
+    console.log("record status", record.status);
+    const isApproved = record.status === STATUS_ENUM_ACCOUNT_OPENING;
+    const isReproved = record.status === STATUS_ENUM_DISAPPROVED;
 
     if (!isApproved && !isReproved) {
       console.error(

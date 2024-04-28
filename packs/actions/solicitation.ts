@@ -174,7 +174,8 @@ export default async function loader(
       clientRisk3["POST /api/v0/logout"]({}, {
         headers,
       });
-    } catch (_error) {
+    } catch (error) {
+      console.error(error);
       return { status: INTERNAL_ERROR, message: RISK3_ERROR };
     }
 
@@ -200,6 +201,7 @@ export default async function loader(
         ...customerWithStatus,
       }]).select();
     if (error) {
+      console.error(error);
       return { status: INTERNAL_ERROR, message: SUPABASE_ERROR };
     }
 
@@ -219,7 +221,8 @@ export default async function loader(
         },
       ).then((res) => res.json());
       recordsData = records;
-    } catch (_error) {
+    } catch (error) {
+      console.error(error);
       return { status: INTERNAL_ERROR, message: RISK3_ERROR };
     }
 
@@ -269,6 +272,7 @@ export default async function loader(
         ...customerWithStatus,
       }]).select();
     if (error) {
+      console.error(error);
       return { status: INTERNAL_ERROR, message: SUPABASE_ERROR };
     }
     return data as DataObjectSoliciation[];

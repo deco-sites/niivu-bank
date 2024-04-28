@@ -23,6 +23,7 @@ export async function handler(
   console.log("email iniciado");
   try {
     //o body da requisição é um stream
+    console.log(req);
     const bodyText = await req.text();
     const cleanBodyText = bodyText.replace(/\n/g, "").replace(/\s+/g, " ");
     const fixedBodyText = cleanBodyText.replace(/"{/g, "'{").replace(
@@ -79,7 +80,7 @@ export async function handler(
       rg: record.rg,
     };
 
-    console.log("invoke actions sendEmail");
+    console.log("invoke actions sendEmail solicitation ", record.id_risk3);
     return await ctx.state.invoke(
       "deco-sites/niivu-bank/loaders/actions/sendEmail.ts",
       {

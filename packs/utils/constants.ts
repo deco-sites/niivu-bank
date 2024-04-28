@@ -15,7 +15,7 @@ export const RESPONSE_RISK3_APPROVED = "aprovado";
 export const HEADER_AUTH_TOKEN = "Venidera-AuthToken";
 
 export type StatusType =
-  | "Analise de Crédito"
+  | "Análise de Crédito"
   | "Abertura de Conta"
   | "Assinatura"
   | "Habilitado"

@@ -40,16 +40,23 @@ export interface Status {
 export interface Props {
   status: Status[];
 
+  /**
+   * @title Mensagem de Status padrão
+   * @description Mensagem que será exibida caso não seja passado um status
+   */
+  statusMessageDefault?: string;
+
   solicitation: DataObjectSoliciation | Error;
 }
 
 export const loader = (props: Props, _req: Request, ctx: AppContext) => {
   const statusMessage = props.solicitation.status;
+  const statusMessageDefault = props.statusMessageDefault;
 
   if (typeof statusMessage !== "string") {
     return {
       ...props,
-      statusMessage: statusMessage ?? "Abertura de Conta",
+      statusMessage: statusMessageDefault,
       isDesktop: ctx.device === "desktop",
     };
   }
@@ -57,7 +64,7 @@ export const loader = (props: Props, _req: Request, ctx: AppContext) => {
 };
 
 function FollowSolicitation(
-  { status, isDesktop, statusMessage = "Abertura de Conta" }: Awaited<
+  { status, isDesktop, statusMessage }: Awaited<
     ReturnType<typeof loader>
   >,
 ) {

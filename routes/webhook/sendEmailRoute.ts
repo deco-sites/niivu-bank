@@ -42,12 +42,9 @@ export async function handler(
       return;
     }
 
-    const analysisRisk3 = record.credit_status;
-    const isApproved = analysisRisk3 &&
-      (record.analysis_classification === STATUS_ENUM_ACCOUNT_OPENING &&
+    const isApproved = (record.analysis_classification === STATUS_ENUM_ACCOUNT_OPENING &&
         old_record.analysis_classification !== STATUS_ENUM_ACCOUNT_OPENING);
-    const isReproved = !analysisRisk3 &&
-      record.analysis_classification === STATUS_ENUM_DISAPPROVED;
+    const isReproved = record.analysis_classification === STATUS_ENUM_DISAPPROVED;
     if (!isApproved && !isReproved) {
       return;
     }

@@ -34,7 +34,7 @@ export async function handler(
       "(" + fixedBodyText + ")",
     ) as unknown as WebhookRequestSupabase;
 
-    const { type, record, old_record } = objectJSON;
+    const { type, record } = objectJSON;
 
     if (
       type !== "UPDATE" ||
@@ -43,7 +43,7 @@ export async function handler(
       return;
     }
 
-    const isApproved = record.analysis_classification === STATUS_ENUM_ACCOUNT_OPENING)
+    const isApproved = record.analysis_classification === STATUS_ENUM_ACCOUNT_OPENING;
     const isReproved = record.analysis_classification === STATUS_ENUM_DISAPPROVED;
 
     if (!isApproved && !isReproved) {

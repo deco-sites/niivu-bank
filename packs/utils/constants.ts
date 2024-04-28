@@ -1,7 +1,7 @@
 export const SOLICITATION_ENTITY_NAME = "solicitation";
 export const SOLICITATION_FILD_ID_RISK = "id_risk3";
 
-export const STATUS_ENUM_CREDIT_ANALYSIS = "Analise de Crédito";
+export const STATUS_ENUM_CREDIT_ANALYSIS = "Análise de Crédito";
 export const STATUS_ENUM_ACCOUNT_OPENING = "Abertura de Conta";
 export const STATUS_ENUM_RISK3_FAILED = "Reprovado RISK3";
 export const STATUS_ENUM_SIGNATURE = "Assinatura";

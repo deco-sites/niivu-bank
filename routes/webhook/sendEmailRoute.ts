@@ -23,7 +23,6 @@ export async function handler(
   console.log("email iniciado");
   try {
     //o body da requisição é um stream
-    console.log(req);
     const bodyText = await req.text();
     const cleanBodyText = bodyText.replace(/\n/g, "").replace(/\s+/g, " ");
     const fixedBodyText = cleanBodyText.replace(/"{/g, "'{").replace(
@@ -42,13 +41,13 @@ export async function handler(
     ) {
       return;
     }
-    console.log("record status", record.status);
+
     const isApproved = record.status === STATUS_ENUM_ACCOUNT_OPENING;
     const isReproved = record.status === STATUS_ENUM_DISAPPROVED;
 
     if (!isApproved && !isReproved) {
       console.error(
-        "Erro ao enviar email, status de análise inválido solicitation não aprovado e não Reprovada",
+        "Error sending email, analysis status invalid request not approved and not Failed",
         {
           idRisk3Solicitation: record.id_risk3,
           isApproved,
@@ -59,7 +58,7 @@ export async function handler(
     }
     if (isApproved && isReproved) {
       console.error(
-        "Erro ao enviar email, status de análise inválido solicitation aprovado e Reprovada ao mesmo tempo",
+        "Error sending email, invalid analysis status, request approved and failed at the same time",
         {
           idRisk3Solicitation: record.id_risk3,
           isApproved,
@@ -88,7 +87,7 @@ export async function handler(
       rg: record.rg,
     };
 
-    console.log("invoke actions sendEmail solicitation ", record.id_risk3);
+    console.log("invoke actions sendEmail, solicitation_id: ", record.id_risk3);
     return await ctx.state.invoke(
       "deco-sites/niivu-bank/loaders/actions/sendEmail.ts",
       {

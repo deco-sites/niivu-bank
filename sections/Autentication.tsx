@@ -181,14 +181,14 @@ const Autentication = (
             textAlignment && verticalAlignment[textAlignment]
           }`}
         >
-          <span class="space-y-6">
+          <div class="space-y-6 px-3">
             {textBanner && <RichText text={textBanner} />}
             {buttonText && (
               <Button class="h-14 w-52 btn btn-outline btn-neutral px-6 py-4 text-base">
                 {buttonText}
               </Button>
             )}
-          </span>
+          </div>
         </div>
         <span class="absolute top-0 left-0 h-full">
           {image && (

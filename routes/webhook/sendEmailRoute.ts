@@ -46,7 +46,16 @@ export async function handler(
     const isApproved = (record.analysis_classification === STATUS_ENUM_ACCOUNT_OPENING &&
         old_record.analysis_classification !== STATUS_ENUM_ACCOUNT_OPENING);
     const isReproved = record.analysis_classification === STATUS_ENUM_DISAPPROVED;
+
     if (!isApproved && !isReproved) {
+      console.error(
+        "Erro ao enviar email, status de análise inválido solicitation não aprovado e não Reprovada",
+        {
+          idRisk3Solicitation: record.id_risk3,
+          isApproved,
+          isReproved,
+        },
+      );
       return;
     }
     if (isApproved && isReproved) {

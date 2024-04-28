@@ -44,6 +44,7 @@ function personalForm({ inputs }: Props) {
           <StandardInput
             labelText="RG"
             id="rg"
+            maxLength={20}
             placeholder={inputs?.RG.placeholder ?? PLACEHOLDER_RG}
           />
         </Container>

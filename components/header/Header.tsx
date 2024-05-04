@@ -1,18 +1,15 @@
 import { ImageWidget } from "apps/admin/widgets.ts";
 import Step from "./Step.tsx";
 import { AppContext } from "deco-sites/niivu-bank/apps/site.ts";
-import { SectionProps } from "deco/mod.ts";
-import Drawers from "deco-sites/niivu-bank/components/header/Drawer.tsx";
+import { SectionProps } from "deco/mod.ts";;
 import Navbar from "deco-sites/niivu-bank/components/header/Navbar.tsx";
-import {
-  PATH_SOLICITATION,
-  PATH_SOLICITATION_SUCCESS,
-} from "deco-sites/niivu-bank/components/header/Constants.ts";
 import {
   DataObjectSoliciation,
   Error,
 } from "deco-sites/niivu-bank/packs/solicitation/getDetails.ts";
 import { INTERNAL_ERROR } from "deco-sites/niivu-bank/utils/enum.ts";
+import DropdownContainer from "deco-sites/niivu-bank/components/header/dropdown/Container.tsx";
+import { useId } from "deco-sites/niivu-bank/sdk/useId.ts";
 
 export interface IStep {
   /** @title Título */
@@ -121,14 +118,15 @@ function Header(
   const statusIndex = isSolicitationSend
     ? steps?.length! - 1
     : steps?.findIndex((step) => step.isCurrent);
+  const id = useId()
 
   return (
     <header>
-      <Drawers
-        menu={{ urls, isLogged }}
-      >
+      <DropdownContainer id={id}>
         <div class="w-full border-b border-base-300 max-lg:border-[#E5E5E5] max-lg:h-16 h-28">
           <Navbar
+            id={id}
+            menu={{ urls, isLogged }}
             showNavItems={showNavItems}
             logo={logo}
             steps={steps}
@@ -141,7 +139,7 @@ function Header(
             isDesktop={isDesktop}
           />
         </div>
-      </Drawers>
+      </DropdownContainer>
       {!isDesktop && showStep && (
         <ul class="timeline max-lg:w-full mx-auto">
           {steps?.map((props, index, array) => (

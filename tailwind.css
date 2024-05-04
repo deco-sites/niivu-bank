@@ -4,6 +4,9 @@
 
 @layer base {
 
+  body:has(.dropdown-open) { 
+    overflow: hidden;
+  }
 
   /* Allow changing font family via CMS */
   html {

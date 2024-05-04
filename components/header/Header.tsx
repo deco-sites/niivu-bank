@@ -1,7 +1,7 @@
 import { ImageWidget } from "apps/admin/widgets.ts";
 import Step from "./Step.tsx";
 import { AppContext } from "deco-sites/niivu-bank/apps/site.ts";
-import { SectionProps } from "deco/mod.ts";;
+import { SectionProps } from "deco/mod.ts";
 import Navbar from "deco-sites/niivu-bank/components/header/Navbar.tsx";
 import {
   DataObjectSoliciation,
@@ -118,7 +118,7 @@ function Header(
   const statusIndex = isSolicitationSend
     ? steps?.length! - 1
     : steps?.findIndex((step) => step.isCurrent);
-  const id = useId()
+  const id = useId();
 
   return (
     <header>

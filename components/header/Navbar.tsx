@@ -13,7 +13,9 @@ import {
 } from "deco-sites/niivu-bank/components/header/Constants.ts";
 import { Picture, Source } from "apps/website/components/Picture.tsx";
 import type { UserData } from "deco-sites/niivu-bank/components/header/Header.tsx";
-import Menu, { Props as MenuProps } from "deco-sites/niivu-bank/components/header/Menu.tsx";
+import Menu, {
+  Props as MenuProps,
+} from "deco-sites/niivu-bank/components/header/Menu.tsx";
 import DropDownButton from "deco-sites/niivu-bank/components/header/dropdown/Button.tsx";
 import DropdownContent from "deco-sites/niivu-bank/components/header/dropdown/Content.tsx";
 import Icon from "deco-sites/niivu-bank/components/ui/Icon.tsx";
@@ -47,7 +49,7 @@ function Navbar(
     showStep,
     isDesktop,
     id,
-    menu
+    menu,
   }: Props,
 ) {
   const isHomePage = pathname === "/";
@@ -104,14 +106,19 @@ function Navbar(
         showButtonLogout={showLogoutButton}
         userName={userData?.name}
       />
-      {!isDesktop && showMenu && <> <DropDownButton id={id} class="md:hidden btn btn-circle md:btn-sm btn-xs btn-ghost">
-        <Icon id="Bars3" size={20} strokeWidth={0.01} />
-      </DropDownButton>
-        <DropdownContent id={id}>
-          <Menu {...menu} />
-        </DropdownContent>
-      </>
-      }
+      {!isDesktop && showMenu && (
+        <>
+          <DropDownButton
+            id={id}
+            class="md:hidden btn btn-circle md:btn-sm btn-xs btn-ghost"
+          >
+            <Icon id="Bars3" size={20} strokeWidth={0.01} />
+          </DropDownButton>
+          <DropdownContent id={id}>
+            <Menu {...menu} />
+          </DropdownContent>
+        </>
+      )}
     </div>
   );
 }

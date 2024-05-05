@@ -29,20 +29,24 @@ function Menu({ urls, isLogged }: Props) {
         </li>
       ))}
       <li class="h-11 flex items-center">
-        {isLogged ? (
-            <ButtonLogout />
-        ) : (
-          <a class="flex justify-between w-full" href={`/entrar`}>
-            <div class="flex text-base text-secondary">
-              <Icon id="User" width={16} height={24} class="pt-px" />
-              <p class="pt-px ml-4">
-                Entrar
-              </p>
-            </div>
-            <Icon id="ChevronRight" height={24} width={20} class="text-base-300" />
-          </a>
-        )
-        }
+        {isLogged
+          ? <ButtonLogout />
+          : (
+            <a class="flex justify-between w-full" href={`/entrar`}>
+              <div class="flex text-base text-secondary">
+                <Icon id="User" width={16} height={24} class="pt-px" />
+                <p class="pt-px ml-4">
+                  Entrar
+                </p>
+              </div>
+              <Icon
+                id="ChevronRight"
+                height={24}
+                width={20}
+                class="text-base-300"
+              />
+            </a>
+          )}
       </li>
     </ul>
   );

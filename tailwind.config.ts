@@ -5,13 +5,13 @@ export default {
   daisyui: { themes: [], logs: false },
   content: ["./**/*.tsx"],
   theme: {
-    colors: {
-      "facebook": "#1877F2",
-    },
     container: { center: true },
     extend: {
       animation: {
         sliding: "sliding 30s linear infinite",
+      },
+      colors: {
+        "facebook": "#1877F2",
       },
       keyframes: {
         sliding: {

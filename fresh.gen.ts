@@ -20,9 +20,8 @@ import * as $Cep from "./islands/Cep.tsx";
 import * as $Cnpj from "./islands/Cnpj.tsx";
 import * as $CorporationForm from "./islands/CorporationForm.tsx";
 import * as $Cpf from "./islands/Cpf.tsx";
+import * as $Dropdown_Button from "./islands/Dropdown/Button.tsx";
 import * as $Form from "./islands/Form.tsx";
-import * as $Header_Dreawer from "./islands/Header/Dreawer.tsx";
-import * as $Header_MenuButton from "./islands/Header/MenuButton.tsx";
 import * as $Input_Password from "./islands/Input/Password.tsx";
 import * as $Newsletter from "./islands/Newsletter.tsx";
 import * as $OutOfStock from "./islands/OutOfStock.tsx";
@@ -60,9 +59,8 @@ const manifest = {
     "./islands/Cnpj.tsx": $Cnpj,
     "./islands/CorporationForm.tsx": $CorporationForm,
     "./islands/Cpf.tsx": $Cpf,
+    "./islands/Dropdown/Button.tsx": $Dropdown_Button,
     "./islands/Form.tsx": $Form,
-    "./islands/Header/Dreawer.tsx": $Header_Dreawer,
-    "./islands/Header/MenuButton.tsx": $Header_MenuButton,
     "./islands/Input/Password.tsx": $Input_Password,
     "./islands/Newsletter.tsx": $Newsletter,
     "./islands/OutOfStock.tsx": $OutOfStock,

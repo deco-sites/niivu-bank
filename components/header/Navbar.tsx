@@ -5,7 +5,6 @@ import {
 } from "deco-sites/niivu-bank/components/header/Header.tsx";
 import Step from "deco-sites/niivu-bank/components/header/Step.tsx";
 import NavItem from "deco-sites/niivu-bank/components/header/NavItem.tsx";
-import MenuButton from "deco-sites/niivu-bank/components/header/MenuButton.tsx";
 import { UserHandle } from "deco-sites/niivu-bank/components/header/UserHandle.tsx";
 import {
   PATH_MY_ACCOUNT,
@@ -14,6 +13,12 @@ import {
 } from "deco-sites/niivu-bank/components/header/Constants.ts";
 import { Picture, Source } from "apps/website/components/Picture.tsx";
 import type { UserData } from "deco-sites/niivu-bank/components/header/Header.tsx";
+import Menu, {
+  Props as MenuProps,
+} from "deco-sites/niivu-bank/components/header/Menu.tsx";
+import DropDownButton from "deco-sites/niivu-bank/components/header/dropdown/Button.tsx";
+import DropdownContent from "deco-sites/niivu-bank/components/header/dropdown/Content.tsx";
+import Icon from "deco-sites/niivu-bank/components/ui/Icon.tsx";
 
 export interface Props {
   /** @description (150px)x(45px) */
@@ -27,6 +32,8 @@ export interface Props {
   userData: UserData;
   showStep: boolean;
   isDesktop: boolean;
+  id: string;
+  menu: MenuProps;
 }
 
 function Navbar(
@@ -41,6 +48,8 @@ function Navbar(
     userData,
     showStep,
     isDesktop,
+    id,
+    menu,
   }: Props,
 ) {
   const isHomePage = pathname === "/";
@@ -73,7 +82,7 @@ function Navbar(
           <img src={logo.desk} alt={logo.alt ?? "Niivo Logo Preta Mobile"} />
         </Picture>
       </a>
-      {showStep &&
+      {isDesktop && showStep &&
         (
           <ul class="timeline max-lg:hidden mt-6">
             {steps?.map((props, index, array) => (
@@ -97,7 +106,19 @@ function Navbar(
         showButtonLogout={showLogoutButton}
         userName={userData?.name}
       />
-      {!isDesktop && showMenu && <MenuButton />}
+      {!isDesktop && showMenu && (
+        <>
+          <DropDownButton
+            id={id}
+            class="md:hidden btn btn-circle md:btn-sm btn-xs btn-ghost"
+          >
+            <Icon id="Bars3" size={20} strokeWidth={0.01} />
+          </DropDownButton>
+          <DropdownContent id={id}>
+            <Menu {...menu} />
+          </DropdownContent>
+        </>
+      )}
     </div>
   );
 }

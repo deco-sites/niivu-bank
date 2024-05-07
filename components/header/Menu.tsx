@@ -21,7 +21,7 @@ function MenuItem({ item }: { item: Url }) {
 
 function Menu({ urls, isLogged }: Props) {
   return (
-    <ul tabIndex={0} class="px-4 w-full bg-white flex flex-col">
+    <ul class="px-4 w-full bg-white flex flex-col">
       {urls?.map((item) => (
         <li class="h-11 py-2 flex items-center border-b border-base-300">
           <MenuItem item={item} />

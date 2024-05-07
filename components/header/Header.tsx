@@ -61,13 +61,12 @@ export interface Props {
   /** @title Mostrar os itens de navegação */
   showNavItems?: boolean;
 
-  solicitation: DataObjectSoliciation | Error;
+  solicitations: DataObjectSoliciation[] | Error;
 }
 
 export type UserData = null | {
   name?: string;
   email?: string;
-  solicitation: string | null;
 };
 
 export function loader(props: Props, req: Request, ctx: AppContext) {
@@ -81,24 +80,22 @@ export function loader(props: Props, req: Request, ctx: AppContext) {
     isSolicitationSend: false,
     userData: null as UserData,
   };
-  const statusMessage = props.solicitation.status;
 
-  if (typeof statusMessage !== "string") {
-    if (statusMessage === INTERNAL_ERROR) {
+  if (!Array.isArray(props.solicitations)) {
+    if (props.solicitations.status === INTERNAL_ERROR) {
       data.isLogged = false;
     }
     data.userData = null;
     return data;
   }
 
-  const solicitation = props.solicitation as DataObjectSoliciation;
+  const solicitation = props.solicitations[0] as DataObjectSoliciation;
   const userName = solicitation?.full_name?.split(" ");
   data.isSolicitationSend = !!solicitation?.id_risk3;
 
   data.userData = {
     name: `${userName?.[0]} ${userName?.[userName.length - 1]}`,
     email: solicitation.email,
-    solicitation: solicitation?.id_risk3,
   };
 
   return data;

@@ -88,7 +88,7 @@ interface Props {
     title?: string;
 
     /**
-     * @format html
+     * @format rich-text
      * @title Descrição do aceite de termos.
      * @description Texto que será exibido para o usuário e deve ser confirmado para criar a conta.
      */

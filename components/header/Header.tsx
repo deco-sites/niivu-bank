@@ -82,7 +82,7 @@ export function loader(props: Props, req: Request, ctx: AppContext) {
   };
 
   if (!Array.isArray(props.solicitations)) {
-    if (props.solicitations.status === INTERNAL_ERROR) {
+    if (props.solicitations?.status === INTERNAL_ERROR) {
       data.isLogged = false;
     }
     data.userData = null;

@@ -54,7 +54,7 @@ function StatusTable({ solicitations, status, statusMessageDefault, isDesktop }:
                         <input class="hidden" id={`${index}`} type="checkbox" />
                         <label htmlFor={`${index}`}>
                             <div class="collapse-title min-h-0 p-0 rounded-none">
-                                <div class="flex justify-start items-center gap-4 leading-4 text-[#111214] border-b border-[#E0E0E0] h-10 bg-transparent text-sm py-3 px-2 max-md:gap-2 max-md:text-[11px]">
+                                <div class="flex justify-start items-center gap-4 leading-4 text-[#111214] border-b border-[#E0E0E0] h-10 bg-transparent text-sm py-3 px-2 max-md:gap-2 max-md:text-[11px] group-has-[input:checked]/form:border-none">
                                     <p class="max-w-80 w-full h-6">{solicitation.id}</p>
                                     <p class="max-w-80 w-full h-6">{solicitation.cnpj ?? solicitation.cpf}</p>
                                     <div class="max-w-80 w-full h-6">
@@ -63,7 +63,7 @@ function StatusTable({ solicitations, status, statusMessageDefault, isDesktop }:
                                             <p class="line-clamp-1">{solicitation.status}</p>
                                         </div>
                                     </div>
-                                    <label class="swap group-has-[input:checked]/form:swap-active swap-rotate ml-auto">
+                                    <label class="swap group-has-[input:checked]/form:swap-active swap-rotate ml-auto -z-10">
                                         <Icon id="ChevronRight" width={24} height={24} class="swap-off text-[#888D95]" />
                                         <Icon id="ChevronDown" width={24} height={24} class="swap-on text-[#888D95]" />
                                     </label>
@@ -71,7 +71,9 @@ function StatusTable({ solicitations, status, statusMessageDefault, isDesktop }:
                             </div>
                         </label>
                         <div class="collapse-content flex justify-center items-center">
-                            <StatusBar solicitation={solicitation} statusMessageDefault={statusMessageDefault} status={status} isDesktop={isDesktop} />
+                            <div class="py-4">
+                                <StatusBar solicitation={solicitation} statusMessageDefault={statusMessageDefault} status={status} isDesktop={isDesktop} />
+                            </div>
                         </div>
                     </div>
                     )}

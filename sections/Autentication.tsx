@@ -200,12 +200,11 @@ const Autentication = (
             {textBanner && <RichText text={textBanner} />}
             {button && button.text && (
               <a
+              class="h-14 w-52 btn btn-outline btn-neutral px-6 py-4 text-base"
                 href={button?.href}
                 target={button?.href?.includes("http") ? "_blank" : "_self"}
               >
-                <Button class="h-14 w-52 btn btn-outline btn-neutral px-6 py-4 text-base">
                   {button.text}
-                </Button>
               </a>
             )}
           </div>

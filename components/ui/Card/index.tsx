@@ -3,9 +3,11 @@ import Icons from "deco-sites/niivu-bank/components/ui/card/Icons.tsx";
 import Title from "deco-sites/niivu-bank/components/ui/card/Title.tsx";
 import Description from "deco-sites/niivu-bank/components/ui/card/Description.tsx";
 
-export const Card = {
+const Card = {
   Root,
   Icons,
   Title,
   Description,
 };
+
+export default Card;

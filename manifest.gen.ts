@@ -14,11 +14,12 @@ import * as $$$8 from "./loaders/actions/singup.ts";
 import * as $$$9 from "./loaders/actions/solicitation.ts";
 import * as $$$10 from "./loaders/actions/updatePassword.ts";
 import * as $$$11 from "./loaders/configs/emailsConfig.ts";
-import * as $$$12 from "./loaders/customAdmin/icons.ts";
+import * as $$$12 from "./loaders/customAdmin/AvailableIcons.ts";
+import * as $$$13 from "./loaders/customAdmin/icons.ts";
 import * as $$$0 from "./loaders/Layouts/ProductCard.tsx";
 import * as $$$1 from "./loaders/List/Sections.tsx";
-import * as $$$13 from "./loaders/solicitation/getDetails.ts";
-import * as $$$14 from "./loaders/supabase/supabaseConfig.ts";
+import * as $$$14 from "./loaders/solicitation/getDetails.ts";
+import * as $$$15 from "./loaders/supabase/supabaseConfig.ts";
 import * as $$$$$$0 from "./sections/Animation/Animation.tsx";
 import * as $$$$$$1 from "./sections/Autentication.tsx";
 import * as $$$$$$2 from "./sections/Category/CategoryBanner.tsx";
@@ -67,6 +68,7 @@ import * as $$$$$$44 from "./sections/Product/ShelfWithImage.tsx";
 import * as $$$$$$45 from "./sections/Product/Wishlist.tsx";
 import * as $$$$$$46 from "./sections/Social/InstagramPosts.tsx";
 import * as $$$$$$47 from "./sections/Social/WhatsApp.tsx";
+import * as $$$$$$49 from "./sections/CardsSection.tsx";
 import * as $$$$$$48 from "./sections/Theme/Theme.tsx";
 
 const manifest = {
@@ -81,11 +83,12 @@ const manifest = {
     "deco-sites/niivu-bank/loaders/actions/solicitation.ts": $$$9,
     "deco-sites/niivu-bank/loaders/actions/updatePassword.ts": $$$10,
     "deco-sites/niivu-bank/loaders/configs/emailsConfig.ts": $$$11,
-    "deco-sites/niivu-bank/loaders/customAdmin/icons.ts": $$$12,
+    "deco-sites/niivu-bank/loaders/customAdmin/AllIcons.ts": $$$12,
+    "deco-sites/niivu-bank/loaders/customAdmin/icons.ts": $$$13,
     "deco-sites/niivu-bank/loaders/Layouts/ProductCard.tsx": $$$0,
     "deco-sites/niivu-bank/loaders/List/Sections.tsx": $$$1,
-    "deco-sites/niivu-bank/loaders/solicitation/getDetails.ts": $$$13,
-    "deco-sites/niivu-bank/loaders/supabase/supabaseConfig.ts": $$$14,
+    "deco-sites/niivu-bank/loaders/solicitation/getDetails.ts": $$$14,
+    "deco-sites/niivu-bank/loaders/supabase/supabaseConfig.ts": $$$15,
   },
   "sections": {
     "deco-sites/niivu-bank/sections/Animation/Animation.tsx": $$$$$$0,
@@ -137,6 +140,7 @@ const manifest = {
     "deco-sites/niivu-bank/sections/Product/Wishlist.tsx": $$$$$$45,
     "deco-sites/niivu-bank/sections/Social/InstagramPosts.tsx": $$$$$$46,
     "deco-sites/niivu-bank/sections/Social/WhatsApp.tsx": $$$$$$47,
+    "deco-sites/niivu-bank/sections/teste.tsx": $$$$$$49,
     "deco-sites/niivu-bank/sections/Theme/Theme.tsx": $$$$$$48,
   },
   "apps": {

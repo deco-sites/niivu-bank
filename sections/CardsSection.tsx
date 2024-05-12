@@ -1,5 +1,5 @@
-import { Card } from "../components/ui/card/index.tsx";
 import { AvailableIcons } from "deco-sites/niivu-bank/components/ui/Icon.tsx";
+import Card from "../components/ui/card/Card.tsx";
 
 /**
  * @title {{title}}

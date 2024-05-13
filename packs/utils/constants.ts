@@ -17,9 +17,12 @@ export const HEADER_AUTH_TOKEN = "Venidera-AuthToken";
 export type StatusType =
   | "Análise de Crédito"
   | "Abertura de Conta"
+  | "Reprovado RISK3"
   | "Assinatura"
   | "Habilitado"
-  | "Em operação";
+  | "Em operação"
+  | "Suspenso"
+  | "Reprovado";
 
 // TODO: Try to improve in deco this. The schema reader don't read enums
 // export enum StatusEnum {

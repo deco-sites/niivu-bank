@@ -37,7 +37,7 @@ export default async function loader(
   _props: unknown,
   req: Request,
   ctx: AppContext,
-): Promise<DataObjectSoliciation | Error> {
+): Promise<DataObjectSoliciation[] | Error> {
   const { supabaseClient } = ctx;
   const email = await getEmail({ supabaseClient, req });
 
@@ -55,5 +55,5 @@ export default async function loader(
     return { status: BAD_REQUEST, message: EMAIL_ERROR };
   }
 
-  return (data as unknown as DataObjectSoliciation[])[0];
+  return (data as unknown as DataObjectSoliciation[]);
 }

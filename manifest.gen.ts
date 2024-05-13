@@ -53,7 +53,7 @@ import * as $$$$$$30 from "./sections/Miscellaneous/CookieConsent.tsx";
 import * as $$$$$$31 from "./sections/Miscellaneous/Slide.tsx";
 import * as $$$$$$32 from "./sections/Newsletter/Newsletter.tsx";
 import * as $$$$$$33 from "./sections/Private/Solicitation.tsx";
-import * as $$$$$$34 from "./sections/Private/StatusBar.tsx";
+import * as $$$$$$34 from "./sections/Private/StatusTable.tsx";
 import * as $$$$$$35 from "./sections/Private/SucessMessage.tsx";
 import * as $$$$$$36 from "./sections/Product/ImageGalleryFrontBack.tsx";
 import * as $$$$$$37 from "./sections/Product/ImageGallerySlider.tsx";
@@ -122,7 +122,7 @@ const manifest = {
     "deco-sites/niivu-bank/sections/Miscellaneous/Slide.tsx": $$$$$$31,
     "deco-sites/niivu-bank/sections/Newsletter/Newsletter.tsx": $$$$$$32,
     "deco-sites/niivu-bank/sections/Private/Solicitation.tsx": $$$$$$33,
-    "deco-sites/niivu-bank/sections/Private/StatusBar.tsx": $$$$$$34,
+    "deco-sites/niivu-bank/sections/Private/StatusTable.tsx": $$$$$$34,
     "deco-sites/niivu-bank/sections/Private/SucessMessage.tsx": $$$$$$35,
     "deco-sites/niivu-bank/sections/Product/ImageGalleryFrontBack.tsx":
       $$$$$$36,

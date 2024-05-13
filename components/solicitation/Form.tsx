@@ -151,7 +151,7 @@ function Form({ children, type, successLink, formRef }: Props) {
         props,
       });
 
-      if ("error" in solicitation || "status" in solicitation) {
+      if ("error" in solicitation && "status" in solicitation) {
         sendSolicitationLoading.value = false;
         sendSolicitationError.value = true
         return;

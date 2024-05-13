@@ -38,11 +38,6 @@ interface Props {
     textBanner?: HTMLWidget;
 
     /**
-     * @title Texto do botão
-     */
-    buttonText?: string;
-
-    /**
      * @title Imagem de fundo
      */
     image?: {
@@ -51,14 +46,23 @@ interface Props {
       width: number;
       height: number;
     };
-  };
 
-  /**
-   * @title Logar com facebook e google
-   * @description Se ativado, o botão de login com facebook e google será exibido
-   * @default false
-   */
-  showLoginSSO?: boolean;
+    /**
+     * @title Configurações do botão
+     */
+    button?: {
+      /**
+       * @title Texto do botão
+       */
+      text?: string;
+
+      /**
+       * @title Ação do botão CTA
+       * @Description exemplo: www.exemplo.com. se incluir http:// ou https://, o link será aberto em uma nova aba.
+       */
+      href?: string;
+    };
+  };
 
   /**
    * @title Imagem do header
@@ -75,16 +79,28 @@ interface Props {
   };
 
   /**
-   * @title Titulo do aceite de termos.
+   * @title Configurações do aceite de termos
    */
-  title?: string;
+  disclaimer?: {
+    /**
+     * @title Titulo do aceite de termos.
+     */
+    title?: string;
+
+    /**
+     * @format rich-text
+     * @title Descrição do aceite de termos.
+     * @description Texto que será exibido para o usuário e deve ser confirmado para criar a conta.
+     */
+    text?: string;
+  };
 
   /**
-   * @format html
-   * @title Descrição do aceite de termos.
-   * @description Texto que será exibido para o usuário e deve ser confirmado para criar a conta.
+   * @title Logar com facebook e google
+   * @description Se ativado, o botão de login com facebook e google será exibido
+   * @default false
    */
-  disclaimerText: string;
+  showLoginSSO?: boolean;
 
   /**
    * @ignore
@@ -137,10 +153,9 @@ const Autentication = (
     step = LOGIN,
     textAlignment,
     showLoginSSO,
-    disclaimerText,
+    disclaimer,
     urlChangePassword,
-    title,
-    banner: { textBanner, image, buttonText },
+    banner: { textBanner, image, button },
     header: { mobile, alt, desktop },
   }: SectionProps<typeof loader>,
 ) => {
@@ -183,10 +198,14 @@ const Autentication = (
         >
           <div class="space-y-6 px-3">
             {textBanner && <RichText text={textBanner} />}
-            {buttonText && (
-              <Button class="h-14 w-52 btn btn-outline btn-neutral px-6 py-4 text-base">
-                {buttonText}
-              </Button>
+            {button && button.text && (
+              <a
+                class="h-14 w-52 btn btn-outline btn-neutral px-6 py-4 text-base"
+                href={button?.href}
+                target={button?.href?.includes("http") ? "_blank" : "_self"}
+              >
+                {button.text}
+              </a>
             )}
           </div>
         </div>
@@ -253,7 +272,10 @@ const Autentication = (
         {step === SIGNUP && (
           <div class="max-w-[348px] m-auto md:m-0 px-4 pt-6 md:p-0 flex flex-col">
             <Title title="Abra agora sua Conta Digital" class="mb-3 text-2xl" />
-            <SignupForm title={title} disclaimerText={disclaimerText} />
+            <SignupForm
+              title={disclaimer?.title}
+              disclaimerText={disclaimer?.text ?? ""}
+            />
             <ButtonPartial />
           </div>
         )}

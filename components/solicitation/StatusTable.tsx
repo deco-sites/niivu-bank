@@ -5,6 +5,7 @@ import {
 } from "../../packs/solicitation/getDetails.ts";
 import type { AppContext } from "$store/apps/site.ts";
 import Icon from "deco-sites/niivu-bank/components/ui/Icon.tsx";
+import { STATUS_ENUM_ACCOUNT_OPENING, STATUS_ENUM_RISK3_FAILED } from "deco-sites/niivu-bank/packs/utils/constants.ts";
 
 export interface Props extends Omit<StatusProps, "solicitation" | "isDesktop"> {
     solicitations: DataObjectSoliciation[] | Error;
@@ -60,7 +61,10 @@ function StatusTable({ solicitations, status, statusMessageDefault, isDesktop }:
                                     <div class="max-w-80 w-full h-6">
                                         <div class="max-w-40 h-6 rounded-full gap-2 p-2 bg-[#F0F2F4] flex justify-start items-center" style={{ color: status.find(({ statusType }) => statusType === solicitation.status)?.color }}>
                                             <div class="rounded-full w-2 h-2 flex-shrink-0 mt-1" style={{ backgroundColor: status.find(({ statusType }) => statusType === solicitation.status)?.color ?? "black" }} />
-                                            <p class="line-clamp-1">{solicitation.status}</p>
+                                            <p class="line-clamp-1">{
+                                                solicitation.status === STATUS_ENUM_RISK3_FAILED ?
+                                                    STATUS_ENUM_ACCOUNT_OPENING :
+                                                    solicitation.status}</p>
                                         </div>
                                     </div>
                                     <label class="swap group-has-[input:checked]/form:swap-active swap-rotate ml-auto -z-10">
@@ -72,7 +76,11 @@ function StatusTable({ solicitations, status, statusMessageDefault, isDesktop }:
                         </label>
                         <div class="collapse-content flex justify-center items-center">
                             <div class="py-4">
-                                <StatusBar solicitation={solicitation} statusMessageDefault={statusMessageDefault} status={status} isDesktop={isDesktop} />
+                                <StatusBar solicitation={{
+                                    ...solicitation, status: solicitation.status === STATUS_ENUM_RISK3_FAILED ?
+                                        STATUS_ENUM_ACCOUNT_OPENING :
+                                        solicitation.status
+                                }} statusMessageDefault={statusMessageDefault} status={status} isDesktop={isDesktop} />
                             </div>
                         </div>
                     </div>

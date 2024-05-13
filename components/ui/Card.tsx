@@ -14,7 +14,7 @@ export default function Card({ title, id, description }: Props) {
       <h1 class="text-base font-bold truncate">
         {title}
       </h1>
-      <Icon size={32} id={id} />;
+      <Icon size={32} id={id} />
       <p class="h-full text-sm font-normal">
         {description}
       </p>

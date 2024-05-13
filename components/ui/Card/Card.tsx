@@ -1,4 +1,4 @@
-import Base from "./Base.tsx";
+import Base from "./Root.tsx";
 import Icons from "./Icons.tsx";
 import Title from "./Title.tsx";
 import Description from "./Description.tsx";

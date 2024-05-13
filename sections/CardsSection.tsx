@@ -1,5 +1,5 @@
 import { AvailableIcons } from "deco-sites/niivu-bank/components/ui/Icon.tsx";
-import Card from "../components/ui/card/Card.tsx";
+import Card from "deco-sites/niivu-bank/components/ui/Card.tsx";
 
 /**
  * @title {{title}}
@@ -10,7 +10,7 @@ interface CardData {
    * @format icon-select
    * @options deco-sites/niivu-bank/loaders/customAdmin/AllIcons.ts
    */
-  icons?: AvailableIcons;
+  icons: AvailableIcons;
   /**
    * @title Titulo
    */
@@ -56,11 +56,7 @@ export default function CardsSection({ title, cards, color }: Props) {
                 : `col-start-${index + 2}`
             }`}
           >
-            <Card.Root>
-              <Card.Icons id={icons} size={32} />
-              <Card.Title title={title} />
-              <Card.Description description={description} />
-            </Card.Root>
+            <Card title={title} id={icons} description={description} />
           </div>
         ))}
       </div>

@@ -23,7 +23,6 @@ import * as $Cpf from "./islands/Cpf.tsx";
 import * as $Dropdown_Button from "./islands/Dropdown/Button.tsx";
 import * as $Form from "./islands/Form.tsx";
 import * as $Input_Password from "./islands/Input/Password.tsx";
-import * as $Newsletter from "./islands/Newsletter.tsx";
 import * as $OutOfStock from "./islands/OutOfStock.tsx";
 import * as $PersonalForm from "./islands/PersonalForm.tsx";
 import * as $ProductImageZoom from "./islands/ProductImageZoom.tsx";
@@ -62,7 +61,6 @@ const manifest = {
     "./islands/Dropdown/Button.tsx": $Dropdown_Button,
     "./islands/Form.tsx": $Form,
     "./islands/Input/Password.tsx": $Input_Password,
-    "./islands/Newsletter.tsx": $Newsletter,
     "./islands/OutOfStock.tsx": $OutOfStock,
     "./islands/PersonalForm.tsx": $PersonalForm,
     "./islands/ProductImageZoom.tsx": $ProductImageZoom,

@@ -78,7 +78,6 @@ export default async function loader(
     };
   }
 
-  console.log(analise?.classificacao)
   const updateSolicitation = await supabaseClient.from(SOLICITATION_ENTITY_NAME)
     .update({
       status: statusCredit,
@@ -87,9 +86,10 @@ export default async function loader(
     }).eq("id", solicitation.data.id);
 
   if (updateSolicitation.error !== null) {
-    const message = JSON.stringify(updateSolicitation.error)
     console.error(
-      "Risk3 webhook: update status in Supabase, message: " + message,
+      {
+        error: "Risk3 webhook: update status in Supabase"
+      }
     );
     return {
       error: "error, update solicitation.",

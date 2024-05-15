@@ -82,13 +82,13 @@ export default async function loader(
     .update({
       status: statusCredit,
       credit_status: isApproved,
-      analysis_classification: analise?.classificacao ?? "sem classificação",
+      analysis_classification: analise?.classificacao?.replace(/"/g, '')?.toLocaleLowerCase ?? "sem classificação",
     }).eq("id", solicitation.data.id);
 
   if (updateSolicitation.error !== null) {
     const message = JSON.stringify(updateSolicitation.error)
     console.error(
-      "Risk3 webhook: update status, message: " + message,
+      "Risk3 webhook: update status in Supabase, message: " + message,
     );
     return {
       error: "error, update solicitation.",

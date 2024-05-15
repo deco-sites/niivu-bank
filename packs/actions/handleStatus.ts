@@ -55,7 +55,7 @@ export default async function loader(
   ).then((res) => res.json());
 
   const { analise } = analisys.data;
-  const isApproved = colorSolicitation?.find((cor) =>
+  const isApproved = colorSolicitation?.some((cor) =>
     cor.toLowerCase() === analise?.classificacao.toLowerCase()
   );
 

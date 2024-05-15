@@ -126,6 +126,10 @@ export default async function loader(
     return { status: INTERNAL_ERROR, message: SERVER_ERROR };
   }
 
+  console.log(await clientRisk3["POST /api/v0/login"]({
+    username: username,
+    password: password,
+  }).then((res) => res.json()))
   const response = await clientRisk3["POST /api/v0/login"]({
     username: username,
     password: password,
@@ -139,6 +143,7 @@ export default async function loader(
     };
   }
 
+  console.log(data.token)
   const headers = new Headers({ [HEADER_AUTH_TOKEN]: data.token });
 
   const {

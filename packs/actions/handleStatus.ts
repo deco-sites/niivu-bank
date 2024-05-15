@@ -86,8 +86,9 @@ export default async function loader(
     }).eq("id", solicitation.data.id);
 
   if (updateSolicitation.error !== null) {
+    const message = JSON.stringify(updateSolicitation.error)
     console.error(
-      "Risk3 webhook: update status, message: " + updateSolicitation.error,
+      "Risk3 webhook: update status, message: " + message,
     );
     return {
       error: "error, update solicitation.",

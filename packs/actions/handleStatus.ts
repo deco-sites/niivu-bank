@@ -78,11 +78,12 @@ export default async function loader(
     };
   }
 
+  console.log(analise?.classificacao)
   const updateSolicitation = await supabaseClient.from(SOLICITATION_ENTITY_NAME)
     .update({
       status: statusCredit,
       credit_status: isApproved,
-      analysis_classification: analise?.classificacao?.replace(/"/g, '')?.toLocaleLowerCase ?? "sem classificação",
+      analysis_classification: analise?.classificacao ?? "sem classificação",
     }).eq("id", solicitation.data.id);
 
   if (updateSolicitation.error !== null) {

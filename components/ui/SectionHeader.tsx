@@ -12,20 +12,26 @@ const fontSizeClasses = {
   "Large": "lg:text-4xl",
 };
 
+const fontSizeClassesDescriptions = {
+  "Small": "lg:text-lg",
+  "Normal": "lg:text-xl",
+  "Large": "lg:text-2xl",
+};
+
 function Header(props: Props) {
   return (
     <>
       {props.title || props.description
         ? (
           <div
-            class={`flex flex-col gap-2 ${
+            class={`flex flex-col gap-2 text- ${
               props.alignment === "left" ? "text-left" : "text-center"
             }`}
           >
             {props.title &&
               (
                 <h1
-                  class={`text-2xl font-light leading-8 lg:leading-10
+                  class={`font-bold leading-8 lg:leading-10
                   ${
                     props.colorReverse
                       ? "text-primary-content"
@@ -45,7 +51,7 @@ function Header(props: Props) {
                   ${
                     props.colorReverse ? "text-primary-content" : "text-neutral"
                   }
-                  ${fontSizeClasses[props.fontSize || "Normal"]}
+                  ${fontSizeClassesDescriptions[props.fontSize || "Normal"]}
                 `}
                 >
                   {props.description}

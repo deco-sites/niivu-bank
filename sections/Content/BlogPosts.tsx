@@ -26,8 +26,7 @@ export interface Post {
   alt?: string;
   label?: string;
   description?: string;
-  author?: string;
-  date?: string;
+  theme?: string;
 }
 
 function BlogPosts({
@@ -47,10 +46,31 @@ function BlogPosts({
       image:
         "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/80a115a2-3623-4e9b-aec7-42601c2ff416",
       alt: "alternative text",
-      label: "Title Post",
-      description: "Description",
-      author: "Author",
-      date: "Date",
+      label: "Poupar ou investir: confira as diferenças",
+      description:
+        "Você ainda está na dúvida se deve poupar ou investir? Então este conteúdo foi feito para você!",
+      theme: "Orientação financeira",
+    },
+    {
+      href: "/",
+      image:
+        "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/80a115a2-3623-4e9b-aec7-42601c2ff416",
+      alt: "alternative text",
+      label:
+        "Mercado Financeiro Registra Volatilidade devido a Indicadores Econômicos e Geopolíticos",
+      description:
+        "O mercado financeiro global enfrentou uma semana de volatilidade, com índices oscilando.",
+      theme: "Orientação financeira",
+    },
+    {
+      href: "/",
+      image:
+        "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/80a115a2-3623-4e9b-aec7-42601c2ff416",
+      alt: "alternative text",
+      label: "Desvendando os Mistérios do Mundo Financeiro",
+      description:
+        "Descubra estratégias inteligentes para economizar, investir e planejar seu futuro financeiro de maneira eficaz.",
+      theme: "Orientação financeira",
     },
     {
       href: "/",
@@ -59,8 +79,7 @@ function BlogPosts({
       alt: "alternative text",
       label: "Title Post",
       description: "Description",
-      author: "Author",
-      date: "Date",
+      theme: "Orientação financeira",
     },
     {
       href: "/",
@@ -69,8 +88,7 @@ function BlogPosts({
       alt: "alternative text",
       label: "Title Post",
       description: "Description",
-      author: "Author",
-      date: "Date",
+      theme: "Orientação financeira",
     },
   ],
 }: Props) {
@@ -96,38 +114,37 @@ function BlogPosts({
   };
 
   const Card = ({ post }: { post: Post }) => (
-    <a href={post.href} class="block px-3">
-      <article class="flex flex-col">
-        <figure class="w-full">
+    <a href={post.href} class="w-[350px] h-[563px]">
+      <article class="w-full h-full flex flex-col bg-white">
+        <figure class="w-full h-[283px]">
           <Image
-            class="w-full object-cover"
+            class="w-full h-full object-cover"
             src={post.image}
             alt={post.alt}
-            width={442}
-            height={266}
+            width={430}
+            height={283}
           />
-          <figcaption class="text-2xl mt-4 font-light">{post.label}</figcaption>
         </figure>
-        <div class="flex flex-col gap-1">
-          <p class="text-base font-light pb-14 pt-2">{post.description}</p>
-          <div class="flex items-center justify-between">
-            <p class="font-light text-xs">
-              {post.author}
-            </p>
-            <p class="font-light text-xs">{post.date}</p>
-          </div>
+        <div class="w-full flex flex-col justify-between px-3 mt-5 gap-6">
+          <h1 class="text-xl font-bold">{post.label}</h1>
+          <p class="text-base font-medium no-break-words">{post.description}</p>
+          <p class="text-base font-bold text-secondary">
+            {post.theme}
+          </p>
         </div>
       </article>
     </a>
   );
 
   return (
-    <div class="w-full container py-8 flex flex-col gap-6 lg:pt-32 pb-16">
-      <div class="px-9">
+    <div class="w-full h-[831px] mx-0 flex flex-col pb-16 bg-gradient-to-l from-success to-info">
+      <div class="py-14">
         <Header
+          colorReverse
           title={title || "BlogPosts"}
           fontSize={layout?.headerfontSize || "Normal"}
           alignment={layout?.headerAlignment || "center"}
+          description="Prepare-se para uma jornada emocionante rumo à prosperidade financeira."
         />
       </div>
       <div
@@ -151,14 +168,24 @@ function BlogPosts({
 
         {layout?.showArrows && (
           <>
-            <div class="relative block z-10 col-start-1 row-start-3">
-              <Slider.PrevButton class="absolute w-12 h-12 flex justify-center items-center">
-                <Icon size={24} id="ChevronLeft" strokeWidth={3} class="w-5" />
+            <div class="z-10 col-start-1 row-start-3">
+              <Slider.PrevButton class="absolute w-12 h-12 top-[95%] left-[84%]">
+                <Icon
+                  class="text-white w-5"
+                  size={24}
+                  id="ChevronLeft"
+                  strokeWidth={3}
+                />
               </Slider.PrevButton>
             </div>
-            <div class="relative block z-10 col-start-3 row-start-3">
-              <Slider.NextButton class="absolute w-12 h-12 flex justify-center items-center">
-                <Icon size={24} id="ChevronRight" strokeWidth={3} />
+            <div class="z-10 col-start-3 row-start-3">
+              <Slider.NextButton class="absolute w-12 h-12 top-[95%] right-[150px]">
+                <Icon
+                  class="text-white"
+                  size={24}
+                  id="ChevronRight"
+                  strokeWidth={3}
+                />
               </Slider.NextButton>
             </div>
           </>

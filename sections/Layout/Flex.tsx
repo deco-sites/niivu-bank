@@ -47,19 +47,19 @@ function Section(
   return (
     <div
       class={clx(
-        "w-full flex",
+        "w-full flex container",
         gap?.mobile && flex.gap.mobile[gap.mobile],
         gap?.desktop && flex.gap.desktop[gap.desktop],
         direction?.mobile &&
-          flex.direction.mobile[direction.mobile],
+        flex.direction.mobile[direction.mobile],
         direction?.desktop &&
-          flex.direction.desktop[direction.desktop],
+        flex.direction.desktop[direction.desktop],
         align?.mobile && flex.align.mobile[align.mobile],
         align?.desktop &&
-          flex.align.desktop[align.desktop],
+        flex.align.desktop[align.desktop],
         justify?.mobile && flex.justify.mobile[justify.mobile],
         justify?.desktop &&
-          flex.justify.desktop[justify.desktop],
+        flex.justify.desktop[justify.desktop],
         wrap?.mobile && flex.wrap.mobile[wrap.mobile],
         wrap?.desktop && flex.wrap.desktop[wrap.desktop],
       )}

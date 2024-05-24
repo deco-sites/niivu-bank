@@ -33,8 +33,8 @@ function Links({ title, links, isDesktop }: Props) {
                         <div class="flex border-b border-[#E0E0E0] group-has-[input:checked]/footer:border-none items-center justify-between h-[72px] py-6">
                             <p class="font-bold text-base">{title}</p>
                             <label class="swap group-has-[input:checked]/footer:swap-active swap-rotate ml-auto pointer-events-none">
-                                <Icon id="ChevronRight" width={24} height={24} class="swap-off text-[#F6F6F6]" />
-                                <Icon id="ChevronDown" width={24} height={24} class="swap-on text-[#F6F6F6]" />
+                                <Icon id="ChevronDown" width={24} height={24} class="swap-off text-[#F6F6F6]" />
+                                <Icon id="ChevronRight" width={24} height={24} class="swap-on text-[#F6F6F6]" />
                             </label>
                         </div>
                     </div>

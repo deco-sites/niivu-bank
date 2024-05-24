@@ -47,7 +47,7 @@ function Section(
   return (
     <div
       class={clx(
-        "w-full flex container",
+        "flex container",
         gap?.mobile && flex.gap.mobile[gap.mobile],
         gap?.desktop && flex.gap.desktop[gap.desktop],
         direction?.mobile &&
@@ -67,7 +67,9 @@ function Section(
       {children}
       {sectionChildrens &&
         sectionChildrens.map((section) => (
-          <section.Component {...section.props} />
+          <div class="w-full">
+            <section.Component {...section.props} />
+          </div>
         ))}
     </div>
   );

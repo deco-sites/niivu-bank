@@ -46,19 +46,22 @@ const IframeLoader = ({ videoLink, preload, width = 477, height = 311 }: Props) 
     }, []);
 
     return (
-        <iframe
-            style={{ width, height }}
-            width={width}
-            height={height}
-            title="YouTube video player"
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            class="w-full h-full"
-            allowFullScreen
-            ref={targetElement}
-            loading={preload ? "eager" : "lazy"}
-        >
-        </iframe>
+        <div class="h-full w-full">
+
+            <iframe
+                style={{ maxWidth: width, height }}
+                width={width}
+                height={height}
+                title="YouTube video player"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                class="w-full h-full"
+                allowFullScreen
+                ref={targetElement}
+                loading={preload ? "eager" : "lazy"}
+            >
+            </iframe>
+        </div>
     );
 };
 

@@ -32,7 +32,7 @@ export interface Props {
 
 const Step = ({ alt, description, icon, name, title }: Step) => {
   return (
-    <div class="flex flex-col items-center lg:gap-3 gap-10">
+    <div class="flex flex-col items-center lg:gap-3 gap-10 w-full">
       <div class="border-2 border-[#FFFFFF]/30 rounded-full flex items-center justify-center w-[89px] h-[89px]">
         <Image src={icon} alt={alt} width={32} height={32} />
       </div>
@@ -53,24 +53,27 @@ function Steps({ steps, title, cta }: Props) {
     <div class="bg-gradient-to-r from-[#00C3D7] to-[#00AD6C]">
       <div class="container">
         <div
-          class="flex flex-col gap-10 pb-12 pt-16 max-md:ml-11 lg:items-center"
+          class="flex flex-col gap-10 pb-12 pt-16 xl:items-center"
           id={id}
         >
           <p class="font-bold text-center text-3xl text-[#E7E8E8]">{title}</p>
-          <Slider class="carousel carosuel-start flex justify-start items-center gap-14 pt-3 px-1 max-md:ml-7">
+          <Slider class="carousel flex justify-start items-center gap-14 pt-3 px-1">
             {steps.map((stepProps, index, array) => (
               <>
-                <Slider.Item index={index} class="relative">
+                <Slider.Item
+                  index={index}
+                  class="carousel-item relative max-sm:w-full"
+                >
                   <Step {...stepProps} />
                   {!(index === (array.length - 1)) && (
-                    <hr class="bg-white h-[2px] w-40 absolute -right-[108px] top-10" />
+                    <hr class="bg-white h-[2px] w-40 absolute -right-[108px] top-10 max-sm:w-1/2" />
                   )}
                 </Slider.Item>
               </>
             ))}
           </Slider>
 
-          <div class="flex flex-col gap-7">
+          <div class="flex flex-col gap-7 w-full">
             <a
               class="btn bg-transparent border border-white flex items-center justify-center rounded-sm px-8 max-md:max-w-72 max-w-52 h-12 text-white mx-auto w-full"
               href={cta.link}

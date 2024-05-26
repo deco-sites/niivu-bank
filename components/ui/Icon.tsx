@@ -5,7 +5,9 @@ export type AvailableIcons =
   | "ArrowsPointingOut"
   | "Bars3"
   | "ChevronLeft"
+  | "ChevronLeft2"
   | "ChevronRight"
+  | "ChevronRight2"
   | "ChevronUp"
   | "ChevronDown"
   | "CreditCard"
@@ -55,6 +57,11 @@ export type AvailableIcons =
   | "Google"
   | "RoundCheck"
   | "User"
+  | "Money"
+  | "IconCalendar"
+  | "IconBankSlip"
+  | "Investment"
+  | "Cashback"
   | "Schedule";
 
 interface Props extends JSX.SVGAttributes<SVGSVGElement> {

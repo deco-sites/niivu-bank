@@ -1,1 +1,1 @@
-export { default, loader } from "../../components/solicitation/StatusTable.tsx"
+export { default, loader } from "../../components/solicitation/StatusTable.tsx";

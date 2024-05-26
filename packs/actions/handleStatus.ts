@@ -88,8 +88,8 @@ export default async function loader(
   if (updateSolicitation.error !== null) {
     console.error(
       {
-        error: "Risk3 webhook: update status in Supabase"
-      }
+        error: "Risk3 webhook: update status in Supabase",
+      },
     );
     return {
       error: "error, update solicitation.",

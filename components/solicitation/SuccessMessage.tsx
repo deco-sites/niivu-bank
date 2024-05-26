@@ -28,7 +28,7 @@ export interface Props {
 export const loader = (props: Props, req: Request, _ctx: AppContext) => {
   const url = new URL(req.url);
 
-  const isAdmin = req.url.includes("__d")
+  const isAdmin = req.url.includes("__d");
   if (!Array.isArray(props.solicitations) && !isAdmin) {
     // We need to pass the complete url. Only with relative urls don't work.
     redirect(`${url.origin}/minha-conta/solicitacao`);
@@ -40,7 +40,7 @@ export const loader = (props: Props, req: Request, _ctx: AppContext) => {
       solicitation_id: 1000,
     };
   }
-  const solicitation = props.solicitations as DataObjectSoliciation[]
+  const solicitation = props.solicitations as DataObjectSoliciation[];
 
   return {
     ...props,

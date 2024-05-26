@@ -22,20 +22,29 @@ export interface Props {
   /** @title Icone */
   icon?: ImageWidget;
 
-  solicitation: DataObjectSoliciation | Error;
+  solicitations: DataObjectSoliciation[] | Error;
 }
 
 export const loader = (props: Props, req: Request, _ctx: AppContext) => {
-  const statusMessage = props.solicitation.status;
   const url = new URL(req.url);
-  if (typeof statusMessage !== "string") {
+
+  const isAdmin = req.url.includes("__d");
+  if (!Array.isArray(props.solicitations) && !isAdmin) {
     // We need to pass the complete url. Only with relative urls don't work.
     redirect(`${url.origin}/minha-conta/solicitacao`);
   }
 
+  if (isAdmin) {
+    return {
+      ...props,
+      solicitation_id: 1000,
+    };
+  }
+  const solicitation = props.solicitations as DataObjectSoliciation[];
+
   return {
     ...props,
-    solicitation_id: (props.solicitation as DataObjectSoliciation).id,
+    solicitation_id: solicitation.at(-1)?.id,
   };
 };
 

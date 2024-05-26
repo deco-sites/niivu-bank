@@ -53,7 +53,7 @@ export default async function loader(
     };
 
     if (!apiKey) {
-      console.log("Chave de API não encontrada");
+      console.error("Chave de API não encontrada");
       return "email-credentials";
     }
 

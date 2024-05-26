@@ -1,55 +1,30 @@
-import Icon, { AvailableIcons } from "$store/components/ui/Icon.tsx";
+import Image from "apps/website/components/Image.tsx";
+import type { SocialSection } from "./Footer.tsx";
 
-export interface SocialItem {
-  label:
-    | "Discord"
-    | "Facebook"
-    | "Instagram"
-    | "Linkedin"
-    | "Tiktok"
-    | "Twitter";
-  link: string;
-}
-
-export default function Social(
-  { content, vertical = false }: {
-    content?: { title?: string; items?: SocialItem[] };
-    vertical?: boolean;
-  },
-) {
+function Social({ title, links }: SocialSection) {
   return (
-    <>
-      {content && content.items && content.items.length > 0 && (
-        <div class="flex flex-col gap-4">
-          {content.title && <h3 class="text-lg">{content.title}</h3>}
-          <ul
-            class={`flex gap-4 ${
-              vertical ? "lg:flex-col lg:items-start" : "flex-wrap items-center"
-            }`}
+    <div class="flex flex-col gap-3">
+      <p class="font-bold text-base">{title}</p>
+      <div class="flex gap-6 items-start">
+        {links.map(({ image, alt, href, isOutside }) => (
+          <a
+            rel={isOutside ? "noopener noreferrer" : ""}
+            target={isOutside ? "_blank" : "_self"}
+            href={href}
           >
-            {content.items.map((item) => {
-              return (
-                <li>
-                  <a
-                    href={item.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={`${item.label} Logo`}
-                    class="flex gap-2 items-center"
-                  >
-                    <span class="block p-1 border rounded-full">
-                      <Icon size={24} id={item.label} />
-                    </span>
-                    {vertical && (
-                      <div class="text-sm hidden lg:block">{item.label}</div>
-                    )}
-                  </a>
-                </li>
-              );
-            })}
-          </ul>
-        </div>
-      )}
-    </>
+            <Image
+              src={image}
+              alt={alt}
+              height={27}
+              width={27}
+              decoding={"async"}
+              loading={"lazy"}
+            />
+          </a>
+        ))}
+      </div>
+    </div>
   );
 }
+
+export default Social;

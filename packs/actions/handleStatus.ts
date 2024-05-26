@@ -55,7 +55,7 @@ export default async function loader(
   ).then((res) => res.json());
 
   const { analise } = analisys.data;
-  const isApproved = colorSolicitation?.find((cor) =>
+  const isApproved = colorSolicitation?.some((cor) =>
     cor.toLowerCase() === analise?.classificacao.toLowerCase()
   );
 
@@ -87,7 +87,9 @@ export default async function loader(
 
   if (updateSolicitation.error !== null) {
     console.error(
-      "Risk3 webhook: update status, message: " + updateSolicitation.error,
+      {
+        error: "Risk3 webhook: update status in Supabase",
+      },
     );
     return {
       error: "error, update solicitation.",

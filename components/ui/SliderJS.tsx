@@ -95,10 +95,13 @@ const setup = ({ rootId, scroll, interval, infinite }: Props) => {
       return;
     }
 
+    /** WARNING: Now we assume that all items are the same size and have no spacing */
+    const offSet = item.clientWidth * index;
+
     slider.scrollTo({
       top: 0,
       behavior: scroll,
-      left: item.offsetLeft - root.offsetLeft,
+      left: offSet,
     });
   };
 

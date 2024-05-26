@@ -3,12 +3,11 @@ interface Props {
   fontSize?: "Small" | "Normal" | "Large";
   description?: string;
   alignment: "center" | "left";
-  colorReverse?: boolean;
 }
 
 const fontSizeClasses = {
   "Small": "lg:text-2xl",
-  "Normal": "lg:text-3xl",
+  "Normal": "text-3xl lg:text-3xl",
   "Large": "lg:text-4xl",
 };
 
@@ -24,19 +23,14 @@ function Header(props: Props) {
       {props.title || props.description
         ? (
           <div
-            class={`flex flex-col gap-2 text- ${
-              props.alignment === "left" ? "text-left" : "text-center"
+            class={`flex flex-col gap-2 ${
+              props.alignment === "left" ? "text-left" : "text-left md:text-center"
             }`}
           >
             {props.title &&
               (
                 <h1
-                  class={`font-bold leading-8 lg:leading-10
-                  ${
-                    props.colorReverse
-                      ? "text-primary-content"
-                      : "text-base-content"
-                  }
+                  class={`font-bold leading-8 lg:leading-10 text-white 
                   ${fontSizeClasses[props.fontSize || "Normal"]}
                 `}
                 >
@@ -49,7 +43,7 @@ function Header(props: Props) {
                   class={`
                   leading-6 lg:leading-8
                   ${
-                    props.colorReverse ? "text-primary-content" : "text-neutral"
+                    "text-white"
                   }
                   ${fontSizeClassesDescriptions[props.fontSize || "Normal"]}
                 `}

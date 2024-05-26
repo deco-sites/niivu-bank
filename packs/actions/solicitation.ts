@@ -139,7 +139,6 @@ export default async function loader(
     };
   }
 
-  console.log(data.token)
   const headers = new Headers({ [HEADER_AUTH_TOKEN]: data.token });
 
   const {

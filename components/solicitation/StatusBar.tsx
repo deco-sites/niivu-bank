@@ -1,10 +1,6 @@
-import {
-  StatusType,
-} from "$store/packs/utils/constants.ts";
+import { StatusType } from "$store/packs/utils/constants.ts";
 import Step from "./Step.tsx";
-import {
-  DataObjectSoliciation,
-} from "../../packs/solicitation/getDetails.ts";
+import { DataObjectSoliciation } from "../../packs/solicitation/getDetails.ts";
 
 export interface ToolTip {
   /**
@@ -29,7 +25,7 @@ export interface Status {
   message?: string;
   /** @description Texto ao passar o mouse no titulo ou no icone de etapa */
   toolTip: ToolTip;
-  /** 
+  /**
    * @description Aqui é para definir a cor do status na tabela
    * @title cor
    * @format color-input
@@ -64,14 +60,15 @@ function FollowSolicitation(
   const mobileStatus = statusIndex === 0
     ? status.slice(0, 3)
     : statusIndex === status.length - 1
-      ? status.slice(-3)
-      : status.slice(statusIndex - 1, statusIndex + 2);
+    ? status.slice(-3)
+    : status.slice(statusIndex - 1, statusIndex + 2);
 
   const steps = isDesktop ? status : mobileStatus;
 
   if (!isDesktop) {
     statusIndex = steps.findIndex(({ statusType }) =>
-      statusType === statusMessage ?? statusMessageDefault ?? "Análise de Crédito"
+      statusType === statusMessage ?? statusMessageDefault ??
+        "Análise de Crédito"
     );
   }
 

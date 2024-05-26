@@ -173,9 +173,7 @@ function BlogPosts({
               index={index}
               class={`carousel-item justify-center ${
                 slideDesktop[layout?.numberOfSliders?.desktop ?? 3]
-              } ${
-                slideMobile[layout?.numberOfSliders?.mobile ?? 1]
-              }`}
+              } ${slideMobile[layout?.numberOfSliders?.mobile ?? 1]}`}
             >
               <Card post={post} />
             </Slider.Item>
@@ -184,7 +182,11 @@ function BlogPosts({
 
         {layout?.showArrows && (
           <>
-            <div class={`${posts.length <= 3? "hidden": "hidden md:flex"}  col-start-2 row-start-2 row-end-2 w-full items-center justify-end pr-[4%] lg:pr-[7%]`}>
+            <div
+              class={`${
+                posts.length <= 3 ? "hidden" : "hidden md:flex"
+              }  col-start-2 row-start-2 row-end-2 w-full items-center justify-end pr-[4%] lg:pr-[7%]`}
+            >
               <div class="flex justify-between w-14">
                 <Slider.PrevButton class="w-12 h-12 right-[60px]">
                   <Icon
@@ -205,7 +207,11 @@ function BlogPosts({
               </div>
             </div>
 
-            <div class={`${posts.length <= 3? "flex md:hidden": "flex"} relative z-10 w-full col-start-2 row-start-3  flex-row gap-4 justify-center items-center`}>
+            <div
+              class={`${
+                posts.length <= 3 ? "flex md:hidden" : "flex"
+              } relative z-10 w-full col-start-2 row-start-3  flex-row gap-4 justify-center items-center`}
+            >
               <ul class="carousel justify-center col-span-full gap-6 z-10 row-start-4">
                 {posts?.map((_, index) => (
                   <li class="carousel-item">

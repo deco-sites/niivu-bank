@@ -24,7 +24,9 @@ function Header(props: Props) {
         ? (
           <div
             class={`flex flex-col gap-2 ${
-              props.alignment === "left" ? "text-left" : "text-left md:text-center"
+              props.alignment === "left"
+                ? "text-left"
+                : "text-left md:text-center"
             }`}
           >
             {props.title &&
@@ -42,9 +44,7 @@ function Header(props: Props) {
                 <h2
                   class={`
                   leading-6 lg:leading-8
-                  ${
-                    "text-white"
-                  }
+                  ${"text-white"}
                   ${fontSizeClassesDescriptions[props.fontSize || "Normal"]}
                 `}
                 >

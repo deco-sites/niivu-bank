@@ -57,6 +57,11 @@ export type AvailableIcons =
   | "Google"
   | "RoundCheck"
   | "User"
+  | "Money"
+  | "IconCalendar"
+  | "IconBankSlip"
+  | "Investment"
+  | "Cashback"
   | "Schedule";
 
 interface Props extends JSX.SVGAttributes<SVGSVGElement> {

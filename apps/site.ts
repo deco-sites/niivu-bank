@@ -5,8 +5,8 @@ import manifest, { Manifest } from "../manifest.gen.ts";
 import { ClientOf, createHttpClient } from "apps/utils/http.ts";
 import creditAnalysis from "../packs/utils/creditAnalysis.ts";
 import type { Supabase } from "$store/loaders/supabase/supabaseConfig.ts";
-import BrevoClient from "deco-sites/niivu-bank/packs/utils/createHTMLEmail.ts";
 import { Secret } from "apps/website/loaders/secret.ts";
+import { BrevoConfig } from "deco-sites/niivu-bank/loaders/configs/brevo.ts";
 
 /**
  * @title Configurações do Risk3
@@ -50,38 +50,11 @@ export interface Risk3 {
   clientRisk3: ClientOf<creditAnalysis>;
 }
 
-/**
- * @title Configurações de envio de email
- */
-export interface SendEmailConfig {
-  /**
-   * @title Brevo Chave da API
-   */
-  apiKey: Secret;
-
-  /**
-   * @title Brevo URL
-   */
-  baseUrl: string;
-
-  /**
-   * @title Email da equipe Niivo
-   * @description Email que envia os dados dos clientes para a equipe Niivo
-   */
-  emailNiivo: string;
-
-  /**
-   * @title Cliente do Brevo
-   * @ignore
-   */
-  clientBrevo: ClientOf<BrevoClient>;
-}
-
 export type Props = {
   theme?: Section;
   supabaseClient: Supabase;
   risk3: Risk3;
-  brevo: SendEmailConfig;
+  brevo: BrevoConfig;
 } & CommerceProps;
 
 export type App = ReturnType<typeof Site>;
@@ -95,33 +68,16 @@ export default function Site(
     headers: new Headers({ "accept": "application/json" }),
   });
 
-  const authToken = typeof brevo.apiKey === "string"
-    ? brevo.apiKey
-    : brevo.apiKey.get() as string;
-
-  const clientBrevo = createHttpClient<BrevoClient>({
-    base: brevo.baseUrl,
-    headers: new Headers({
-      "accept": "application/json",
-      "api-key": authToken,
-    }),
-  });
-
   const risk3ConfigsAndClient = {
     ...risk3,
     clientRisk3,
-  };
-
-  const brevoConfigsAndClient = {
-    ...brevo,
-    clientBrevo,
   };
 
   return {
     state: {
       supabaseClient,
       risk3: risk3ConfigsAndClient,
-      brevo: brevoConfigsAndClient,
+      brevo,
       theme,
       ...state,
     },

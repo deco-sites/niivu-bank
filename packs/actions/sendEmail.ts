@@ -26,7 +26,6 @@ export default async function loader(
   try {
     console.info("init sendEmail");
     const {
-      apiKey,
       emailNiivo,
       clientBrevo,
     } = ctx.brevo;
@@ -51,11 +50,6 @@ export default async function loader(
       cpf: param.cpf,
       rg: param.rg,
     };
-
-    if (!apiKey) {
-      console.error("Chave de API não encontrada");
-      return "email-credentials";
-    }
 
     if (isApproved) {
       const approvedEmail = createEmailHTML(

@@ -36,7 +36,7 @@ function CarouselClients({ title, clients, backgroundColor }: Props) {
           <h2 class="text-3xl leading-10 font-bold text-primary text-center max-md:max-w-64">
             {title}
           </h2>
-          <div class="flex justify-start gap-3">
+          <div class="flex justify-start gap-3 w-full">
             <Slider.PrevButton>
               <Icon
                 id="ChevronLeft2"
@@ -45,7 +45,7 @@ function CarouselClients({ title, clients, backgroundColor }: Props) {
                 height={24}
               />
             </Slider.PrevButton>
-            <Slider class="carousel carousel-start">
+            <Slider class="carousel carousel-start w-full">
               {clients.map(({ image, alt }, index) => (
                 <Slider.Item
                   class="flex-[0_0_auto] autoCard max-md:flex max-md:justify-center"

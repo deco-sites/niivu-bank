@@ -39,10 +39,14 @@ export interface Props {
     /** @default wrap */
     desktop?: "Wrap" | "Nowrap" | "Wrap-reverse";
   };
+  /** @title Espaçamento no topo em px */
+  paddingTop: number;
+  /** @title Espaçamento em baixo em px*/
+  paddingBottom: number;
 }
 
 function Section(
-  { gap, direction, align, justify, wrap, children, sectionChildrens }: Props,
+  { gap, direction, align, justify, wrap, children, sectionChildrens, paddingBottom = 0, paddingTop = 0 }: Props,
 ) {
   return (
     <div
@@ -63,6 +67,7 @@ function Section(
         wrap?.mobile && flex.wrap.mobile[wrap.mobile],
         wrap?.desktop && flex.wrap.desktop[wrap.desktop],
       )}
+      style={{ paddingTop: `${paddingTop}px`, paddingBottom: `${paddingBottom}px` }}
     >
       {children}
       {sectionChildrens &&

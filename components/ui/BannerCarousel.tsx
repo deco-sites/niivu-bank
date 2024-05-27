@@ -195,7 +195,7 @@ function Dots({ images, interval = 0 }: Props) {
 function Buttons() {
   return (
     <>
-      <div class="flex items-center justify-end z-10 col-start-1 row-start-2 ml-[30%]">
+      <div class="flex items-center justify-end z-10 col-start-1 row-start-2 ml-[30%] max-sm:hidden">
         <Slider.PrevButton class="flex items-center justify-center hover:opacity-80 bg-secondary rounded h-[38px] w-[38px]">
           <Icon
             class="text-base-100"

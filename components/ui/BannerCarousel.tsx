@@ -195,18 +195,18 @@ function Dots({ images, interval = 0 }: Props) {
 function Buttons() {
   return (
     <>
-      <div class="flex items-center justify-center z-10 col-start-1 row-start-2">
-        <Slider.PrevButton class="btn btn-circle glass">
+      <div class="flex items-center justify-end z-10 col-start-1 row-start-2 ml-[30%]">
+        <Slider.PrevButton class="flex items-center justify-center hover:opacity-80 bg-secondary rounded h-[38px] w-[38px]">
           <Icon
             class="text-base-100"
-            size={24}
+            size={20}
             id="ChevronLeft"
-            strokeWidth={3}
+            strokeWidth={2}
           />
         </Slider.PrevButton>
       </div>
-      <div class="flex items-center justify-center z-10 col-start-3 row-start-2">
-        <Slider.NextButton class="btn btn-circle glass">
+      <div class="flex items-center justify-start z-10 col-start-3 row-start-2 mr-[30%]">
+        <Slider.NextButton class="flex items-center justify-center hover:opacity-80 bg-secondary rounded h-[38px] w-[38px]">
           <Icon
             class="text-base-100"
             size={24}
@@ -226,7 +226,7 @@ function BannerCarousel(props: Props) {
   return (
     <div
       id={id}
-      class="grid grid-cols-[48px_1fr_48px] sm:grid-cols-[120px_1fr_120px] grid-rows-[1fr_48px_1fr_64px] sm:min-h-min min-h-[660px]"
+      class="grid grid-cols-[174px_1fr_174px] sm:grid-cols-[174px_1fr_174px] grid-rows-[1fr_48px_1fr_64px] sm:min-h-min min-h-[660px]"
     >
       <Slider class="carousel carousel-center w-full col-span-full row-span-full gap-6">
         {images?.map((image, index) => {

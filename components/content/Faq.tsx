@@ -38,11 +38,13 @@ function Faq(
         class={`flex gap-6 max-lg:flex-wrap ${
           titlePosition === "aside"
             ? "justify-between"
-            : "flex-col items-center justify-center"
+            : "flex-col justify-center"
         }`}
       >
         {title && (
-          <p class="font-bold text-2xl sm:text-3xl text-[#404042]">{title}</p>
+          <p class="font-bold text-2xl sm:text-3xl text-[#404042] max-sm:max-w-64">
+            {title}
+          </p>
         )}
         <div class="flex flex-col justify-start pt-2 sm:pt-10 gap-6">
           {accordions.map(({ title, description }) => (

@@ -2,6 +2,7 @@ import { clx } from "$store/sdk/clx.ts";
 import type { Section } from "deco/blocks/section.ts";
 import type { ComponentChildren } from "preact";
 import { flex } from "../../constants.tsx";
+import { AppContext } from "deco-sites/niivu-bank/apps/site.ts";
 
 /**
  * @title Flex
@@ -39,15 +40,34 @@ export interface Props {
     /** @default wrap */
     desktop?: "Wrap" | "Nowrap" | "Wrap-reverse";
   };
-  /** @title Espaçamento no topo em px */
-  paddingTop: number;
-  /** @title Espaçamento em baixo em px*/
-  paddingBottom: number;
+  padding: {
+    mobile: {
+      /** @title Espaçamento no topo em px */
+      paddingTop: number;
+      /** @title Espaçamento em baixo em px*/
+      paddingBottom: number;
+    };
+
+    desktop: {
+      /** @title Espaçamento no topo em px */
+      paddingTop: number;
+      /** @title Espaçamento em baixo em px*/
+      paddingBottom: number;
+    }
+  }
 }
 
+export const loader = (props: Props, _req: Request, ctx: AppContext) => {
+  return { ...props, isDesktop: ctx.device === "desktop" };
+};
+
 function Section(
-  { gap, direction, align, justify, wrap, children, sectionChildrens, paddingBottom = 0, paddingTop = 0 }: Props,
+  { gap, direction, align, justify, wrap, children, sectionChildrens, padding, isDesktop }: ReturnType<
+    typeof loader
+  >,
 ) {
+  const paddingTop = isDesktop ? padding.desktop.paddingTop : padding.mobile.paddingTop
+  const paddingBottom = isDesktop ? padding.desktop.paddingBottom : padding.mobile.paddingBottom
   return (
     <div
       class={clx(
@@ -67,7 +87,7 @@ function Section(
         wrap?.mobile && flex.wrap.mobile[wrap.mobile],
         wrap?.desktop && flex.wrap.desktop[wrap.desktop],
       )}
-      style={{ paddingTop: `${paddingTop}px`, paddingBottom: `${paddingBottom}px` }}
+      style={{ paddingTop, paddingBottom }}
     >
       {children}
       {sectionChildrens &&

@@ -43,7 +43,7 @@ interface Props {
 export default function CardsSection({ title, cards, color }: Props) {
   return (
     <div class="relative overflow-hidden">
-      <div className="space-y-8 md:space-y-0 md:grid grid-cols-3 gap-x-8 gap-y-8 mx-6 md:mx-auto lg:pl-[174px] lg:px-[170px] md:pb-28">
+      <div className="space-y-8 md:space-y-0 md:grid grid-cols-3 gap-x-8 gap-y-8 mx-6 md:mx-auto lg:pl-[174px] lg:px-[170px] pb-10 md:pb-28">
         <p class="col-start-1 text-4xl text-start">
           <strong>{title}</strong>
         </p>

@@ -25,7 +25,9 @@ export default async function loader(
 
   const { risk3, supabaseClient } = ctx;
   const { clientRisk3, password, username, colorSolicitation } = risk3;
-
+  const authToken = typeof password === "string"
+    ? password
+    : password.get() as string;
   if (!password || !username) {
     console.error("Risk3 webhook: password or user not set.");
     return {
@@ -35,7 +37,7 @@ export default async function loader(
 
   const response = await clientRisk3["POST /api/v0/login"]({
     username: username,
-    password: password,
+    password: authToken,
   }).then((res) => res.json());
 
   const { data, status, message } = response;

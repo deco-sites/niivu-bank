@@ -127,7 +127,7 @@ function BlogPosts({
   };
 
   const Card = ({ post }: { post: Post }) => (
-    <a href={post.href} class="w-[350px] h-[563px]">
+    <a href={post.href} class="w-[328px] md:w-[350px] h-[563px]">
       <article class="w-full h-full flex flex-col bg-white">
         <figure class="w-full h-[283px]">
           <Image
@@ -161,13 +161,13 @@ function BlogPosts({
       </div>
       <div
         id={id}
-        class={`grid ${
+        class={`grid max-w-[1125px] ${
           layout?.showArrows
-            ? "grid-cols-[24px_1fr_24px] md:grid-cols-[48px_1fr_48px] grid-rows-[auto_28px]"
+            ? "grid-cols-[0px_1fr_0px] md:grid-cols-[0px_1fr_0px] grid-rows-[auto_28px]"
             : ""
-        } grid-rows-2 px-0 md:px-6`}
+        } grid-rows-2 px-0 md:mx-auto`}
       >
-        <Slider class="flex carousel carousel-center sm:carousel-end col-start-2 col-end-3">
+        <Slider class="carousel carousel-center sm:carousel-end col-start-2 col-end-3 md:pr-[1%]">
           {posts?.map((post, index) => (
             <Slider.Item
               index={index}
@@ -185,7 +185,7 @@ function BlogPosts({
             <div
               class={`${
                 posts.length <= 3 ? "hidden" : "hidden md:flex"
-              }  col-start-2 row-start-2 row-end-2 w-full items-center justify-end pr-[4%] lg:pr-[7%]`}
+              }  col-start-2 row-start-2 row-end-2 w-full items-center justify-end mt-1`}
             >
               <div class="flex justify-between w-14">
                 <Slider.PrevButton class="w-12 h-12 right-[60px]">

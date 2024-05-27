@@ -6,6 +6,7 @@ import { ClientOf, createHttpClient } from "apps/utils/http.ts";
 import creditAnalysis from "../packs/utils/creditAnalysis.ts";
 import type { Supabase } from "$store/loaders/supabase/supabaseConfig.ts";
 import BrevoClient from "deco-sites/niivu-bank/packs/utils/createHTMLEmail.ts";
+import { Secret } from "apps/website/loaders/secret.ts";
 
 /**
  * @title Configurações do Risk3
@@ -20,7 +21,7 @@ export interface Risk3 {
   /**
    * @title Senha
    */
-  password: string;
+  password: Secret;
 
   /**
    * @title URL
@@ -56,7 +57,7 @@ export interface SendEmailConfig {
   /**
    * @title Brevo Chave da API
    */
-  apiKey: string;
+  apiKey: Secret;
 
   /**
    * @title Brevo URL
@@ -94,11 +95,15 @@ export default function Site(
     headers: new Headers({ "accept": "application/json" }),
   });
 
+  const authToken = typeof brevo.apiKey === "string"
+    ? brevo.apiKey
+    : brevo.apiKey.get() as string;
+
   const clientBrevo = createHttpClient<BrevoClient>({
     base: brevo.baseUrl,
     headers: new Headers({
       "accept": "application/json",
-      "api-key": brevo.apiKey,
+      "api-key": authToken,
     }),
   });
 

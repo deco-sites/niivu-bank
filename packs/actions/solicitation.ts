@@ -107,7 +107,9 @@ export default async function loader(
 ): Promise<LoaderResponse> {
   const { risk3, supabaseClient } = ctx;
   const { clientRisk3, password, username, product } = risk3;
-
+  const authToken = typeof password === "string"
+    ? password
+    : password.get() as string;
   if (props.type !== "CPF" && props.type !== "CNPJ") {
     return {
       error: "error, wrong type.",
@@ -128,7 +130,7 @@ export default async function loader(
 
   const response = await clientRisk3["POST /api/v0/login"]({
     username: username,
-    password: password,
+    password: authToken,
   }).then((res) => res.json());
 
   const { data, status, message } = response;

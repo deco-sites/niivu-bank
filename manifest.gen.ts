@@ -10,17 +10,18 @@ import * as $$$4 from "./loaders/actions/recoveryPassword.ts";
 import * as $$$5 from "./loaders/actions/sendEmail.ts";
 import * as $$$6 from "./loaders/actions/signOut.ts";
 import * as $$$7 from "./loaders/actions/singin.ts";
-import * as $$$8 from "./loaders/actions/singup.ts";
-import * as $$$9 from "./loaders/actions/solicitation.ts";
-import * as $$$10 from "./loaders/actions/updatePassword.ts";
-import * as $$$11 from "./loaders/configs/brevo.ts";
-import * as $$$12 from "./loaders/configs/emailsConfig.ts";
-import * as $$$13 from "./loaders/customAdmin/AvailableIcons.ts";
-import * as $$$14 from "./loaders/customAdmin/icons.ts";
+import * as $$$8 from "./loaders/actions/singinWithGoogle.ts";
+import * as $$$9 from "./loaders/actions/singup.ts";
+import * as $$$10 from "./loaders/actions/solicitation.ts";
+import * as $$$11 from "./loaders/actions/updatePassword.ts";
+import * as $$$12 from "./loaders/configs/brevo.ts";
+import * as $$$13 from "./loaders/configs/emailsConfig.ts";
+import * as $$$14 from "./loaders/customAdmin/AvailableIcons.ts";
+import * as $$$15 from "./loaders/customAdmin/icons.ts";
 import * as $$$0 from "./loaders/Layouts/ProductCard.tsx";
 import * as $$$1 from "./loaders/List/Sections.tsx";
-import * as $$$15 from "./loaders/solicitation/getDetails.ts";
-import * as $$$16 from "./loaders/supabase/supabaseConfig.ts";
+import * as $$$16 from "./loaders/solicitation/getDetails.ts";
+import * as $$$17 from "./loaders/supabase/supabaseConfig.ts";
 import * as $$$$$$0 from "./sections/Animation/Animation.tsx";
 import * as $$$$$$1 from "./sections/Autentication.tsx";
 import * as $$$$$$2 from "./sections/CardsSection.tsx";
@@ -59,22 +60,23 @@ import * as $$$$$$34 from "./sections/Miscellaneous/CampaignTimer.tsx";
 import * as $$$$$$35 from "./sections/Miscellaneous/CookieConsent.tsx";
 import * as $$$$$$36 from "./sections/Miscellaneous/Slide.tsx";
 import * as $$$$$$37 from "./sections/Newsletter/Newsletter.tsx";
-import * as $$$$$$38 from "./sections/Private/Solicitation.tsx";
-import * as $$$$$$39 from "./sections/Private/StatusTable.tsx";
-import * as $$$$$$40 from "./sections/Private/SucessMessage.tsx";
-import * as $$$$$$41 from "./sections/Product/ImageGalleryFrontBack.tsx";
-import * as $$$$$$42 from "./sections/Product/ImageGallerySlider.tsx";
-import * as $$$$$$43 from "./sections/Product/NotFound.tsx";
-import * as $$$$$$44 from "./sections/Product/NotFoundChallenge.tsx";
-import * as $$$$$$45 from "./sections/Product/ProductInfo.tsx";
-import * as $$$$$$46 from "./sections/Product/ProductShelf.tsx";
-import * as $$$$$$47 from "./sections/Product/ProductShelfTabbed.tsx";
-import * as $$$$$$48 from "./sections/Product/SearchResult.tsx";
-import * as $$$$$$49 from "./sections/Product/ShelfWithImage.tsx";
-import * as $$$$$$50 from "./sections/Product/Wishlist.tsx";
-import * as $$$$$$51 from "./sections/Social/InstagramPosts.tsx";
-import * as $$$$$$52 from "./sections/Social/WhatsApp.tsx";
-import * as $$$$$$53 from "./sections/Theme/Theme.tsx";
+import * as $$$$$$38 from "./sections/Private/GetToken.tsx";
+import * as $$$$$$39 from "./sections/Private/Solicitation.tsx";
+import * as $$$$$$40 from "./sections/Private/StatusTable.tsx";
+import * as $$$$$$41 from "./sections/Private/SucessMessage.tsx";
+import * as $$$$$$42 from "./sections/Product/ImageGalleryFrontBack.tsx";
+import * as $$$$$$43 from "./sections/Product/ImageGallerySlider.tsx";
+import * as $$$$$$44 from "./sections/Product/NotFound.tsx";
+import * as $$$$$$45 from "./sections/Product/NotFoundChallenge.tsx";
+import * as $$$$$$46 from "./sections/Product/ProductInfo.tsx";
+import * as $$$$$$47 from "./sections/Product/ProductShelf.tsx";
+import * as $$$$$$48 from "./sections/Product/ProductShelfTabbed.tsx";
+import * as $$$$$$49 from "./sections/Product/SearchResult.tsx";
+import * as $$$$$$50 from "./sections/Product/ShelfWithImage.tsx";
+import * as $$$$$$51 from "./sections/Product/Wishlist.tsx";
+import * as $$$$$$52 from "./sections/Social/InstagramPosts.tsx";
+import * as $$$$$$53 from "./sections/Social/WhatsApp.tsx";
+import * as $$$$$$54 from "./sections/Theme/Theme.tsx";
 
 const manifest = {
   "loaders": {
@@ -84,17 +86,18 @@ const manifest = {
     "deco-sites/niivu-bank/loaders/actions/sendEmail.ts": $$$5,
     "deco-sites/niivu-bank/loaders/actions/signOut.ts": $$$6,
     "deco-sites/niivu-bank/loaders/actions/singin.ts": $$$7,
-    "deco-sites/niivu-bank/loaders/actions/singup.ts": $$$8,
-    "deco-sites/niivu-bank/loaders/actions/solicitation.ts": $$$9,
-    "deco-sites/niivu-bank/loaders/actions/updatePassword.ts": $$$10,
-    "deco-sites/niivu-bank/loaders/configs/brevo.ts": $$$11,
-    "deco-sites/niivu-bank/loaders/configs/emailsConfig.ts": $$$12,
-    "deco-sites/niivu-bank/loaders/customAdmin/AvailableIcons.ts": $$$13,
-    "deco-sites/niivu-bank/loaders/customAdmin/icons.ts": $$$14,
+    "deco-sites/niivu-bank/loaders/actions/singinWithGoogle.ts": $$$8,
+    "deco-sites/niivu-bank/loaders/actions/singup.ts": $$$9,
+    "deco-sites/niivu-bank/loaders/actions/solicitation.ts": $$$10,
+    "deco-sites/niivu-bank/loaders/actions/updatePassword.ts": $$$11,
+    "deco-sites/niivu-bank/loaders/configs/brevo.ts": $$$12,
+    "deco-sites/niivu-bank/loaders/configs/emailsConfig.ts": $$$13,
+    "deco-sites/niivu-bank/loaders/customAdmin/AvailableIcons.ts": $$$14,
+    "deco-sites/niivu-bank/loaders/customAdmin/icons.ts": $$$15,
     "deco-sites/niivu-bank/loaders/Layouts/ProductCard.tsx": $$$0,
     "deco-sites/niivu-bank/loaders/List/Sections.tsx": $$$1,
-    "deco-sites/niivu-bank/loaders/solicitation/getDetails.ts": $$$15,
-    "deco-sites/niivu-bank/loaders/supabase/supabaseConfig.ts": $$$16,
+    "deco-sites/niivu-bank/loaders/solicitation/getDetails.ts": $$$16,
+    "deco-sites/niivu-bank/loaders/supabase/supabaseConfig.ts": $$$17,
   },
   "sections": {
     "deco-sites/niivu-bank/sections/Animation/Animation.tsx": $$$$$$0,
@@ -135,23 +138,24 @@ const manifest = {
     "deco-sites/niivu-bank/sections/Miscellaneous/CookieConsent.tsx": $$$$$$35,
     "deco-sites/niivu-bank/sections/Miscellaneous/Slide.tsx": $$$$$$36,
     "deco-sites/niivu-bank/sections/Newsletter/Newsletter.tsx": $$$$$$37,
-    "deco-sites/niivu-bank/sections/Private/Solicitation.tsx": $$$$$$38,
-    "deco-sites/niivu-bank/sections/Private/StatusTable.tsx": $$$$$$39,
-    "deco-sites/niivu-bank/sections/Private/SucessMessage.tsx": $$$$$$40,
+    "deco-sites/niivu-bank/sections/Private/GetToken.tsx": $$$$$$38,
+    "deco-sites/niivu-bank/sections/Private/Solicitation.tsx": $$$$$$39,
+    "deco-sites/niivu-bank/sections/Private/StatusTable.tsx": $$$$$$40,
+    "deco-sites/niivu-bank/sections/Private/SucessMessage.tsx": $$$$$$41,
     "deco-sites/niivu-bank/sections/Product/ImageGalleryFrontBack.tsx":
-      $$$$$$41,
-    "deco-sites/niivu-bank/sections/Product/ImageGallerySlider.tsx": $$$$$$42,
-    "deco-sites/niivu-bank/sections/Product/NotFound.tsx": $$$$$$43,
-    "deco-sites/niivu-bank/sections/Product/NotFoundChallenge.tsx": $$$$$$44,
-    "deco-sites/niivu-bank/sections/Product/ProductInfo.tsx": $$$$$$45,
-    "deco-sites/niivu-bank/sections/Product/ProductShelf.tsx": $$$$$$46,
-    "deco-sites/niivu-bank/sections/Product/ProductShelfTabbed.tsx": $$$$$$47,
-    "deco-sites/niivu-bank/sections/Product/SearchResult.tsx": $$$$$$48,
-    "deco-sites/niivu-bank/sections/Product/ShelfWithImage.tsx": $$$$$$49,
-    "deco-sites/niivu-bank/sections/Product/Wishlist.tsx": $$$$$$50,
-    "deco-sites/niivu-bank/sections/Social/InstagramPosts.tsx": $$$$$$51,
-    "deco-sites/niivu-bank/sections/Social/WhatsApp.tsx": $$$$$$52,
-    "deco-sites/niivu-bank/sections/Theme/Theme.tsx": $$$$$$53,
+      $$$$$$42,
+    "deco-sites/niivu-bank/sections/Product/ImageGallerySlider.tsx": $$$$$$43,
+    "deco-sites/niivu-bank/sections/Product/NotFound.tsx": $$$$$$44,
+    "deco-sites/niivu-bank/sections/Product/NotFoundChallenge.tsx": $$$$$$45,
+    "deco-sites/niivu-bank/sections/Product/ProductInfo.tsx": $$$$$$46,
+    "deco-sites/niivu-bank/sections/Product/ProductShelf.tsx": $$$$$$47,
+    "deco-sites/niivu-bank/sections/Product/ProductShelfTabbed.tsx": $$$$$$48,
+    "deco-sites/niivu-bank/sections/Product/SearchResult.tsx": $$$$$$49,
+    "deco-sites/niivu-bank/sections/Product/ShelfWithImage.tsx": $$$$$$50,
+    "deco-sites/niivu-bank/sections/Product/Wishlist.tsx": $$$$$$51,
+    "deco-sites/niivu-bank/sections/Social/InstagramPosts.tsx": $$$$$$52,
+    "deco-sites/niivu-bank/sections/Social/WhatsApp.tsx": $$$$$$53,
+    "deco-sites/niivu-bank/sections/Theme/Theme.tsx": $$$$$$54,
   },
   "apps": {
     "deco-sites/niivu-bank/apps/decohub.ts": $$$$$$$$$$$0,

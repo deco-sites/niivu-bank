@@ -1,5 +1,6 @@
 import Button from "deco-sites/niivu-bank/components/ui/Button.tsx";
 import Icon from "deco-sites/niivu-bank/components/ui/Icon.tsx";
+import { invoke } from "deco-sites/niivu-bank/runtime.ts";
 
 export default function LoginSSO() {
   return (
@@ -17,6 +18,13 @@ export default function LoginSSO() {
         </Button>
 
         <Button
+          onClick={async () => {
+            const url = await invoke({
+              key: "deco-sites/niivu-bank/loaders/actions/singinWithGoogle.ts",
+            });
+            if (typeof url !== "string") return;
+            window.location.href = url;
+          }}
           ariaLabel="Entre com Google"
           class="w-full btn-neutral rounded  shadow-md"
         >

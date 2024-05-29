@@ -38,9 +38,9 @@ const Step = ({ alt, description, icon, name, title }: Step) => {
       </div>
       <div class="flex justify-start gap-14">
         <div class="flex flex-col w-[234px] gap-3">
-          <p class="font-normal text-sm text-accent text-center">{name}</p>
-          <p class="font-bold text-center text-2xl text-accent">{title}</p>
-          <p class="text-sm text-center text-accent">{description}</p>
+          <p class="font-normal text-sm text-[#E7E8E8] text-center">{name}</p>
+          <p class="font-bold text-center text-2xl text-[#E7E8E8]">{title}</p>
+          <p class="text-sm text-center text-[#E7E8E8]">{description}</p>
         </div>
       </div>
     </div>
@@ -56,7 +56,7 @@ function Steps({ steps, title, cta }: Props) {
           class="flex flex-col gap-10 pb-12 pt-16 xl:items-center"
           id={id}
         >
-          <p class="font-bold text-center text-3xl text-accent">{title}</p>
+          <p class="font-bold text-center text-3xl text-[#E7E8E8]">{title}</p>
           <Slider class="carousel flex justify-start items-center gap-14 pt-3 px-1">
             {steps.map((stepProps, index, array) => (
               <>

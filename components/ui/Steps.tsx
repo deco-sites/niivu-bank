@@ -33,14 +33,14 @@ export interface Props {
 const Step = ({ alt, description, icon, name, title }: Step) => {
   return (
     <div class="flex flex-col items-center lg:gap-3 gap-10 w-full">
-      <div class="border-2 border-[#FFFFFF]/30 rounded-full flex items-center justify-center w-[89px] h-[89px]">
+      <div class="border-2 border-white/30 rounded-full flex items-center justify-center w-[89px] h-[89px]">
         <Image src={icon} alt={alt} width={32} height={32} />
       </div>
       <div class="flex justify-start gap-14">
         <div class="flex flex-col w-[234px] gap-3">
-          <p class="font-normal text-sm text-[#E7E8E8] text-center">{name}</p>
-          <p class="font-bold text-center text-2xl text-[#E7E8E8]">{title}</p>
-          <p class="text-sm text-center text-[#E7E8E8]">{description}</p>
+          <p class="font-normal text-sm text-accent text-center">{name}</p>
+          <p class="font-bold text-center text-2xl text-accent">{title}</p>
+          <p class="text-sm text-center text-accent">{description}</p>
         </div>
       </div>
     </div>
@@ -50,13 +50,13 @@ const Step = ({ alt, description, icon, name, title }: Step) => {
 function Steps({ steps, title, cta }: Props) {
   const id = useId();
   return (
-    <div class="bg-gradient-to-r from-[#00C3D7] to-[#00AD6C]">
+    <div class="bg-gradient-to-r from-info to-success">
       <div class="container">
         <div
           class="flex flex-col gap-10 pb-12 pt-16 xl:items-center"
           id={id}
         >
-          <p class="font-bold text-center text-3xl text-[#E7E8E8]">{title}</p>
+          <p class="font-bold text-center text-3xl text-accent">{title}</p>
           <Slider class="carousel flex justify-start items-center gap-14 pt-3 px-1">
             {steps.map((stepProps, index, array) => (
               <>

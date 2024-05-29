@@ -127,7 +127,10 @@ function BlogPosts({
   };
 
   const Card = ({ post }: { post: Post }) => (
-    <a href={post.href} class="min-w-[328px] md:min-w-[350px] max-w-[400px] h-[563px]">
+    <a
+      href={post.href}
+      class="min-w-[328px] md:min-w-[350px] max-w-[400px] h-[563px]"
+    >
       <article class="w-full h-full flex flex-col bg-white">
         <figure class="w-full h-[283px]">
           <Image
@@ -162,9 +165,7 @@ function BlogPosts({
       <div
         id={id}
         class={`grid container ${
-          layout?.showArrows
-            ? "grid-cols-1 grid-rows-[auto_28px]"
-            : ""
+          layout?.showArrows ? "grid-cols-1 grid-rows-[auto_28px]" : ""
         } grid-rows-2 px-0`}
       >
         <Slider class="gap-6 carousel carousel-center sm:carousel-end md:pr-[1%]">

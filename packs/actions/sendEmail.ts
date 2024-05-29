@@ -4,6 +4,7 @@ import {
   CreditRequestData,
 } from "deco-sites/niivu-bank/packs/utils/createHTMLEmail.ts";
 import {
+  ABLE_ACCOUNT,
   APPROVED_CREDIT,
   APPROVED_CUSTOMER,
   DISAPPROVED_CREDIT,
@@ -12,6 +13,7 @@ import {
 interface EmailData {
   isApproved: boolean;
   isReproved: boolean;
+  isAbleAccount: boolean;
   email: string;
   name: string;
   fullName: string;
@@ -29,8 +31,16 @@ export default async function loader(
       emailNiivo,
       clientBrevo,
     } = ctx.brevo;
-    const { isApproved, isReproved, email, name, lastName, fullName, param } =
-      props;
+    const {
+      isApproved,
+      isReproved,
+      isAbleAccount,
+      email,
+      name,
+      lastName,
+      fullName,
+      param,
+    } = props;
 
     const solicitationData: CreditRequestData = {
       nome: name,
@@ -56,7 +66,7 @@ export default async function loader(
         name,
         email,
         solicitationData,
-        "Credito Aprovado",
+        "Abertura de Conta - Documentação Necessária",
         {
           email: emailNiivo,
           name: "Niivo",
@@ -94,6 +104,23 @@ export default async function loader(
           name: "Niivo",
         },
         DISAPPROVED_CREDIT,
+      );
+
+      await clientBrevo["POST /v3/smtp/email"]({}, {
+        body: bodyEmail,
+      }).then((res) => res.json());
+      console.log("Email send");
+    } else if (isAbleAccount) {
+      const bodyEmail = createEmailHTML(
+        name,
+        email,
+        solicitationData,
+        "Conta Habilitada - Niivo Bank",
+        {
+          email: emailNiivo,
+          name: "Niivo",
+        },
+        ABLE_ACCOUNT,
       );
 
       await clientBrevo["POST /v3/smtp/email"]({}, {

@@ -1,6 +1,7 @@
 import { WebhookRequestSupabase } from "deco-sites/niivu-bank/packs/types.ts";
 import { FreshContext } from "$fresh/server.ts";
 import {
+  STATUS_ENUM_ABLE,
   STATUS_ENUM_ACCOUNT_OPENING,
   STATUS_ENUM_CREDIT_ANALYSIS,
   STATUS_ENUM_DISAPPROVED,
@@ -44,6 +45,7 @@ export async function handler(
 
     const isApproved = record.status === STATUS_ENUM_ACCOUNT_OPENING;
     const isReproved = record.status === STATUS_ENUM_DISAPPROVED;
+    const isAbleAccount = record.status === STATUS_ENUM_ABLE;
 
     if (!isApproved && !isReproved) {
       console.error(
@@ -93,6 +95,7 @@ export async function handler(
       {
         isApproved: isApproved,
         isReproved: isReproved,
+        isAbleAccount: isAbleAccount,
         email: record.email,
         fullName: record.full_name,
         name: nameSplit ? nameSplit[0] : undefined,

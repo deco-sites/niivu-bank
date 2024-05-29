@@ -47,7 +47,7 @@ export async function handler(
     const isReproved = record.status === STATUS_ENUM_DISAPPROVED;
     const isAbleAccount = record.status === STATUS_ENUM_ABLE;
 
-    if (!isApproved && !isReproved) {
+    if (!isApproved && !isReproved && !isAbleAccount) {
       console.error(
         "Error sending email, analysis status invalid request not approved and not Failed",
         {

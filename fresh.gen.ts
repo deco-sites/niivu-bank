@@ -14,6 +14,7 @@ import * as $AddToCartButton_wake from "./islands/AddToCartButton/wake.tsx";
 import * as $Authentication_ChangePassword from "./islands/Authentication/ChangePassword.tsx";
 import * as $Authentication_Login from "./islands/Authentication/Login.tsx";
 import * as $Authentication_RecoveryPassword from "./islands/Authentication/RecoveryPassword.tsx";
+import * as $Authentication_SSO from "./islands/Authentication/SSO.tsx";
 import * as $Authentication_Signup from "./islands/Authentication/Signup.tsx";
 import * as $ButtonLogout from "./islands/ButtonLogout.tsx";
 import * as $Cep from "./islands/Cep.tsx";
@@ -53,6 +54,7 @@ const manifest = {
     "./islands/Authentication/Login.tsx": $Authentication_Login,
     "./islands/Authentication/RecoveryPassword.tsx":
       $Authentication_RecoveryPassword,
+    "./islands/Authentication/SSO.tsx": $Authentication_SSO,
     "./islands/Authentication/Signup.tsx": $Authentication_Signup,
     "./islands/ButtonLogout.tsx": $ButtonLogout,
     "./islands/Cep.tsx": $Cep,

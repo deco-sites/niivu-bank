@@ -4,21 +4,21 @@ import {
   SERVER_ERROR,
 } from "deco-sites/niivu-bank/utils/enum.ts";
 
+export interface Props {
+  provider: "google" | "facebook";
+}
+
 export default async function loader(
-  _props: unknown,
+  { provider }: Props,
   req: Request,
   ctx: AppContext,
 ) {
   const { supabaseClient } = ctx;
   const url = new URL(req.url);
   const { data, error } = await supabaseClient.auth.signInWithOAuth({
-    provider: "google",
+    provider,
     options: {
       redirectTo: `${url.origin}/entrar`,
-      queryParams: {
-        access_type: "offline",
-        prompt: "consent",
-      },
     },
   });
 

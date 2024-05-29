@@ -8,6 +8,14 @@ export default function LoginSSO() {
       <div className="divider text-black bg text-xs mt-6">Ou entre com</div>
       <div class="space-y-2">
         <Button
+          onClick={async () => {
+            const url = await invoke({
+              key: "deco-sites/niivu-bank/loaders/actions/singinWithOAuth.ts",
+              props: { provider: "facebook" },
+            });
+            if (typeof url !== "string") return;
+            window.location.href = url;
+          }}
           ariaLabel="Entre com Facebook"
           class="w-full bg-facebook border-facebook hover:border-facebook hover:bg-[#428df0] rounded font-bold text-neutral"
         >
@@ -20,7 +28,8 @@ export default function LoginSSO() {
         <Button
           onClick={async () => {
             const url = await invoke({
-              key: "deco-sites/niivu-bank/loaders/actions/singinWithGoogle.ts",
+              key: "deco-sites/niivu-bank/loaders/actions/singinWithOAuth.ts",
+              props: { provider: "google" },
             });
             if (typeof url !== "string") return;
             window.location.href = url;

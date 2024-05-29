@@ -10,7 +10,7 @@ import * as $$$4 from "./loaders/actions/recoveryPassword.ts";
 import * as $$$5 from "./loaders/actions/sendEmail.ts";
 import * as $$$6 from "./loaders/actions/signOut.ts";
 import * as $$$7 from "./loaders/actions/singin.ts";
-import * as $$$8 from "./loaders/actions/singinWithGoogle.ts";
+import * as $$$8 from "./loaders/actions/singinWithOAuth.ts";
 import * as $$$9 from "./loaders/actions/singup.ts";
 import * as $$$10 from "./loaders/actions/solicitation.ts";
 import * as $$$11 from "./loaders/actions/updatePassword.ts";
@@ -86,7 +86,7 @@ const manifest = {
     "deco-sites/niivu-bank/loaders/actions/sendEmail.ts": $$$5,
     "deco-sites/niivu-bank/loaders/actions/signOut.ts": $$$6,
     "deco-sites/niivu-bank/loaders/actions/singin.ts": $$$7,
-    "deco-sites/niivu-bank/loaders/actions/singinWithGoogle.ts": $$$8,
+    "deco-sites/niivu-bank/loaders/actions/singinWithOAuth.ts": $$$8,
     "deco-sites/niivu-bank/loaders/actions/singup.ts": $$$9,
     "deco-sites/niivu-bank/loaders/actions/solicitation.ts": $$$10,
     "deco-sites/niivu-bank/loaders/actions/updatePassword.ts": $$$11,

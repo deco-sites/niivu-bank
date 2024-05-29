@@ -53,8 +53,8 @@ export interface Props {
       paddingTop: number;
       /** @title Espaçamento em baixo em px*/
       paddingBottom: number;
-    }
-  }
+    };
+  };
 }
 
 export const loader = (props: Props, _req: Request, ctx: AppContext) => {
@@ -62,12 +62,26 @@ export const loader = (props: Props, _req: Request, ctx: AppContext) => {
 };
 
 function Section(
-  { gap, direction, align, justify, wrap, children, sectionChildrens, padding, isDesktop }: ReturnType<
+  {
+    gap,
+    direction,
+    align,
+    justify,
+    wrap,
+    children,
+    sectionChildrens,
+    padding,
+    isDesktop,
+  }: ReturnType<
     typeof loader
   >,
 ) {
-  const paddingTop = isDesktop ? padding.desktop.paddingTop : padding.mobile.paddingTop
-  const paddingBottom = isDesktop ? padding.desktop.paddingBottom : padding.mobile.paddingBottom
+  const paddingTop = isDesktop
+    ? padding.desktop.paddingTop
+    : padding.mobile.paddingTop;
+  const paddingBottom = isDesktop
+    ? padding.desktop.paddingBottom
+    : padding.mobile.paddingBottom;
   return (
     <div
       class={clx(
@@ -75,15 +89,15 @@ function Section(
         gap?.mobile && flex.gap.mobile[gap.mobile],
         gap?.desktop && flex.gap.desktop[gap.desktop],
         direction?.mobile &&
-        flex.direction.mobile[direction.mobile],
+          flex.direction.mobile[direction.mobile],
         direction?.desktop &&
-        flex.direction.desktop[direction.desktop],
+          flex.direction.desktop[direction.desktop],
         align?.mobile && flex.align.mobile[align.mobile],
         align?.desktop &&
-        flex.align.desktop[align.desktop],
+          flex.align.desktop[align.desktop],
         justify?.mobile && flex.justify.mobile[justify.mobile],
         justify?.desktop &&
-        flex.justify.desktop[justify.desktop],
+          flex.justify.desktop[justify.desktop],
         wrap?.mobile && flex.wrap.mobile[wrap.mobile],
         wrap?.desktop && flex.wrap.desktop[wrap.desktop],
       )}

@@ -127,7 +127,7 @@ function BlogPosts({
   };
 
   const Card = ({ post }: { post: Post }) => (
-    <a href={post.href} class="w-[328px] md:w-[350px] h-[563px]">
+    <a href={post.href} class="min-w-[328px] md:min-w-[350px] max-w-[400px] h-[563px]">
       <article class="w-full h-full flex flex-col bg-white">
         <figure class="w-full h-[283px]">
           <Image
@@ -150,7 +150,7 @@ function BlogPosts({
   );
 
   return (
-    <div class="w-full h-[831px] mx-0 flex flex-col pb-16 bg-gradient-to-l from-success to-info">
+    <div class=" h-[831px] flex flex-col pb-16 bg-gradient-to-l from-success to-info">
       <div class="py-8 md:py-14 px-6">
         <Header
           title={title || "BlogPosts"}
@@ -161,17 +161,17 @@ function BlogPosts({
       </div>
       <div
         id={id}
-        class={`grid max-w-[1125px] ${
+        class={`grid container ${
           layout?.showArrows
-            ? "grid-cols-[0px_1fr_0px] md:grid-cols-[0px_1fr_0px] grid-rows-[auto_28px]"
+            ? "grid-cols-1 grid-rows-[auto_28px]"
             : ""
-        } grid-rows-2 px-0 md:mx-auto`}
+        } grid-rows-2 px-0`}
       >
-        <Slider class="carousel carousel-center sm:carousel-end col-start-2 col-end-3 md:pr-[1%]">
+        <Slider class="gap-6 carousel carousel-center sm:carousel-end md:pr-[1%]">
           {posts?.map((post, index) => (
             <Slider.Item
               index={index}
-              class={`carousel-item justify-center ${
+              class={`carousel-item justify-center  ${
                 slideDesktop[layout?.numberOfSliders?.desktop ?? 3]
               } ${slideMobile[layout?.numberOfSliders?.mobile ?? 1]}`}
             >
@@ -185,10 +185,10 @@ function BlogPosts({
             <div
               class={`${
                 posts.length <= 3 ? "hidden" : "hidden md:flex"
-              }  col-start-2 row-start-2 row-end-2 w-full items-center justify-end mt-1`}
+              }  container row-start-2 row-end-2 w-full items-center justify-end mt-1`}
             >
               <div class="flex justify-between w-14">
-                <Slider.PrevButton class="w-12 h-12 right-[60px]">
+                <Slider.PrevButton class="w-12 h-12">
                   <Icon
                     class="text-white w-5"
                     size={24}
@@ -196,7 +196,7 @@ function BlogPosts({
                     strokeWidth={2}
                   />
                 </Slider.PrevButton>
-                <Slider.NextButton class="w-12 h-12 right-[40px]">
+                <Slider.NextButton class="w-12 h-12">
                   <Icon
                     class="text-white"
                     size={24}
@@ -210,7 +210,7 @@ function BlogPosts({
             <div
               class={`${
                 posts.length <= 3 ? "flex md:hidden" : "flex"
-              } relative z-10 w-full col-start-2 row-start-3  flex-row gap-4 justify-center items-center`}
+              } relative z-10 w-full row-start-3  flex-row gap-4 justify-center items-center`}
             >
               <ul class="carousel justify-center col-span-full gap-6 z-10 row-start-4">
                 {posts?.map((_, index) => (

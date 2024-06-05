@@ -19,7 +19,7 @@ export function UserHandle(
         <a href={`/entrar`}>
           <Button class="hidden md:flex max-h-9 w-24 btn-sm btn-outline btn-secondary text-base px-0 pt-px">
             <Icon id="User" width={16} height={24} class="pt-px" />
-            <p class="pt-px">
+            <p class="mb-[2px]">
               Entrar
             </p>
           </Button>

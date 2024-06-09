@@ -92,7 +92,7 @@ export function loader(props: Props, req: Request, ctx: AppContext) {
 
   data.userData = {
     name: `${userName?.[0]} ${userName?.[userName.length - 1]}`,
-    email: solicitation.email,
+    email: solicitation?.email ?? "",
   };
 
   return data;

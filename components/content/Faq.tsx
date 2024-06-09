@@ -7,7 +7,7 @@ export interface Accordion {
   /** @title Título */
   title: string;
   /**
-   * @format html
+   * @format rich-text
    * @title Descrição
    */
   description: string;

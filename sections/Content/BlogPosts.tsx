@@ -188,7 +188,7 @@ function BlogPosts({
                 posts.length <= 3 ? "hidden" : "hidden md:flex"
               }  container row-start-2 row-end-2 w-full items-center justify-end mt-1`}
             >
-              <div class="flex justify-between w-14">
+              <div class="flex justify-between w-14 lg:mr-10">
                 <Slider.PrevButton class="w-12 h-12">
                   <Icon
                     class="text-white w-5"

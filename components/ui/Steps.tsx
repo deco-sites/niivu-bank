@@ -57,7 +57,7 @@ function Steps({ steps, title, cta }: Props) {
           id={id}
         >
           <p class="font-bold text-center text-3xl text-[#E7E8E8]">{title}</p>
-          <Slider class="carousel flex justify-start items-center gap-14 pt-3 px-1">
+          <Slider class="carousel flex justify-start items-start gap-14 pt-3 px-1">
             {steps.map((stepProps, index, array) => (
               <>
                 <Slider.Item

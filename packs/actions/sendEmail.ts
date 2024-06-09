@@ -98,7 +98,7 @@ export default async function loader(
         name,
         email,
         solicitationData,
-        "Credito Reprovado",
+        "Análise de Crédito - Resultado",
         {
           email: emailNiivo,
           name: "Niivo",

@@ -52,6 +52,7 @@ function Navbar(
     menu,
   }: Props,
 ) {
+  console.log(urls)
   const isHomePage = pathname === "/";
   const isSolicitationPage = pathname === PATH_SOLICITATION;
   const isMyAccountPage = pathname === PATH_MY_ACCOUNT;
@@ -95,7 +96,7 @@ function Navbar(
             ))}
           </ul>
         )}
-      {showMenu && showNavItems && (
+      {showNavItems && (
         <ul class="hidden md:flex items-center w-full pl-28 gap-12">
           {urls?.map((item) => <NavItem item={item} />)}
         </ul>

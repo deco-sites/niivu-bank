@@ -22,9 +22,8 @@ interface Props {
 }
 
 export default function Contact({ title, warningConsent, inputs }: Props) {
-  console.log(title, warningConsent, inputs);
   return (
-    <div class="w-full px-4">
+    <div class="container px-4">
       <p class="font-bold py-2">
         <span class="font-bold py-2">{title}</span>
       </p>

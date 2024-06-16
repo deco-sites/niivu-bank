@@ -52,7 +52,6 @@ function Navbar(
     menu,
   }: Props,
 ) {
-  console.log(urls)
   const isHomePage = pathname === "/";
   const isSolicitationPage = pathname === PATH_SOLICITATION;
   const isMyAccountPage = pathname === PATH_MY_ACCOUNT;

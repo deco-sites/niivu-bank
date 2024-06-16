@@ -59,6 +59,10 @@ export interface Select {
    */
   label?: string;
 
+  /**
+   * @title Valor padrão do select
+   */
+  fistOption?: string;
   options: string[];
 }
 export function getFormValues(event: Event): EmailData {
@@ -115,9 +119,9 @@ export default function ContactForm(
       <div class="space-y-4">
         {select?.label && (
           <div>
-            <label className="mb-2">{select.label}</label>
+            <label className="mb-2">{select?.label}</label>
             <select name="selectField" className="select w-full input">
-              <option disabled value="">{select.label}</option>
+              {select?.fistOption && <option disabled selected>{select?.fistOption}</option>}
               {select.options.map((option, index) => (
                 <option key={index} value={option}>{option}</option>
               ))}
@@ -132,7 +136,7 @@ export default function ContactForm(
             placeholder={inputs?.name}
           />
         </Input.Root>
-        <div class=" md:flex space-y-4">
+        <div class=" md:flex space-y-4 gap-4">
           <Input.Root class="w-full mt-4 md:mt-0">
             <Input.Label label={"E-mail"} class="mb-2" />
             <Input.Base
@@ -150,7 +154,7 @@ export default function ContactForm(
             />
           </Input.Root>
         </div>
-        <div class=" md:flex space-y-4">
+        <div class=" md:flex space-y-4 gap-4">
           <Input.Root class="w-full">
             <Input.Label label="Nome da empresa" class="mb-2" />
             <Input.Base

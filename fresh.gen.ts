@@ -19,6 +19,7 @@ import * as $Authentication_Signup from "./islands/Authentication/Signup.tsx";
 import * as $ButtonLogout from "./islands/ButtonLogout.tsx";
 import * as $Cep from "./islands/Cep.tsx";
 import * as $Cnpj from "./islands/Cnpj.tsx";
+import * as $ContactForm from "./islands/ContactForm.tsx";
 import * as $CorporationForm from "./islands/CorporationForm.tsx";
 import * as $Cpf from "./islands/Cpf.tsx";
 import * as $Dropdown_Button from "./islands/Dropdown/Button.tsx";
@@ -59,6 +60,7 @@ const manifest = {
     "./islands/ButtonLogout.tsx": $ButtonLogout,
     "./islands/Cep.tsx": $Cep,
     "./islands/Cnpj.tsx": $Cnpj,
+    "./islands/ContactForm.tsx": $ContactForm,
     "./islands/CorporationForm.tsx": $CorporationForm,
     "./islands/Cpf.tsx": $Cpf,
     "./islands/Dropdown/Button.tsx": $Dropdown_Button,

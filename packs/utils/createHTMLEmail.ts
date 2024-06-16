@@ -25,7 +25,7 @@ interface EmailRecipient {
 
 interface MessageVersion {
   to: EmailRecipient[];
-  params: CreditRequestData;
+  params?: CreditRequestData;
   subject?: string;
 }
 
@@ -33,7 +33,7 @@ interface EmailHTMLBody {
   sender: EmailRecipient;
   subject: string;
   htmlContent: string;
-  params: CreditRequestData;
+  params?: CreditRequestData;
   messageVersions: MessageVersion[];
 }
 

@@ -1,10 +1,13 @@
 import WarningConsent from "deco-sites/niivu-bank/components/solicitation/WarningConsent.tsx";
 import { Input } from "deco-sites/niivu-bank/components/ui/inputs/index.tsx";
 import PhoneFormatter from "deco-sites/niivu-bank/components/solicitation/Phone.tsx";
-import Checkbox from "deco-sites/niivu-bank/components/daisy/Checkbox.tsx";
+import { JSX } from "preact";
+import { invoke } from "deco-sites/niivu-bank/runtime.ts";
+import { EmailData } from "deco-sites/niivu-bank/packs/utils/emailHandles.ts";
 
 interface Props {
   title?: string;
+  select?: Select;
   inputs: Inputs;
   disclaimerText: string;
   buttonLabel?: string;
@@ -21,10 +24,6 @@ export interface Checkboxes {
  * @title Label dos inputs
  */
 export interface Inputs {
-  /**
-   * @title Caixas de seleções
-   */
-  checkboxes?: Checkboxes[];
   /** @title Nome */
   name?: string;
   /** @title Telefone */
@@ -36,6 +35,10 @@ export interface Inputs {
   companyName?: string;
   /** @title Site da empresa */
   companyWebsite?: string;
+  /**
+   * @title Caixas de seleções
+   */
+  checkboxes?: Checkboxes[];
 }
 
 export interface WarningConsent {
@@ -50,27 +53,77 @@ export interface WarningConsent {
   buttonLabel?: string;
 }
 
+export interface Select {
+  /**
+   * @title Label do select
+   */
+  label?: string;
+
+  options: string[];
+}
+export function getFormValues(event: Event): EmailData {
+  const target = event.target as HTMLFormElement;
+  const elements = target.elements as HTMLFormControlsCollection;
+  const values: EmailData = {};
+
+  for (let i = 0; i < elements.length; i++) {
+    const element = elements[i] as
+      | HTMLInputElement
+      | HTMLSelectElement
+      | HTMLTextAreaElement;
+    //@ts-ignore html type error
+    const { name, type, value, checked, options } = element;
+
+    if (type === "checkbox") {
+      values[name] = checked;
+    } else if (type === "select-multiple") {
+      const selectedOptions = [];
+      for (let j = 0; j < options.length; j++) {
+        if (options[j].selected && options[j].value !== "") {
+          selectedOptions.push(options[j].value);
+        }
+      }
+      values[name] = selectedOptions;
+    } else {
+      if (name && value !== "") {
+        values[name] = value;
+      }
+    }
+  }
+
+  return values;
+}
+
 export default function ContactForm(
-  { disclaimerText, buttonLabel, inputs }: Props,
+  { disclaimerText, buttonLabel, inputs, select }: Props,
 ) {
+  const submit: JSX.GenericEventHandler<HTMLFormElement> = async (e) => {
+    e.preventDefault();
+
+    const formValues = getFormValues(e);
+
+    await invoke({
+      key: "deco-sites/niivu-bank/loaders/actions/email.ts",
+      props: {
+        ...formValues,
+      },
+    });
+  };
+
   return (
-    <form onSubmit={() => {}} method="POST">
+    <form onSubmit={submit} method="POST">
       <div class="space-y-4">
-        <div class="flex flex-wrap min-w-min gap-4">
-          {inputs?.checkboxes &&
-            inputs.checkboxes.map((checkbox) => (
-              <div class="flex items-start gap-4">
-                <input
-                  class="checkbox checkbox-primary checkbox-md border-[3px]"
-                  type="checkbox"
-                  name={checkbox.label}
-                />
-                <span class="font-normal">
-                  {checkbox.label}
-                </span>
-              </div>
-            ))}
-        </div>
+        {select?.label && (
+          <div>
+            <label className="mb-2">{select.label}</label>
+            <select name="selectField" className="select w-full input">
+              <option disabled value="">{select.label}</option>
+              {select.options.map((option, index) => (
+                <option key={index} value={option}>{option}</option>
+              ))}
+            </select>
+          </div>
+        )}
         <Input.Root>
           <Input.Label label="Nome" class="mb-2" />
           <Input.Base
@@ -79,8 +132,8 @@ export default function ContactForm(
             placeholder={inputs?.name}
           />
         </Input.Root>
-        <div class=" md:flex gap-4">
-          <Input.Root class="w-full">
+        <div class=" md:flex space-y-4">
+          <Input.Root class="w-full mt-4 md:mt-0">
             <Input.Label label={"E-mail"} class="mb-2" />
             <Input.Base
               name="email"
@@ -97,7 +150,7 @@ export default function ContactForm(
             />
           </Input.Root>
         </div>
-        <div class=" md:flex gap-4">
+        <div class=" md:flex space-y-4">
           <Input.Root class="w-full">
             <Input.Label label="Nome da empresa" class="mb-2" />
             <Input.Base
@@ -118,9 +171,24 @@ export default function ContactForm(
         <PhoneFormatter
           placeholder={inputs?.phone ?? ""}
         />
+        <div class="flex flex-wrap min-w-min gap-4">
+          {inputs?.checkboxes &&
+            inputs.checkboxes.map((checkbox) => (
+              <div class="flex items-start gap-4">
+                <input
+                  class="checkbox checkbox-primary checkbox-md border-[3px]"
+                  type="checkbox"
+                  name={checkbox.label}
+                />
+                <span class="font-normal">
+                  {checkbox.label}
+                </span>
+              </div>
+            ))}
+        </div>
         <Input.Root>
           <Input.Label label="Descrição" class="mb-2" />
-          <textarea name="message" class="input w-full"></textarea>
+          <textarea name="message" class="input w-full h-36"></textarea>
         </Input.Root>
         <WarningConsent
           disclaimerText={disclaimerText}

@@ -121,7 +121,9 @@ export default function ContactForm(
           <div>
             <label className="mb-2">{select?.label}</label>
             <select name="selectField" className="select w-full input">
-              {select?.fistOption && <option disabled selected>{select?.fistOption}</option>}
+              {select?.fistOption && (
+                <option disabled selected>{select?.fistOption}</option>
+              )}
               {select.options.map((option, index) => (
                 <option key={index} value={option}>{option}</option>
               ))}
@@ -136,7 +138,7 @@ export default function ContactForm(
             placeholder={inputs?.name}
           />
         </Input.Root>
-        <div class=" md:flex space-y-4 gap-4">
+        <div class=" md:flex space-y-4 md:gap-4 gap-0">
           <Input.Root class="w-full mt-4 md:mt-0">
             <Input.Label label={"E-mail"} class="mb-2" />
             <Input.Base
@@ -154,7 +156,7 @@ export default function ContactForm(
             />
           </Input.Root>
         </div>
-        <div class=" md:flex space-y-4 gap-4">
+        <div class=" md:flex space-y-4 md:gap-4 gap-0">
           <Input.Root class="w-full">
             <Input.Label label="Nome da empresa" class="mb-2" />
             <Input.Base
@@ -174,8 +176,9 @@ export default function ContactForm(
         </div>
         <PhoneFormatter
           placeholder={inputs?.phone ?? ""}
+          isRequired={false}
         />
-        <div class="flex flex-wrap min-w-min gap-4">
+        <div class="flex flex-wrap min-w-min md:gap-4 gap-0">
           {inputs?.checkboxes &&
             inputs.checkboxes.map((checkbox) => (
               <div class="flex items-start gap-4">

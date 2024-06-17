@@ -1,4 +1,4 @@
-import { itemToAnalyticsItem, useCart } from "apps/vtex/hooks/useCart.ts";
+import { useCart } from "apps/magento/hooks/useCart.ts";
 import BaseCart from "../common/Cart.tsx";
 
 function Cart() {

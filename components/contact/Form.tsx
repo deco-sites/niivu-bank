@@ -105,7 +105,6 @@ export default function ContactForm(
     e.preventDefault();
 
     const formValues = getFormValues(e);
-
     await invoke({
       key: "deco-sites/niivu-bank/loaders/actions/email.ts",
       props: {
@@ -118,8 +117,8 @@ export default function ContactForm(
     <form onSubmit={submit} method="POST">
       <div class="space-y-4">
         {select?.label && (
-          <div>
-            <label className="mb-2">{select?.label}</label>
+          <Input.Root>
+            <Input.Label label={select?.label} class="mb-2" />
             <select name="selectField" className="select w-full input">
               {select?.fistOption && (
                 <option disabled selected>{select?.fistOption}</option>
@@ -128,7 +127,7 @@ export default function ContactForm(
                 <option key={index} value={option}>{option}</option>
               ))}
             </select>
-          </div>
+          </Input.Root>
         )}
         <Input.Root>
           <Input.Label label="Nome" class="mb-2" />
@@ -138,7 +137,7 @@ export default function ContactForm(
             placeholder={inputs?.name}
           />
         </Input.Root>
-        <div class=" md:flex space-y-4 md:gap-4 gap-0">
+        <div class=" md:flex space-y-4 md:space-y-0 md:gap-4 gap-0">
           <Input.Root class="w-full mt-4 md:mt-0">
             <Input.Label label={"E-mail"} class="mb-2" />
             <Input.Base
@@ -156,7 +155,7 @@ export default function ContactForm(
             />
           </Input.Root>
         </div>
-        <div class=" md:flex space-y-4 md:gap-4 gap-0">
+        <div class=" md:flex space-y-4 md:space-y-0 md:gap-4 gap-0">
           <Input.Root class="w-full">
             <Input.Label label="Nome da empresa" class="mb-2" />
             <Input.Base
@@ -178,21 +177,23 @@ export default function ContactForm(
           placeholder={inputs?.phone ?? ""}
           isRequired={false}
         />
-        <div class="flex flex-wrap min-w-min md:gap-4 gap-0">
-          {inputs?.checkboxes &&
-            inputs.checkboxes.map((checkbox) => (
-              <div class="flex items-start gap-4">
-                <input
-                  class="checkbox checkbox-primary checkbox-md border-[3px]"
-                  type="checkbox"
-                  name={checkbox.label}
-                />
-                <span class="font-normal">
-                  {checkbox.label}
-                </span>
-              </div>
-            ))}
-        </div>
+        {(inputs?.checkboxes?.length > 0) && (
+          <div class="flex flex-wrap min-w-min md:gap-4 gap-0">
+            {inputs?.checkboxes &&
+              inputs.checkboxes.map((checkbox) => (
+                <div class="flex items-start gap-4">
+                  <input
+                    class="checkbox checkbox-primary checkbox-md border-[3px]"
+                    type="checkbox"
+                    name={checkbox.label}
+                  />
+                  <span class="font-normal">
+                    {checkbox.label}
+                  </span>
+                </div>
+              ))}
+          </div>
+        )}
         <Input.Root>
           <Input.Label label="Descrição" class="mb-2" />
           <textarea name="message" class="input w-full h-36"></textarea>

@@ -23,10 +23,17 @@ interface Props {
    * @title Titulo do formulario de contato
    */
   warningConsent?: WarningConsent;
+
+  /**
+   * @title Texto do modal
+   * @description Texto que aparece no modal quando o email é enviado
+   * @format html
+   */
+  modalRichText: string;
 }
 
 export default function Contact(
-  { title, warningConsent, inputs, select }: Props,
+  { title, warningConsent, inputs, select, modalRichText }: Props,
 ) {
   return (
     <div class="container px-4">
@@ -40,6 +47,7 @@ export default function Contact(
           select={select}
           buttonLabel={warningConsent?.buttonLabel}
           disclaimerText={warningConsent?.disclaimerText ?? ""}
+          modalRichText={modalRichText}
         />
       </div>
     </div>

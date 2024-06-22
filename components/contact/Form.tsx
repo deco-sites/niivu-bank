@@ -4,6 +4,7 @@ import PhoneFormatter from "deco-sites/niivu-bank/components/solicitation/Phone.
 import { JSX } from "preact";
 import { invoke } from "deco-sites/niivu-bank/runtime.ts";
 import { EmailData } from "deco-sites/niivu-bank/packs/utils/emailHandles.ts";
+import { useId } from "deco-sites/niivu-bank/sdk/useId.ts";
 
 interface Props {
   title?: string;
@@ -11,6 +12,7 @@ interface Props {
   inputs: Inputs;
   disclaimerText: string;
   buttonLabel?: string;
+  modalRichText: string;
 }
 
 export interface Checkboxes {
@@ -98,9 +100,26 @@ export function getFormValues(event: Event): EmailData {
   return values;
 }
 
+const Modal = ({ id, richText }: { id: string, richText: string; }) => {
+  return (
+    <>
+      <input type="checkbox" id={id} className="modal-toggle" />
+      <div className="modal" role="dialog">
+        <div className="modal-box">
+          <div dangerouslySetInnerHTML={{ __html: richText }} />
+          <div className="modal-action">
+            <label htmlFor={id} className="btn btn-primary text-xl text-white">Close!</label>
+          </div>
+        </div>
+      </div>
+    </>
+  )
+}
+
 export default function ContactForm(
-  { disclaimerText, buttonLabel, inputs, select }: Props,
+  { disclaimerText, buttonLabel, inputs, select, modalRichText }: Props,
 ) {
+  const id = useId()
   const submit: JSX.GenericEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
 
@@ -111,6 +130,8 @@ export default function ContactForm(
         ...formValues,
       },
     });
+    const input = document.getElementById(id) as HTMLInputElement
+    input!.checked = true
   };
 
   return (
@@ -134,7 +155,7 @@ export default function ContactForm(
           <Input.Base
             name="name"
             type="text"
-            placeholder={inputs?.name}
+            placeholder={inputs?.name ?? ""}
           />
         </Input.Root>
         <div class=" md:flex space-y-4 md:space-y-0 md:gap-4 gap-0">
@@ -143,7 +164,7 @@ export default function ContactForm(
             <Input.Base
               name="email"
               type="email"
-              placeholder={inputs?.email}
+              placeholder={inputs?.email ?? ""}
             />
           </Input.Root>
           <Input.Root class="w-full">
@@ -151,7 +172,7 @@ export default function ContactForm(
             <Input.Base
               name="Industry"
               type="text"
-              placeholder={inputs?.industry}
+              placeholder={inputs?.industry ?? ""}
             />
           </Input.Root>
         </div>
@@ -161,7 +182,7 @@ export default function ContactForm(
             <Input.Base
               name="companyName"
               type="text"
-              placeholder={inputs?.companyName}
+              placeholder={inputs?.companyName ?? ""}
             />
           </Input.Root>
           <Input.Root class="w-full">
@@ -169,15 +190,14 @@ export default function ContactForm(
             <Input.Base
               name="companyWebsite"
               type="text"
-              placeholder={inputs?.companyWebsite}
+              placeholder={inputs?.companyWebsite ?? ""}
             />
           </Input.Root>
         </div>
         <PhoneFormatter
           placeholder={inputs?.phone ?? ""}
-          isRequired={false}
         />
-        {(inputs?.checkboxes?.length > 0) && (
+        {inputs?.checkboxes && (inputs?.checkboxes?.length > 0) && (
           <div class="flex flex-wrap min-w-min md:gap-4 gap-0">
             {inputs?.checkboxes &&
               inputs.checkboxes.map((checkbox) => (
@@ -202,6 +222,7 @@ export default function ContactForm(
           disclaimerText={disclaimerText}
           buttonLabel={buttonLabel}
         />
+        <Modal id={id} richText={modalRichText} />
       </div>
     </form>
   );

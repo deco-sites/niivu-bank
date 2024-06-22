@@ -13,6 +13,7 @@ interface Props {
   disclaimerText: string;
   buttonLabel?: string;
   modalRichText: string;
+  modalButtonLabel: string;
 }
 
 export interface Checkboxes {
@@ -100,7 +101,7 @@ export function getFormValues(event: Event): EmailData {
   return values;
 }
 
-const Modal = ({ id, richText }: { id: string, richText: string; }) => {
+const Modal = ({ id, richText, buttonLabel }: { id: string, richText: string, buttonLabel: string }) => {
   return (
     <>
       <input type="checkbox" id={id} className="modal-toggle" />
@@ -108,7 +109,7 @@ const Modal = ({ id, richText }: { id: string, richText: string; }) => {
         <div className="modal-box">
           <div dangerouslySetInnerHTML={{ __html: richText }} />
           <div className="modal-action">
-            <label htmlFor={id} className="btn btn-primary text-xl text-white">Close!</label>
+            <label htmlFor={id} className="btn btn-primary text-xl text-white">{buttonLabel}</label>
           </div>
         </div>
       </div>
@@ -117,7 +118,7 @@ const Modal = ({ id, richText }: { id: string, richText: string; }) => {
 }
 
 export default function ContactForm(
-  { disclaimerText, buttonLabel, inputs, select, modalRichText }: Props,
+  { disclaimerText, buttonLabel, inputs, select, modalRichText, modalButtonLabel }: Props,
 ) {
   const id = useId()
   const submit: JSX.GenericEventHandler<HTMLFormElement> = async (e) => {
@@ -222,7 +223,7 @@ export default function ContactForm(
           disclaimerText={disclaimerText}
           buttonLabel={buttonLabel}
         />
-        <Modal id={id} richText={modalRichText} />
+        <Modal id={id} richText={modalRichText} buttonLabel={modalButtonLabel} />
       </div>
     </form>
   );

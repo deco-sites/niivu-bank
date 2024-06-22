@@ -5,6 +5,18 @@ import ContactForm, {
   WarningConsent,
 } from "deco-sites/niivu-bank/components/contact/Form.tsx";
 
+interface Modal {
+  /**
+   * @title Texto do modal
+   * @description Texto que aparece no modal quando o email é enviado
+   * @format html
+   */
+  richText: string;
+  /**
+   * @title Label do botão do modal
+   */
+  buttonLabel: string;
+}
 interface Props {
   /**
    * @title Titulo do formulario de contato
@@ -24,16 +36,12 @@ interface Props {
    */
   warningConsent?: WarningConsent;
 
-  /**
-   * @title Texto do modal
-   * @description Texto que aparece no modal quando o email é enviado
-   * @format html
-   */
-  modalRichText: string;
+
+  modal: Modal;
 }
 
 export default function Contact(
-  { title, warningConsent, inputs, select, modalRichText }: Props,
+  { title, warningConsent, inputs, select, modal }: Props,
 ) {
   return (
     <div class="container px-4">
@@ -47,7 +55,8 @@ export default function Contact(
           select={select}
           buttonLabel={warningConsent?.buttonLabel}
           disclaimerText={warningConsent?.disclaimerText ?? ""}
-          modalRichText={modalRichText}
+          modalRichText={modal.richText}
+          modalButtonLabel={modal.buttonLabel}
         />
       </div>
     </div>

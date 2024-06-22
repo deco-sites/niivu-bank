@@ -110,7 +110,7 @@ function BannerItem(
     action,
   } = image;
 
-  const hasAction = action?.title && action?.subTitle && action?.label
+  const hasAction = action?.title && action?.subTitle && action?.label;
 
   return (
     <a

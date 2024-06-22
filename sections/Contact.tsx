@@ -9,7 +9,7 @@ interface Modal {
   /**
    * @title Texto do modal
    * @description Texto que aparece no modal quando o email é enviado
-   * @format html
+   * @format rich-text
    */
   richText: string;
   /**

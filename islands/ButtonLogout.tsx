@@ -1,1 +1,1 @@
-export { default } from "deco-sites/niivu-bank/components/ui/ButtonLogout.tsx";
+export { default } from "site/components/ui/ButtonLogout.tsx";

@@ -1,1 +1,1 @@
-export { default } from "deco-sites/niivu-bank/components/solicitation/CorporationForm.tsx";
+export { default } from "site/components/solicitation/CorporationForm.tsx";

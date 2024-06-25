@@ -1,1 +1,1 @@
-export { default } from "deco-sites/niivu-bank/packs/actions/handleStatus.ts";
+export { default } from "site/packs/actions/handleStatus.ts";

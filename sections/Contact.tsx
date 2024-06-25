@@ -3,7 +3,7 @@ import ContactForm, {
   Inputs,
   Select,
   WarningConsent,
-} from "deco-sites/niivu-bank/components/contact/Form.tsx";
+} from "site/components/contact/Form.tsx";
 
 interface Modal {
   /**

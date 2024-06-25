@@ -1,12 +1,12 @@
 import { useSignal } from "@preact/signals";
 import type { JSX } from "preact";
-import { invoke } from "deco-sites/niivu-bank/runtime.ts";
-import { Input } from "deco-sites/niivu-bank/components/ui/inputs/index.tsx";
-import Button from "deco-sites/niivu-bank/components/ui/Button.tsx";
+import { invoke } from "site/runtime.ts";
+import { Input } from "site/components/ui/inputs/index.tsx";
+import Button from "site/components/ui/Button.tsx";
 import {
   EMPTY_INVALID_EMAIL,
   ERROR_EMPTY_PASSWORD,
-} from "deco-sites/niivu-bank/components/autentication/constants.ts";
+} from "site/components/autentication/constants.ts";
 
 export default function LoginForm() {
   const isLoaging = useSignal(false);
@@ -34,7 +34,7 @@ export default function LoginForm() {
     try {
       isLoaging.value = true;
       const response = await invoke({
-        key: "deco-sites/niivu-bank/loaders/actions/singin.ts",
+        key: "site/loaders/actions/singin.ts",
         props: {
           email: email,
           password: password,

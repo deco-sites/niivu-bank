@@ -1,6 +1,6 @@
 import { Signal, useSignal } from "@preact/signals";
 import { ChangeEvent } from "https://esm.sh/v128/preact@10.19.2/compat/src/index.js";
-import Icon from "deco-sites/niivu-bank/components/ui/Icon.tsx";
+import Icon from "site/components/ui/Icon.tsx";
 
 interface Props {
   placeholder: string;

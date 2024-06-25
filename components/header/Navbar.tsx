@@ -2,23 +2,23 @@ import {
   IStep,
   Logo,
   Url,
-} from "deco-sites/niivu-bank/components/header/Header.tsx";
-import Step from "deco-sites/niivu-bank/components/header/Step.tsx";
-import NavItem from "deco-sites/niivu-bank/components/header/NavItem.tsx";
-import { UserHandle } from "deco-sites/niivu-bank/components/header/UserHandle.tsx";
+} from "site/components/header/Header.tsx";
+import Step from "site/components/header/Step.tsx";
+import NavItem from "site/components/header/NavItem.tsx";
+import { UserHandle } from "site/components/header/UserHandle.tsx";
 import {
   PATH_MY_ACCOUNT,
   PATH_SOLICITATION,
   PATH_SOLICITATION_SUCCESS,
-} from "deco-sites/niivu-bank/components/header/Constants.ts";
+} from "site/components/header/Constants.ts";
 import { Picture, Source } from "apps/website/components/Picture.tsx";
-import type { UserData } from "deco-sites/niivu-bank/components/header/Header.tsx";
+import type { UserData } from "site/components/header/Header.tsx";
 import Menu, {
   Props as MenuProps,
-} from "deco-sites/niivu-bank/components/header/Menu.tsx";
-import DropDownButton from "deco-sites/niivu-bank/components/header/dropdown/Button.tsx";
-import DropdownContent from "deco-sites/niivu-bank/components/header/dropdown/Content.tsx";
-import Icon from "deco-sites/niivu-bank/components/ui/Icon.tsx";
+} from "site/components/header/Menu.tsx";
+import DropDownButton from "site/components/header/dropdown/Button.tsx";
+import DropdownContent from "site/components/header/dropdown/Content.tsx";
+import Icon from "site/components/ui/Icon.tsx";
 
 export interface Props {
   /** @description (150px)x(45px) */

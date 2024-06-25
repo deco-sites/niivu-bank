@@ -11,9 +11,9 @@ import {
   PLACEHOLDER_STATE,
   PLACEHOLDER_STREET,
   PLACEHOLDER_ZIP_CODE,
-} from "deco-sites/niivu-bank/components/solicitation/constants.ts";
-import { showFormError } from "deco-sites/niivu-bank/utils/showFormError.ts";
-import { useFormErrors } from "deco-sites/niivu-bank/sdk/useFormErros.tsx";
+} from "site/components/solicitation/constants.ts";
+import { showFormError } from "site/utils/showFormError.ts";
+import { useFormErrors } from "site/sdk/useFormErros.tsx";
 
 export interface Props {
   formRef: RefObject<HTMLFormElement>;

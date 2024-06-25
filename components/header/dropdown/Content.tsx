@@ -1,5 +1,5 @@
 import type { ComponentChildren } from "preact";
-import Button from "deco-sites/niivu-bank/components/header/dropdown/Button.tsx";
+import Button from "site/components/header/dropdown/Button.tsx";
 
 export interface Props {
   children: ComponentChildren;

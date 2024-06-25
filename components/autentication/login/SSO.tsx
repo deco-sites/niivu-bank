@@ -1,6 +1,6 @@
-import Button from "deco-sites/niivu-bank/components/ui/Button.tsx";
-import Icon from "deco-sites/niivu-bank/components/ui/Icon.tsx";
-import { invoke } from "deco-sites/niivu-bank/runtime.ts";
+import Button from "site/components/ui/Button.tsx";
+import Icon from "site/components/ui/Icon.tsx";
+import { invoke } from "site/runtime.ts";
 
 export default function LoginSSO() {
   return (
@@ -10,7 +10,7 @@ export default function LoginSSO() {
         <Button
           onClick={async () => {
             const url = await invoke({
-              key: "deco-sites/niivu-bank/loaders/actions/singinWithOAuth.ts",
+              key: "site/loaders/actions/singinWithOAuth.ts",
               props: { provider: "facebook" },
             });
             if (typeof url !== "string") return;
@@ -28,7 +28,7 @@ export default function LoginSSO() {
         <Button
           onClick={async () => {
             const url = await invoke({
-              key: "deco-sites/niivu-bank/loaders/actions/singinWithOAuth.ts",
+              key: "site/loaders/actions/singinWithOAuth.ts",
               props: { provider: "google" },
             });
             if (typeof url !== "string") return;

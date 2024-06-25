@@ -9,7 +9,7 @@ import {
   PASSWORD_ERROR,
   SINGIN_ERROR,
 } from "$store/utils/enum.ts";
-import { SOLICITATION_ENTITY_NAME } from "deco-sites/niivu-bank/packs/utils/constants.ts";
+import { SOLICITATION_ENTITY_NAME } from "site/packs/utils/constants.ts";
 
 export interface Props {
   email: string;

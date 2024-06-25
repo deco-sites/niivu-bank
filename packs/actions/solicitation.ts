@@ -10,7 +10,7 @@ import {
   STATUS_ENUM_RISK3_FAILED,
   STATUS_ENUM_SIGNATURE,
   STATUS_ENUM_SUSPENDED,
-} from "deco-sites/niivu-bank/packs/utils/constants.ts";
+} from "site/packs/utils/constants.ts";
 import {
   INTERNAL_ERROR,
   RISK3_ERROR,
@@ -18,7 +18,7 @@ import {
   SUPABASE_ERROR,
 } from "$store/utils/enum.ts";
 import { getEmail } from "$store/utils/cookies.ts";
-import { RecordRisk } from "deco-sites/niivu-bank/packs/utils/creditAnalysis.ts";
+import { RecordRisk } from "site/packs/utils/creditAnalysis.ts";
 
 interface Fields {
   full_name: string;

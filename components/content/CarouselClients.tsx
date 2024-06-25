@@ -1,10 +1,10 @@
 import { ImageWidget } from "apps/admin/widgets.ts";
-import Slider from "deco-sites/niivu-bank/components/ui/Slider.tsx";
-import SliderJS from "deco-sites/niivu-bank/islands/SliderJS.tsx";
-import { useId } from "deco-sites/niivu-bank/sdk/useId.ts";
+import Slider from "site/components/ui/Slider.tsx";
+import SliderJS from "site/islands/SliderJS.tsx";
+import { useId } from "site/sdk/useId.ts";
 import Image from "apps/website/components/Image.tsx";
-import Icon from "deco-sites/niivu-bank/components/ui/Icon.tsx";
-import { autoCard } from "deco-sites/niivu-bank/utils/css.ts";
+import Icon from "site/components/ui/Icon.tsx";
+import { autoCard } from "site/utils/css.ts";
 
 /** @titleBy alt */
 export interface Item {

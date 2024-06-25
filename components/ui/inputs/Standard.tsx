@@ -1,4 +1,4 @@
-import { Input } from "deco-sites/niivu-bank/components/ui/inputs/index.tsx";
+import { Input } from "site/components/ui/inputs/index.tsx";
 
 export interface Props {
   labelText: string;

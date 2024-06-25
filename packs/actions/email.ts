@@ -1,9 +1,9 @@
-import { AppContext } from "deco-sites/niivu-bank/apps/site.ts";
-import { CONTACT } from "deco-sites/niivu-bank/email-tamplate/MinifiedTemplates.ts";
+import { AppContext } from "site/apps/site.ts";
+import { CONTACT } from "site/email-tamplate/MinifiedTemplates.ts";
 import {
   EmailData,
   replacePlaceholderWithHtmlList,
-} from "deco-sites/niivu-bank/packs/utils/emailHandles.ts";
+} from "site/packs/utils/emailHandles.ts";
 
 export default async function loader(
   props: EmailData,

@@ -1,14 +1,14 @@
-import { WebhookRequestSupabase } from "deco-sites/niivu-bank/packs/types.ts";
+import { WebhookRequestSupabase } from "site/packs/types.ts";
 import { FreshContext } from "$fresh/server.ts";
 import {
   STATUS_ENUM_ABLE,
   STATUS_ENUM_ACCOUNT_OPENING,
   STATUS_ENUM_CREDIT_ANALYSIS,
   STATUS_ENUM_DISAPPROVED,
-} from "deco-sites/niivu-bank/packs/utils/constants.ts";
-import { CreditRequestData } from "deco-sites/niivu-bank/packs/utils/createHTMLEmail.ts";
+} from "site/packs/utils/constants.ts";
+import { CreditRequestData } from "site/packs/utils/createHTMLEmail.ts";
 import { DecoState } from "deco/types.ts";
-import { Manifest } from "deco-sites/niivu-bank/manifest.gen.ts";
+import { Manifest } from "site/manifest.gen.ts";
 
 export async function handler(
   req: Request,
@@ -91,7 +91,7 @@ export async function handler(
 
     console.log("invoke actions sendEmail, solicitation_id: ", record.id_risk3);
     return await ctx.state.invoke(
-      "deco-sites/niivu-bank/loaders/actions/sendEmail.ts",
+      "site/loaders/actions/sendEmail.ts",
       {
         isApproved: isApproved,
         isReproved: isReproved,

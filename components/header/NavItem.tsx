@@ -1,4 +1,4 @@
-import { Url } from "deco-sites/niivu-bank/components/header/Header.tsx";
+import { Url } from "site/components/header/Header.tsx";
 
 function NavItem({ item }: { item: Url }) {
   const { url, label } = item;

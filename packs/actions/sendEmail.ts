@@ -1,14 +1,14 @@
-import { AppContext } from "deco-sites/niivu-bank/apps/site.ts";
+import { AppContext } from "site/apps/site.ts";
 import {
   createEmailHTML,
   CreditRequestData,
-} from "deco-sites/niivu-bank/packs/utils/createHTMLEmail.ts";
+} from "site/packs/utils/createHTMLEmail.ts";
 import {
   ABLE_ACCOUNT,
   APPROVED_CREDIT,
   APPROVED_CUSTOMER,
   DISAPPROVED_CREDIT,
-} from "deco-sites/niivu-bank/email-tamplate/MinifiedTemplates.ts";
+} from "site/email-tamplate/MinifiedTemplates.ts";
 
 interface EmailData {
   isApproved: boolean;

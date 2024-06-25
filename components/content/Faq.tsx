@@ -1,4 +1,4 @@
-import { AppContext } from "deco-sites/niivu-bank/apps/site.ts";
+import { AppContext } from "site/apps/site.ts";
 import Collapse from "../ui/Collapse.tsx";
 import { Section } from "deco/blocks/section.ts";
 

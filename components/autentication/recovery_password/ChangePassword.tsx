@@ -1,20 +1,20 @@
 import { useSignal } from "@preact/signals";
 import type { JSX } from "preact";
-import { invoke } from "deco-sites/niivu-bank/runtime.ts";
-import { Input } from "deco-sites/niivu-bank/components/ui/inputs/index.tsx";
+import { invoke } from "site/runtime.ts";
+import { Input } from "site/components/ui/inputs/index.tsx";
 import {
   validatePassword,
-} from "deco-sites/niivu-bank/utils/ValidadeForm/Password.ts";
-import Button from "deco-sites/niivu-bank/components/ui/Button.tsx";
+} from "site/utils/ValidadeForm/Password.ts";
+import Button from "site/components/ui/Button.tsx";
 import {
   ACCESS_TOKEN,
   REFRESH_TOKEN,
-} from "deco-sites/niivu-bank/utils/enum.ts";
+} from "site/utils/enum.ts";
 import {
   ERROR_EMPTY_PASSWORD,
   GENERIC_ERROR,
-} from "deco-sites/niivu-bank/components/autentication/constants.ts";
-import { PasswordErrors } from "deco-sites/niivu-bank/components/ui/inputs/PasswordErrors.tsx";
+} from "site/components/autentication/constants.ts";
+import { PasswordErrors } from "site/components/ui/inputs/PasswordErrors.tsx";
 
 interface Props {
   urlChangePassword: string | null;
@@ -79,7 +79,7 @@ export default function ChangePassword({ urlChangePassword }: Props) {
     try {
       isLoaging.value = true;
       const response = await invoke({
-        key: "deco-sites/niivu-bank/loaders/actions/updatePassword.ts",
+        key: "site/loaders/actions/updatePassword.ts",
         props: {
           password: password.value,
           access_token: tokens.value.accessToken,

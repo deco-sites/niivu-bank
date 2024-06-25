@@ -1,12 +1,12 @@
 import { ComponentChildren, JSX, RefObject } from "preact";
-import { useUI } from "deco-sites/niivu-bank/sdk/useUI.ts";
-import validateCPF from "deco-sites/niivu-bank/utils/ValidadeForm/CPF.ts";
-import validateCNPJ from "deco-sites/niivu-bank/utils/ValidadeForm/CNPJ.ts";
-import validateField from "deco-sites/niivu-bank/utils/ValidadeForm/Field.ts";
-import getFormValues from "deco-sites/niivu-bank/utils/getFormValues.ts";
-import { invoke } from "deco-sites/niivu-bank/runtime.ts";
-import formatCNPJ from "deco-sites/niivu-bank/utils/formatCNPJ.ts";
-import { useFormErrors } from "deco-sites/niivu-bank/sdk/useFormErros.tsx";
+import { useUI } from "site/sdk/useUI.ts";
+import validateCPF from "site/utils/ValidadeForm/CPF.ts";
+import validateCNPJ from "site/utils/ValidadeForm/CNPJ.ts";
+import validateField from "site/utils/ValidadeForm/Field.ts";
+import getFormValues from "site/utils/getFormValues.ts";
+import { invoke } from "site/runtime.ts";
+import formatCNPJ from "site/utils/formatCNPJ.ts";
+import { useFormErrors } from "site/sdk/useFormErros.tsx";
 
 export interface Props {
   children: ComponentChildren;
@@ -147,7 +147,7 @@ function Form({ children, type, successLink, formRef }: Props) {
         props.cnpj = formatCNPJ(formValues?.CNPJ);
       }
       const solicitation = await invoke({
-        key: "deco-sites/niivu-bank/loaders/actions/solicitation.ts",
+        key: "site/loaders/actions/solicitation.ts",
         props,
       });
 

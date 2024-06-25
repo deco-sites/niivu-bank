@@ -1,5 +1,5 @@
-import { AvailableIcons } from "deco-sites/niivu-bank/components/ui/Icon.tsx";
-import Card from "deco-sites/niivu-bank/components/ui/Card.tsx";
+import { AvailableIcons } from "site/components/ui/Icon.tsx";
+import Card from "site/components/ui/Card.tsx";
 
 /**
  * @title {{title}}
@@ -8,7 +8,7 @@ interface CardData {
   /**
    * @title Icones
    * @format icon-select
-   * @options deco-sites/niivu-bank/loaders/customAdmin/AllIcons.ts
+   * @options site/loaders/customAdmin/AllIcons.ts
    */
   icons: AvailableIcons;
   /**

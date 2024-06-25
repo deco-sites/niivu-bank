@@ -5,8 +5,8 @@ import {
   EMAIL_ERROR,
   INTERNAL_ERROR,
   SERVER_ERROR,
-} from "deco-sites/niivu-bank/utils/enum.ts";
-import { SOLICITATION_ENTITY_NAME } from "deco-sites/niivu-bank/packs/utils/constants.ts";
+} from "site/utils/enum.ts";
+import { SOLICITATION_ENTITY_NAME } from "site/packs/utils/constants.ts";
 
 export interface DataObjectSoliciation {
   id: number;

@@ -1,6 +1,6 @@
-import { useUI } from "deco-sites/niivu-bank/sdk/useUI.ts";
-import Loading from "deco-sites/niivu-bank/components/daisy/Loading.tsx";
-import { ERROR_SEND_SOLICITATION } from "deco-sites/niivu-bank/components/solicitation/constants.ts";
+import { useUI } from "site/sdk/useUI.ts";
+import Loading from "site/components/daisy/Loading.tsx";
+import { ERROR_SEND_SOLICITATION } from "site/components/solicitation/constants.ts";
 import { useSignal } from "@preact/signals";
 
 export interface Props {

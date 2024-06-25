@@ -5,7 +5,7 @@ import Container from "$store/components/ui/inputs/Container.tsx";
 import { RefObject } from "preact";
 import Cnpj from "$store/islands/Cnpj.tsx";
 import type { Inputs } from "./Solicitation.tsx";
-import { useUI } from "deco-sites/niivu-bank/sdk/useUI.ts";
+import { useUI } from "site/sdk/useUI.ts";
 import {
   ERROR_REQUIRED,
   PLACEHOLDER_CITY,
@@ -15,9 +15,9 @@ import {
   PLACEHOLDER_NUMBER,
   PLACEHOLDER_STREET,
   PLACEHOLDER_ZIP_CODE,
-} from "deco-sites/niivu-bank/components/solicitation/constants.ts";
-import { showFormError } from "deco-sites/niivu-bank/utils/showFormError.ts";
-import { useFormErrors } from "deco-sites/niivu-bank/sdk/useFormErros.tsx";
+} from "site/components/solicitation/constants.ts";
+import { showFormError } from "site/utils/showFormError.ts";
+import { useFormErrors } from "site/sdk/useFormErros.tsx";
 
 export interface Props {
   formRef: RefObject<HTMLFormElement>;

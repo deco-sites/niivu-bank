@@ -1,10 +1,10 @@
 import { HTMLWidget, ImageWidget } from "apps/admin/widgets.ts";
-import RichText from "deco-sites/niivu-bank/sections/Content/RichText.tsx";
+import RichText from "site/sections/Content/RichText.tsx";
 import { usePartialSection } from "deco/hooks/usePartialSection.ts";
 import LoginForm from "../islands/Authentication/Login.tsx";
 import LoginSSO from "../components/autentication/login/SSO.tsx";
 import { Picture, Source } from "apps/website/components/Picture.tsx";
-import SignupForm from "deco-sites/niivu-bank/islands/Authentication/Signup.tsx";
+import SignupForm from "site/islands/Authentication/Signup.tsx";
 import { redirect, type SectionProps } from "deco/mod.ts";
 import { getCookie } from "$store/utils/cookies.ts";
 import {
@@ -12,19 +12,19 @@ import {
   LOGIN,
   RECOVERY_PASSWORD,
   SIGNUP,
-} from "deco-sites/niivu-bank/utils/enum.ts";
-import Title from "deco-sites/niivu-bank/components/ui/Title.tsx";
+} from "site/utils/enum.ts";
+import Title from "site/components/ui/Title.tsx";
 import RecoveryPasswordForm from "../components/autentication/recovery_password/Form.tsx";
-import ChangePassword from "deco-sites/niivu-bank/islands/Authentication/ChangePassword.tsx";
+import ChangePassword from "site/islands/Authentication/ChangePassword.tsx";
 import Image from "apps/website/components/Image.tsx";
-import Button from "deco-sites/niivu-bank/components/ui/Button.tsx";
+import Button from "site/components/ui/Button.tsx";
 import type { AppContext } from "$store/apps/site.ts";
 
 interface Props {
   /**
    * @title Alinhamento do texto dentro do banner
    * @format button-group
-   * @options deco-sites/niivu-bank/loaders/customAdmin/icons.ts
+   * @options site/loaders/customAdmin/icons.ts
    */
   textAlignment?: "Em cima" | "No centro" | "Em baixo";
 

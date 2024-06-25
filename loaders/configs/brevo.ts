@@ -1,6 +1,6 @@
 import { Secret } from "apps/website/loaders/secret.ts";
 import { ClientOf, createHttpClient } from "apps/utils/http.ts";
-import BrevoClient from "deco-sites/niivu-bank/packs/utils/createHTMLEmail.ts";
+import BrevoClient from "site/packs/utils/createHTMLEmail.ts";
 
 export interface Props {
   /**

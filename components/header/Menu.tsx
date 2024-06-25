@@ -1,6 +1,6 @@
-import { Url } from "deco-sites/niivu-bank/components/header/Header.tsx";
-import Icon from "deco-sites/niivu-bank/components/ui/Icon.tsx";
-import ButtonLogout from "deco-sites/niivu-bank/islands/ButtonLogout.tsx";
+import { Url } from "site/components/header/Header.tsx";
+import Icon from "site/components/ui/Icon.tsx";
+import ButtonLogout from "site/islands/ButtonLogout.tsx";
 
 export interface Props {
   urls?: Url[];

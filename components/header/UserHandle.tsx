@@ -1,7 +1,7 @@
-import Button from "deco-sites/niivu-bank/components/ui/Button.tsx";
-import Icon from "deco-sites/niivu-bank/components/ui/Icon.tsx";
-import UserInfo from "deco-sites/niivu-bank/components/ui/UserInfo.tsx";
-import ButtonLogout from "deco-sites/niivu-bank/islands/ButtonLogout.tsx";
+import Button from "site/components/ui/Button.tsx";
+import Icon from "site/components/ui/Icon.tsx";
+import UserInfo from "site/components/ui/UserInfo.tsx";
+import ButtonLogout from "site/islands/ButtonLogout.tsx";
 
 interface Props {
   isLogged?: boolean;

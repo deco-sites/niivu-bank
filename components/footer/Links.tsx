@@ -1,6 +1,6 @@
-import { useId } from "deco-sites/niivu-bank/sdk/useId.ts";
+import { useId } from "site/sdk/useId.ts";
 import type { Section } from "./Footer.tsx";
-import Icon from "deco-sites/niivu-bank/components/ui/Icon.tsx";
+import Icon from "site/components/ui/Icon.tsx";
 
 export interface Props extends Section {
   isDesktop: boolean;

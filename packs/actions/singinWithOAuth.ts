@@ -1,8 +1,8 @@
-import { AppContext } from "deco-sites/niivu-bank/apps/site.ts";
+import { AppContext } from "site/apps/site.ts";
 import {
   INTERNAL_ERROR,
   SERVER_ERROR,
-} from "deco-sites/niivu-bank/utils/enum.ts";
+} from "site/utils/enum.ts";
 
 export interface Props {
   provider: "google" | "facebook";

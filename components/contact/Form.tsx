@@ -1,10 +1,10 @@
-import WarningConsent from "deco-sites/niivu-bank/components/solicitation/WarningConsent.tsx";
-import { Input } from "deco-sites/niivu-bank/components/ui/inputs/index.tsx";
-import PhoneFormatter from "deco-sites/niivu-bank/components/solicitation/Phone.tsx";
+import WarningConsent from "site/components/solicitation/WarningConsent.tsx";
+import { Input } from "site/components/ui/inputs/index.tsx";
+import PhoneFormatter from "site/components/solicitation/Phone.tsx";
 import { JSX } from "preact";
-import { invoke } from "deco-sites/niivu-bank/runtime.ts";
-import { EmailData } from "deco-sites/niivu-bank/packs/utils/emailHandles.ts";
-import { useId } from "deco-sites/niivu-bank/sdk/useId.ts";
+import { invoke } from "site/runtime.ts";
+import { EmailData } from "site/packs/utils/emailHandles.ts";
+import { useId } from "site/sdk/useId.ts";
 
 interface Props {
   title?: string;
@@ -126,7 +126,7 @@ export default function ContactForm(
 
     const formValues = getFormValues(e);
     await invoke({
-      key: "deco-sites/niivu-bank/loaders/actions/email.ts",
+      key: "site/loaders/actions/email.ts",
       props: {
         ...formValues,
       },

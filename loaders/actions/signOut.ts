@@ -1,1 +1,1 @@
-export { default } from "deco-sites/niivu-bank/packs/actions/signOut.ts";
+export { default } from "site/packs/actions/signOut.ts";

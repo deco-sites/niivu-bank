@@ -1,5 +1,5 @@
-import Icon from "deco-sites/niivu-bank/components/ui/Icon.tsx";
-import ButtonLogout from "deco-sites/niivu-bank/components/ui/ButtonLogout.tsx";
+import Icon from "site/components/ui/Icon.tsx";
+import ButtonLogout from "site/components/ui/ButtonLogout.tsx";
 
 export default function UserInfo({ userName }: { userName?: string }) {
   return (

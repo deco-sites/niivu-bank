@@ -6,7 +6,7 @@ import { ClientOf, createHttpClient } from "apps/utils/http.ts";
 import creditAnalysis from "../packs/utils/creditAnalysis.ts";
 import type { Supabase } from "$store/loaders/supabase/supabaseConfig.ts";
 import { Secret } from "apps/website/loaders/secret.ts";
-import { BrevoConfig } from "deco-sites/niivu-bank/loaders/configs/brevo.ts";
+import { BrevoConfig } from "site/loaders/configs/brevo.ts";
 
 /**
  * @title Configurações do Risk3

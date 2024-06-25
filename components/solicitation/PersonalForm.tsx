@@ -8,10 +8,10 @@ import {
   PLACEHOLDER_NAME,
   PLACEHOLDER_PHONE,
   PLACEHOLDER_RG,
-} from "deco-sites/niivu-bank/components/solicitation/constants.ts";
-import { useFormErrors } from "deco-sites/niivu-bank/sdk/useFormErros.tsx";
-import { showFormError } from "deco-sites/niivu-bank/utils/showFormError.ts";
-import PhoneFormatter from "deco-sites/niivu-bank/components/solicitation/Phone.tsx";
+} from "site/components/solicitation/constants.ts";
+import { useFormErrors } from "site/sdk/useFormErros.tsx";
+import { showFormError } from "site/utils/showFormError.ts";
+import PhoneFormatter from "site/components/solicitation/Phone.tsx";
 
 export interface Props {
   inputs?: Inputs;

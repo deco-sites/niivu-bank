@@ -1,5 +1,5 @@
-import Icon from "deco-sites/niivu-bank/components/ui/Icon.tsx";
-import { invoke } from "deco-sites/niivu-bank/runtime.ts";
+import Icon from "site/components/ui/Icon.tsx";
+import { invoke } from "site/runtime.ts";
 
 export default function ButtonLogout(
   { mobileMode = false }: { mobileMode?: boolean },
@@ -7,7 +7,7 @@ export default function ButtonLogout(
   const logout = async () => {
     try {
       const response = await invoke({
-        key: "deco-sites/niivu-bank/loaders/actions/signOut.ts",
+        key: "site/loaders/actions/signOut.ts",
       });
       if (response.status !== 200) {
         throw new Error("Logout request failed");

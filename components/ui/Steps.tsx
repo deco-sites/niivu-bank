@@ -1,8 +1,8 @@
 import { ImageWidget } from "apps/admin/widgets.ts";
 import Image from "apps/website/components/Image.tsx";
-import Slider from "deco-sites/niivu-bank/components/ui/Slider.tsx";
+import Slider from "site/components/ui/Slider.tsx";
 import SliderJS from "$store/islands/SliderJS.tsx";
-import { useId } from "deco-sites/niivu-bank/sdk/useId.ts";
+import { useId } from "site/sdk/useId.ts";
 
 /** @titleBy name */
 export interface Step {

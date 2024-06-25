@@ -1,6 +1,6 @@
 import Icon, {
   AvailableIcons,
-} from "deco-sites/niivu-bank/components/ui/Icon.tsx";
+} from "site/components/ui/Icon.tsx";
 
 interface Props {
   title?: string;

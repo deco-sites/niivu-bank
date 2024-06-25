@@ -1,1 +1,1 @@
-export { default } from "deco-sites/niivu-bank/components/ui/inputs/Password.tsx";
+export { default } from "site/components/ui/inputs/Password.tsx";

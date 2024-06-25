@@ -1,16 +1,16 @@
 import StatusBar, {
   Props as StatusProps,
-} from "deco-sites/niivu-bank/components/solicitation/StatusBar.tsx";
+} from "site/components/solicitation/StatusBar.tsx";
 import {
   DataObjectSoliciation,
   Error,
 } from "../../packs/solicitation/getDetails.ts";
 import type { AppContext } from "$store/apps/site.ts";
-import Icon from "deco-sites/niivu-bank/components/ui/Icon.tsx";
+import Icon from "site/components/ui/Icon.tsx";
 import {
   STATUS_ENUM_ACCOUNT_OPENING,
   STATUS_ENUM_RISK3_FAILED,
-} from "deco-sites/niivu-bank/packs/utils/constants.ts";
+} from "site/packs/utils/constants.ts";
 
 export interface Props extends Omit<StatusProps, "solicitation" | "isDesktop"> {
   solicitations: DataObjectSoliciation[] | Error;

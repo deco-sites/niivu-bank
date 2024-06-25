@@ -5,7 +5,7 @@ import {
   SOLICITATION_FILD_ID_RISK,
   STATUS_ENUM_ACCOUNT_OPENING,
   STATUS_ENUM_RISK3_FAILED,
-} from "deco-sites/niivu-bank/packs/utils/constants.ts";
+} from "site/packs/utils/constants.ts";
 
 export default async function loader(
   props: {

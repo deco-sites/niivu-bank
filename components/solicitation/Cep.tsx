@@ -1,6 +1,6 @@
 import { invoke } from "$store/runtime.ts";
 import { RefObject } from "preact";
-import { Input } from "deco-sites/niivu-bank/components/ui/inputs/index.tsx";
+import { Input } from "site/components/ui/inputs/index.tsx";
 export interface Props {
   formRef: RefObject<HTMLFormElement>;
   prefix?: string;
@@ -20,7 +20,7 @@ export default function Cep(
 
     if (cep.length === 8) {
       const response = await invoke({
-        key: "deco-sites/niivu-bank/loaders/actions/getCep.ts",
+        key: "site/loaders/actions/getCep.ts",
         props: {
           cep,
         },

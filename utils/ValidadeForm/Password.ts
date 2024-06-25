@@ -1,4 +1,4 @@
-import { PasswordValidationResult } from "deco-sites/niivu-bank/components/ui/inputs/PasswordErrors.tsx";
+import { PasswordValidationResult } from "site/components/ui/inputs/PasswordErrors.tsx";
 
 interface EmptyInputs<T> {
   [key: string]: T;

@@ -1,16 +1,16 @@
 import { useSignal } from "@preact/signals";
 import type { JSX } from "preact";
-import { invoke } from "deco-sites/niivu-bank/runtime.ts";
-import { Input } from "deco-sites/niivu-bank/components/ui/inputs/index.tsx";
-import { EMAIL_RESGISTER_ERROR } from "deco-sites/niivu-bank/utils/enum.ts";
+import { invoke } from "site/runtime.ts";
+import { Input } from "site/components/ui/inputs/index.tsx";
+import { EMAIL_RESGISTER_ERROR } from "site/utils/enum.ts";
 import { validatePassword } from "../../utils/ValidadeForm/Password.ts";
 import {
   EMPTY_INVALID_EMAIL,
   ERROR_EMPTY_PASSWORD,
   GENERIC_ERROR,
-} from "deco-sites/niivu-bank/components/autentication/constants.ts";
-import { PasswordErrors } from "deco-sites/niivu-bank/components/ui/inputs/PasswordErrors.tsx";
-import WarningConsent from "deco-sites/niivu-bank/islands/WarningConsent.tsx";
+} from "site/components/autentication/constants.ts";
+import { PasswordErrors } from "site/components/ui/inputs/PasswordErrors.tsx";
+import WarningConsent from "site/islands/WarningConsent.tsx";
 
 interface Props {
   title?: string;
@@ -59,7 +59,7 @@ export default function SignupForm({ disclaimerText, title }: Props) {
     try {
       isLoaging.value = true;
       const response = await invoke({
-        key: "deco-sites/niivu-bank/loaders/actions/singup.ts",
+        key: "site/loaders/actions/singup.ts",
         props: {
           email: email,
           password: password.value,

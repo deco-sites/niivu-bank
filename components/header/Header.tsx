@@ -1,15 +1,15 @@
 import { ImageWidget } from "apps/admin/widgets.ts";
 import Step from "./Step.tsx";
-import { AppContext } from "deco-sites/niivu-bank/apps/site.ts";
+import { AppContext } from "site/apps/site.ts";
 import { SectionProps } from "deco/mod.ts";
-import Navbar from "deco-sites/niivu-bank/components/header/Navbar.tsx";
+import Navbar from "site/components/header/Navbar.tsx";
 import {
   DataObjectSoliciation,
   Error,
-} from "deco-sites/niivu-bank/packs/solicitation/getDetails.ts";
-import { INTERNAL_ERROR } from "deco-sites/niivu-bank/utils/enum.ts";
-import DropdownContainer from "deco-sites/niivu-bank/components/header/dropdown/Container.tsx";
-import { useId } from "deco-sites/niivu-bank/sdk/useId.ts";
+} from "site/packs/solicitation/getDetails.ts";
+import { INTERNAL_ERROR } from "site/utils/enum.ts";
+import DropdownContainer from "site/components/header/dropdown/Container.tsx";
+import { useId } from "site/sdk/useId.ts";
 
 export interface IStep {
   /** @title Título */

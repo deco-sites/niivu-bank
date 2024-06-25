@@ -2,7 +2,7 @@ import { clx } from "$store/sdk/clx.ts";
 import type { Section } from "deco/blocks/section.ts";
 import type { ComponentChildren } from "preact";
 import { flex } from "../../constants.tsx";
-import { AppContext } from "deco-sites/niivu-bank/apps/site.ts";
+import { AppContext } from "site/apps/site.ts";
 
 /**
  * @title Flex

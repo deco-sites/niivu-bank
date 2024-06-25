@@ -1,1 +1,1 @@
-export { default } from "deco-sites/niivu-bank/components/solicitation/WarningConsent.tsx";
+export { default } from "site/components/solicitation/WarningConsent.tsx";

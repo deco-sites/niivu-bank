@@ -1,8 +1,8 @@
 import { ImageWidget } from "apps/admin/widgets.ts";
-import Links from "deco-sites/niivu-bank/components/footer/Links.tsx";
+import Links from "site/components/footer/Links.tsx";
 import Image from "apps/website/components/Image.tsx";
-import Social from "deco-sites/niivu-bank/components/footer/Social.tsx";
-import { AppContext } from "deco-sites/niivu-bank/apps/site.ts";
+import Social from "site/components/footer/Social.tsx";
+import { AppContext } from "site/apps/site.ts";
 
 /** @titleBy label */
 export interface Item {

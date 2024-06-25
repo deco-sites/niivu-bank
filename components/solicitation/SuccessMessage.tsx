@@ -2,11 +2,11 @@ import type { ImageWidget } from "apps/admin/widgets.ts";
 import { Picture, Source } from "apps/website/components/Picture.tsx";
 import Image from "apps/website/components/Image.tsx";
 import type { AppContext } from "$store/apps/site.ts";
-import Button from "deco-sites/niivu-bank/components/ui/Button.tsx";
+import Button from "site/components/ui/Button.tsx";
 import {
   DataObjectSoliciation,
   Error,
-} from "deco-sites/niivu-bank/packs/solicitation/getDetails.ts";
+} from "site/packs/solicitation/getDetails.ts";
 import { redirect } from "deco/mod.ts";
 
 export interface IPicture {
